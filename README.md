@@ -82,24 +82,24 @@ $P(b)$ is a prior we can define to give preference to simpler parameters. For mu
 
 ```python
 def bayesian_parameter_inference(sketch, examples):
-  # This is constrained because in practice, either a or b is unknown, not both
-  (a, b), mse, confidence_interval = constrained_linear_regression(sketch, examples)
-  if mse > threshold:
-    # Sketch rejected due to high MSE
-    return []
-  scored_params = []
-  potential_params_from_prior = get_parameter_space(sketch, (a, b))
-  for (a, b) in potential_params_from_prior:
-    if is_in_interval((a, b), confidence_interval):
-      # P(a) or P(b)
-      prior = calculate_prior((a, b), sketch)
-      # P(examples | a) or P(examples | b)
-      likelihood = calculate_likelihood((a, b), sketch, examples)
-      # P(a | examples) or P(b | examples)
-      posterior = prior * likelihood
-      # b or a
-      scored_params.append((a, posterior))
-  return scored_params
+    # This is constrained because in practice, either a or b is unknown, not both
+    (a, b), mse, confidence_interval = constrained_linear_regression(sketch, examples)
+    if mse > threshold:
+        # Sketch rejected due to high MSE
+        return []
+    scored_params = []
+    potential_params_from_prior = get_parameter_space(sketch, (a, b))
+    for (a, b) in potential_params_from_prior:
+        if is_in_interval((a, b), confidence_interval):
+            # P(a) or P(b)
+            prior = calculate_prior((a, b), sketch)
+            # P(examples | a) or P(examples | b)
+            likelihood = calculate_likelihood((a, b), sketch, examples)
+            # P(a | examples) or P(b | examples)
+            posterior = prior * likelihood
+            # b or a
+            scored_params.append((a, posterior))
+    return scored_params
 
 def get_parameter_space(sketch, (a, b)):
   """Returns plausible 'simple' parameters near the complex linear regression parameters."""
@@ -112,4 +112,53 @@ After local inference, we have a set of candidate (potentially conflicting and s
 
 To encode the MaxSMT problem, each constraint gets a boolean control variable which represents if it's included in the subset or not. This boolean has a weight according to the score, so we prefer simpler constraints.
 
-Each pair of anchor and screen size (w, h) gets a rational number variable that represents the placement/location 
+Each pair of anchor $x$ and screen size (w_j, h_j) gets a rational number variable $x_j$ that represents the placement/location of the anchor under this screen size.
+
+The MaxSMT formula is encoded with all of the following formulas anded together:
+- for each screen size, $\text{root.width}_j = w_j~\wedge \text{root.height}_j = h_j$: the root size must match the screen size.
+- for each constraint $c_i$ and screen size $j$, $b_i \Rightarrow c^j_i$: the constraint with each anchor replaced by its location $x_j$ under the screen size. It is controlled by a boolean to allow the SMT to turn off this constraint if it is conflicting with others.
+- domain specific facts like $x_j \geq 0$ and $\text{x.width}_j=\text{x.right}_j-\text{x.left}_j$
+
+The solution given by the MaxSMT solver can then be converted to constraints by taking the set of all constraints whose corresponding control variables are set to true
+
+While this formula works well for small layouts, it is too complex with many anchors/UI elements. To still compute this, the paper decomposes global MaxSMT query into smaller queries which...?
+
+```python
+# candidate_constraints: list of complete constraints c_1, c_2, ...
+# test_dims: list of screen sizes [(w, h)]
+# score: dict mapping constraint c_i -> score from local inference
+def synthesize_hierarchial(candidate_constraints, test_dims):
+
+    # root contains root.name, root.rect, and root.children
+    worklist = [(root, test_dims)]
+    max_satisfiable_constraints = set()
+
+    while worklist:
+        # 'focus' is the parent view we're solving for
+        # 'dims_f' is the list of screen sizes to test for it
+        focus_view, focus_dims = worklist.pop()
+
+        # restrict to only constraints that define the layout of focus_view's *immediate children*.
+        relevant_constraints = restrict(focus_view, candidate_constraints)
+
+        # run the MaxSMT solver to find the best subset that works for all 'focus_dims'.
+        selected_constraints = select(
+            relevant_constraints,
+            focus_view,
+            focus_dims,
+            scores
+        )
+        max_satisfiable_constraints.update(selected_constraints)
+
+        for child_view in focus_view.children:
+            child_dims = calculate_dims(
+                focus_view,
+                focus_dims,
+                child_view,
+                max_satisfiable_constraints
+            )
+            worklist.append((child_view, child_dims))
+    return max_satisfiable_constraints
+```
+
+The goal of calculate_dims is to return a list of test dimensions that the **child UI element** must generalize to. However note that this is dependent on the parent UI element, because if the parent generalizes for `[100, 150, 300]`, the child must generalize to appropriate dimensions. If the child is approximately 1/3 of the size of the parent, it might need to generalize `[33, 50, 100]`. To accomplish this, `calculate_dims` creates a MaxSMT query that calculates the minimal and maxmimal size of the child UI element, given the `max_satisfiable_constraints` which link the child_view's dimensions all the way back to the parent's dimensions.
