@@ -26,6 +26,8 @@ def template_instantiation(root: View) -> list[LinearConstraint]:
     anchors: list[Anchor] = root._anchors_in_subtree
     n = len(anchors)
 
+    # Use boolean matrices to efficiently combine
+    # various predicates over anchor pairs
     same_view_matrix = np.zeros((n, n), dtype=bool)
     same_type_matrix = np.zeros((n, n), dtype=bool)
     parent_matrix = np.zeros((n, n), dtype=bool)
@@ -60,10 +62,10 @@ def template_instantiation(root: View) -> list[LinearConstraint]:
             one_horizontal_one_vertical_matrix[i, j] = (
                 anchors[i].is_horizontal() and anchors[j].is_vertical()
             )
-            dual_type_matrix[i, j] = {anchors[i].type, anchors[j].type} == {
-                "left",
-                "right",
-            } or {anchors[i].type, anchors[j].type} == {"top", "bottom"}
+            dual_type_matrix[i, j] = (
+                {anchors[i].type, anchors[j].type} == {"left", "right"}
+                or {anchors[i].type, anchors[j].type} == {"top", "bottom"}
+            )
 
     # Aspect Ratio Constraints: (y = a * x)
     # y and x are from same view and y = [anchor].width; x = [anchor].height
