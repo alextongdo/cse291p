@@ -1,4 +1,4 @@
-from rich import rprint
+from rich import print
 
 from src.types import View
 
@@ -13,5 +13,5 @@ bruh = {
 }
 
 lol = View(**bruh)
-rprint(lol)
-rprint(lol._anchors_in_subtree)
+print(lol)
+assert len(lol._anchors_in_subtree) == 8 * 4

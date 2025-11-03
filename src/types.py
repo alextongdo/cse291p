@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, PrivateAttr
 
@@ -7,7 +7,7 @@ class View(BaseModel):
     name: str
     rect: tuple[float, float, float, float]
     children: list["View"] = Field(default_factory=list)
-    parent: "View" | None = Field(default=None)
+    parent: Optional["View"] = Field(default=None)
 
     _anchors_in_subtree: list["Anchor"] = PrivateAttr(default_factory=list)
 
