@@ -3,15 +3,98 @@
 # Uses vectorized matrix operations to efficiently identify valid anchor pairs.
 
 import numpy as np
+from intervaltree import IntervalTree
 
 from src.types import Anchor, LinearConstraint, View
 
 
 def compute_visibility_matrix(anchors: list[Anchor], root: View) -> np.ndarray:
     """
-    Compute NxN visibility matrix. Uses IntervalTree sweep-line algorithm.
+    Compute NxN visibility matrix using sweep-line algorithm with IntervalTree.
+
+    Algorithm:
+    1. Build interval trees for horizontal/vertical edges
+    2. Cast sweep lines at every view boundary coordinate
+    3. Edges adjacent along a sweep line are visible to each other
     """
-    pass
+    n = len(anchors)
+    visible_matrix = np.zeros((n, n), dtype=bool)
+
+    # Map anchor -> index. Works because Anchor.__hash__ and __eq__ use (view_id, type)
+    anchor_to_index_map = {anchor: i for i, anchor in enumerate(anchors)}
+
+    # Stores horizontal edges of the form y = c {left <= x <= right}
+    # When queried by x = c, returns intersecting edges
+    horizontal_edge_tree = IntervalTree()
+    # Stores vertical edges of the form x = c {top <= y <= bottom}
+    # When queried by y = c, returns intersecting edges
+    vertical_edge_tree = IntervalTree()
+
+    views = root._flattened_views_in_subtree
+    # Collect all y-coords to cast horizontal intersection lines y = c
+    horizontal_events = set()
+    # Collect all x-coords to cast vertical intersection lines x = c
+    vertical_events = set()
+
+    for view in views:
+        left, top, right, bottom = view.rect
+        # Top edge
+        horizontal_edge_tree.addi(begin=left, end=right, data=view.anchor("top"))
+        # Bottom edge
+        horizontal_edge_tree.addi(begin=left, end=right, data=view.anchor("bottom"))
+
+        horizontal_events.add(top)
+        horizontal_events.add(bottom)
+
+        # Left edge
+        vertical_edge_tree.addi(begin=top, end=bottom, data=view.anchor("left"))
+        # Right edge
+        vertical_edge_tree.addi(begin=top, end=bottom, data=view.anchor("right"))
+
+        vertical_events.add(left)
+        vertical_events.add(right)
+
+    for vertical_line in vertical_events:
+        intersecting_anchors: list[Anchor] = [
+            interval.data for interval in horizontal_edge_tree[vertical_line]
+        ]
+        intersecting_anchors.sort(
+            key=lambda anchor: (anchor.view.rect[1] + anchor.view.rect[3]) / 2
+        )
+
+        # Adjacent anchors are visible
+        for i in range(len(intersecting_anchors) - 1):
+            anchor_i = intersecting_anchors[i]
+            anchor_j = intersecting_anchors[i + 1]
+            # We should not have duplicate anchors here
+            assert anchor_i != anchor_j
+
+            idx_i = anchor_to_index_map[anchor_i]
+            idx_j = anchor_to_index_map[anchor_j]
+            visible_matrix[idx_i, idx_j] = True
+            visible_matrix[idx_j, idx_i] = True  # Symmetric
+
+    for horizontal_line in horizontal_events:
+        intersecting_anchors: list[Anchor] = [
+            interval.data for interval in vertical_edge_tree[horizontal_line]
+        ]
+        intersecting_anchors.sort(
+            key=lambda anchor: (anchor.view.rect[0] + anchor.view.rect[2]) / 2
+        )
+
+        # Adjacent anchors are visible
+        for i in range(len(intersecting_anchors) - 1):
+            anchor_i = intersecting_anchors[i]
+            anchor_j = intersecting_anchors[i + 1]
+            # We should not have duplicate anchors here
+            assert anchor_i != anchor_j
+
+            idx_i = anchor_to_index_map[anchor_i]
+            idx_j = anchor_to_index_map[anchor_j]
+            visible_matrix[idx_i, idx_j] = True
+            visible_matrix[idx_j, idx_i] = True  # Symmetric
+
+    return visible_matrix
 
 
 def template_instantiation(root: View) -> list[LinearConstraint]:
@@ -62,10 +145,10 @@ def template_instantiation(root: View) -> list[LinearConstraint]:
             one_horizontal_one_vertical_matrix[i, j] = (
                 anchors[i].is_horizontal() and anchors[j].is_vertical()
             )
-            dual_type_matrix[i, j] = (
-                {anchors[i].type, anchors[j].type} == {"left", "right"}
-                or {anchors[i].type, anchors[j].type} == {"top", "bottom"}
-            )
+            dual_type_matrix[i, j] = {anchors[i].type, anchors[j].type} == {
+                "left",
+                "right",
+            } or {anchors[i].type, anchors[j].type} == {"top", "bottom"}
 
     # Aspect Ratio Constraints: (y = a * x)
     # y and x are from same view and y = [anchor].width; x = [anchor].height
@@ -131,7 +214,7 @@ def template_instantiation(root: View) -> list[LinearConstraint]:
                     ),
                 )
             if offset_matrix[i, j] or alignment_matrix[i, j]:
-                # Technically alignment should enfoce b=0, but 
+                # Technically alignment should enfoce b=0, but
                 # original Mockdown allows small alignment errors
                 sketches.append(
                     LinearConstraint(y=anchors[i], x=anchors[j], a=1.0, b=None),

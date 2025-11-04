@@ -7,20 +7,24 @@ class View(BaseModel):
     name: str
     rect: tuple[float, float, float, float]
     children: list["View"] = Field(default_factory=list)
-    parent: Optional["View"] = Field(default=None)
+    parent: Optional["View"] = None
 
     _anchors_in_subtree: list["Anchor"] = PrivateAttr(default_factory=list)
+    _flattened_views_in_subtree: list["View"] = PrivateAttr(default_factory=list)
 
-    # def anchor(self, type: str) -> "Anchor":
-    #     return Anchor(view=self, type=type)
+    def anchor(self, type: str) -> "Anchor":
+        return Anchor(view=self, type=type)
 
     def model_post_init(self, _):
         anchors = self.anchors()
+        views = [self]
         for child in self.children:
             child.parent = self
             child.model_post_init(_)
             anchors.extend(child._anchors_in_subtree)
+            views.extend(child._flattened_views_in_subtree)
         self._anchors_in_subtree = anchors
+        self._flattened_views_in_subtree = views
 
     def anchors(self) -> list["Anchor"]:
         """Get all anchors for this view."""
@@ -43,7 +47,14 @@ class Anchor(BaseModel):
 
     view: View
     type: Literal[
-        "left", "right", "top", "bottom", "center_x", "center_y", "width", "height",
+        "left",
+        "right",
+        "top",
+        "bottom",
+        "center_x",
+        "center_y",
+        "width",
+        "height",
     ]
 
     def is_size(self) -> bool:
@@ -65,6 +76,16 @@ class Anchor(BaseModel):
         """Check if anchor is a vertical type (top, bottom, center_y, height)."""
         return self.type in ["top", "bottom", "center_y", "height"]
 
+    def __eq__(self, other):
+        """Compare anchors by identity to avoid infinite recursion."""
+        if not isinstance(other, Anchor):
+            return False
+        return id(self.view) == id(other.view) and self.type == other.type
+
+    def __hash__(self):
+        """Hash based on view identity and type."""
+        return hash((id(self.view), self.type))
+
 
 class LinearConstraint(BaseModel):
     """
@@ -75,3 +96,14 @@ class LinearConstraint(BaseModel):
     x: Anchor | None = None  # None means y = b
     a: float | None = None  # None means not yet known
     b: float | None = None  # None means not yet known
+
+    def __repr__(self):
+        if self.x is None:
+            assert self.a == 0
+            return (
+                f"LinearConstraint({self.y.view.name}.{self.y.type} = {self.b or 'b'})"
+            )
+        return (
+            f"LinearConstraint({self.y.view.name}.{self.y.type} = {self.a or 'a'} * "
+            f"{self.x.view.name}.{self.x.type} + {self.b or 'b'})"
+        )

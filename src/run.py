@@ -1,8 +1,9 @@
-from rich import print
+from rich import print as rprint
 
+from src.instantiation import template_instantiation
 from src.types import View
 
-bruh = {
+example = {
     "name": "root",
     "rect": [0, 0, 1200, 800],
     "children": [
@@ -12,6 +13,6 @@ bruh = {
     ],
 }
 
-lol = View(**bruh)
-print(lol)
-assert len(lol._anchors_in_subtree) == 8 * 4
+root = View(**example)
+sketches = template_instantiation(root)
+rprint(repr(sketches))
