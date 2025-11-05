@@ -84,7 +84,7 @@ def synthesize(input_data: MockdownInput, options: MockdownOptions) -> MockdownR
     candidate_lists = learner.learn()
     candidates = [c for lst in candidate_lists for c in lst]
 
-    # 4) Global inference (BlackBoxPruner). Use top-level bounds from examples.
+    # 4) Global inference. Use top-level bounds from examples.
     root = examples[0]
     min_w = min(e.width for e in examples)
     min_h = min(e.height for e in examples)
@@ -97,7 +97,15 @@ def synthesize(input_data: MockdownInput, options: MockdownOptions) -> MockdownR
         'max_h': sym.Rational(max_h),
     }
 
-    pruner = BlackBoxPruner(examples, bounds, options.get('unambig', False), targets=[root] + list(root.children))
+    # Support both BlackBoxPruner (baseline) and HierarchicalPruner
+    pruning_method = options.get('pruning_method', 'baseline')
+    if pruning_method == 'baseline':
+        pruner = BlackBoxPruner(examples, bounds, options.get('unambig', False), targets=[root] + list(root.children))
+    elif pruning_method == 'hierarchical':
+        pruner = HierarchicalPruner(examples, bounds, options.get('unambig', False))
+    else:
+        raise ValueError(f"unknown pruning_method: {pruning_method}")
+    
     pruned_constraints, min_vals, max_vals = pruner(candidates)
 
     result: MockdownResults = {

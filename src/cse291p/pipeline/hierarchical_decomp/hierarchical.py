@@ -4,6 +4,8 @@ Reimplements:
 - mockdown/src/mockdown/pruning/blackbox.py (HierarchicalPruner parts)
 """
 
+import operator
+from dataclasses import replace
 from fractions import Fraction
 from typing import Dict, List, Set, Tuple
 
@@ -11,7 +13,9 @@ import sympy as sym
 
 from cse291p.pipeline.constraint import IConstraint, ConstraintKind
 from cse291p.pipeline.constraint.constraint import ConstantConstraint
+from cse291p.pipeline.constraint.types import PRIORITY_STRONG
 from cse291p.pipeline.view import IView, IAnchor
+from cse291p.pipeline.bayes.types import ConstraintCandidate
 from cse291p.types import NT
 from .conformance import Conformance, confs_to_bounds, to_rect, conf_zip
 from .types import ISizeBounds, BasePruningMethod

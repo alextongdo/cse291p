@@ -1,0 +1,120 @@
+=== ORIGINAL OUTPUT ===
+{
+  "constraints": [
+    {
+      "y": "child.width",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    },
+    {
+      "y": "root.center_x",
+      "op": "=",
+      "a": "1",
+      "x": "child.center_x",
+      "b": "0",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "root.top",
+      "op": "=",
+      "a": "1",
+      "x": "child.top",
+      "b": "-25",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "child.height",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    }
+  ],
+  "axioms": []
+}
+
+=== REFACTORED OUTPUT ===
+{
+  "constraints": [
+    {
+      "y": "child.width",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    },
+    {
+      "y": "root.center_x",
+      "op": "=",
+      "a": "1",
+      "x": "child.center_x",
+      "b": "0",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "root.top",
+      "op": "=",
+      "a": "1",
+      "x": "child.top",
+      "b": "-25",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "child.height",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    }
+  ],
+  "axioms": [],
+  "valuations_min": {
+    "root.left": "0",
+    "root.right": "100",
+    "root.width": "100",
+    "root.center_x": "50",
+    "child.left": "25",
+    "child.right": "75",
+    "child.width": "50",
+    "child.center_x": "50",
+    "root.top": "0",
+    "root.bottom": "100",
+    "root.height": "100",
+    "root.center_y": "50",
+    "child.top": "25",
+    "child.bottom": "75",
+    "child.height": "50",
+    "child.center_y": "50"
+  },
+  "valuations_max": {
+    "root.left": "0",
+    "root.right": "300",
+    "root.width": "300",
+    "root.center_x": "150",
+    "child.left": "125",
+    "child.right": "175",
+    "child.width": "50",
+    "child.center_x": "150",
+    "root.top": "0",
+    "root.bottom": "200",
+    "root.height": "200",
+    "root.center_y": "100",
+    "child.top": "25",
+    "child.bottom": "75",
+    "child.height": "50",
+    "child.center_y": "50"
+  }
+}
+
+=== COMPARISON ===
+Original constraints: 4
+Refactored constraints: 4
+Difference: 0
+
+✓ Constraint sets match!

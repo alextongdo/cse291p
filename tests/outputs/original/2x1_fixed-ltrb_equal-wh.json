@@ -1,0 +1,5 @@
+{
+  "error": "Length of values (24) does not match length of index (16)",
+  "traceback": "ValueError",
+  "full_traceback": "Traceback (most recent call last):\n  File \"/Users/xurui/Downloads/FA25/cse291p/tests/compare_all.py\", line 98, in run_original\n    result = mockdown_run(input_data, options)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/xurui/Downloads/FA25/cse291p/mockdown/src/mockdown/run.py\", line 153, in run\n    instantiator = instantiator_factory(examples)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/xurui/Downloads/FA25/cse291p/mockdown/src/mockdown/instantiation/numpy/instantiator.py\", line 35, in __init__\n    anchor_vec = pd.Series(anchors, index=index)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/anaconda3/envs/fifteenAI/lib/python3.11/site-packages/pandas/core/series.py\", line 574, in __init__\n    com.require_length_match(data, index)\n  File \"/opt/anaconda3/envs/fifteenAI/lib/python3.11/site-packages/pandas/core/common.py\", line 571, in require_length_match\n    raise ValueError(\nValueError: Length of values (24) does not match length of index (16)\n"
+}

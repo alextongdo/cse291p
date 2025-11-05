@@ -1,0 +1,37 @@
+{
+  "constraints": [
+    {
+      "y": "child.width",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    },
+    {
+      "y": "root.left",
+      "op": "=",
+      "a": "1",
+      "x": "child.left",
+      "b": "-25",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "root.bottom",
+      "op": "=",
+      "a": "1",
+      "x": "child.bottom",
+      "b": "25",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "pos_lrtb_offset"
+    },
+    {
+      "y": "child.height",
+      "op": "=",
+      "b": "50",
+      "strength": "[1000, 1000, 1000]",
+      "kind": "size_constant"
+    }
+  ],
+  "axioms": []
+}
