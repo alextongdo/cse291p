@@ -87,13 +87,15 @@ class LinearConstraint(BaseModel):
     a: float | None = None  # None means not yet known
     b: float | None = None  # None means not yet known
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         if self.x is None:
             assert self.a == 0
             return (
                 f"LinearConstraint({self.y.view.name}.{self.y.type} = {self.b or 'b'})"
             )
         return (
-            f"LinearConstraint({self.y.view.name}.{self.y.type} = {self.a or 'a'} * "
-            f"{self.x.view.name}.{self.x.type} + {self.b or 'b'})"
+            f"LinearConstraint({self.y.view.name}.{self.y.type} = "
+            f"{self.a if self.a is not None else 'a'} * "
+            f"{self.x.view.name}.{self.x.type} + "
+            f"{self.b if self.b is not None else 'b'})"
         )
