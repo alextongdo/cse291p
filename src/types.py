@@ -76,16 +76,6 @@ class Anchor(BaseModel):
         """Check if anchor is a vertical type (top, bottom, center_y, height)."""
         return self.type in ["top", "bottom", "center_y", "height"]
 
-    def __eq__(self, other):
-        """Compare anchors by identity to avoid infinite recursion."""
-        if not isinstance(other, Anchor):
-            return False
-        return id(self.view) == id(other.view) and self.type == other.type
-
-    def __hash__(self):
-        """Hash based on view identity and type."""
-        return hash((id(self.view), self.type))
-
 
 class LinearConstraint(BaseModel):
     """

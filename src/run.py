@@ -3,16 +3,49 @@ from rich import print as rprint
 from src.instantiation import template_instantiation
 from src.types import View
 
-example = {
-    "name": "root",
-    "rect": [0, 0, 1200, 800],
-    "children": [
-        {"name": "header", "rect": [0, 0, 1200, 80], "children": []},
-        {"name": "sidebar", "rect": [0, 80, 250, 800], "children": []},
-        {"name": "main", "rect": [250, 80, 1200, 800], "children": []},
-    ],
-}
+examples = [
+    {
+      "name": "root",
+      "rect": [0, 0, 100, 200],
+      "children": [
+        {
+          "name": "child",
+          "rect": [30, 10, 70, 40]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 200, 200],
+      "children": [
+        {
+          "name": "child",
+          "rect": [30, 10, 170, 115]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 300, 200],
+      "children": [
+        {
+          "name": "child",
+          "rect": [30, 10, 270, 190]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 100, 400],
+      "children": [
+        {
+          "name": "child",
+          "rect": [30, 10, 70, 40]
+        }
+      ]
+    }
+  ]
 
-root = View(**example)
-sketches = template_instantiation(root)
-rprint(repr(sketches))
+sketches = template_instantiation([View(**example) for example in examples])
+for s in sketches:
+  rprint(repr(s))
