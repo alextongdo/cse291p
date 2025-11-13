@@ -213,3 +213,4 @@ migration/
 
 #original code for comparison
 mockdown/
+auto-mock/

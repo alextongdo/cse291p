@@ -5,9 +5,9 @@ import sympy as sym
 
 from cse291p.pipeline.view import View
 from cse291p.pipeline.view.builder import ViewBuilder
-from cse291p.pipeline.constraint import Constraint, ConstraintCandidate
 from cse291p.pipeline.view.primitives import Attribute
 from cse291p.evaluation import (
+    get_view_ltwh,
     get_view_corners,
     calculate_rmsd,
     calculate_accuracy,
@@ -18,7 +18,7 @@ from cse291p.evaluation import (
 
 
 def test_get_view_corners():
-    """Test corner extraction from view hierarchy."""
+    """Test LTWH extraction from view hierarchy (backward compatibility alias)."""
     # Create a simple view hierarchy
     root = ViewBuilder(
         name="root",
@@ -35,35 +35,37 @@ def test_get_view_corners():
     assert "child1" in corners
     assert "child2" in corners
     
+    # get_view_corners now returns LTWH format: (left, top, width, height)
     assert corners["root"] == (0.0, 0.0, 100.0, 100.0)
-    assert corners["child1"] == (10.0, 10.0, 50.0, 50.0)
-    assert corners["child2"] == (60.0, 10.0, 90.0, 50.0)
+    assert corners["child1"] == (10.0, 10.0, 40.0, 40.0)  # width=50-10, height=50-10
+    assert corners["child2"] == (60.0, 10.0, 30.0, 40.0)  # width=90-60, height=50-10
 
 
 def test_calculate_rmsd():
-    """Test RMSD calculation."""
+    """Test RMSD calculation using LTWH format (matches auto-mock)."""
+    # LTWH format: (left, top, width, height)
     original = {
-        "view1": (10.0, 20.0, 50.0, 60.0),
+        "view1": (10.0, 20.0, 40.0, 40.0),  # left, top, width, height
         "view2": (0.0, 0.0, 100.0, 100.0),
     }
     
     # Perfect match
     synthesized = {
-        "view1": (10.0, 20.0, 50.0, 60.0),
+        "view1": (10.0, 20.0, 40.0, 40.0),
         "view2": (0.0, 0.0, 100.0, 100.0),
     }
     
     rmsd = calculate_rmsd(original, synthesized)
     assert rmsd == 0.0
     
-    # 1 pixel difference in one corner
+    # 1 pixel difference in left coordinate only
     synthesized = {
-        "view1": (11.0, 20.0, 50.0, 60.0),  # left differs by 1
+        "view1": (11.0, 20.0, 40.0, 40.0),  # left differs by 1
         "view2": (0.0, 0.0, 100.0, 100.0),
     }
     
     rmsd = calculate_rmsd(original, synthesized)
-    # 1 difference squared = 1, mean = 1/8 (8 corners total), sqrt = sqrt(1/8)
+    # 1 difference squared = 1, count = 8 (2 views * 4 dimensions), sqrt(1/8)
     assert abs(rmsd - (1.0 / (8 ** 0.5))) < 0.001
 
 
