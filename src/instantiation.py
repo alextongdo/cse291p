@@ -205,10 +205,10 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
             one_horizontal_one_vertical_matrix[i, j] = (
                 anchors[i].is_horizontal() and anchors[j].is_vertical()
             )
-            dual_type_matrix[i, j] = {anchors[i].type, anchors[j].type} == {
-                "left",
-                "right",
-            } or {anchors[i].type, anchors[j].type} == {"top", "bottom"}
+            # Specifially right/left and bottom/top, not vice versa
+            dual_type_matrix[i, j] = (
+                anchors[i].type == "right" and anchors[j].type == "left"
+            ) or (anchors[i].type == "bottom" and anchors[j].type == "top")
 
     # Aspect Ratio Constraints: (y = a * x)
     # y and x are from same view and y = [anchor].width; x = [anchor].height
@@ -226,8 +226,8 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
 
     # Offset Position Constraints: (y = x + b)
     # y = [parent].[same_type]; x = [child].[same_type]
-    # y = [sibling].[left/right]; x = [sibling].[right/left]
-    # y = [sibling].[top/bottom]; x = [sibling].[bottom/top]
+    # y = [sibling].right; x = [sibling].left
+    # y = [sibling].bottom; x = [sibling].top
     # and anchors are visible from each other
     offset_parent_child_matrix = (
         parent_matrix & both_position_matrix & same_type_matrix & visible_matrix
@@ -237,24 +237,91 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
     )
     offset_matrix = offset_parent_child_matrix | offset_sibling_matrix
 
+    # Compute view-level visibility matrices
+    # Two views are horizontally visible if any of their horizontal anchors are visible
+    # Two views are vertically visible if any of their vertical anchors are visible
+    
+    # Step 1: Find which anchor pairs are visible in each direction
+    h_anchor_visible = both_horizontal_matrix & visible_matrix
+    v_anchor_visible = both_vertical_matrix & visible_matrix
+    
+    # Step 2: Broadcast to view level using numpy operations
+    # Create view index mapping
+
+    views = examples[0]._flattened_views_in_subtree
+    for i in range(0, n, 8):
+        view = anchors[i].view
+        assert view == anchors[i+1].view
+        assert view == anchors[i+2].view
+        assert view == anchors[i+3].view
+        assert view == anchors[i+4].view
+        assert view == anchors[i+5].view
+        assert view == anchors[i+6].view
+        assert view == anchors[i+7].view
+        assert view == views[i // 8]
+
+    # horizontal_visible_views_matrix = np.zeros((len(views), len(views)), dtype=bool)
+    # vertical_visible_views_matrix = np.zeros((len(views), len(views)), dtype=bool)
+
+    h_visible_view_matrix1 = np.zeros((n, n), dtype=bool)
+    v_visible_view_matrix1 = np.zeros((n, n), dtype=bool)
+
+    for i in range(0, n, 8):
+        for j in range(0, n, 8):
+            h_visible_view_matrix1[i:i+8, j:j+8] = h_anchor_visible[i:i+8, j:j+8].any()
+            v_visible_view_matrix1[i:i+8, j:j+8] = v_anchor_visible[i:i+8, j:j+8].any()
+
+    # Create view index mapping for view-level visibility
+    view_names = [anchor.view.name for anchor in anchors]
+    unique_views = []
+    view_to_idx = {}
+    for name in view_names:
+        if name not in view_to_idx:
+            view_to_idx[name] = len(unique_views)
+            unique_views.append(name)
+    view_indices = np.array([view_to_idx[name] for name in view_names])
+    num_views = len(unique_views)
+    
+    # For each view pair, check if ANY of their anchor pairs are visible in each direction
+    num_views = len(unique_views)
+    h_vis_view_level = np.zeros((num_views, num_views), dtype=bool)
+    v_vis_view_level = np.zeros((num_views, num_views), dtype=bool)
+    
+    for i in range(n):
+        for j in range(n):
+            view_i = view_indices[i]
+            view_j = view_indices[j]
+
+            if h_anchor_visible[i, j]:
+                h_vis_view_level[view_i, view_j] = True
+            if v_anchor_visible[i, j]:
+                v_vis_view_level[view_i, view_j] = True
+    
+    # Step 3: Broadcast back to anchor level
+    h_visible_view_matrix = h_vis_view_level[view_indices[:, None], view_indices[None, :]]
+    v_visible_view_matrix = v_vis_view_level[view_indices[:, None], view_indices[None, :]]
+
+    assert np.array_equal(h_visible_view_matrix1, h_visible_view_matrix)
+
+
     # Alignment Position Constraints: (y = x)
     # y = [sibling].[left/right]; x = [sibling].[left/right]
     # y = [sibling].[top/bottom]; x = [sibling].[top/bottom]
     # y = [sibling].[center_x/center_y]; x = [sibling].[center_x/center_y]
-    # and anchors are visible from each other
+    # and *views* (not anchors) directionally visible from each other
     alignment_horizontal_matrix = (
         sibling_matrix
         & both_horizontal_matrix
         & both_position_matrix
         & same_type_matrix
-        & visible_matrix
+        & v_visible_view_matrix
     )
     alignment_vertical_matrix = (
         sibling_matrix
         & both_vertical_matrix
         & both_position_matrix
         & same_type_matrix
-        & visible_matrix
+        & h_visible_view_matrix
     )
     alignment_matrix = alignment_horizontal_matrix | alignment_vertical_matrix
 

@@ -15,6 +15,11 @@ class View(BaseModel):
     def anchor(self, type: str) -> "Anchor":
         return Anchor(view=self, type=type)
 
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, View):
+            return False
+        return self.name == other.name and self.rect == other.rect
+
     def model_post_init(self, _):
         anchors = self.anchors()
         views = [self]
@@ -56,6 +61,14 @@ class Anchor(BaseModel):
         "width",
         "height",
     ]
+
+    def __eq__(self, other) -> bool:
+        """Compare based on view name and type to avoid infinite recursion."""
+        if not isinstance(other, Anchor):
+            return False
+        # Assumes that view names are unique,
+        # i.e. View objects with the same name are equivalent
+        return self.view.name == other.view.name and self.type == other.type
 
     def is_size(self) -> bool:
         """Check if anchor is a size type (width or height)."""
