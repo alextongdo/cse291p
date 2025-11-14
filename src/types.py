@@ -15,6 +15,9 @@ class View(BaseModel):
     def anchor(self, type: str) -> "Anchor":
         return Anchor(view=self, type=type)
 
+    def __hash__(self):
+        return hash((self.name, self.rect))
+
     def __eq__(self, other) -> bool:
         if not isinstance(other, View):
             return False

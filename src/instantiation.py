@@ -165,50 +165,39 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
 
     # Use boolean matrices to efficiently combine
     # various predicates over anchor pairs
-    same_view_matrix = np.zeros((n, n), dtype=bool)
-    same_type_matrix = np.zeros((n, n), dtype=bool)
-    parent_matrix = np.zeros((n, n), dtype=bool)
-    sibling_matrix = np.zeros((n, n), dtype=bool)
-    both_size_matrix = np.zeros((n, n), dtype=bool)
-    both_position_matrix = np.zeros((n, n), dtype=bool)
-    both_horizontal_matrix = np.zeros((n, n), dtype=bool)
-    both_vertical_matrix = np.zeros((n, n), dtype=bool)
-    one_horizontal_one_vertical_matrix = np.zeros((n, n), dtype=bool)
-    dual_type_matrix = np.zeros((n, n), dtype=bool)
+    views = np.array([a.view for a in anchors], dtype=object)
+    types = np.array([a.type for a in anchors], dtype=object)
+
+    is_size = np.array([a.is_size() for a in anchors])
+    is_position = np.array([a.is_position() for a in anchors])
+    is_horizontal = np.array([a.is_horizontal() for a in anchors])
+    is_vertical = np.array([a.is_vertical() for a in anchors])
+
+    parents = np.array([a.view.parent for a in anchors], dtype=object)
+    children = np.array([set(a.view.children) for a in anchors], dtype=object)
+
+    same_view_matrix = views[:, None] == views[None, :]
+    same_type_matrix = types[:, None] == types[None, :]
+    parent_matrix = np.vectorize(lambda c, child_set: c in child_set)(
+        views[None, :], children[:, None]
+    )
+    sibling_matrix = (views[:, None] != views[None, :]) & (
+        parents[:, None] == parents[None, :]
+    )
+    both_size_matrix = is_size[:, None] & is_size[None, :]
+    both_position_matrix = is_position[:, None] & is_position[None, :]
+    both_horizontal_matrix = is_horizontal[:, None] & is_horizontal[None, :]
+    both_vertical_matrix = is_vertical[:, None] & is_vertical[None, :]
+    one_horizontal_one_vertical_matrix = is_horizontal[:, None] & is_vertical[None, :]
+    dual_type_matrix = ((types[:, None] == "right") & (types[None, :] == "left")) | (
+        (types[:, None] == "bottom") & (types[None, :] == "top")
+    )
 
     # Compute visibility matrix for all examples
     visible_matrix = np.zeros((n, n), dtype=bool)
     for example in examples:
         example_visible_matrix = compute_visibility_matrix(anchors, example)
         visible_matrix |= example_visible_matrix
-
-    for i in range(n):
-        for j in range(n):
-            same_view_matrix[i, j] = anchors[i].view == anchors[j].view
-            same_type_matrix[i, j] = anchors[i].type == anchors[j].type
-            # Column is parent of row so that parent = a * child + b
-            parent_matrix[i, j] = anchors[j].view in anchors[i].view.children
-            sibling_matrix[i, j] = (
-                anchors[i].view != anchors[j].view
-                and anchors[i].view.parent == anchors[j].view.parent
-            )
-            both_size_matrix[i, j] = anchors[i].is_size() and anchors[j].is_size()
-            both_position_matrix[i, j] = (
-                anchors[i].is_position() and anchors[j].is_position()
-            )
-            both_horizontal_matrix[i, j] = (
-                anchors[i].is_horizontal() and anchors[j].is_horizontal()
-            )
-            both_vertical_matrix[i, j] = (
-                anchors[i].is_vertical() and anchors[j].is_vertical()
-            )
-            one_horizontal_one_vertical_matrix[i, j] = (
-                anchors[i].is_horizontal() and anchors[j].is_vertical()
-            )
-            # Specifially right/left and bottom/top, not vice versa
-            dual_type_matrix[i, j] = (
-                anchors[i].type == "right" and anchors[j].type == "left"
-            ) or (anchors[i].type == "bottom" and anchors[j].type == "top")
 
     # Aspect Ratio Constraints: (y = a * x)
     # y and x are from same view and y = [anchor].width; x = [anchor].height
@@ -237,72 +226,32 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
     )
     offset_matrix = offset_parent_child_matrix | offset_sibling_matrix
 
-    # Compute view-level visibility matrices
-    # Two views are horizontally visible if any of their horizontal anchors are visible
-    # Two views are vertically visible if any of their vertical anchors are visible
-    
-    # Step 1: Find which anchor pairs are visible in each direction
-    h_anchor_visible = both_horizontal_matrix & visible_matrix
-    v_anchor_visible = both_vertical_matrix & visible_matrix
-    
-    # Step 2: Broadcast to view level using numpy operations
-    # Create view index mapping
-
+    # Compute view-level visibility matrices, which marks an anchor pair as visible if
+    # *any anchor pair* of their views were deemed visible by the sweep-line algorithm
     views = examples[0]._flattened_views_in_subtree
     for i in range(0, n, 8):
         view = anchors[i].view
-        assert view == anchors[i+1].view
-        assert view == anchors[i+2].view
-        assert view == anchors[i+3].view
-        assert view == anchors[i+4].view
-        assert view == anchors[i+5].view
-        assert view == anchors[i+6].view
-        assert view == anchors[i+7].view
+        assert view == anchors[i + 1].view
+        assert view == anchors[i + 2].view
+        assert view == anchors[i + 3].view
+        assert view == anchors[i + 4].view
+        assert view == anchors[i + 5].view
+        assert view == anchors[i + 6].view
+        assert view == anchors[i + 7].view
         assert view == views[i // 8]
 
-    # horizontal_visible_views_matrix = np.zeros((len(views), len(views)), dtype=bool)
-    # vertical_visible_views_matrix = np.zeros((len(views), len(views)), dtype=bool)
+    h_visible_anchor_matrix = both_horizontal_matrix & visible_matrix
+    v_visible_anchor_matrix = both_vertical_matrix & visible_matrix
 
-    h_visible_view_matrix1 = np.zeros((n, n), dtype=bool)
-    v_visible_view_matrix1 = np.zeros((n, n), dtype=bool)
-
-    for i in range(0, n, 8):
-        for j in range(0, n, 8):
-            h_visible_view_matrix1[i:i+8, j:j+8] = h_anchor_visible[i:i+8, j:j+8].any()
-            v_visible_view_matrix1[i:i+8, j:j+8] = v_anchor_visible[i:i+8, j:j+8].any()
-
-    # Create view index mapping for view-level visibility
-    view_names = [anchor.view.name for anchor in anchors]
-    unique_views = []
-    view_to_idx = {}
-    for name in view_names:
-        if name not in view_to_idx:
-            view_to_idx[name] = len(unique_views)
-            unique_views.append(name)
-    view_indices = np.array([view_to_idx[name] for name in view_names])
-    num_views = len(unique_views)
-    
-    # For each view pair, check if ANY of their anchor pairs are visible in each direction
-    num_views = len(unique_views)
-    h_vis_view_level = np.zeros((num_views, num_views), dtype=bool)
-    v_vis_view_level = np.zeros((num_views, num_views), dtype=bool)
-    
-    for i in range(n):
-        for j in range(n):
-            view_i = view_indices[i]
-            view_j = view_indices[j]
-
-            if h_anchor_visible[i, j]:
-                h_vis_view_level[view_i, view_j] = True
-            if v_anchor_visible[i, j]:
-                v_vis_view_level[view_i, view_j] = True
-    
-    # Step 3: Broadcast back to anchor level
-    h_visible_view_matrix = h_vis_view_level[view_indices[:, None], view_indices[None, :]]
-    v_visible_view_matrix = v_vis_view_level[view_indices[:, None], view_indices[None, :]]
-
-    assert np.array_equal(h_visible_view_matrix1, h_visible_view_matrix)
-
+    # (anchors x anchors) -> (views, anchors, views, anchors)
+    h_view_anchor_blocks = h_visible_anchor_matrix.reshape(n // 8, 8, n // 8, 8)
+    h_visible_view_matrix = np.repeat(
+        np.repeat(h_view_anchor_blocks.any(axis=(1, 3)), 8, axis=0), 8, axis=1
+    )
+    v_view_anchor_blocks = v_visible_anchor_matrix.reshape(n // 8, 8, n // 8, 8)
+    v_visible_view_matrix = np.repeat(
+        np.repeat(v_view_anchor_blocks.any(axis=(1, 3)), 8, axis=0), 8, axis=1
+    )
 
     # Alignment Position Constraints: (y = x)
     # y = [sibling].[left/right]; x = [sibling].[left/right]
