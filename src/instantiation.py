@@ -278,7 +278,7 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
         for j in range(n):
             if aspect_ratio_matrix[i, j]:
                 sketches.append(
-                    LinearConstraint(y=anchors[i], x=anchors[j], a=None, b=0.0),
+                    LinearConstraint(y=anchors[i], x=anchors[j], a=None, b=0),
                 )
             if parent_relative_matrix[i, j]:
                 sketches.append(
@@ -286,7 +286,7 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
                         y=anchors[i],
                         x=anchors[j],
                         a=None,
-                        b=0.0,
+                        b=0,
                     ),
                 )
             if offset_matrix[i, j] or alignment_matrix[i, j]:
@@ -300,6 +300,6 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
     # y = [anchor].width/height
     for i in range(n):
         if anchors[i].is_size():
-            sketches.append(LinearConstraint(y=anchors[i], x=None, a=0.0, b=None))
+            sketches.append(LinearConstraint(y=anchors[i], x=None, a=0, b=None))
 
     return sketches

@@ -8,6 +8,9 @@ dependencies = [
     "pydantic>=2.12.3",
     "numpy>=1.24.0",
     "intervaltree>=3.1.0",
+    "pandas>=2.3.3",
+    "scipy>=1.16.3",
+    "statsmodels>=0.14.5",
 ]
 
 [dependency-groups]

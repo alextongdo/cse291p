@@ -1,3 +1,4 @@
+from fractions import Fraction
 from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, PrivateAttr
@@ -11,6 +12,14 @@ class View(BaseModel):
 
     _anchors_in_subtree: list["Anchor"] = PrivateAttr(default_factory=list)
     _flattened_views_in_subtree: list["View"] = PrivateAttr(default_factory=list)
+
+    @property
+    def width(self) -> float:
+        return self.rect[2] - self.rect[0]
+
+    @property
+    def height(self) -> float:
+        return self.rect[3] - self.rect[1]
 
     def anchor(self, type: str) -> "Anchor":
         return Anchor(view=self, type=type)
@@ -100,8 +109,8 @@ class LinearConstraint(BaseModel):
 
     y: Anchor
     x: Anchor | None = None  # None means y = b
-    a: float | None = None  # None means not yet known
-    b: float | None = None  # None means not yet known
+    a: int | Fraction | None = None  # None means not yet known
+    b: int | None = None  # None means not yet known
 
     def __repr__(self) -> str:
         if self.x is None:
