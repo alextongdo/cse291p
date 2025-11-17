@@ -3,6 +3,8 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, PrivateAttr
 
+LEFT, TOP, RIGHT, BOTTOM = 0, 1, 2, 3
+
 
 class View(BaseModel):
     name: str
@@ -12,25 +14,6 @@ class View(BaseModel):
 
     _anchors_in_subtree: list["Anchor"] = PrivateAttr(default_factory=list)
     _flattened_views_in_subtree: list["View"] = PrivateAttr(default_factory=list)
-
-    @property
-    def width(self) -> float:
-        return self.rect[2] - self.rect[0]
-
-    @property
-    def height(self) -> float:
-        return self.rect[3] - self.rect[1]
-
-    def anchor(self, type: str) -> "Anchor":
-        return Anchor(view=self, type=type)
-
-    def __hash__(self):
-        return hash((self.name, self.rect))
-
-    def __eq__(self, other) -> bool:
-        if not isinstance(other, View):
-            return False
-        return self.name == other.name and self.rect == other.rect
 
     def model_post_init(self, _):
         anchors = self.anchors()
@@ -42,6 +25,49 @@ class View(BaseModel):
             views.extend(child._flattened_views_in_subtree)
         self._anchors_in_subtree = anchors
         self._flattened_views_in_subtree = views
+
+    def __hash__(self):
+        return hash((self.name, self.rect))
+
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, View):
+            return False
+        return self.name == other.name and self.rect == other.rect
+
+    @property
+    def width(self) -> float:
+        return self.rect[RIGHT] - self.rect[LEFT]
+
+    @property
+    def height(self) -> float:
+        return self.rect[BOTTOM] - self.rect[TOP]
+
+    @property
+    def left(self) -> float:
+        return self.rect[LEFT]
+
+    @property
+    def right(self) -> float:
+        return self.rect[RIGHT]
+
+    @property
+    def top(self) -> float:
+        return self.rect[TOP]
+
+    @property
+    def bottom(self) -> float:
+        return self.rect[BOTTOM]
+
+    @property
+    def center_x(self) -> float:
+        return (self.rect[LEFT] + self.rect[RIGHT]) / 2
+
+    @property
+    def center_y(self) -> float:
+        return (self.rect[TOP] + self.rect[BOTTOM]) / 2
+
+    def anchor(self, type: str) -> "Anchor":
+        return Anchor(view=self, type=type)
 
     def anchors(self) -> list["Anchor"]:
         """Get all anchors for this view."""
@@ -111,6 +137,7 @@ class LinearConstraint(BaseModel):
     x: Anchor | None = None  # None means y = b
     a: int | Fraction | None = None  # None means not yet known
     b: int | None = None  # None means not yet known
+    score: float | None = None  # Likelihood of constraint after parameter learning
 
     def __repr__(self) -> str:
         if self.x is None:

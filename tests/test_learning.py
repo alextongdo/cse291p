@@ -1,5 +1,5 @@
 from src.instantiation import template_instantiation
-from src.learning import BayesianLearning
+from src.learning import bayesian_learning
 from src.types import View
 
 
@@ -29,10 +29,9 @@ def test_1x1_fixed_ltr_centered_x_aspectratio_4_3():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(child.width = 4/3 * child.height + 0)",
         "LinearConstraint(root.center_x = 1 * child.center_x + 0)",
@@ -69,10 +68,9 @@ def test_1x1_fixed_ltwh():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(child.width = 1 * child.height + 0)",
         "LinearConstraint(child.height = 50)",
@@ -109,10 +107,9 @@ def test_1x1_fixed_lw_relative_h_centered_y():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(root.height = 2 * child.height + 0)",
         "LinearConstraint(child.width = 50)",
@@ -148,10 +145,9 @@ def test_1x1_fixed_th_relative_w_centered_x():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(root.width = 2 * child.width + 0)",
         "LinearConstraint(child.height = 50)",
@@ -187,10 +183,9 @@ def test_1x1_fixed_whl_centered_y():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(child.width = 1 * child.height + 0)",
         "LinearConstraint(child.height = 50)",
@@ -227,10 +222,9 @@ def test_1x1_fixed_wht_centered_x():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(child.width = 1 * child.height + 0)",
         "LinearConstraint(child.height = 50)",
@@ -280,10 +274,9 @@ def test_1x2_fixed_ltwh():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(bottom.width = 16/7 * bottom.height + 0)",
         "LinearConstraint(top.width = 16/7 * top.height + 0)",
@@ -347,10 +340,9 @@ def test_2x1_fixed_ltwh():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(left.width = 7/16 * left.height + 0)",
         "LinearConstraint(right.width = 7/16 * right.height + 0)",
@@ -412,10 +404,9 @@ def test_2x1_fixed_ltrb_equal_wh():
     ]
     views = [View(**example) for example in examples]
     sketches = template_instantiation(views)
-    learner = BayesianLearning(sketches, views)
-    candidates = learner.learn_flat()
+    candidates = bayesian_learning(sketches, views, seed=42)
 
-    actual_constraints = {repr(c.constraint) for c in candidates}
+    actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
         "LinearConstraint(left.bottom = 1 * right.bottom + 0)",
         "LinearConstraint(left.center_y = 1 * right.center_y + 0)",
