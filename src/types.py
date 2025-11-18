@@ -100,6 +100,8 @@ class Anchor(BaseModel):
         "height",
     ]
 
+    model_config = {"frozen": True}
+
     def __eq__(self, other) -> bool:
         """Compare based on view name and type to avoid infinite recursion."""
         if not isinstance(other, Anchor):
@@ -137,7 +139,9 @@ class LinearConstraint(BaseModel):
     x: Anchor | None = None  # None means y = b
     a: int | Fraction | None = None  # None means not yet known
     b: int | None = None  # None means not yet known
-    score: float | None = None  # Likelihood of constraint after parameter learning
+    score: float | None = None  # None means no parameter learning done yet
+
+    model_config = {"frozen": True}
 
     def __repr__(self) -> str:
         if self.x is None:

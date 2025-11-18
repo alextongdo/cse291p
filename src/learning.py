@@ -205,11 +205,13 @@ class TemplateBayesianLinearModel:
         """Add tiny noise to avoid perfect separation in GLM."""
         # Generate 1D noise for x and broadcast across columns
         x_noise = np.random.randn(len(x)) * 1e-5
+        x_noise -= x_noise.mean() # ALEX ADDDED
         # Broadcasting: add noise to each row
         x_smudged = x + x_noise[:, np.newaxis]
 
         # Generate noise for y
         y_noise = np.random.randn(len(y)) * 1e-5
+        y_noise -= y_noise.mean() # ALEX ADDDED
         y_smudged = y + y_noise
 
         return x_smudged, y_smudged
@@ -367,24 +369,20 @@ class TemplateBayesianLinearModel:
         # Compute posterior: Prior × Likelihood
         posteriors = likelihoods * priors
 
-        # Normalize posterior
-        posteriors /= posteriors.sum()
+        # No need to normalize posteriors probabilities to sum 
+        # to 1, since only the relative ranking matters for score
 
-        # Create LinearConstraint objects with scores
         results = []
         for (a, b), score in zip(candidates, posteriors, strict=True):
-            # Keep a as Fraction, b as int for exact representation
             results.append(
                 LinearConstraint(
                     y=self.template.y,
                     x=self.template.x,
-                    a=a,  # Fraction object
-                    b=b,  # int object
+                    a=a,
+                    b=b,
                     score=float(score),
                 )
             )
-
-        # Sort by descending score
         return sorted(results, key=lambda c: -c.score)
 
 
