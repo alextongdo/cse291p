@@ -151,6 +151,7 @@ def compare_optimizations(input_file: Path) -> Dict[str, Any]:
         'prune_axiom_violators': False,
         'enable_hierarchical_pruning': False,
         'enable_early_rejection': False,
+        'enable_parallel_learning': False,
     })
     result_no_opt = test_with_options(input_file, options_no_opt)
     
@@ -161,6 +162,8 @@ def compare_optimizations(input_file: Path) -> Dict[str, Any]:
         'prune_axiom_violators': True,
         'enable_hierarchical_pruning': True,
         'enable_early_rejection': True,
+        'enable_parallel_learning': True,
+        'n_jobs': -1,  # Use all CPU cores
     })
     result_with_opt = test_with_options(input_file, options_with_opt)
     

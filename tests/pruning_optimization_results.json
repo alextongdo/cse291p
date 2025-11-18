@@ -6,13 +6,13 @@
       "accuracy": 50.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.2223207950592041,
-        "input_loading_latency_seconds": 7.796287536621094e-05,
-        "sketch_generation_latency_seconds": 0.014014959335327148,
-        "local_inference_latency_seconds": 0.18847084045410156,
-        "global_inference_latency_seconds": 0.019718170166015625,
-        "result_formatting_latency_seconds": 3.4809112548828125e-05,
-        "overhead_latency_seconds": 4.0531158447265625e-06
+        "e2e_latency_seconds": 0.2952098846435547,
+        "input_loading_latency_seconds": 8.893013000488281e-05,
+        "sketch_generation_latency_seconds": 0.016736984252929688,
+        "local_inference_latency_seconds": 0.21770405769348145,
+        "global_inference_latency_seconds": 0.06063485145568848,
+        "result_formatting_latency_seconds": 3.910064697265625e-05,
+        "overhead_latency_seconds": 5.9604644775390625e-06
       },
       "num_examples": 4
     },
@@ -21,13 +21,13 @@
       "accuracy": 50.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.128587007522583,
-        "input_loading_latency_seconds": 2.09808349609375e-05,
-        "sketch_generation_latency_seconds": 0.023675918579101562,
-        "local_inference_latency_seconds": 0.08839702606201172,
-        "global_inference_latency_seconds": 0.0164639949798584,
-        "result_formatting_latency_seconds": 2.8133392333984375e-05,
-        "overhead_latency_seconds": 9.5367431640625e-07
+        "e2e_latency_seconds": 3.4372432231903076,
+        "input_loading_latency_seconds": 2.3126602172851562e-05,
+        "sketch_generation_latency_seconds": 0.012123823165893555,
+        "local_inference_latency_seconds": 3.4007201194763184,
+        "global_inference_latency_seconds": 0.024312973022460938,
+        "result_formatting_latency_seconds": 6.103515625e-05,
+        "overhead_latency_seconds": 2.1457672119140625e-06
       },
       "num_examples": 4
     },
@@ -36,9 +36,9 @@
       "rmsd_change_pct": 0.0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.7289522428629436,
-      "local_speedup": 2.1320948096363184,
-      "global_speedup": 1.1976540438780683,
+      "e2e_speedup": 0.0858856547165007,
+      "local_speedup": 0.06401704640339706,
+      "global_speedup": 2.4939299443006195,
       "constraint_count_change": 0
     }
   },
@@ -49,13 +49,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.10104703903198242,
+        "e2e_latency_seconds": 0.3397800922393799,
         "input_loading_latency_seconds": 3.504753112792969e-05,
-        "sketch_generation_latency_seconds": 0.010891914367675781,
-        "local_inference_latency_seconds": 0.0744788646697998,
-        "global_inference_latency_seconds": 0.01561594009399414,
-        "result_formatting_latency_seconds": 2.193450927734375e-05,
-        "overhead_latency_seconds": 3.337860107421875e-06
+        "sketch_generation_latency_seconds": 0.01349496841430664,
+        "local_inference_latency_seconds": 0.2954280376434326,
+        "global_inference_latency_seconds": 0.030783891677856445,
+        "result_formatting_latency_seconds": 3.218650817871094e-05,
+        "overhead_latency_seconds": 5.9604644775390625e-06
       },
       "num_examples": 4
     },
@@ -64,13 +64,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.13219213485717773,
+        "e2e_latency_seconds": 0.14965510368347168,
         "input_loading_latency_seconds": 2.09808349609375e-05,
-        "sketch_generation_latency_seconds": 0.05199718475341797,
-        "local_inference_latency_seconds": 0.06425595283508301,
-        "global_inference_latency_seconds": 0.015894174575805664,
-        "result_formatting_latency_seconds": 2.1696090698242188e-05,
-        "overhead_latency_seconds": 2.1457672119140625e-06
+        "sketch_generation_latency_seconds": 0.062319040298461914,
+        "local_inference_latency_seconds": 0.06952500343322754,
+        "global_inference_latency_seconds": 0.017765045166015625,
+        "result_formatting_latency_seconds": 2.2172927856445312e-05,
+        "overhead_latency_seconds": 2.86102294921875e-06
       },
       "num_examples": 4
     },
@@ -79,9 +79,9 @@
       "rmsd_change_pct": 0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 0.7643952428875975,
-      "local_speedup": 1.159096727753062,
-      "global_speedup": 0.9824945623640591,
+      "e2e_speedup": 2.270421013893602,
+      "local_speedup": 4.249234420062481,
+      "global_speedup": 1.7328349796006013,
       "constraint_count_change": 0
     }
   },
@@ -92,13 +92,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.08467793464660645,
-        "input_loading_latency_seconds": 2.3126602172851562e-05,
-        "sketch_generation_latency_seconds": 0.010526895523071289,
-        "local_inference_latency_seconds": 0.058799028396606445,
-        "global_inference_latency_seconds": 0.015297174453735352,
-        "result_formatting_latency_seconds": 2.9087066650390625e-05,
-        "overhead_latency_seconds": 2.6226043701171875e-06
+        "e2e_latency_seconds": 0.0910348892211914,
+        "input_loading_latency_seconds": 3.0040740966796875e-05,
+        "sketch_generation_latency_seconds": 0.012188911437988281,
+        "local_inference_latency_seconds": 0.06269693374633789,
+        "global_inference_latency_seconds": 0.016056060791015625,
+        "result_formatting_latency_seconds": 5.888938903808594e-05,
+        "overhead_latency_seconds": 4.0531158447265625e-06
       },
       "num_examples": 4
     },
@@ -107,12 +107,12 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.0767219066619873,
-        "input_loading_latency_seconds": 2.1219253540039062e-05,
-        "sketch_generation_latency_seconds": 0.01066899299621582,
-        "local_inference_latency_seconds": 0.050595760345458984,
-        "global_inference_latency_seconds": 0.015395164489746094,
-        "result_formatting_latency_seconds": 3.886222839355469e-05,
+        "e2e_latency_seconds": 0.08068180084228516,
+        "input_loading_latency_seconds": 2.2649765014648438e-05,
+        "sketch_generation_latency_seconds": 0.013515233993530273,
+        "local_inference_latency_seconds": 0.05000805854797363,
+        "global_inference_latency_seconds": 0.017105817794799805,
+        "result_formatting_latency_seconds": 2.8133392333984375e-05,
         "overhead_latency_seconds": 1.9073486328125e-06
       },
       "num_examples": 4
@@ -122,9 +122,9 @@
       "rmsd_change_pct": 0.0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.1036995602790596,
-      "local_speedup": 1.1621335067431933,
-      "global_speedup": 0.9936350120795391,
+      "e2e_speedup": 1.1283199962175388,
+      "local_speedup": 1.25373660899456,
+      "global_speedup": 0.9386315804145121,
       "constraint_count_change": 0
     }
   },
@@ -135,13 +135,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.08405399322509766,
-        "input_loading_latency_seconds": 2.2649765014648438e-05,
-        "sketch_generation_latency_seconds": 0.010643243789672852,
-        "local_inference_latency_seconds": 0.05834388732910156,
-        "global_inference_latency_seconds": 0.015017986297607422,
-        "result_formatting_latency_seconds": 2.3126602172851562e-05,
-        "overhead_latency_seconds": 3.0994415283203125e-06
+        "e2e_latency_seconds": 0.09590816497802734,
+        "input_loading_latency_seconds": 3.5762786865234375e-05,
+        "sketch_generation_latency_seconds": 0.011441230773925781,
+        "local_inference_latency_seconds": 0.0661458969116211,
+        "global_inference_latency_seconds": 0.018253803253173828,
+        "result_formatting_latency_seconds": 2.7179718017578125e-05,
+        "overhead_latency_seconds": 4.291534423828125e-06
       },
       "num_examples": 4
     },
@@ -150,13 +150,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.07645416259765625,
-        "input_loading_latency_seconds": 2.09808349609375e-05,
-        "sketch_generation_latency_seconds": 0.009998083114624023,
-        "local_inference_latency_seconds": 0.05158495903015137,
-        "global_inference_latency_seconds": 0.014805078506469727,
-        "result_formatting_latency_seconds": 4.291534423828125e-05,
-        "overhead_latency_seconds": 2.1457672119140625e-06
+        "e2e_latency_seconds": 0.07801580429077148,
+        "input_loading_latency_seconds": 2.193450927734375e-05,
+        "sketch_generation_latency_seconds": 0.011330842971801758,
+        "local_inference_latency_seconds": 0.051009178161621094,
+        "global_inference_latency_seconds": 0.015625,
+        "result_formatting_latency_seconds": 2.5987625122070312e-05,
+        "overhead_latency_seconds": 2.86102294921875e-06
       },
       "num_examples": 4
     },
@@ -165,9 +165,9 @@
       "rmsd_change_pct": 0.0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.0994037521205469,
-      "local_speedup": 1.131025175284129,
-      "global_speedup": 1.0143807269272267,
+      "e2e_speedup": 1.2293427703516266,
+      "local_speedup": 1.2967450034587844,
+      "global_speedup": 1.168243408203125,
       "constraint_count_change": 0
     }
   },
@@ -178,13 +178,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.09398698806762695,
-        "input_loading_latency_seconds": 2.574920654296875e-05,
-        "sketch_generation_latency_seconds": 0.0103912353515625,
-        "local_inference_latency_seconds": 0.06753778457641602,
-        "global_inference_latency_seconds": 0.016005277633666992,
-        "result_formatting_latency_seconds": 2.4080276489257812e-05,
-        "overhead_latency_seconds": 2.86102294921875e-06
+        "e2e_latency_seconds": 0.10963916778564453,
+        "input_loading_latency_seconds": 2.8133392333984375e-05,
+        "sketch_generation_latency_seconds": 0.011372089385986328,
+        "local_inference_latency_seconds": 0.07773184776306152,
+        "global_inference_latency_seconds": 0.020475149154663086,
+        "result_formatting_latency_seconds": 3.0040740966796875e-05,
+        "overhead_latency_seconds": 1.9073486328125e-06
       },
       "num_examples": 4
     },
@@ -193,13 +193,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.08844995498657227,
-        "input_loading_latency_seconds": 2.193450927734375e-05,
-        "sketch_generation_latency_seconds": 0.010831832885742188,
-        "local_inference_latency_seconds": 0.0622100830078125,
-        "global_inference_latency_seconds": 0.01536107063293457,
-        "result_formatting_latency_seconds": 2.193450927734375e-05,
-        "overhead_latency_seconds": 3.0994415283203125e-06
+        "e2e_latency_seconds": 0.06930732727050781,
+        "input_loading_latency_seconds": 2.288818359375e-05,
+        "sketch_generation_latency_seconds": 0.013262271881103516,
+        "local_inference_latency_seconds": 0.037915706634521484,
+        "global_inference_latency_seconds": 0.01807713508605957,
+        "result_formatting_latency_seconds": 2.8133392333984375e-05,
+        "overhead_latency_seconds": 1.1920928955078125e-06
       },
       "num_examples": 4
     },
@@ -208,9 +208,9 @@
       "rmsd_change_pct": 0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.062600745041592,
-      "local_speedup": 1.0856404831984303,
-      "global_speedup": 1.0419376367784694,
+      "e2e_speedup": 1.5819275119024685,
+      "local_speedup": 2.0501226183738916,
+      "global_speedup": 1.1326545416177576,
       "constraint_count_change": 0
     }
   },
@@ -221,13 +221,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.09576702117919922,
-        "input_loading_latency_seconds": 2.9087066650390625e-05,
-        "sketch_generation_latency_seconds": 0.010329961776733398,
-        "local_inference_latency_seconds": 0.06881308555603027,
-        "global_inference_latency_seconds": 0.0165712833404541,
+        "e2e_latency_seconds": 0.10927510261535645,
+        "input_loading_latency_seconds": 2.8848648071289062e-05,
+        "sketch_generation_latency_seconds": 0.011754035949707031,
+        "local_inference_latency_seconds": 0.0802760124206543,
+        "global_inference_latency_seconds": 0.017193317413330078,
         "result_formatting_latency_seconds": 2.193450927734375e-05,
-        "overhead_latency_seconds": 1.6689300537109375e-06
+        "overhead_latency_seconds": 9.5367431640625e-07
       },
       "num_examples": 4
     },
@@ -236,13 +236,13 @@
       "accuracy": 100.0,
       "num_constraints": 4,
       "timings": {
-        "e2e_latency_seconds": 0.09679889678955078,
-        "input_loading_latency_seconds": 2.288818359375e-05,
-        "sketch_generation_latency_seconds": 0.013399124145507812,
-        "local_inference_latency_seconds": 0.06797194480895996,
-        "global_inference_latency_seconds": 0.015384197235107422,
-        "result_formatting_latency_seconds": 1.9788742065429688e-05,
-        "overhead_latency_seconds": 9.5367431640625e-07
+        "e2e_latency_seconds": 0.0671849250793457,
+        "input_loading_latency_seconds": 2.09808349609375e-05,
+        "sketch_generation_latency_seconds": 0.013383865356445312,
+        "local_inference_latency_seconds": 0.0370330810546875,
+        "global_inference_latency_seconds": 0.016722917556762695,
+        "result_formatting_latency_seconds": 2.193450927734375e-05,
+        "overhead_latency_seconds": 2.1457672119140625e-06
       },
       "num_examples": 4
     },
@@ -251,9 +251,9 @@
       "rmsd_change_pct": 0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 0.989340006502399,
-      "local_speedup": 1.012374822427612,
-      "global_speedup": 1.0771626941078014,
+      "e2e_speedup": 1.6264824659148172,
+      "local_speedup": 2.167683868974042,
+      "global_speedup": 1.028129054333414,
       "constraint_count_change": 0
     }
   },
@@ -272,13 +272,13 @@
       "accuracy": 100.0,
       "num_constraints": 14,
       "timings": {
-        "e2e_latency_seconds": 0.2520749568939209,
-        "input_loading_latency_seconds": 2.9802322387695312e-05,
-        "sketch_generation_latency_seconds": 0.01259922981262207,
-        "local_inference_latency_seconds": 0.20988798141479492,
-        "global_inference_latency_seconds": 0.029491901397705078,
-        "result_formatting_latency_seconds": 6.413459777832031e-05,
-        "overhead_latency_seconds": 1.9073486328125e-06
+        "e2e_latency_seconds": 0.2591400146484375,
+        "input_loading_latency_seconds": 4.1961669921875e-05,
+        "sketch_generation_latency_seconds": 0.014277935028076172,
+        "local_inference_latency_seconds": 0.21337008476257324,
+        "global_inference_latency_seconds": 0.03138303756713867,
+        "result_formatting_latency_seconds": 6.127357482910156e-05,
+        "overhead_latency_seconds": 5.7220458984375e-06
       },
       "num_examples": 4
     },
@@ -287,13 +287,13 @@
       "accuracy": 100.0,
       "num_constraints": 14,
       "timings": {
-        "e2e_latency_seconds": 0.22992706298828125,
-        "input_loading_latency_seconds": 2.8848648071289062e-05,
-        "sketch_generation_latency_seconds": 0.013144969940185547,
-        "local_inference_latency_seconds": 0.18641901016235352,
-        "global_inference_latency_seconds": 0.03026890754699707,
-        "result_formatting_latency_seconds": 6.413459777832031e-05,
-        "overhead_latency_seconds": 1.1920928955078125e-06
+        "e2e_latency_seconds": 0.11613917350769043,
+        "input_loading_latency_seconds": 2.9087066650390625e-05,
+        "sketch_generation_latency_seconds": 0.012356042861938477,
+        "local_inference_latency_seconds": 0.0700528621673584,
+        "global_inference_latency_seconds": 0.033637285232543945,
+        "result_formatting_latency_seconds": 6.29425048828125e-05,
+        "overhead_latency_seconds": 9.5367431640625e-07
       },
       "num_examples": 4
     },
@@ -302,9 +302,9 @@
       "rmsd_change_pct": 0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.096325737465574,
-      "local_speedup": 1.125893658763675,
-      "global_speedup": 0.9743298912230125,
+      "e2e_speedup": 2.231288606778986,
+      "local_speedup": 3.0458439264455133,
+      "global_speedup": 0.9329836623312188,
       "constraint_count_change": 0
     }
   },
@@ -315,13 +315,13 @@
       "accuracy": 83.33333333333334,
       "num_constraints": 56,
       "timings": {
-        "e2e_latency_seconds": 0.8411030769348145,
-        "input_loading_latency_seconds": 0.0001811981201171875,
-        "sketch_generation_latency_seconds": 0.020771026611328125,
-        "local_inference_latency_seconds": 0.7270188331604004,
-        "global_inference_latency_seconds": 0.09287714958190918,
-        "result_formatting_latency_seconds": 0.00025391578674316406,
-        "overhead_latency_seconds": 9.5367431640625e-07
+        "e2e_latency_seconds": 0.8832149505615234,
+        "input_loading_latency_seconds": 0.0002110004425048828,
+        "sketch_generation_latency_seconds": 0.02328181266784668,
+        "local_inference_latency_seconds": 0.7625350952148438,
+        "global_inference_latency_seconds": 0.09694409370422363,
+        "result_formatting_latency_seconds": 0.00023984909057617188,
+        "overhead_latency_seconds": 3.0994415283203125e-06
       },
       "num_examples": 3
     },
@@ -330,13 +330,13 @@
       "accuracy": 83.33333333333334,
       "num_constraints": 56,
       "timings": {
-        "e2e_latency_seconds": 0.827984094619751,
-        "input_loading_latency_seconds": 0.00017690658569335938,
-        "sketch_generation_latency_seconds": 0.019727230072021484,
-        "local_inference_latency_seconds": 0.7007758617401123,
-        "global_inference_latency_seconds": 0.1070699691772461,
-        "result_formatting_latency_seconds": 0.00023221969604492188,
-        "overhead_latency_seconds": 1.9073486328125e-06
+        "e2e_latency_seconds": 0.3258070945739746,
+        "input_loading_latency_seconds": 0.00017786026000976562,
+        "sketch_generation_latency_seconds": 0.021662235260009766,
+        "local_inference_latency_seconds": 0.20423579216003418,
+        "global_inference_latency_seconds": 0.0994710922241211,
+        "result_formatting_latency_seconds": 0.0002579689025878906,
+        "overhead_latency_seconds": 2.1457672119140625e-06
       },
       "num_examples": 3
     },
@@ -345,9 +345,9 @@
       "rmsd_change_pct": 0.0,
       "accuracy_change": 0.0,
       "accuracy_change_pct": 0.0,
-      "e2e_speedup": 1.0158444859029427,
-      "local_speedup": 1.037448452284192,
-      "global_speedup": 0.8674435072280464,
+      "e2e_speedup": 2.7108524193324133,
+      "local_speedup": 3.7336016726066306,
+      "global_speedup": 0.9745956492143083,
       "constraint_count_change": 0
     }
   }

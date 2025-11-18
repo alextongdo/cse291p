@@ -30,17 +30,34 @@ class NoiseTolerantLearning(IConstraintLearning):
                  templates: Sequence[IConstraint],
                  samples: List[IView[sympy.Number]],
                  config: Optional[NoiseTolerantLearningConfig] = None,
-                 enable_early_rejection: bool = True) -> None:
+                 enable_early_rejection: bool = True,
+                 enable_parallel_learning: bool = True,
+                 n_jobs: int = -1) -> None:
         self.templates = [tpl for tpl in templates if tpl.op is operator.eq]
         self.samples = samples
         self.enable_early_rejection = enable_early_rejection
+        self.enable_parallel_learning = enable_parallel_learning
+        self.n_jobs = n_jobs  # -1 means use all CPU cores
 
         if not config:
             config = NoiseTolerantLearningConfig(sample_count=len(samples))
         self.config = config
 
     def learn(self) -> List[List[ConstraintCandidate]]:
-        return list(map(self.learn_one, self.templates))
+        if self.enable_parallel_learning and len(self.templates) > 1:
+            # Parallel processing using joblib
+            try:
+                from joblib import Parallel, delayed
+                logger.info(f"Learning {len(self.templates)} templates in parallel with n_jobs={self.n_jobs}")
+                return Parallel(n_jobs=self.n_jobs, backend='loky')(
+                    delayed(self.learn_one)(tpl) for tpl in self.templates
+                )
+            except ImportError:
+                logger.warning("joblib not available, falling back to sequential processing")
+                return list(map(self.learn_one, self.templates))
+        else:
+            # Sequential processing (original behavior)
+            return list(map(self.learn_one, self.templates))
 
     def learn_one(self, template) -> List[ConstraintCandidate]:
         data = self._template_data(template)

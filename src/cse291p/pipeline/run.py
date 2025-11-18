@@ -93,6 +93,8 @@ def synthesize(input_data: MockdownInput, options: MockdownOptions) -> MockdownR
     timings['local_inference_start'] = time.time()
     learning_method = options.get('learning_method', 'noisetolerant')
     enable_early_rejection = options.get('enable_early_rejection', True)
+    enable_parallel_learning = options.get('enable_parallel_learning', True)
+    n_jobs = options.get('n_jobs', -1)  # -1 means use all CPU cores
     
     if learning_method == 'simple':
         cfg: Any = SimpleLearningConfig()
@@ -104,7 +106,9 @@ def synthesize(input_data: MockdownInput, options: MockdownOptions) -> MockdownR
         max_offset = max((max(ex.width, ex.height) for ex in examples)) + 10
         cfg = NoiseTolerantLearningConfig(sample_count=len(examples), max_offset=max_offset)
         learner = NoiseTolerantLearning(templates=templates, samples=examples, config=cfg, 
-                                       enable_early_rejection=enable_early_rejection)
+                                       enable_early_rejection=enable_early_rejection,
+                                       enable_parallel_learning=enable_parallel_learning,
+                                       n_jobs=n_jobs)
     else:
         raise ValueError("unknown learning_method")
     candidate_lists = learner.learn()
