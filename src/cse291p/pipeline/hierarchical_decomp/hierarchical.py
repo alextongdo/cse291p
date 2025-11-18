@@ -21,10 +21,19 @@ from .conformance import Conformance, confs_to_bounds, to_rect, conf_zip
 from .types import ISizeBounds, BasePruningMethod
 from .blackbox import BlackBoxPruner, is_x_constr, LogLevel
 from .util import short_str, to_frac
+import logging
+
+logger = logging.getLogger(__name__)
 
 
 class HierarchicalPruner(BasePruningMethod):
-    def __init__(self, examples: List[IView[NT]], bounds: ISizeBounds, solve_unambig: bool):
+    def __init__(self, examples: List[IView[NT]], bounds: ISizeBounds, solve_unambig: bool,
+                 max_depth: int = 100,
+                 max_nodes: int = 10000,
+                 min_quality_threshold: float = 0.0,
+                 max_iterations: int = 100,
+                 timeout_seconds: float = 30.0,
+                 enable_pruning: bool = True):
         bounds_frac = {k: to_frac(v) if v else None for k, v in bounds.items()}
 
         heights = [to_frac(v.height) for v in examples]
@@ -57,7 +66,25 @@ class HierarchicalPruner(BasePruningMethod):
 
         self.solve_unambig = solve_unambig
         self.log_level = LogLevel.NONE
+        
+        # Pruning optimization parameters
+        self.max_depth = max_depth
+        self.max_nodes = max_nodes
+        self.min_quality_threshold = min_quality_threshold
+        self.max_iterations = max_iterations
+        self.timeout_seconds = timeout_seconds
+        self.enable_pruning = enable_pruning
+        self.nodes_processed = 0
 
+    def _get_depth(self, view: IView[NT]) -> int:
+        """Calculate depth of view from root."""
+        depth = 0
+        current = view
+        while current.parent is not None:
+            depth += 1
+            current = current.parent
+        return depth
+    
     def relevant_constraint(self, focus: IView[NT], c: IConstraint) -> bool:
         if c.x_id:
             y_name = c.y_id.view_name
@@ -156,7 +183,19 @@ class HierarchicalPruner(BasePruningMethod):
         output_constrs = set()
 
         while len(worklist) > 0:
+            # Early exit: node count limit
+            if self.enable_pruning and self.nodes_processed >= self.max_nodes:
+                logger.warning(f"Stopped at {self.max_nodes} nodes (worklist has {len(worklist)} remaining)")
+                break
+            
             focus, focus_examples, min_c, max_c = worklist.pop()
+            
+            # Early exit: depth limit
+            if self.enable_pruning:
+                depth = self._get_depth(focus)
+                if depth > self.max_depth:
+                    continue  # Skip deep nodes
+            
             if self.log_level != LogLevel.NONE:
                 print('solving for ', focus, 'with bounds ', min_c, max_c)
             relevant = [c for c in cands if self.relevant_constraint(focus, c.constraint)]
@@ -164,7 +203,23 @@ class HierarchicalPruner(BasePruningMethod):
             bounds = confs_to_bounds(min_c, max_c)
             bb_solver = BlackBoxPruner(focus_examples, bounds, self.solve_unambig, targets=targets)
             bb_solver.log_level = self.log_level
+            bb_solver.max_iterations = self.max_iterations
+            bb_solver.timeout_seconds = self.timeout_seconds
             focus_output, mins, maxes = bb_solver(relevant)
+            
+            # Quality-based pruning: skip children if constraint quality is low
+            if self.enable_pruning and len(focus_output) > 0 and self.min_quality_threshold > 0.0:
+                # Get scores from original candidates
+                relevant_scores = {c.constraint: c.score for c in relevant}
+                output_scores = [relevant_scores.get(c, 0.0) for c in focus_output if c in relevant_scores]
+                if output_scores:
+                    avg_score = sum(output_scores) / len(output_scores)
+                    if avg_score < self.min_quality_threshold:
+                        # Still add constraints, but skip child exploration
+                        output_constrs |= set(focus_output)
+                        self.nodes_processed += 1
+                        continue
+            
             output_constrs |= set(focus_output)
             if integrate and len(focus_output) > 0:
                 int_output_constrs = set(self.integrate_constraints(self.examples, self.min_conf, self.max_conf, list(output_constrs)))
@@ -181,6 +236,8 @@ class HierarchicalPruner(BasePruningMethod):
                 else:
                     clo, chi = child_confs[child.name]['min'], child_confs[child.name]['max']
                 worklist.append((child, [fe.children[ci] for fe in focus_examples], clo, chi))
+            
+            self.nodes_processed += 1
             with open('constraints.json', 'a') as debugout:
                 print([short_str(c) for c in focus_output], file=debugout)
 

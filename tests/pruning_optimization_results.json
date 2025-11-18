@@ -1,0 +1,354 @@
+[
+  {
+    "input_file": "1x1_fixed-ltr_centered-x_aspectratio-4-3.json",
+    "without_optimizations": {
+      "rmsd": 30.493979938669863,
+      "accuracy": 50.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.2223207950592041,
+        "input_loading_latency_seconds": 7.796287536621094e-05,
+        "sketch_generation_latency_seconds": 0.014014959335327148,
+        "local_inference_latency_seconds": 0.18847084045410156,
+        "global_inference_latency_seconds": 0.019718170166015625,
+        "result_formatting_latency_seconds": 3.4809112548828125e-05,
+        "overhead_latency_seconds": 4.0531158447265625e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 30.493979938669863,
+      "accuracy": 50.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.128587007522583,
+        "input_loading_latency_seconds": 2.09808349609375e-05,
+        "sketch_generation_latency_seconds": 0.023675918579101562,
+        "local_inference_latency_seconds": 0.08839702606201172,
+        "global_inference_latency_seconds": 0.0164639949798584,
+        "result_formatting_latency_seconds": 2.8133392333984375e-05,
+        "overhead_latency_seconds": 9.5367431640625e-07
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0.0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.7289522428629436,
+      "local_speedup": 2.1320948096363184,
+      "global_speedup": 1.1976540438780683,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x1_fixed-ltwh.json",
+    "without_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.10104703903198242,
+        "input_loading_latency_seconds": 3.504753112792969e-05,
+        "sketch_generation_latency_seconds": 0.010891914367675781,
+        "local_inference_latency_seconds": 0.0744788646697998,
+        "global_inference_latency_seconds": 0.01561594009399414,
+        "result_formatting_latency_seconds": 2.193450927734375e-05,
+        "overhead_latency_seconds": 3.337860107421875e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.13219213485717773,
+        "input_loading_latency_seconds": 2.09808349609375e-05,
+        "sketch_generation_latency_seconds": 0.05199718475341797,
+        "local_inference_latency_seconds": 0.06425595283508301,
+        "global_inference_latency_seconds": 0.015894174575805664,
+        "result_formatting_latency_seconds": 2.1696090698242188e-05,
+        "overhead_latency_seconds": 2.1457672119140625e-06
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 0.7643952428875975,
+      "local_speedup": 1.159096727753062,
+      "global_speedup": 0.9824945623640591,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x1_fixed-lw_relative-h_centered-y.json",
+    "without_optimizations": {
+      "rmsd": 1.1368683772161603e-13,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.08467793464660645,
+        "input_loading_latency_seconds": 2.3126602172851562e-05,
+        "sketch_generation_latency_seconds": 0.010526895523071289,
+        "local_inference_latency_seconds": 0.058799028396606445,
+        "global_inference_latency_seconds": 0.015297174453735352,
+        "result_formatting_latency_seconds": 2.9087066650390625e-05,
+        "overhead_latency_seconds": 2.6226043701171875e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 1.1368683772161603e-13,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.0767219066619873,
+        "input_loading_latency_seconds": 2.1219253540039062e-05,
+        "sketch_generation_latency_seconds": 0.01066899299621582,
+        "local_inference_latency_seconds": 0.050595760345458984,
+        "global_inference_latency_seconds": 0.015395164489746094,
+        "result_formatting_latency_seconds": 3.886222839355469e-05,
+        "overhead_latency_seconds": 1.9073486328125e-06
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0.0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.1036995602790596,
+      "local_speedup": 1.1621335067431933,
+      "global_speedup": 0.9936350120795391,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x1_fixed-th_relative-w_centered-x.json",
+    "without_optimizations": {
+      "rmsd": 1.1368683772161603e-13,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.08405399322509766,
+        "input_loading_latency_seconds": 2.2649765014648438e-05,
+        "sketch_generation_latency_seconds": 0.010643243789672852,
+        "local_inference_latency_seconds": 0.05834388732910156,
+        "global_inference_latency_seconds": 0.015017986297607422,
+        "result_formatting_latency_seconds": 2.3126602172851562e-05,
+        "overhead_latency_seconds": 3.0994415283203125e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 1.1368683772161603e-13,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.07645416259765625,
+        "input_loading_latency_seconds": 2.09808349609375e-05,
+        "sketch_generation_latency_seconds": 0.009998083114624023,
+        "local_inference_latency_seconds": 0.05158495903015137,
+        "global_inference_latency_seconds": 0.014805078506469727,
+        "result_formatting_latency_seconds": 4.291534423828125e-05,
+        "overhead_latency_seconds": 2.1457672119140625e-06
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0.0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.0994037521205469,
+      "local_speedup": 1.131025175284129,
+      "global_speedup": 1.0143807269272267,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x1_fixed-whl_centered-y.json",
+    "without_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.09398698806762695,
+        "input_loading_latency_seconds": 2.574920654296875e-05,
+        "sketch_generation_latency_seconds": 0.0103912353515625,
+        "local_inference_latency_seconds": 0.06753778457641602,
+        "global_inference_latency_seconds": 0.016005277633666992,
+        "result_formatting_latency_seconds": 2.4080276489257812e-05,
+        "overhead_latency_seconds": 2.86102294921875e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.08844995498657227,
+        "input_loading_latency_seconds": 2.193450927734375e-05,
+        "sketch_generation_latency_seconds": 0.010831832885742188,
+        "local_inference_latency_seconds": 0.0622100830078125,
+        "global_inference_latency_seconds": 0.01536107063293457,
+        "result_formatting_latency_seconds": 2.193450927734375e-05,
+        "overhead_latency_seconds": 3.0994415283203125e-06
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.062600745041592,
+      "local_speedup": 1.0856404831984303,
+      "global_speedup": 1.0419376367784694,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x1_fixed-wht_centered-x.json",
+    "without_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.09576702117919922,
+        "input_loading_latency_seconds": 2.9087066650390625e-05,
+        "sketch_generation_latency_seconds": 0.010329961776733398,
+        "local_inference_latency_seconds": 0.06881308555603027,
+        "global_inference_latency_seconds": 0.0165712833404541,
+        "result_formatting_latency_seconds": 2.193450927734375e-05,
+        "overhead_latency_seconds": 1.6689300537109375e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 4,
+      "timings": {
+        "e2e_latency_seconds": 0.09679889678955078,
+        "input_loading_latency_seconds": 2.288818359375e-05,
+        "sketch_generation_latency_seconds": 0.013399124145507812,
+        "local_inference_latency_seconds": 0.06797194480895996,
+        "global_inference_latency_seconds": 0.015384197235107422,
+        "result_formatting_latency_seconds": 1.9788742065429688e-05,
+        "overhead_latency_seconds": 9.5367431640625e-07
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 0.989340006502399,
+      "local_speedup": 1.012374822427612,
+      "global_speedup": 1.0771626941078014,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "1x2_fixed-ltwh.json",
+    "error": "Length of values (24) does not match length of index (16)"
+  },
+  {
+    "input_file": "2x1_fixed-ltrb_equal-wh.json",
+    "error": "Length of values (24) does not match length of index (16)"
+  },
+  {
+    "input_file": "2x1_fixed-ltwh.json",
+    "without_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 14,
+      "timings": {
+        "e2e_latency_seconds": 0.2520749568939209,
+        "input_loading_latency_seconds": 2.9802322387695312e-05,
+        "sketch_generation_latency_seconds": 0.01259922981262207,
+        "local_inference_latency_seconds": 0.20988798141479492,
+        "global_inference_latency_seconds": 0.029491901397705078,
+        "result_formatting_latency_seconds": 6.413459777832031e-05,
+        "overhead_latency_seconds": 1.9073486328125e-06
+      },
+      "num_examples": 4
+    },
+    "with_optimizations": {
+      "rmsd": 0.0,
+      "accuracy": 100.0,
+      "num_constraints": 14,
+      "timings": {
+        "e2e_latency_seconds": 0.22992706298828125,
+        "input_loading_latency_seconds": 2.8848648071289062e-05,
+        "sketch_generation_latency_seconds": 0.013144969940185547,
+        "local_inference_latency_seconds": 0.18641901016235352,
+        "global_inference_latency_seconds": 0.03026890754699707,
+        "result_formatting_latency_seconds": 6.413459777832031e-05,
+        "overhead_latency_seconds": 1.1920928955078125e-06
+      },
+      "num_examples": 4
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.096325737465574,
+      "local_speedup": 1.125893658763675,
+      "global_speedup": 0.9743298912230125,
+      "constraint_count_change": 0
+    }
+  },
+  {
+    "input_file": "onetwo.json",
+    "without_optimizations": {
+      "rmsd": 1742.8119519902311,
+      "accuracy": 83.33333333333334,
+      "num_constraints": 56,
+      "timings": {
+        "e2e_latency_seconds": 0.8411030769348145,
+        "input_loading_latency_seconds": 0.0001811981201171875,
+        "sketch_generation_latency_seconds": 0.020771026611328125,
+        "local_inference_latency_seconds": 0.7270188331604004,
+        "global_inference_latency_seconds": 0.09287714958190918,
+        "result_formatting_latency_seconds": 0.00025391578674316406,
+        "overhead_latency_seconds": 9.5367431640625e-07
+      },
+      "num_examples": 3
+    },
+    "with_optimizations": {
+      "rmsd": 1742.8119519902311,
+      "accuracy": 83.33333333333334,
+      "num_constraints": 56,
+      "timings": {
+        "e2e_latency_seconds": 0.827984094619751,
+        "input_loading_latency_seconds": 0.00017690658569335938,
+        "sketch_generation_latency_seconds": 0.019727230072021484,
+        "local_inference_latency_seconds": 0.7007758617401123,
+        "global_inference_latency_seconds": 0.1070699691772461,
+        "result_formatting_latency_seconds": 0.00023221969604492188,
+        "overhead_latency_seconds": 1.9073486328125e-06
+      },
+      "num_examples": 3
+    },
+    "improvements": {
+      "rmsd_change": 0.0,
+      "rmsd_change_pct": 0.0,
+      "accuracy_change": 0.0,
+      "accuracy_change_pct": 0.0,
+      "e2e_speedup": 1.0158444859029427,
+      "local_speedup": 1.037448452284192,
+      "global_speedup": 0.8674435072280464,
+      "constraint_count_change": 0
+    }
+  }
+]

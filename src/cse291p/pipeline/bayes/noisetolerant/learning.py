@@ -29,9 +29,11 @@ class NoiseTolerantLearning(IConstraintLearning):
     def __init__(self,
                  templates: Sequence[IConstraint],
                  samples: List[IView[sympy.Number]],
-                 config: Optional[NoiseTolerantLearningConfig] = None) -> None:
+                 config: Optional[NoiseTolerantLearningConfig] = None,
+                 enable_early_rejection: bool = True) -> None:
         self.templates = [tpl for tpl in templates if tpl.op is operator.eq]
         self.samples = samples
+        self.enable_early_rejection = enable_early_rejection
 
         if not config:
             config = NoiseTolerantLearningConfig(sample_count=len(samples))
@@ -42,7 +44,7 @@ class NoiseTolerantLearning(IConstraintLearning):
 
     def learn_one(self, template) -> List[ConstraintCandidate]:
         data = self._template_data(template)
-        model = NoiseTolerantTemplateModel(template, data, self.config)
+        model = NoiseTolerantTemplateModel(template, data, self.config, self.enable_early_rejection)
         return model.learn() if not model.reject() else []
 
     def _template_data(self, template: IConstraint) -> pd.DataFrame:
@@ -60,11 +62,25 @@ class NoiseTolerantLearning(IConstraintLearning):
 
 
 class NoiseTolerantTemplateModel(abc.ABC):
-    def __init__(self, template: IConstraint, data: pd.DataFrame, config: NoiseTolerantLearningConfig):
+    def __init__(self, template: IConstraint, data: pd.DataFrame, config: NoiseTolerantLearningConfig, enable_early_rejection: bool = True):
         self.template = template
         self.data = data
         self.config = config
-
+        self.enable_early_rejection = enable_early_rejection
+        
+        # Lazy GLM fitting - only compute when needed
+        self._fit = None
+        self._model = None
+        
+        # If early rejection is disabled, fit immediately (original behavior)
+        if not enable_early_rejection:
+            self._fit_model()
+    
+    def _fit_model(self):
+        """Perform the expensive GLM fitting."""
+        if self._fit is not None:
+            return  # Already fitted
+        
         x = sm.add_constant(self.x_data, has_constant='add')
         y = self.y_data
         kind = self.template.kind
@@ -89,22 +105,36 @@ class NoiseTolerantTemplateModel(abc.ABC):
             try:
                 x_smudged, y_smudged = self._smudge_data(x, y)
 
-                self.model = sm.GLM(y_smudged, x_smudged)
+                self._model = sm.GLM(y_smudged, x_smudged)
                 with warnings.catch_warnings():
                     warnings.simplefilter("ignore")
                     if kind.is_constant_form:
-                        self.fit = self.model.fit_constrained(((0, 1), 0))
+                        self._fit = self._model.fit_constrained(((0, 1), 0))
                     elif kind.is_mul_only_form:
-                        self.fit = self.model.fit_constrained(((1, 0), 0))
+                        self._fit = self._model.fit_constrained(((1, 0), 0))
                     elif kind.is_add_only_form:
-                        self.fit = self.model.fit_constrained(((0, 1), 1))
+                        self._fit = self._model.fit_constrained(((0, 1), 1))
                     else:  # full y = a x + b form...
-                        self.fit = self.model.fit()
+                        self._fit = self._model.fit()
             except sm_exc.PerfectSeparationError:
                 logger.warn(f"Perfect separation error for {self.template} with data:\n{self.data}")
                 continue
             else:
                 break
+    
+    @property
+    def model(self):
+        """Lazy model access - fit on first use."""
+        if self._model is None:
+            self._fit_model()
+        return self._model
+    
+    @property
+    def fit(self):
+        """Lazy fit access - fit on first use."""
+        if self._fit is None:
+            self._fit_model()
+        return self._fit
 
     def _smudge_data(self, x, y):
         x_noise = np.random.randn(len(x)) * 1e-5
@@ -176,20 +206,26 @@ class NoiseTolerantTemplateModel(abc.ABC):
     def reject(self) -> bool:
         x, y = self.x_data, self.y_data
 
+        # Early rejection check 1: No x variance with high y spread
+        # This check doesn't require GLM fitting
         if np.var(x) == 0 and not np.std(y) < self.config.cutoff_spread:
             logger.debug(
-                f"REJECTED: `{self.template}`, no x variance and stdev of y is too high: "
+                f"EARLY REJECTED: `{self.template}`, no x variance and stdev of y is too high: "
                 f"{np.std(y)} > {self.config.cutoff_spread}")
             logger.debug(f"Data:\n{self.data}")
             return True
 
+        # Early rejection check 2: No y variance with high x spread
+        # This check doesn't require GLM fitting
         if np.var(y) == 0 and not np.std(x) < self.config.cutoff_spread:
             logger.debug(
-                f"REJECTED: `{self.template}`, no y variance and stdev of x is too high: "
+                f"EARLY REJECTED: `{self.template}`, no y variance and stdev of x is too high: "
                 f"{np.std(x)} > {self.config.cutoff_spread}")
             logger.debug(f"Data:\n{self.data}")
             return True
 
+        # Late rejection check: High residual spread
+        # This requires GLM fitting (triggers lazy fitting via self.fit property)
         resid_std = np.std(self.fit.resid_response)
         if resid_std > self.config.cutoff_spread:
             logger.debug(

@@ -90,6 +90,8 @@ class BlackBoxPruner(BasePruningMethod, Generic[NT]):
         self.targets: Sequence[IView[NT]] = targets or [x for x in self.example]
         self.solve_unambig = solve_unambig
         self.log_level = LogLevel.NONE
+        self.max_iterations = 100
+        self.timeout_seconds = 30.0
 
     def add_determinism(self, solver: z3.Optimize, cmap: Dict[str, IConstraint], x_dim: bool) -> None:
         constrs_by_id: Dict[str, List[Tuple[str, IConstraint]]] = {str(a.id): [] for box in self.targets for a in box.anchors if box.name != self.example.name}
@@ -146,14 +148,43 @@ class BlackBoxPruner(BasePruningMethod, Generic[NT]):
         return add_conf_dims(solver, conf, confIdx, (self.top_x, self.top_y, self.top_width, self.top_height))
 
     def synth_unambiguous(self, solver: z3.Optimize, names_map: Dict[str, IConstraint], confs: List[Conformance], x_dim: bool, dry_run: bool) -> Tuple[List[IConstraint], Dict[str, Fraction], Dict[str, Fraction]]:
+        import time
         solver.push()
         invalid_candidates: Set[FrozenSet[str]] = set()
         iters = 0
+        start_time = time.time()
+        last_valid_model = None
 
         def get_ancs(v: IView[NT]) -> List[IAnchor[NT]]:
             return v.x_anchors if x_dim else v.y_anchors
 
         while True:
+            # Timeout check
+            elapsed = time.time() - start_time
+            if elapsed > self.timeout_seconds:
+                logger.warning(f"Timeout after {self.timeout_seconds}s ({iters} iterations)")
+                if last_valid_model is not None:
+                    # Return last valid solution
+                    constr_decls = [v for v in last_valid_model.decls() if v.name() in names_map]
+                    output = [names_map[v.name()] for v in constr_decls if last_valid_model.get_interp(v)]
+                    names = [str(a.id) for box in [self.example] + list(self.targets) for a in get_ancs(box)]
+                    min_vals, max_vals = extract_model_valuations(last_valid_model, 0, names), extract_model_valuations(last_valid_model, len(confs) - 1, names)
+                    return (output, min_vals, max_vals)
+                else:
+                    raise Exception('timeout before first solution')
+            
+            # Iteration limit
+            if iters >= self.max_iterations:
+                logger.warning(f"Max iterations ({self.max_iterations}) reached")
+                if last_valid_model is not None:
+                    # Return last valid solution
+                    constr_decls = [v for v in last_valid_model.decls() if v.name() in names_map]
+                    output = [names_map[v.name()] for v in constr_decls if last_valid_model.get_interp(v)]
+                    names = [str(a.id) for box in [self.example] + list(self.targets) for a in get_ancs(box)]
+                    min_vals, max_vals = extract_model_valuations(last_valid_model, 0, names), extract_model_valuations(last_valid_model, len(confs) - 1, names)
+                    return (output, min_vals, max_vals)
+                else:
+                    raise Exception('max iterations reached before first solution')
             for invalid_cand in invalid_candidates:
                 control_term = z3.BoolVal(True)
                 for control in invalid_cand:
@@ -167,6 +198,7 @@ class BlackBoxPruner(BasePruningMethod, Generic[NT]):
                 constr_decls = [v for v in solver.model().decls() if v.name() in names_map]
                 new_cand = frozenset([v.name() for v in constr_decls if solver.model().get_interp(v)])
                 old_model = solver.model()
+                last_valid_model = old_model  # Store for timeout/iteration limit fallback
                 solver.pop(); solver.push()
 
                 for control in new_cand:
