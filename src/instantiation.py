@@ -32,8 +32,8 @@ def compute_visibility_matrix(anchors: list[Anchor], root: View) -> np.ndarray:
     # When queried by y = c, returns intersecting edges
     vertical_edge_tree = IntervalTree()
 
-    # Don't consider root view since it always intersects with all other views
-    views = [v for v in root._flattened_views_in_subtree if v != root]
+    # Only consider immediate children of root for intersections
+    views = root.children
 
     # Collect all y-coords to cast horizontal intersection lines y = c
     horizontal_events = set()
@@ -196,8 +196,15 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
     # Compute visibility matrix for all examples
     visible_matrix = np.zeros((n, n), dtype=bool)
     for example in examples:
+        # Compute visibility at root level
         example_visible_matrix = compute_visibility_matrix(anchors, example)
         visible_matrix |= example_visible_matrix
+        
+        # Recursively compute visibility for each child's subtree
+        for child in example._flattened_views_in_subtree:
+            if child != example and len(child.children) > 0:
+                child_visible_matrix = compute_visibility_matrix(anchors, child)
+                visible_matrix |= child_visible_matrix
 
     # Aspect Ratio Constraints: (y = a * x)
     # y and x are from same view and y = [anchor].width; x = [anchor].height

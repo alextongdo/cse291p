@@ -411,3 +411,112 @@ def test_2x1_fixed_ltrb_equal_wh():
         "LinearConstraint(root.top = 1 * right.top + -10)",
     }
     assert actual_constraints == expected_constraints
+
+
+def test_ieee_simple():
+    """Test ieee-simple.json"""
+    examples = [
+        {
+            "name": "root",
+            "rect": [0, 0, 1200, 870],
+            "children": [
+                {"name": "topbar", "rect": [0, 0, 1200, 25]},
+                {"name": "search", "rect": [0, 25, 1200, 435]},
+                {
+                    "name": "authors",
+                    "rect": [0, 435, 1200, 870],
+                    "children": [
+                        {"name": "author1", "rect": [60, 540, 400, 840]},
+                        {"name": "author2", "rect": [430, 540, 770, 840]},
+                        {"name": "author3", "rect": [800, 540, 1140, 840]},
+                    ],
+                },
+            ],
+        },
+        {
+            "name": "root",
+            "rect": [0, 0, 1600, 870],
+            "children": [
+                {"name": "topbar", "rect": [0, 0, 1600, 25]},
+                {"name": "search", "rect": [0, 25, 1600, 435]},
+                {
+                    "name": "authors",
+                    "rect": [0, 435, 1600, 870],
+                    "children": [
+                        {"name": "author1", "rect": [60, 540, 533.33, 840]},
+                        {"name": "author2", "rect": [563.33, 540, 1036.66, 840]},
+                        {"name": "author3", "rect": [1066.66, 540, 1539.99, 840]},
+                    ],
+                },
+            ],
+        },
+    ]
+    views = [View(**example) for example in examples]
+    sketches = template_instantiation(views)
+    candidates = bayesian_learning(sketches, views, seed=42)
+    selected = HierarchicalPruner(views)(candidates)
+    actual_constraints = {repr(c) for c in selected}
+    expected_constraints = {
+        "LinearConstraint(search.height = 410)",
+        "LinearConstraint(root.center_x = 1 * topbar.center_x + 0)",
+        "LinearConstraint(author1.center_y = 1 * author2.center_y + 0)",
+        "LinearConstraint(root.width = 1 * topbar.width + 0)",
+        "LinearConstraint(root.width = 1 * authors.width + 0)",
+        "LinearConstraint(authors.left = 1 * search.left + 0)",
+        "LinearConstraint(root.height = 87/41 * search.height + 0)",
+        "LinearConstraint(root.height = 2 * authors.height + 0)",
+        "LinearConstraint(topbar.right = 1 * search.right + 0)",
+        "LinearConstraint(authors.bottom = 1 * author1.bottom + 30)",
+        "LinearConstraint(author2.right = 1 * author3.left + -30)",
+        "LinearConstraint(author1.height = 300)",
+        "LinearConstraint(author3.top = 1 * author2.top + 0)",
+        "LinearConstraint(author3.height = 300)",
+        "LinearConstraint(search.left = 1 * topbar.left + 0)",
+        "LinearConstraint(author2.bottom = 1 * author1.bottom + 0)",
+        "LinearConstraint(root.right = 1 * authors.right + 0)",
+        "LinearConstraint(topbar.left = 1 * search.left + 0)",
+        "LinearConstraint(authors.top = 1 * author1.top + -105)",
+        "LinearConstraint(search.left = 1 * authors.left + 0)",
+        "LinearConstraint(author1.top = 1 * author2.top + 0)",
+        "LinearConstraint(author2.height = 300)",
+        "LinearConstraint(author2.center_y = 1 * author1.center_y + 0)",
+        "LinearConstraint(search.center_x = 1 * authors.center_x + 0)",
+        "LinearConstraint(author2.top = 1 * author3.top + 0)",
+        "LinearConstraint(author2.center_y = 1 * author3.center_y + 0)",
+        "LinearConstraint(topbar.height = 25)",
+        "LinearConstraint(author1.right = 1 * author2.left + -30)",
+        "LinearConstraint(authors.top = 1 * author3.top + -105)",
+        "LinearConstraint(topbar.bottom = 1 * search.top + 0)",
+        "LinearConstraint(author1.bottom = 1 * author2.bottom + 0)",
+        "LinearConstraint(root.right = 1 * topbar.right + 0)",
+        "LinearConstraint(authors.height = 29/20 * author3.height + 0)",
+        "LinearConstraint(search.right = 1 * authors.right + 0)",
+        "LinearConstraint(authors.bottom = 1 * author3.bottom + 30)",
+        "LinearConstraint(author3.center_y = 1 * author2.center_y + 0)",
+        "LinearConstraint(authors.bottom = 1 * author2.bottom + 30)",
+        "LinearConstraint(authors.right = 1 * author3.right + 60)",
+        "LinearConstraint(root.width = 1 * search.width + 0)",
+        "LinearConstraint(root.center_x = 1 * authors.center_x + 0)",
+        "LinearConstraint(authors.center_x = 1 * search.center_x + 0)",
+        "LinearConstraint(search.bottom = 1 * authors.top + 0)",
+        "LinearConstraint(root.left = 1 * search.left + 0)",
+        "LinearConstraint(authors.height = 435)",
+        "LinearConstraint(root.center_x = 1 * search.center_x + 0)",
+        "LinearConstraint(authors.left = 1 * author1.left + -60)",
+        "LinearConstraint(authors.top = 1 * author2.top + -105)",
+        "LinearConstraint(author2.bottom = 1 * author3.bottom + 0)",
+        "LinearConstraint(author2.top = 1 * author1.top + 0)",
+        "LinearConstraint(root.top = 1 * topbar.top + 0)",
+        "LinearConstraint(authors.height = 29/20 * author2.height + 0)",
+        "LinearConstraint(search.right = 1 * topbar.right + 0)",
+        "LinearConstraint(topbar.center_x = 1 * search.center_x + 0)",
+        "LinearConstraint(author3.bottom = 1 * author2.bottom + 0)",
+        "LinearConstraint(search.center_x = 1 * topbar.center_x + 0)",
+        "LinearConstraint(root.right = 1 * search.right + 0)",
+        "LinearConstraint(root.bottom = 1 * authors.bottom + 0)",
+        "LinearConstraint(root.left = 1 * topbar.left + 0)",
+        "LinearConstraint(authors.height = 29/20 * author1.height + 0)",
+        "LinearConstraint(root.left = 1 * authors.left + 0)",
+        "LinearConstraint(authors.right = 1 * search.right + 0)",
+    }
+    assert actual_constraints == expected_constraints

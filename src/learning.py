@@ -319,7 +319,10 @@ class TemplateBayesianLinearModel:
         """
         # Note: GLM expects (intercept, coefficient) = (b, a)
         # GLM will auto-convert Fraction to float
-        return self.model.loglike((float(b), float(a)))
+        # Suppress warnings from perfect separation in GLM
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            return self.model.loglike((float(b), float(a)))
 
     def prior_score(self, a: Fraction | int) -> float:
         """
@@ -358,7 +361,12 @@ class TemplateBayesianLinearModel:
         likelihoods = np.exp(log_likelihoods)
 
         # Normalize likelihood
-        likelihoods /= likelihoods.sum()
+        likelihood_sum = likelihoods.sum()
+        if likelihood_sum > 0:
+            likelihoods /= likelihood_sum
+        else:
+            # If all likelihoods are zero, use uniform distribution
+            likelihoods = np.ones_like(likelihoods) / len(likelihoods)
 
         # Compute prior for each candidate
         priors = np.array([self.prior_score(a) for a, b in candidates])

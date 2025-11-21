@@ -219,8 +219,8 @@ class MaxSMTPruner:
         v_solver = z3.Optimize()
 
         # Add constraint variables as soft constraints
-        for idx, constraint in enumerate(constraints):
-            z3_name = f"constraint_{idx}"  # boolean switch
+        for constr_idx, constraint in enumerate(constraints):
+            z3_name = f"constraint_{constr_idx}"  # boolean switch
             z3_var = z3.Bool(z3_name)
 
             if constraint.y.is_horizontal():
@@ -236,25 +236,27 @@ class MaxSMTPruner:
             z3_vars_to_constr_map[z3_name] = constraint
 
         # Add hard constraints for each conformance
-        for idx, test_rect in enumerate(test_rects):
+        for test_rect_idx, test_rect in enumerate(test_rects):
 
             add_root_dims_constraints(
-                h_solver, test_rect, idx, self.root, is_horizontal=True
+                h_solver, test_rect, test_rect_idx, self.root, is_horizontal=True
             )
             add_root_dims_constraints(
-                v_solver, test_rect, idx, self.root, is_horizontal=False
+                v_solver, test_rect, test_rect_idx, self.root, is_horizontal=False
             )
 
-            add_layout_axioms(h_solver, self.root_and_children, idx, is_horizontal=True)
             add_layout_axioms(
-                v_solver, self.root_and_children, idx, is_horizontal=False
+                h_solver, self.root_and_children, test_rect_idx, is_horizontal=True
+            )
+            add_layout_axioms(
+                v_solver, self.root_and_children, test_rect_idx, is_horizontal=False
             )
 
             # If constraint selected, it must hold for this conformance
-            for idx, constraint in enumerate(constraints):
-                z3_name = f"constraint_{idx}"
+            for constr_idx, constraint in enumerate(constraints):
+                z3_name = f"constraint_{constr_idx}"
                 z3_var = z3.Bool(z3_name)
-                expr = constraint_to_z3_expr(constraint, idx)
+                expr = constraint_to_z3_expr(constraint, test_rect_idx)
 
                 if constraint.y.is_horizontal():
                     h_solver.add(z3.Implies(z3_var, expr))
@@ -292,7 +294,19 @@ class MaxSMTPruner:
                 "WARNING: No solution found for "
                 f"{'horizontal' if is_horizontal else 'vertical'} dimension"
             )
-            return ([], {}, {})
+            # Return default anchor values from example
+            defaults: dict[str, Fraction] = {}
+            anchor_types = (
+                ["width", "left", "right", "center_x"]
+                if is_horizontal
+                else ["height", "top", "bottom", "center_y"]
+            )
+            for view in self.root_and_children:
+                for anchor_type in anchor_types:
+                    defaults[f"{view.name}.{anchor_type}"] = Fraction(
+                        getattr(view, anchor_type)
+                    )
+            return ([], defaults, defaults)
 
         model = solver.model()
 
