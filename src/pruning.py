@@ -145,25 +145,14 @@ class MaxSMTPruner:
 
     def __init__(
         self,
-        examples: list[View],
+        root: View,
         min_rect: TestRect,
         max_rect: TestRect,
-        targets: list[View] | None = None,
     ):
-        assert len(examples) > 0, "Pruner requires non-empty learning examples"
-
-        self.examples = examples
-        self.root = examples[0]
+        self.root = root
+        self.root_and_children = [root] + root.children
         self.min_rect = min_rect
         self.max_rect = max_rect
-
-        # Targets: views to optimize (default to entire hierarchy)
-        if targets is not None:
-            self.targets = list(targets)
-        else:
-            self.targets = (
-                self.root._flattened_views_in_subtree
-            )  # TODO: Should this be part of it?
 
     def __call__(
         self, candidates: list[LinearConstraint]
@@ -202,7 +191,7 @@ class MaxSMTPruner:
         if len(constraints) == 0:
             # Return empty results with default anchor values
             defaults: dict[str, Fraction] = {}
-            for view in self.targets:
+            for view in self.root_and_children:
                 for anchor_type in [
                     "left",
                     "right",
@@ -256,8 +245,10 @@ class MaxSMTPruner:
                 v_solver, test_rect, idx, self.root, is_horizontal=False
             )
 
-            add_layout_axioms(h_solver, self.targets, idx, is_horizontal=True)
-            add_layout_axioms(v_solver, self.targets, idx, is_horizontal=False)
+            add_layout_axioms(h_solver, self.root_and_children, idx, is_horizontal=True)
+            add_layout_axioms(
+                v_solver, self.root_and_children, idx, is_horizontal=False
+            )
 
             # If constraint selected, it must hold for this conformance
             for idx, constraint in enumerate(constraints):
@@ -322,7 +313,7 @@ class MaxSMTPruner:
             else ["height", "top", "bottom", "center_y"]
         )
 
-        for view in self.targets:
+        for view in self.root_and_children:
             for anchor_type in anchor_types:
                 # Get anchor position under smallest test rect (index 0)
                 min_var = anchor_to_z3_var(view.anchor(anchor_type), 0)
@@ -373,12 +364,12 @@ class HierarchicalPruner:
         )
 
     def __call__(self, candidates: list[LinearConstraint]) -> list[LinearConstraint]:
-        # Worklist: (focus_view, focus_examples, min_rect, max_rect)
-        worklist = [(self.root, self.examples, self.min_rect, self.max_rect)]
+        # Worklist: (focus_view, min_rect, max_rect)
+        worklist = [(self.root, self.min_rect, self.max_rect)]
         output_constraints = set()
 
         while worklist:
-            focus, focus_examples, min_rect, max_rect = worklist.pop()
+            focus, min_rect, max_rect = worklist.pop()
 
             # Filter to relevant constraints for this level
             relevant = [c for c in candidates if self._is_relevant(focus, c)]
@@ -386,10 +377,7 @@ class HierarchicalPruner:
             if not relevant:
                 continue
 
-            targets = [focus] + list(focus.children)
-            max_smt_solver = MaxSMTPruner(
-                focus_examples, min_rect, max_rect, targets=targets
-            )
+            max_smt_solver = MaxSMTPruner(focus, min_rect, max_rect)
             constraints, anchor_to_min_size_map, anchor_to_max_size_map = (
                 max_smt_solver(relevant)
             )
@@ -410,12 +398,7 @@ class HierarchicalPruner:
                     top=anchor_to_max_size_map[f"{child.name}.top"],
                 )
 
-                child_examples = [
-                    next(view for view in ex.children if view.name == child.name)
-                    for ex in focus_examples
-                ]
-
-                worklist.append((child, child_examples, child_min_rect, child_max_rect))
+                worklist.append((child, child_min_rect, child_max_rect))
 
         return list(output_constraints)
 
