@@ -3,9 +3,9 @@ Simple HTML renderer for synthesized layout constraints.
 Uses Kiwi constraint solver to generate concrete layouts.
 """
 
-import tempfile
 import webbrowser
 from fractions import Fraction
+from pathlib import Path
 
 import kiwisolver
 from jinja2 import Template
@@ -29,12 +29,14 @@ def add_layout_axioms(
     - height = bottom - top
     - center_x = (left + right) / 2
     - center_y = (top + bottom) / 2
+    - Non-negative constraints
+    - Upper bounds to prevent unbounded solutions
     """
     for view in views:
         # Get variables
         w = var_map[f"{view.name}.width"]
         h = var_map[f"{view.name}.height"]
-        l = var_map[f"{view.name}.left"] # noqa: E741
+        l = var_map[f"{view.name}.left"]  # noqa: E741
         r = var_map[f"{view.name}.right"]
         t = var_map[f"{view.name}.top"]
         b = var_map[f"{view.name}.bottom"]
@@ -52,6 +54,11 @@ def add_layout_axioms(
         solver.addConstraint((h >= 0) | "required")
         solver.addConstraint((l >= 0) | "required")
         solver.addConstraint((t >= 0) | "required")
+        
+        # Upper bounds (weak) to prevent unbounded solutions
+        for var in [l, r, t, b, w, h, cx, cy]:
+            solver.addConstraint((var <= 10000.0) | "weak")
+
 
 
 def constraint_to_kiwi(
@@ -62,7 +69,7 @@ def constraint_to_kiwi(
 
     if constraint.x is None:
         # Constant constraint: y = b
-        return (y_var == float(constraint.b)) | "strong"
+        return (y_var == float(constraint.b)) | "required"
     else:
         # Linear constraint: y = a * x + b
         x_var = var_map[f"{constraint.x.view.name}.{constraint.x.type}"]
@@ -75,7 +82,7 @@ def constraint_to_kiwi(
 
         b_val = float(constraint.b)
 
-        return (y_var == a_val * x_var + b_val) | "strong"
+        return (y_var == a_val * x_var + b_val) | "required"
 
 
 def solve_layout(
@@ -226,10 +233,13 @@ def visualize(
     template = Template(HTML_TEMPLATE)
     html = template.render(width=width, height=height, views=views)
 
-    # Write to temp file and open in browser
-    with tempfile.NamedTemporaryFile(mode="w", suffix=".html", delete=False) as f:
-        f.write(html)
-        temp_path = f.name
+    # Create tmp directory if it doesn't exist
+    tmp_dir = Path("tmp_html")
+    tmp_dir.mkdir(exist_ok=True)
+    
+    # Write to local tmp file and open in browser
+    output_path = tmp_dir / "layout_visualization.html"
+    output_path.write_text(html)
 
-    print(f"Opening visualization at: {temp_path}")
-    webbrowser.open(f"file://{temp_path}")
+    print(f"Opening visualization at: {output_path.absolute()}")
+    webbrowser.open(f"file://{output_path.absolute()}")
