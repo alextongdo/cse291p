@@ -10,7 +10,9 @@ import statsmodels.tools.sm_exceptions as sm_exc
 
 from src.config import LearningConfig
 from src.types import LinearConstraint, View
+from src.logging import get_logger
 
+logger = get_logger(__name__)
 
 @lru_cache(maxsize=1)
 def get_a_space(max_denominator: int) -> np.ndarray:
@@ -434,6 +436,7 @@ def bayesian_learning(
 
     results = []
     for template in templates:
+        logger.debug(f"Doing Bayesian learning for {repr(template)}")
         # Extract anchor values data for the template from all examples.
         y_data = np.array(
             anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
@@ -452,6 +455,10 @@ def bayesian_learning(
             template=template, config=config, y_data=y_data, x_data=x_data
         )
         candidates = model.learn()
+        if len(candidates) == 0:
+            logger.debug("Learned 0 candidates")
+        for cand in candidates:
+            logger.debug(f"Learned {repr(cand)}")
         results.extend(candidates)
 
     return results

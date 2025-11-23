@@ -5,14 +5,17 @@ from src.learning import bayesian_learning
 from src.pruning import HierarchicalPruner
 from src.render import visualize
 from src.types import View
+from src.logging import setup_logging
+
+setup_logging(debug=True)
 
 examples = [
     {
         "name": "root",
         "rect": [0, 0, 1200, 870],
         "children": [
-            {"name": "topbar", "rect": [0, 0, 1200, 25]},
-            {"name": "search", "rect": [0, 25, 1200, 435]},
+            # {"name": "topbar", "rect": [0, 0, 1200, 25]},
+            # {"name": "search", "rect": [0, 25, 1200, 435]},
             {
                 "name": "authors",
                 "rect": [0, 435, 1200, 870],
@@ -41,23 +44,23 @@ examples = [
     #         },
     #     ],
     # },
-    # {
-    #     "name": "root",
-    #     "rect": [0, 0, 500, 1530],
-    #     "children": [
-    #         {"name": "topbar", "rect": [0, 0, 500, 25]},
-    #         {"name": "search", "rect": [0, 25, 500, 510]},
-    #         {
-    #             "name": "authors",
-    #             "rect": [0, 510, 500, 1530],
-    #             "children": [
-    #                 {"name": "author1", "rect": [60, 540, 440, 840]},
-    #                 {"name": "author2", "rect": [60, 870, 440, 1170]},
-    #                 {"name": "author3", "rect": [60, 1200, 440, 1500]},
-    #             ],
-    #         },
-    #     ],
-    # },
+    {
+        "name": "root",
+        "rect": [0, 0, 500, 1530],
+        "children": [
+            # {"name": "topbar", "rect": [0, 0, 500, 25]},
+            # {"name": "search", "rect": [0, 25, 500, 510]},
+            {
+                "name": "authors",
+                "rect": [0, 510, 500, 1530],
+                "children": [
+                    {"name": "author1", "rect": [60, 540, 440, 840]},
+                    {"name": "author2", "rect": [60, 870, 440, 1170]},
+                    {"name": "author3", "rect": [60, 1200, 440, 1500]},
+                ],
+            },
+        ],
+    },
     # {
     #     "name": "root",
     #     "rect": [0, 0, 400, 1470],
@@ -85,9 +88,9 @@ selected = pruner(candidates)
 for candidate in selected:
     rprint(f"Score: {candidate.score:.3f} - {repr(candidate)}")
 
-visualize(
-    views[0],
-    selected,
-    width=1200,
-    height=870,
-)
+# visualize(
+#     views[0],
+#     selected,
+#     width=500,
+#     height=870,
+# )
