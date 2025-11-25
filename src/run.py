@@ -1,11 +1,9 @@
-from rich import print as rprint
+from rich import print
 
-from src.instantiation import template_instantiation
-from src.learning import bayesian_learning
-from src.pruning import HierarchicalPruner
-from src.render import visualize
-from src.types import View
+from src.instantiation import conditional_template_instantiation
+from src.learning import conditional_bayesian_learning
 from src.logging import setup_logging
+from src.types import View
 
 setup_logging(debug=True)
 
@@ -14,8 +12,6 @@ examples = [
         "name": "root",
         "rect": [0, 0, 1200, 870],
         "children": [
-            # {"name": "topbar", "rect": [0, 0, 1200, 25]},
-            # {"name": "search", "rect": [0, 25, 1200, 435]},
             {
                 "name": "authors",
                 "rect": [0, 435, 1200, 870],
@@ -31,8 +27,6 @@ examples = [
     #     "name": "root",
     #     "rect": [0, 0, 1600, 870],
     #     "children": [
-    #         {"name": "topbar", "rect": [0, 0, 1600, 25]},
-    #         {"name": "search", "rect": [0, 25, 1600, 435]},
     #         {
     #             "name": "authors",
     #             "rect": [0, 435, 1600, 870],
@@ -48,8 +42,6 @@ examples = [
         "name": "root",
         "rect": [0, 0, 500, 1530],
         "children": [
-            # {"name": "topbar", "rect": [0, 0, 500, 25]},
-            # {"name": "search", "rect": [0, 25, 500, 510]},
             {
                 "name": "authors",
                 "rect": [0, 510, 500, 1530],
@@ -61,36 +53,29 @@ examples = [
             },
         ],
     },
-    # {
-    #     "name": "root",
-    #     "rect": [0, 0, 400, 1470],
-    #     "children": [
-    #         {"name": "topbar", "rect": [0, 0, 400, 25]},
-    #         {"name": "search", "rect": [0, 25, 400, 510]},
-    #         {
-    #             "name": "authors",
-    #             "rect": [0, 510, 400, 1470],
-    #             "children": [
-    #                 {"name": "author1", "rect": [10, 525, 390, 825]},
-    #                 {"name": "author2", "rect": [10, 840, 390, 1140]},
-    #                 {"name": "author3", "rect": [10, 1155, 390, 1455]},
-    #             ],
-    #         },
-    #     ],
-    # },
+    {
+        "name": "root",
+        "rect": [0, 0, 400, 1470],
+        "children": [
+            {
+                "name": "authors",
+                "rect": [0, 510, 400, 1470],
+                "children": [
+                    {"name": "author1", "rect": [10, 525, 390, 825]},
+                    {"name": "author2", "rect": [10, 840, 390, 1140]},
+                    {"name": "author3", "rect": [10, 1155, 390, 1455]},
+                ],
+            },
+        ],
+    },
 ]
+
 views = [View(**example) for example in examples]
-sketches = template_instantiation(views)
-candidates = bayesian_learning(sketches, views, seed=42)
-pruner = HierarchicalPruner(views)
-selected = pruner(candidates)
-
-for candidate in selected:
-    rprint(f"Score: {candidate.score:.3f} - {repr(candidate)}")
-
-# visualize(
-#     views[0],
-#     selected,
-#     width=500,
-#     height=870,
-# )
+example_idxs_to_templates_map = conditional_template_instantiation(views)
+# print(repr(example_idxs_to_templates_map))
+print({ind: len(lst) for ind, lst in example_idxs_to_templates_map.items()})
+example_idxs_to_constrs_map = conditional_bayesian_learning(
+    example_idxs_to_templates_map, views, seed=42
+)
+# print(repr(example_idxs_to_constrs_map))
+print({ind: len(lst) for ind, lst in example_idxs_to_constrs_map.items()})

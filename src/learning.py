@@ -9,10 +9,11 @@ import statsmodels.api as sm
 import statsmodels.tools.sm_exceptions as sm_exc
 
 from src.config import LearningConfig
-from src.types import LinearConstraint, View
 from src.logging import get_logger
+from src.types import LinearConstraint, View
 
 logger = get_logger(__name__)
+
 
 @lru_cache(maxsize=1)
 def get_a_space(max_denominator: int) -> np.ndarray:
@@ -207,13 +208,13 @@ class TemplateBayesianLinearModel:
         """Add tiny noise to avoid perfect separation in GLM."""
         # Generate 1D noise for x and broadcast across columns
         x_noise = np.random.randn(len(x)) * 1e-5
-        x_noise -= x_noise.mean() # ALEX ADDDED
+        x_noise -= x_noise.mean()  # ALEX ADDDED
         # Broadcasting: add noise to each row
         x_smudged = x + x_noise[:, np.newaxis]
 
         # Generate noise for y
         y_noise = np.random.randn(len(y)) * 1e-5
-        y_noise -= y_noise.mean() # ALEX ADDDED
+        y_noise -= y_noise.mean()  # ALEX ADDDED
         y_smudged = y + y_noise
 
         return x_smudged, y_smudged
@@ -379,7 +380,7 @@ class TemplateBayesianLinearModel:
         # Compute posterior: Prior × Likelihood
         posteriors = likelihoods * priors
 
-        # No need to normalize posteriors probabilities to sum 
+        # No need to normalize posteriors probabilities to sum
         # to 1, since only the relative ranking matters for score
 
         results = []
@@ -462,3 +463,62 @@ def bayesian_learning(
         results.extend(candidates)
 
     return results
+
+
+def conditional_bayesian_learning(
+    example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
+    examples: list[View],
+    seed: int | None = None,
+    config: LearningConfig | None = None,
+) -> dict[tuple[int, ...], list[LinearConstraint]]:
+    """
+    Perform Bayesian learning per structural set, then merge constraints across sets.
+
+    Args:
+        example_idxs_to_templates_map: Maps example index tuples to their templates
+            e.g., {(0, 1): [templates], (2, 3): [templates]}
+        examples: All example layouts
+        seed: Random seed for reproducibility
+        config: Learning configuration
+
+    Returns:
+        Dictionary mapping example index tuples to learned constraints:
+        - (0, 1): constraints specific to examples 0, 1
+        - (2, 3): constraints specific to examples 2, 3
+        - (0, 1, 2, 3): constraints that apply to both sets (merged)
+    """
+    if seed is not None:
+        np.random.seed(seed)
+
+    constr_to_sets_map: dict[LinearConstraint, set[int]] = defaultdict(set)
+    constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
+
+    for example_idxs, templates in example_idxs_to_templates_map.items():
+        logger.debug(f"\nLearning for structural set {example_idxs}")
+        set_examples = [examples[i] for i in example_idxs]
+        learned_constraints = bayesian_learning(
+            templates=templates, examples=set_examples, seed=seed, config=config
+        )
+        logger.debug(
+            f"  Learned {len(learned_constraints)} constraints for set {example_idxs}"
+        )
+
+        for constr in learned_constraints:
+            constr_to_sets_map[constr].update(example_idxs)
+
+            # Keep the constraint with highest score
+            if (
+                constr not in constr_to_max_score_map
+                or constr.score > constr_to_max_score_map[constr].score
+            ):
+                constr_to_max_score_map[constr] = constr
+
+    output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
+    for constr, example_idxs_set in constr_to_sets_map.items():
+        output[tuple(sorted(example_idxs_set))].append(constr_to_max_score_map[constr])
+
+    # Sanity
+    for constr_list in output.values():
+        assert len(set(constr_list)) == len(constr_list)
+
+    return dict(output)

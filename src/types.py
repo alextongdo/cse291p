@@ -141,7 +141,10 @@ class LinearConstraint(BaseModel):
     b: int | None = None  # None means not yet known
     score: float | None = None  # None means no parameter learning done yet
 
-    model_config = {"frozen": True}
+    # model_config = {"frozen": True}
+
+    def __hash__(self):
+        return hash(repr(self))
 
     def __repr__(self) -> str:
         if self.x is None:

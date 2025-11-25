@@ -2,6 +2,8 @@
 # Given a view hierarchy, generate constraint sketches with unknown parameters.
 # Uses vectorized matrix operations to efficiently identify valid anchor pairs.
 
+from collections import defaultdict
+
 import numpy as np
 from intervaltree import IntervalTree
 
@@ -199,7 +201,7 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
         # Compute visibility at root level
         example_visible_matrix = compute_visibility_matrix(anchors, example)
         visible_matrix |= example_visible_matrix
-        
+
         # Recursively compute visibility for each child's subtree
         for child in example._flattened_views_in_subtree:
             if child != example and len(child.children) > 0:
@@ -310,3 +312,21 @@ def template_instantiation(examples: list[View]) -> list[LinearConstraint]:
             sketches.append(LinearConstraint(y=anchors[i], x=None, a=0, b=None))
 
     return sketches
+
+
+def conditional_template_instantiation(
+    examples: list[View],
+) -> dict[tuple[int, ...], list[LinearConstraint]]:
+
+    # Group examples by their instantiated templates
+    set_to_examples_map = defaultdict(list)
+    for example_idx, example in enumerate(examples):
+        templates = template_instantiation([example])
+        set_to_examples_map[frozenset(templates)].append(example_idx)
+
+    # Convert to output format: tuple of example indices → list of templates
+    output = {}
+    for templates_set, example_idxs in set_to_examples_map.items():
+        output[tuple(example_idxs)] = list(templates_set)
+
+    return output

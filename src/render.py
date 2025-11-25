@@ -54,11 +54,10 @@ def add_layout_axioms(
         solver.addConstraint((h >= 0) | "required")
         solver.addConstraint((l >= 0) | "required")
         solver.addConstraint((t >= 0) | "required")
-        
+
         # Upper bounds (weak) to prevent unbounded solutions
         for var in [l, r, t, b, w, h, cx, cy]:
             solver.addConstraint((var <= 10000.0) | "weak")
-
 
 
 def constraint_to_kiwi(
@@ -140,8 +139,10 @@ def solve_layout(
         left = var_map[f"{view.name}.left"].value()
         right = var_map[f"{view.name}.right"].value()
         width_val = var_map[f"{view.name}.width"].value()
+        height_val = var_map[f"{view.name}.height"].value()
         print(
-            f"  {view.name}: left={left:.2f}, right={right:.2f}, width={width_val:.2f}"
+            f"  {view.name}: left={left:.2f}, right={right:.2f},"
+            f" width={width_val:.2f}, height={height_val:.2f}"
         )
 
     # Extract values
@@ -236,7 +237,7 @@ def visualize(
     # Create tmp directory if it doesn't exist
     tmp_dir = Path("tmp_html")
     tmp_dir.mkdir(exist_ok=True)
-    
+
     # Write to local tmp file and open in browser
     output_path = tmp_dir / "layout_visualization.html"
     output_path.write_text(html)

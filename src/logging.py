@@ -1,6 +1,7 @@
 import logging
 import sys
 
+
 def setup_logging(debug: bool = False) -> None:
     format_string = "[%(asctime)s] [%(levelname)s] [%(name)s] %(message)s"
     logging.basicConfig(

@@ -189,23 +189,7 @@ class MaxSMTPruner:
         constraints = [c for c in candidates if not is_aspect_ratio(c)]
 
         if len(constraints) == 0:
-            # Return empty results with default anchor values
-            defaults: dict[str, Fraction] = {}
-            for view in self.root_and_children:
-                for anchor_type in [
-                    "left",
-                    "right",
-                    "top",
-                    "bottom",
-                    "width",
-                    "height",
-                    "center_x",
-                    "center_y",
-                ]:
-                    defaults[f"{view.name}.{anchor_type}"] = Fraction(
-                        getattr(view, anchor_type)
-                    )
-            return ([], defaults, defaults)
+            raise ValueError("No constraints were given to the MaxSMT pruner.")
 
         constraint_to_weight_map = get_constraint_weights(constraints)
 
@@ -290,23 +274,10 @@ class MaxSMTPruner:
         """
         # Solve MaxSMT
         if solver.check() != z3.sat:
-            print(
-                "WARNING: No solution found for "
+            raise RuntimeError(
+                "MaxSMT pruner could not solve for "
                 f"{'horizontal' if is_horizontal else 'vertical'} dimension"
             )
-            # Return default anchor values from example
-            defaults: dict[str, Fraction] = {}
-            anchor_types = (
-                ["width", "left", "right", "center_x"]
-                if is_horizontal
-                else ["height", "top", "bottom", "center_y"]
-            )
-            for view in self.root_and_children:
-                for anchor_type in anchor_types:
-                    defaults[f"{view.name}.{anchor_type}"] = Fraction(
-                        getattr(view, anchor_type)
-                    )
-            return ([], defaults, defaults)
 
         model = solver.model()
 
