@@ -1,9 +1,12 @@
+import logging
 from fractions import Fraction
 
 import z3
 from pydantic import BaseModel
 
 from src.types import Anchor, LinearConstraint, View
+
+logger = logging.getLogger(__name__)
 
 
 class TestRect(BaseModel):
@@ -408,3 +411,94 @@ class HierarchicalPruner:
             # Constant constraint: y must be a child
             y_anchor_view_name = constraint.y.view.name
             return any(child.name == y_anchor_view_name for child in focus.children)
+
+
+def conditional_hierarchical_pruning(
+    conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
+    examples: list[View],
+) -> dict[tuple[int, ...], list[LinearConstraint]]:
+    """
+    Hierarchical pruning for conditional constraints.
+
+    CRITICAL: At inference time, we'll apply global constraints + ONE specific group's
+    constraints together. So they must be mutually compatible. We ensure this by pruning
+    them together using MaxSMT.
+
+    Key assumption: Specific groups are MUTUALLY EXCLUSIVE at inference time.
+    - We never apply constraints from group (0,1) AND group (2,3) simultaneously
+    - Therefore, we don't need to test compatibility between specific groups
+    - We only need to ensure each group is compatible with global constraints
+
+    Algorithm:
+    1. Identify global constraints (apply to all examples)
+    2. For each specific group:
+       - Prune group_constraints + global_constraints using that group's examples
+       - This ensures compatibility between group-specific and global constraints
+    3. Global constraints = intersection of what survives across all groups
+       (ensures global constraints work for EVERY group)
+
+    Args:
+        conditional_constraints: Dict mapping example index tuples to their learned
+                                 constraints
+            e.g., {(0, 1): [constraints], (2, 3): [constraints], (0, 1, 2, 3): [global]}
+        examples: All example layouts
+
+    Returns:
+        Dict with same structure, but constraints are pruned and guaranteed compatible
+    """
+    # Find the global key (all example indices)
+    global_key = tuple(range(len(examples)))
+
+    # Separate global from specific groups
+    global_constraints = conditional_constraints.get(global_key, [])
+
+    pruned_output = {}
+    surviving_global_per_group = []
+
+    # Prune each specific group together with global constraints
+    for group_key, group_constraints in conditional_constraints.items():
+        if group_key == global_key:
+            continue
+
+        group_examples = [examples[i] for i in group_key]
+
+        # Combine and prune together - ensures compatibility!
+        combined = group_constraints + global_constraints
+
+        logger.info(
+            f"  Pruning group {group_key}: {len(group_constraints)} group + "
+            f"{len(global_constraints)} global = {len(combined)} total"
+        )
+
+        pruner = HierarchicalPruner(group_examples)
+        pruned_combined = pruner(combined)
+
+        # Separate back into group-specific vs global
+        group_set = set(group_constraints)
+        pruned_group = [c for c in pruned_combined if c in group_set]
+        pruned_global = [c for c in pruned_combined if c not in group_set]
+
+        pruned_output[group_key] = pruned_group
+        surviving_global_per_group.append(set(pruned_global))
+
+        logger.info(
+            f"    → {len(pruned_group)} group constraints, "
+            f"{len(pruned_global)} global constraints survived"
+        )
+
+    # Global constraints must survive for ALL groups (intersection)
+    if surviving_global_per_group:
+        final_global = set.intersection(*surviving_global_per_group)
+        pruned_output[global_key] = list(final_global)
+        logger.info(
+            "  Final global constraints (intersection across groups): "
+            f"{len(final_global)}"
+        )
+    elif global_constraints:
+        # No specific groups, just prune global constraints alone
+        logger.info("  No specific groups, pruning global constraints alone")
+        all_examples = examples
+        pruned_output[global_key] = HierarchicalPruner(all_examples)(global_constraints)
+        logger.info(f"    → {len(pruned_output[global_key])} global constraints")
+
+    return pruned_output

@@ -188,6 +188,9 @@ class TemplateBayesianLinearModel:
                         # Constraint: (0*b) + (1*a) = 1
                         self.fit = model.fit_constrained(((0, 1), 1))
                     else:
+                        assert (
+                            False  # noqa: B011
+                        ), "Mockdown in practice only learns a or b, not both."
                         # Full form: y = a*x + b
                         self.fit = model.fit()
 
@@ -494,7 +497,7 @@ def conditional_bayesian_learning(
     constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
 
     for example_idxs, templates in example_idxs_to_templates_map.items():
-        logger.debug(f"\nLearning for structural set {example_idxs}")
+        logger.debug(f"\n\nLearning for structural set {example_idxs}")
         set_examples = [examples[i] for i in example_idxs]
         learned_constraints = bayesian_learning(
             templates=templates, examples=set_examples, seed=seed, config=config

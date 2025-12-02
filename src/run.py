@@ -3,9 +3,10 @@ from rich import print
 from src.instantiation import conditional_template_instantiation
 from src.learning import conditional_bayesian_learning
 from src.logging import setup_logging
+from src.pruning import conditional_hierarchical_pruning
 from src.types import View
 
-setup_logging(debug=True)
+setup_logging(debug=False)
 
 examples = [
     {
@@ -79,3 +80,7 @@ example_idxs_to_constrs_map = conditional_bayesian_learning(
 )
 # print(repr(example_idxs_to_constrs_map))
 print({ind: len(lst) for ind, lst in example_idxs_to_constrs_map.items()})
+
+outputs = conditional_hierarchical_pruning(example_idxs_to_constrs_map, views)
+
+print(repr(outputs))
