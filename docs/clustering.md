@@ -1,318 +1,392 @@
-# Parameter Clustering for Multi-Modal Constraint Learning
+# Clustering-Based Multi-Mode Parameter Learning
 
 ## The Problem
 
-The current Mockdown design has a fundamental limitation when dealing with **structurally equivalent but parametrically different** examples.
-
-### Example Scenario
+The current Bayesian learning assumes all examples follow the same linear relationship. When examples have multiple parameter modes, it fails:
 
 ```python
-# Both examples have same structure (1-column layout)
-example_1: authors.left = author1.left - 10  # narrow screen (width=400), small margin
-example_2: authors.left = author1.left - 20  # also narrow (width=450), but larger margin
+# Template: parent.left = child.left + b
 
-# Same template structure: authors.left = a * author1.left + b
-# But different parameter values: b ∈ {-10, -20}
+Example 0: parent.left=0, child.left=10  → b = -10
+Example 1: parent.left=0, child.left=10  → b = -10
+Example 2: parent.left=0, child.left=50  → b = -50
+Example 3: parent.left=0, child.left=50  → b = -50
+
+# Current Bayesian learning:
+# Data: y=[0,0,0,0], x=[10,10,50,50]
+# GLM fit: y = a*x + b tries to fit all points
+# Result: High residual variance → REJECTED
 ```
 
-### Why This Fails
-
-1. **Structural clustering groups them together** (both are 1-column layouts)
-2. **Bayesian learning expects consistent parameters** across examples
-3. **Linear regression fails** because the variance in `b` is too high
-4. **Result**: Both constraints rejected OR averaged to `b = -15` (incorrect for both!)
-
-### The Core Issue
-
-- **Synthesis time**: MaxSMT picks ONE constraint set for all future uses
-- **Runtime**: Kiwi solver applies that constraint set to new screen sizes
-- **Missing**: MaxSMT doesn't know which parameter values apply to which screen sizes
-
-## Proposed Solution: Clustering-Based Learning
-
-Instead of fitting a single linear model to all examples, we:
-
-1. **Cluster parameter values** to find multiple "modes"
-2. **Learn decision functions** that map screen sizes to clusters
-3. **Generate multiple constraint candidates**, each applicable to specific screen size ranges
-4. **Let MaxSMT select** based on which candidates work for the test conformances
-
-## Architecture
-
-### Phase 1: Parameter Clustering
-
+But we SHOULD learn:
 ```python
-def cluster_based_learning(templates, examples):
-    """
-    For each template, cluster parameter values and learn applicability.
-    """
-    candidates = []
-    
-    for template in templates:
-        # Step 1: Extract (a, b, screen_size) from each example
-        parameter_data = []
-        for ex in examples:
-            a, b = fit_template_to_example(template, ex)
-            parameter_data.append({
-                'a': a, 
-                'b': b,
-                'screen_width': ex.root.width,
-                'screen_height': ex.root.height,
-                'example_idx': ex.idx
-            })
-        
-        # Step 2: Cluster parameter values
-        # Use DBSCAN (auto-detects clusters) or KMeans (fixed k)
-        from sklearn.cluster import DBSCAN
-        X = np.array([[d['a'], d['b']] for d in parameter_data])
-        clusters = DBSCAN(eps=0.5).fit(X)
-        
-        # Step 3: For each cluster, learn applicability
-        for cluster_id in set(clusters.labels_):
-            if cluster_id == -1:  # noise
-                continue
-            
-            # Cluster center = constraint parameters
-            cluster_mask = clusters.labels_ == cluster_id
-            cluster_data = [d for d, mask in zip(parameter_data, cluster_mask) if mask]
-            
-            a_mean = np.mean([d['a'] for d in cluster_data])
-            b_mean = np.mean([d['b'] for d in cluster_data])
-            
-            # Step 4: Learn decision function: screen_size → this cluster?
-            X_screen = np.array([[d['screen_width'], d['screen_height']] 
-                                  for d in parameter_data])
-            y_cluster = (clusters.labels_ == cluster_id).astype(int)
-            
-            from sklearn.tree import DecisionTreeClassifier
-            clf = DecisionTreeClassifier(max_depth=2)
-            clf.fit(X_screen, y_cluster)
-            
-            # Create candidate with decision function
-            candidate = LinearConstraint(
-                y=template.y,
-                x=template.x,
-                a=a_mean,
-                b=b_mean,
-                score=compute_cluster_score(cluster_data),
-                decision_fn=clf,  # NEW: captures applicability
-                applicable_examples=[d['example_idx'] for d in cluster_data]
-            )
-            candidates.append(candidate)
-    
-    return candidates
+Constraint 1: parent.left = child.left - 10  (applies to examples 0, 1)
+Constraint 2: parent.left = child.left - 50  (applies to examples 2, 3)
 ```
 
-### Phase 2: Cluster-Aware MaxSMT Pruning
+## The Solution: Cluster Then Learn
+
+### Algorithm Overview
+
+Instead of fitting one model to all examples, we:
+1. **Detect parameter clusters** in the data
+2. **Learn separately** for each cluster using existing Bayesian learning
+3. **Tag constraints** with which examples they apply to
+
+This naturally leverages the existing A space, B space, and Stern-Brocot priors!
+
+### Detailed Algorithm
 
 ```python
-def maxsmt_with_clusters(candidates, test_conformances):
+def cluster_based_learning(
+    template: LinearConstraint,
+    examples: list[View],
+    config: LearningConfig
+) -> list[LinearConstraint]:
     """
-    MaxSMT that evaluates decision functions on test screen sizes.
+    Learn multiple constraints for a template when examples exhibit parameter modes.
+    
+    Returns:
+        List of constraints, each tagged with applicable example indices
     """
-    solver = Optimize()
+    # Step 1: Extract actual anchor values from examples
+    y_values = [get_anchor_value(ex, template.y) for ex in examples]
     
-    for c in candidates:
-        # Evaluate: does this constraint apply to test screen sizes?
-        applicability_scores = []
-        for conf in test_conformances:
-            screen = [conf.root.width, conf.root.height]
-            # Probability that this constraint applies at this screen size
-            prob = c.decision_fn.predict_proba([screen])[0][1]
-            applicability_scores.append(prob)
-        
-        # Boost score based on applicability to test cases
-        avg_applicability = np.mean(applicability_scores)
-        boosted_score = c.score * avg_applicability
-        
-        # Add to MaxSMT with boosted score
-        add_soft_constraint(solver, c, weight=boosted_score)
+    if template.x is not None:
+        x_values = [get_anchor_value(ex, template.x) for ex in examples]
+    else:
+        x_values = None
     
-    # Rest of MaxSMT logic (axioms, uniqueness, etc.)
-    # ...
+    # Step 2: Compute "implied parameters" for each example
+    # These are the (a, b) that would perfectly fit each individual example
+    implied_params = []
+    
+    if template.x is None:
+        # Constant form: y = b
+        implied_params = [(0, y) for y in y_values]
+    elif template.b == 0.0:
+        # Multiplicative form: y = a*x
+        implied_params = [(y/x if x != 0 else 0, 0) for y, x in zip(y_values, x_values)]
+    elif template.a == 1.0:
+        # Additive form: y = x + b
+        implied_params = [(1, y - x) for y, x in zip(y_values, x_values)]
+    else:
+        # General form: y = a*x + b
+        # We can't uniquely determine (a, b) from one example, so use b only
+        # (Assume a will be learned from cluster trend)
+        implied_params = [(None, y - x) for y, x in zip(y_values, x_values)]
+    
+    # Step 3: Cluster examples by implied parameters
+    clusters = cluster_parameters(implied_params, distance_threshold=...)
+    
+    # Step 4: For each cluster, run standard Bayesian learning
+    results = []
+    for cluster_indices in clusters:
+        cluster_examples = [examples[i] for i in cluster_indices]
+        
+        # Use existing Bayesian learning!
+        learned = bayesian_learning(
+            templates=[template],
+            examples=cluster_examples,
+            config=config
+        )
+        
+        # Tag with applicable examples
+        for constraint in learned:
+            constraint.applicable_examples = cluster_indices
+        
+        results.extend(learned)
+    
+    return results
 ```
 
-## Alternative Approaches
+### Parameter Clustering Algorithm
 
-### Option 1: Regression Trees (Simpler)
-
-Learn `f(screen_size) → (a, b)` directly using decision trees:
+The key is choosing a clustering method that respects the A/B space structure:
 
 ```python
-def regression_tree_learning(templates, examples):
+def cluster_parameters(
+    implied_params: list[tuple[float, float]],
+    b_threshold: int = 5,
+    a_threshold: float = 0.1
+) -> list[list[int]]:
     """
-    Learn constraint parameters as functions of screen size.
-    """
-    for template in templates:
-        X = [[ex.root.width, ex.root.height] for ex in examples]
-        y_a = [fit_a(template, ex) for ex in examples]
-        y_b = [fit_b(template, ex) for ex in examples]
-        
-        tree_a = DecisionTreeRegressor(max_depth=3).fit(X, y_a)
-        tree_b = DecisionTreeRegressor(max_depth=3).fit(X, y_b)
-        
-        # Extract leaf nodes as discrete candidates
-        for leaf in tree_a.leaves:
-            a_pred = leaf.value
-            b_pred = tree_b.predict(leaf.samples)
-            screen_range = leaf.condition  # e.g., "width < 600"
-            
-            yield LinearConstraint(
-                template.y, template.x, a_pred, b_pred,
-                applicable_when=screen_range
-            )
-```
-
-**Pros**: Directly learns parameter functions, interpretable
-**Cons**: Requires more training data, may overfit
-
-### Option 2: Simple Threshold Learning (Simplest)
-
-For each template, detect if parameters are bimodal, then learn a threshold:
-
-```python
-def threshold_learning(templates, examples):
-    """
-    Detect parameter modes and learn simple thresholds.
-    """
-    for template in templates:
-        b_values = [fit_b(template, ex) for ex in examples]
-        
-        # Detect if multimodal (e.g., using KDE or simple variance check)
-        if variance(b_values) > THRESHOLD:
-            # Cluster b values (e.g., k=2)
-            clusters = kmeans(b_values, k=2)
-            
-            # Learn threshold that separates clusters
-            # e.g., screen_width < 600 for cluster 0
-            for cluster in clusters:
-                threshold = learn_threshold(cluster.examples)
-                yield LinearConstraint(
-                    template.y, template.x,
-                    a=mean(cluster.a_values),
-                    b=mean(cluster.b_values),
-                    applicable_when=f"width < {threshold}"
-                )
-```
-
-**Pros**: Very simple, handles most common case (small vs large screens)
-**Cons**: Only handles 1D thresholds, may miss complex patterns
-
-### Option 3: Parameter-Based Sub-Clustering
-
-Extend structural clustering to include parameter similarity:
-
-```python
-def conditional_template_instantiation_with_parameters(examples):
-    # Step 1: Structural clustering (existing)
-    structural_sets = cluster_by_structure(examples)
+    Cluster examples by their implied parameters using hierarchical clustering.
     
-    # Step 2: Within each set, detect parameter variance
-    for indices in structural_sets:
-        set_examples = [examples[i] for i in indices]
+    Uses distance metric that respects:
+    - Absolute distance for 'b' (offset)
+    - Relative distance for 'a' (scale)
+    
+    Args:
+        implied_params: List of (a, b) tuples for each example
+        b_threshold: Max difference in b to be same cluster (e.g., 10 vs 15 → cluster)
+        a_threshold: Max relative difference in a (e.g., 1.0 vs 1.05 → cluster)
+    
+    Returns:
+        List of clusters, where each cluster is a list of example indices
+    """
+    from scipy.cluster.hierarchy import linkage, fcluster
+    from scipy.spatial.distance import pdist
+    
+    n = len(implied_params)
+    
+    # Handle trivial cases
+    if n <= 1:
+        return [[i] for i in range(n)]
+    
+    # Custom distance function
+    def param_distance(i, j):
+        a_i, b_i = implied_params[i]
+        a_j, b_j = implied_params[j]
         
-        # Estimate parameter variance
-        variance = estimate_parameter_variance(set_examples)
+        # Distance in b space (absolute)
+        b_dist = abs(b_i - b_j) / b_threshold
         
-        if variance > THRESHOLD:
-            # Split into sub-modes by parameter similarity
-            sub_modes = cluster_by_parameter_similarity(set_examples)
-            for sub_indices in sub_modes:
-                yield sub_indices  # Treat as separate structural mode
+        # Distance in a space (relative, if both defined)
+        if a_i is not None and a_j is not None:
+            a_avg = (abs(a_i) + abs(a_j)) / 2 + 1e-10
+            a_dist = abs(a_i - a_j) / (a_avg * a_threshold)
         else:
-            yield indices  # Keep as one mode
-```
-
-**Pros**: Minimal changes to existing architecture
-**Cons**: Requires manual threshold tuning, treats parameter variation as structural difference
-
-## Recommended Approach
-
-**Short term (MVP)**: Option 2 (Simple Threshold Learning)
-- Easiest to implement
-- Handles the 80% case (small vs large screens)
-- Can be added as post-processing to current Bayesian learning
-
-**Long term (Research)**: Option 1 (Clustering + Decision Trees)
-- More principled and general
-- Handles arbitrary parameter distributions
-- Better integration with MaxSMT
-
-## Implementation Strategy
-
-### Phase 1: Extend Data Types
-
-```python
-@dataclass
-class LinearConstraint:
-    y: Anchor
-    x: Anchor
-    a: float | None = None
-    b: float | None = None
-    score: float = 1.0
-    decision_fn: Any = None  # NEW: sklearn classifier or lambda
-    applicable_examples: list[int] = field(default_factory=list)  # NEW
-```
-
-### Phase 2: Modify Learning
-
-```python
-# In learning.py
-def learn_constraints(templates, examples, method="clustering"):
-    if method == "bayesian":
-        return bayesian_learning(templates, examples)  # existing
-    elif method == "clustering":
-        return cluster_based_learning(templates, examples)  # new
-    elif method == "threshold":
-        return threshold_learning(templates, examples)  # new
-```
-
-### Phase 3: Modify MaxSMT Pruning
-
-```python
-# In pruning.py
-def MaxSMTPruner.__call__(self, constraints, test_conformances):
-    # Filter constraints by applicability to test cases
-    for c in constraints:
-        if c.decision_fn is not None:
-            # Evaluate applicability
-            applicability = evaluate_decision_fn(c, test_conformances)
-            c.score *= applicability
+            a_dist = 0  # Ignore a if not computable
+        
+        # Combined distance (max gives conservative clustering)
+        return max(b_dist, a_dist)
     
-    # Rest of MaxSMT logic
-    # ...
+    # Build distance matrix
+    distances = pdist(range(n), metric=param_distance)
+    
+    # Hierarchical clustering with threshold=1.0
+    # (distance > 1.0 means parameters differ by more than threshold)
+    linkage_matrix = linkage(distances, method='complete')
+    cluster_labels = fcluster(linkage_matrix, t=1.0, criterion='distance')
+    
+    # Group by cluster label
+    clusters = {}
+    for idx, label in enumerate(cluster_labels):
+        if label not in clusters:
+            clusters[label] = []
+        clusters[label].append(idx)
+    
+    return list(clusters.values())
 ```
 
-## Open Questions
+### Why This Works
 
-1. **How to evaluate decision functions at synthesis time?**
-   - Need test conformances (screen sizes) to know which constraints apply
-   - Current approach: use examples as test cases
-   - Better: user provides target screen size ranges
+**Leverages A/B Space**: Each cluster is learned using standard Bayesian learning, which:
+- Searches over A space (Farey sequence)
+- Searches over B space (integer ball)
+- Applies Stern-Brocot priors (favors simple fractions)
 
-2. **How to handle overlapping clusters?**
-   - What if a constraint applies to multiple screen size ranges?
-   - Solution: Allow multiple candidates, MaxSMT picks best
+**Example**: 
+```python
+# Cluster 1: margin = 10 ± noise
+# Bayesian learning sees [10, 10, 11, 10]
+# Finds candidates: b ∈ [8, 12] → {8, 9, 10, 11, 12}
+# Scores using prior + likelihood
+# Result: b=10 (highest posterior, simplest)
 
-3. **How to choose clustering parameters?**
-   - DBSCAN epsilon, KMeans k, decision tree depth
-   - Could use cross-validation or heuristics
+# Cluster 2: margin = 50 ± noise  
+# Bayesian learning sees [50, 49, 50, 51]
+# Finds candidates: b ∈ [47, 53] → {47, 48, ..., 53}
+# Result: b=50 (highest posterior)
+```
 
-4. **Should this replace or augment Bayesian learning?**
-   - Augment: Use Bayesian for single-mode, clustering for multi-mode
-   - Replace: Always use clustering (more general)
+The priors automatically handle "33/100 vs 1/3" - even if data says 0.33, the prior strongly favors 1/3!
 
-## Related Work
+### Confidence Intervals Still Apply
 
-- **CSS Media Queries**: Conditional styling based on screen size
-- **Responsive Design Breakpoints**: Discrete screen size ranges
-- **Mockdown's Structural Clustering**: Already handles discrete layout modes
-- **Parametric Constraints**: Research area in constraint programming
+Within each cluster, Bayesian learning computes confidence intervals normally:
 
-## Next Steps
+```python
+# Cluster with [10, 10, 11, 10]
+# GLM fit: b ≈ 10.25, confidence interval [9.5, 11.0]
+# Candidates: {9, 10, 11}
+# Posteriors: {9: 0.1, 10: 0.8, 11: 0.1}  ← prior favors round numbers!
+# Output: LinearConstraint(..., b=10, score=0.8)
+```
 
-1. Implement simple threshold learning as proof of concept
-2. Validate on examples with known parameter variance
-3. Compare with current Bayesian approach
-4. Extend to full clustering if threshold learning insufficient
+This means even with small noise, the algorithm finds the "simplest" value in the confidence region.
+
+### Integration with Conditional Learning
+
+This slots perfectly into your existing `conditional_bayesian_learning`:
+
+```python
+def conditional_bayesian_learning(
+    example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
+    examples: list[View],
+    seed: int | None = None,
+    config: LearningConfig | None = None,
+    enable_clustering: bool = True,  # New parameter
+) -> dict[tuple[int, ...], list[LinearConstraint]]:
+    
+    constr_to_sets_map = defaultdict(set)
+    constr_to_max_score_map = {}
+    
+    for example_idxs, templates in example_idxs_to_templates_map.items():
+        set_examples = [examples[i] for i in example_idxs]
+        
+        if enable_clustering:
+            # Use clustering-based learning
+            learned_constraints = cluster_based_bayesian_learning(
+                templates=templates,
+                examples=set_examples,
+                seed=seed,
+                config=config
+            )
+        else:
+            # Use standard learning
+            learned_constraints = bayesian_learning(
+                templates=templates,
+                examples=set_examples,
+                seed=seed,
+                config=config
+            )
+        
+        # Rest of merging logic remains the same...
+```
+
+### When Clustering Helps
+
+**Scenario 1: Multi-mode within structural set**
+```python
+# All same structure (same visibility), but different margins
+Examples [0,1]: margin = 10  (wide screens)
+Examples [2,3]: margin = 50  (narrow screens)
+
+Without clustering: REJECTED (high variance)
+With clustering: Two constraints, each applicable to subset
+```
+
+**Scenario 2: Noise tolerance for globals**
+```python
+# Structural set A: margin = 10
+# Structural set B: margin = 11
+
+Without clustering: Separate constraints (10 ≠ 11)
+With clustering: If clusters merge, becomes global constraint
+```
+
+### Clustering Threshold Selection
+
+**Conservative (small threshold)**: 
+- `b_threshold = 2-3`: Only cluster very similar values (10 vs 11)
+- Avoids false merging
+- Good for clean data
+
+**Aggressive (large threshold)**:
+- `b_threshold = 10-20`: Cluster broad ranges (10 vs 20)
+- Tolerates more noise
+- Risk of false positives
+
+**Adaptive (recommended)**:
+```python
+# Scale threshold by data magnitude
+b_threshold = max(5, 0.1 * median(|b_values|))
+
+# For margins ~100: threshold = 10 (10% tolerance)
+# For margins ~10: threshold = 5 (50% tolerance, but absolute min)
+```
+
+### Alternative: Density-Based Clustering (DBSCAN)
+
+Instead of hierarchical clustering, use DBSCAN:
+
+```python
+from sklearn.cluster import DBSCAN
+
+def cluster_parameters_dbscan(implied_params, eps=5, min_samples=2):
+    """
+    Use DBSCAN to find parameter clusters.
+    
+    Advantages:
+    - Automatically determines number of clusters
+    - Handles outliers (noise points)
+    - No need to specify distance threshold
+    
+    Args:
+        eps: Max distance for points to be in same neighborhood
+        min_samples: Min points to form a cluster
+    """
+    # Extract b values (most important for clustering)
+    b_values = np.array([b for a, b in implied_params]).reshape(-1, 1)
+    
+    clustering = DBSCAN(eps=eps, min_samples=min_samples).fit(b_values)
+    labels = clustering.labels_
+    
+    # Group by cluster (-1 = noise)
+    clusters = {}
+    for idx, label in enumerate(labels):
+        if label == -1:
+            # Outlier: put in its own cluster
+            clusters[f'noise_{idx}'] = [idx]
+        else:
+            if label not in clusters:
+                clusters[label] = []
+            clusters[label].append(idx)
+    
+    return list(clusters.values())
+```
+
+### Complete Example
+
+```python
+# Input:
+Template: parent.left = child.left + b
+Examples:
+  0: parent.left=0, child.left=10
+  1: parent.left=0, child.left=10
+  2: parent.left=0, child.left=50
+  3: parent.left=0, child.left=51
+
+# Step 1: Implied parameters
+implied_params = [(None, -10), (None, -10), (None, -50), (None, -51)]
+
+# Step 2: Cluster (b_threshold=5)
+# Distance: |-10 - (-10)| = 0 → same cluster
+# Distance: |-50 - (-51)| = 1 → same cluster  
+# Distance: |-10 - (-50)| = 40 → different clusters
+Clusters: [[0, 1], [2, 3]]
+
+# Step 3: Learn per cluster
+# Cluster [0,1]: Bayesian learning on examples 0,1
+#   y=[0,0], x=[10,10]
+#   CI for b: [-11, -9]
+#   Candidates: {-11, -10, -9}
+#   Result: b=-10 (highest posterior)
+
+# Cluster [2,3]: Bayesian learning on examples 2,3
+#   y=[0,0], x=[50,51]
+#   CI for b: [-52, -49]
+#   Candidates: {-52, -51, -50, -49}
+#   Result: b=-50 (round number, higher prior)
+
+# Output:
+[
+  LinearConstraint(parent.left, child.left, a=1, b=-10, 
+                   score=0.9, applicable_examples=[0,1]),
+  LinearConstraint(parent.left, child.left, a=1, b=-50,
+                   score=0.85, applicable_examples=[2,3])
+]
+```
+
+## Summary
+
+**Key advantages of this approach:**
+
+1. ✅ **Leverages existing infrastructure**: Uses A/B space, priors, confidence intervals
+2. ✅ **Respects simplicity bias**: 1/3 still preferred over 33/100 within clusters
+3. ✅ **Automatic mode detection**: Finds parameter clusters without manual specification
+4. ✅ **Clean integration**: Slots into existing `conditional_bayesian_learning` pipeline
+5. ✅ **Interpretable**: Each constraint explicitly tagged with applicable examples
+
+**Implementation complexity**: Medium
+- Need to add clustering step before Bayesian learning
+- Need to track applicable examples through pipeline
+- Rest of system remains unchanged
+
+**Research contribution**: High
+- Novel synthesis approach (not just detection)
+- Handles multi-mode parameters the original Mockdown cannot
+- Maintains mathematical rigor (Bayesian inference + priors)
 

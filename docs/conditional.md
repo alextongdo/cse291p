@@ -16,347 +16,309 @@ We had assumed that for structurally different layouts, the examples would be \t
 These have identical tree structure but fundamentally different spatial relationships.
 
 
-### Solution: Template-Based Layout Clustering
 
-Instead of relying solely on tree isomorphism, we can leverage the **template instantiation** output to distinguish semantically different layouts. Since template instantiation uses the visibility algorithm (sweep-line) to determine which constraint templates are applicable, different layout modes will naturally produce **different sets of constraint templates**.
 
-**Key Insight**: The visibility algorithm already encodes all structural information we need. We don't need to extract visibility signatures manually - we can simply compare the sets of instantiated templates!
 
-#### Algorithm Overview
+### MaxSMT Solving for Conditional Constraints: Complete Implementation Guide
 
-1. **Per-Example Template Instantiation**: For each example individually, run `template_instantiation([example])` to generate its constraint template set. This captures the spatial relationships (visibility) specific to that example's layout structure.
+#### Overview of MaxSMT in the Conditional Pipeline
 
-2. **Cluster by Template Set Equality**: Group examples that produce identical template sets into **layout mode clusters**. Examples with the same template set have the same structural behavior and should share constraint parameters.
-   ```python
-   # Pseudocode
-   template_sets = {i: set(template_instantiation([examples[i]])) for i in range(len(examples))}
-   clusters = group_by_set_equality(template_sets)
-   ```
+MaxSMT pruning is the final stage after instantiation and learning. Its goal is to **remove conflicting constraints** while preserving the group-specific nature of conditional constraints. Unlike the unconditional case, we must now handle constraints that only apply to certain example groups.
 
-3. **Per-Cluster Constraint Learning**: For each layout mode cluster:
-   - Use the cluster's template set (which is identical for all examples in the cluster)
-   - Perform Bayesian learning using **only examples from this cluster**
-   - This preserves mode association even for templates that appear in all modes
+**Key Principle**: Conditional constraints should only be tested against screen sizes from their associated examples. Testing constraints from group (0, 1) against screen sizes from group (2, 3) would be meaningless and could incorrectly prune valid constraints.
 
-4. **Identify Global vs Conditional Constraints**: After learning per-cluster, analyze constraint categories:
-   
-   **a) Find structurally global templates:**
-   ```python
-   global_templates = set.intersection(*[template_sets[c] for c in clusters])
-   ```
-   
-   **b) For each global template, check if parameters are identical:**
-   - If all clusters learned the same parameters (within threshold) → **Truly Global Constraint**
-   - If clusters learned different parameters → **Conditional Parameters** (tag each with its cluster)
-   
-   **c) Mode-specific templates** (not in intersection) are automatically **Conditional Structure**
-   
-   This produces three constraint categories:
-   - **Truly Global**: Same structure AND same parameters (e.g., `root.width = authors.width + 0`)
-   - **Conditional Structure**: Template only in some modes (e.g., `author1.right = author2.left - 30` only in horizontal)
-   - **Conditional Parameters**: Template in all modes but different values (e.g., `authors.left = author1.left - 60` in wide, `- 10` in narrow)
+**Important Distinction**: 
+- **Pruning time** (now): We test constraints against screen sizes from training examples
+- **Inference time** (future): We apply learned constraints to new screen sizes not in training
 
-5. **Unification Algorithm**: Merge constraints learned from different clusters:
-   ```python
-   # After per-cluster learning
-   global_templates = set.intersection(*[template_sets[c] for c in clusters])
-   
-   truly_global = []
-   conditional = []
-   
-   # Check global templates for parameter consistency
-   for template in global_templates:
-       learned_constraints = {}
-       for cluster_id in clusters:
-           # Find constraint matching this template in cluster's learned constraints
-           for constraint in cluster_constraints[cluster_id]:
-               if constraint.matches_template(template):
-                   learned_constraints[cluster_id] = constraint
-                   break
-       
-       # Compare parameters across clusters
-       params = [(c.a, c.b) for c in learned_constraints.values()]
-       if all_close(params, threshold=0.01):
-           # Parameters match → truly global
-           truly_global.append(learned_constraints[next(iter(clusters))])
-       else:
-           # Parameters differ → conditional
-           for cluster_id, constraint in learned_constraints.items():
-               conditional.append((cluster_id, constraint))
-   
-   # All mode-specific templates are conditional
-   for cluster_id in clusters:
-       mode_specific_templates = template_sets[cluster_id] - global_templates
-       for constraint in cluster_constraints[cluster_id]:
-           if constraint.template in mode_specific_templates:
-               conditional.append((cluster_id, constraint))
-   ```
+At pruning time, we DON'T need implications or mode selection in MaxSMT - we simply route each constraint group to be tested only against its associated examples.
 
-6. **MaxSMT with Mode Selection**: Extend the MaxSMT formulation to include mode selection:
-   - Add a categorical variable `layout_mode` that ranges over cluster IDs
-   - For each conditional constraint `(cluster_id, constraint)`, add implication: `(layout_mode == cluster_id) ⇒ constraint`
-   - Add truly global constraints unconditionally (no mode guard)
-   - Add soft constraints that prefer each mode based on aspect ratio heuristics (e.g., wide screens prefer horizontal layout)
-   - Solve to find optimal mode and constraint set
+#### The Complete Conditional Constraint Pipeline
 
-#### Template Set Comparison Example
+```
+Input: Example layouts
+  ↓
+1. Template Instantiation (per-example)
+   → Groups examples by template set similarity
+   Output: {(0,1): [templates], (2,3): [templates]}
+  ↓
+2. Bayesian Learning (per-group)
+   → Learns parameters for each group's constraints
+   → Merges identical constraints across groups
+   Output: {(0,1): [constraints], (0,1,2,3): [global_constraints], (2,3): [constraints]}
+  ↓
+3. MaxSMT Pruning (per-mode, this section)
+   → Removes conflicts within each mode
+   → Preserves mode tags in output
+   Output: {(0,1): [pruned_constraints], (0,1,2,3): [pruned_global], (2,3): [pruned_constraints]}
+  ↓
+Final: Mode-conditional constraint set ready for deployment
+```
 
-For the 3-column vs 1-column example:
+#### Step-by-Step MaxSMT Implementation
 
-**3-column layout** (horizontal flow):
+**Input to MaxSMT Pruner**:
 ```python
-templates_3col = {
-    LinearConstraint(authors.left, author1.left, a=?, b=?),
-    LinearConstraint(author1.right, author2.left, a=?, b=?),  # horizontal adjacency
-    LinearConstraint(author2.right, author3.left, a=?, b=?),  # horizontal adjacency
-    LinearConstraint(author1.top, author2.top, a=?, b=?),     # aligned tops
-    # ... etc
+# From conditional_bayesian_learning output:
+conditional_constraints = {
+    (0, 1): [constraint1, constraint2, ...],      # Constraints for examples 0, 1
+    (2, 3): [constraint3, constraint4, ...],      # Constraints for examples 2, 3
+    (0, 1, 2, 3): [global1, global2, ...],        # Global constraints (all examples)
+}
+examples = [example0, example1, example2, example3]  # Original examples
+```
+
+**The Algorithm (Very Simple!)**
+
+```python
+def conditional_hierarchical_pruning(
+    conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
+    examples: list[View],
+) -> dict[tuple[int, ...], list[LinearConstraint]]:
+    """
+    Hierarchical pruning for conditional constraints.
+    
+    CRITICAL: At inference time, we apply global constraints + group-specific constraints
+    together. So they must be COMPATIBLE. We ensure this by pruning them together.
+    
+    Algorithm:
+    1. Identify global constraints (apply to all examples)
+    2. For each specific group:
+       - Prune group_constraints + global_constraints TOGETHER using that group's examples
+       - This ensures compatibility between group-specific and global constraints
+    3. Global constraints = intersection of what survives across all groups
+       (ensures global constraints work for EVERY group)
+    """
+    # Find global key (all example indices)
+    all_indices = set()
+    for key in conditional_constraints.keys():
+        all_indices.update(key)
+    global_key = tuple(sorted(all_indices))
+    
+    # Separate global from specific groups
+    global_constraints = conditional_constraints.get(global_key, [])
+    specific_groups = {k: v for k, v in conditional_constraints.items() if k != global_key}
+    
+    pruned_output = {}
+    surviving_global_per_group = []
+    
+    # Prune each specific group together with global constraints
+    for group_key, group_constraints in specific_groups.items():
+        group_examples = [examples[i] for i in group_key]
+        
+        # Combine and prune together - ensures compatibility!
+        combined = group_constraints + global_constraints
+        pruned_combined = HierarchicalPruner(group_examples)(combined)
+        
+        # Separate back into group-specific vs global
+        group_set = set(group_constraints)
+        pruned_group = [c for c in pruned_combined if c in group_set]
+        pruned_global = [c for c in pruned_combined if c not in group_set]
+        
+        pruned_output[group_key] = pruned_group
+        surviving_global_per_group.append(set(pruned_global))
+    
+    # Global constraints must survive for ALL groups (intersection)
+    if surviving_global_per_group:
+        final_global = set.intersection(*surviving_global_per_group)
+        pruned_output[global_key] = list(final_global)
+    elif global_constraints:
+        # No specific groups, just prune global constraints alone
+        all_examples = examples
+        pruned_output[global_key] = HierarchicalPruner(all_examples)(global_constraints)
+    
+    return pruned_output
+```
+
+**Why We Must Prune Together**:
+
+Consider this scenario:
+```python
+# After learning:
+Global (0,1,2,3): root.width = authors.width + 0       (score: 0.95)
+Group (0,1):      root.width = topbar.width + 0        (score: 0.90)
+Group (2,3):      root.width = search.width + 0        (score: 0.88)
+```
+
+At inference time for a screen size similar to examples 0,1, you'll apply:
+```python
+constraints_to_apply = constraints[(0,1,2,3)] + constraints[(0,1)]
+                    = [root.width = authors.width] + [root.width = topbar.width]
+```
+
+**These constraints conflict!** They require `authors.width == topbar.width`, which may not be true.
+
+If we pruned them separately:
+- Global constraints tested against all examples → both might survive
+- Group (0,1) constraints tested against examples 0,1 → might survive
+- **Problem**: Never tested together, so conflict not detected!
+
+By pruning them together using examples 0,1, MaxSMT will detect the conflict and choose one:
+- Either keep global `root.width = authors.width` (higher score, drop group-specific)
+- Or keep group `root.width = topbar.width` (more specific to this group)
+
+**Global Constraint Intersection**:
+
+Global constraints must survive pruning against **every** group's examples:
+```python
+# Prune global + group(0,1) using examples 0,1 → global_constraints_a survive
+# Prune global + group(2,3) using examples 2,3 → global_constraints_b survive
+# Final global = global_constraints_a ∩ global_constraints_b
+```
+
+This ensures global constraints truly work for all layout modes!
+
+**No MaxSMT Modifications Needed!**
+
+Your existing `HierarchicalPruner` and `MaxSMTPruner` classes don't need ANY changes. They already handle conditional constraints correctly when you pass the right examples.
+
+**Output Format**
+
+The output preserves the group structure:
+```python
+{
+    (0, 1, 2, 3): [pruned_global_constraints],  # Apply to all examples
+    (0, 1): [pruned_constraints_for_group_01],   # Apply only to examples 0, 1
+    (2, 3): [pruned_constraints_for_group_23],   # Apply only to examples 2, 3
 }
 ```
 
-**1-column layout** (vertical flow):
+---
+
+## Inference Time: Applying Constraints to New Screen Sizes (Future Work)
+
+**Important**: The above pruning algorithm is complete for the current implementation. What follows is for FUTURE deployment when you need to apply learned constraints to screen sizes not in your training data.
+
+---
+
+When generating a layout for a new screen size (not in training examples), you need to determine which constraint group to use:
+
+**Option A: Heuristic-Based Group Selection (Simpler, Recommended)**
 ```python
-templates_1col = {
-    LinearConstraint(authors.left, author1.left, a=?, b=?),
-    LinearConstraint(author1.bottom, author2.top, a=?, b=?),   # vertical adjacency
-    LinearConstraint(author2.bottom, author3.top, a=?, b=?),   # vertical adjacency
-    LinearConstraint(author1.left, author2.left, a=?, b=?),    # aligned lefts
-    # ... etc
-}
+def infer_group_from_screen_size(width, height, training_examples, constraint_groups):
+    """
+    Use simple heuristics to determine which constraint group a new screen size belongs to.
+    Match to the group with the most similar average screen size/aspect ratio.
+    """
+    aspect_ratio = width / height
+    
+    # Compute average characteristics for each group
+    group_characteristics = {}
+    for group_key in constraint_groups.keys():
+        group_examples = [training_examples[i] for i in group_key]
+        avg_aspect = np.mean([ex.width / ex.height for ex in group_examples])
+        avg_width = np.mean([ex.width for ex in group_examples])
+        avg_height = np.mean([ex.height for ex in group_examples])
+        group_characteristics[group_key] = (avg_aspect, avg_width, avg_height)
+    
+    # Find closest group (can use aspect ratio, absolute size, or both)
+    closest_group = min(
+        group_characteristics.keys(), 
+        key=lambda k: abs(group_characteristics[k][0] - aspect_ratio)
+    )
+    return closest_group
+
+# Usage at inference time:
+new_width, new_height = 800, 600
+active_group = infer_group_from_screen_size(new_width, new_height, examples, pruned_constraints)
+
+# Apply global constraints + group-specific constraints
+global_key = tuple(range(len(examples)))  # e.g., (0, 1, 2, 3)
+constraints_to_apply = (
+    pruned_constraints.get(global_key, []) + 
+    pruned_constraints[active_group]
+)
+
+# Now use Kiwi/Cassowary solver with these constraints to generate layout
 ```
 
-The set difference reveals mode-specific templates:
-- `templates_3col - templates_1col` → horizontal adjacency constraints (author1.right to author2.left)
-- `templates_1col - templates_3col` → vertical adjacency constraints (author1.bottom to author2.top)
+**Option B: Solver-Based Group Selection (More Flexible, Advanced)**
 
-These structural differences allow automatic clustering without manual signature extraction!
-
-#### Why Learn Per-Cluster Matters: The Parameter Problem
-
-Consider this scenario with a template that appears in **all** layout modes:
+**This is when you'd need implications in MaxSMT!** You'd extend the solver to include group selection as a variable:
 
 ```python
-# Template: authors.left = author1.left + b
-# This structural relationship exists in both modes, but with different values:
-
-# 3-column mode (wide screen, 1200px):
-# authors.left = 0, author1.left = 60
-# → authors.left = author1.left - 60
-
-# 1-column mode (narrow screen, 500px):  
-# authors.left = 0, author1.left = 10
-# → authors.left = author1.left - 10
+# This is FUTURE work - adds implications to Z3 for inference-time mode selection
+def solve_with_mode_selection(screen_width, screen_height, conditional_constraints):
+    """
+    Let the solver automatically choose which constraint group to apply.
+    Uses implications: (group_var == i) ⇒ constraints[i]
+    """
+    solver = z3.Optimize()
+    
+    # Add group selection variable
+    num_groups = len([k for k in conditional_constraints.keys() if len(k) < len(examples)])
+    group_var = z3.Int('constraint_group')
+    solver.add(z3.Or([group_var == i for i in range(num_groups)]))
+    
+    # For each group's constraints, add as implications
+    for group_id, (group_key, constraints) in enumerate(conditional_constraints.items()):
+        if group_key == global_key:
+            # Global constraints always apply (no implication)
+            for constraint in constraints:
+                z3_constraint = constraint_to_z3_expr(constraint, ...)
+                solver.add_soft(z3_constraint, weight=constraint.score)
+        else:
+            # Group-specific constraints use implications
+            for constraint in constraints:
+                z3_constraint = constraint_to_z3_expr(constraint, ...)
+                # (group_var == group_id) ⇒ z3_constraint
+                solver.add_soft(
+                    z3.Implies(group_var == group_id, z3_constraint),
+                    weight=constraint.score
+                )
+    
+    # Add soft preferences for groups based on heuristics
+    aspect_ratio = screen_width / screen_height
+    for group_id, group_key in enumerate(constraint_groups):
+        group_examples = [examples[i] for i in group_key]
+        group_aspect = np.mean([ex.width / ex.height for ex in group_examples])
+        
+        # Prefer groups with similar aspect ratio
+        similarity = 1.0 / (1.0 + abs(aspect_ratio - group_aspect))
+        solver.add_soft(group_var == group_id, weight=int(similarity * 100))
+    
+    # Solve and extract chosen group
+    if solver.check() == z3.sat:
+        model = solver.model()
+        chosen_group = model.eval(group_var).as_long()
+        return chosen_group
 ```
 
-**If we learn using all examples together:**
-- Bayesian learning sees: `b ∈ {-60, -10}`
-- Produces mixture distribution with two peaks
-- ❌ **Problem**: Both constraints are generated, but not tagged with which mode they came from
-- MaxSMT solver can't know that `-60` goes with wide screens and `-10` with narrow screens
+**Note**: Option B requires significant extension to your MaxSMT solver and is only needed if you want the solver to automatically switch between groups at inference time. For most use cases, Option A (heuristic-based) is simpler and sufficient.
 
-**If we learn per-cluster first:**
-- Cluster 1 (3-column): `authors.left = author1.left - 60` tagged as `mode=horizontal`
-- Cluster 2 (1-column): `authors.left = author1.left - 10` tagged as `mode=vertical`
-- ✅ **Solution**: Each constraint is explicitly associated with its layout mode
-- MaxSMT can apply mode guards: `(mode == horizontal) ⇒ b = -60`
+#### Implementation Checklist
 
-This is why the unification algorithm checks parameter consistency - it distinguishes between:
-- **Truly global**: `root.width = authors.width + 0` (same everywhere)
-- **Conditional parameters**: `authors.left = author1.left + b` where `b` varies by mode
+**For Current Pruning Implementation (Do Now):**
 
-#### Complete Example: 3-Column vs 1-Column
+- [x] **Created `conditional_hierarchical_pruning` function** in `src/pruning.py` ✓
+- [ ] **Call `conditional_hierarchical_pruning`** instead of standard `hierarchical_pruning` when you have conditional constraints
+- [x] **No changes to `MaxSMTPruner` or `HierarchicalPruner`** - they already work correctly ✓
+- [x] **Preserve group tags** through the pruning process (input dict keys → output dict keys) ✓
 
-**Input**: 2 examples at 1200×870 (horizontal), 2 examples at 500×1530 (vertical)
+**For Future Inference Implementation (Later):**
 
-**Step 1: Template instantiation per-example**
-```python
-templates_example1 = {author1.right → author2.left, ...}  # horizontal adjacency
-templates_example2 = {author1.right → author2.left, ...}  # same horizontal
-templates_example3 = {author1.bottom → author2.top, ...}  # vertical adjacency
-templates_example4 = {author1.bottom → author2.top, ...}  # same vertical
+- [ ] **Implement group selection heuristic** (Option A) or solver-based selection (Option B)
+- [ ] **(Option B only)** Add implication support to MaxSMT for group-conditional constraints
+- [ ] **Integrate with deployment pipeline** to apply correct constraints for new screen sizes
 
-# Cluster by template set equality
-cluster_horizontal = [example1, example2]
-cluster_vertical = [example3, example4]
-```
+#### Key Insights
 
-**Step 2: Learn per-cluster**
-```python
-# Horizontal cluster
-constraints_h = bayesian_learning(templates_horizontal, [ex1, ex2])
-# → author1.right = author2.left - 30 (score: 0.95)
-# → authors.left = author1.left - 60 (score: 0.92)
+1. **Must prune group + global constraints together**: At inference, we apply both. If we prune separately, conflicts might slip through. Pruning them together ensures compatibility.
 
-# Vertical cluster  
-constraints_v = bayesian_learning(templates_vertical, [ex3, ex4])
-# → author1.bottom = author2.top + 0 (score: 0.98)
-# → authors.left = author1.left - 10 (score: 0.90)
-```
+2. **Global constraints = intersection across groups**: A "global" constraint must survive pruning with EVERY group's examples. We take the intersection to ensure this.
 
-**Step 3: Unification**
-```python
-# Template "author1.right → author2.left" only in horizontal → Conditional Structure
-# Template "authors.left = author1.left + b" in both, but b differs → Conditional Parameters
-# Template "root.width = authors.width + 0" in both, same params → Truly Global
+3. **No synthetic test sizes needed**: You don't manually create test screen sizes. The `min_rect` and `max_rect` computed from each group's examples automatically provide appropriate test cases.
 
-output = {
-    "global": [
-        LinearConstraint(root.width, authors.width, a=1, b=0)
-    ],
-    "conditional": [
-        ("horizontal", LinearConstraint(author1.right, author2.left, a=1, b=-30)),
-        ("horizontal", LinearConstraint(authors.left, author1.left, a=1, b=-60)),
-        ("vertical", LinearConstraint(author1.bottom, author2.top, a=1, b=0)),
-        ("vertical", LinearConstraint(authors.left, author1.left, a=1, b=-10)),
-    ]
-}
-```
+4. **Conditional pruning is still simple**: Despite the added logic, it's still a clean wrapper around the existing pruner. The core MaxSMT logic needs ZERO changes.
 
-**Step 4: MaxSMT with mode selection (at inference time)**
-```python
-# For new screen size 800×600:
-variables = [layout_mode ∈ {horizontal, vertical}, ...]
-hard_constraints = [
-    layout_axioms,  # width = right - left, etc.
-    root.width = authors.width + 0,  # global
-]
-soft_constraints = [
-    (layout_mode == horizontal) ⇒ (author1.right = author2.left - 30),
-    (layout_mode == horizontal) ⇒ (authors.left = author1.left - 60),
-    (layout_mode == vertical) ⇒ (author1.bottom = author2.top + 0),
-    (layout_mode == vertical) ⇒ (authors.left = author1.left - 10),
-    (width > height * 1.5) ⇒ prefer(layout_mode == horizontal),  # heuristic
-]
-# Solver picks: layout_mode = horizontal (since 800 > 600 * 1.5)
-# Applies: horizontal constraints only
-```
+4. **Group tags flow through the entire pipeline**: 
+   - Instantiation: `{(0,1): templates, (2,3): templates}` ← Groups by template similarity
+   - Learning: `{(0,1): constraints, (2,3): constraints, (0,1,2,3): global}` ← Learns per-group, merges identical
+   - Pruning: `{(0,1): pruned, (2,3): pruned, (0,1,2,3): pruned_global}` ← Prunes per-group
+   - Inference (future): "New screen 800×600 → matches group (0,1) → apply constraints[(0,1)] + constraints[(0,1,2,3)]"
 
-#### Mode Detection at Inference Time
+5. **Implications only needed for inference**: Z3 implications `(condition) → (constraint)` are ONLY needed if you want the solver to automatically choose between groups at deployment time (Option B). For simple heuristic-based group selection (Option A), no MaxSMT changes are needed.
 
-When generating a layout for a new screen size, the MaxSMT solver will:
-1. Receive as input the desired screen dimensions (width, height)
-2. Add soft preferences for each mode (e.g., `prefer horizontal mode when width > height * 1.5`)
-3. Select the optimal mode based on which constraints can be satisfied and maximize the total score
-4. Apply only the constraints tagged with the selected mode (conditional constraints) plus all global constraints
+6. **Hierarchical groups**: In principle, each level of the view hierarchy could have different groups (e.g., root has 2 groups, child container has 3 groups). The algorithm naturally supports this by running conditional instantiation/learning/pruning recursively at each level.
 
-This approach allows the system to automatically switch between layout modes (3-column ↔ 1-column) based on screen size, without requiring manual breakpoints or media queries.
-
-#### Implementation Considerations
-
-- **Template set comparison**: Use `frozenset` for hashable template sets to enable efficient clustering via dictionary/set operations
-- **Hierarchical application**: Apply clustering recursively at each level of the view hierarchy, not just at the root level
-- **Mode preferences**: Use simple heuristics (aspect ratio, screen size) as soft constraints, not hard rules
-- **Constraint compatibility**: Ensure that conditional constraint sets are mutually exclusive to avoid conflicts during MaxSMT solving
-- **Template equivalence**: Two templates are equivalent if they relate the same anchors (y, x), even if parameter values (a, b) differ. Implement `constraint.matches_template(y_anchor, x_anchor)` helper method.
-- **Parameter comparison threshold**: When checking if parameters match across clusters, use `np.allclose(params1, params2, rtol=0.01)` to handle floating-point imprecision
-- **Score preservation**: When creating truly global constraints, preserve the highest score from any cluster (or average scores across clusters)
-
-By the end of the project, this visibility-based clustering approach should enable \textsc{Mockdown} to synthesize responsive layouts that adapt not just sizes, but entire layout structures, making it significantly more powerful for modern responsive web design.
-
-
-### Implementation Plan: Phased Approach
-
-To reduce risk and validate the core algorithm before implementing the full visibility-based detection, we will use a **phased implementation**:
-
-#### Phase 1: Manual Layout Mode Tagging (Proof of Concept)
-
-Instead of automatically detecting layout modes via visibility graphs, we will initially **manually tag examples** with their layout mode membership. This allows us to focus on implementing and validating the core conditional constraint algorithm.
-
-**Input format example:**
-```python
-examples = [
-    {
-        "name": "root",
-        "rect": [0, 0, 1200, 870],
-        "layout_mode": "horizontal",  # Manual tag
-        "children": [...]
-    },
-    {
-        "name": "root",
-        "rect": [0, 0, 500, 1530],
-        "layout_mode": "vertical",  # Manual tag
-        "children": [...]
-    }
-]
-```
-
-**Phase 1 Implementation Tasks:**
-1. Extend input schema to accept `layout_mode` field (e.g., "horizontal", "vertical", "set1", "set2")
-2. Group examples by manual `layout_mode` tags into mode groups
-3. For each mode group, run template instantiation on **only that group's examples**:
-   ```python
-   mode_groups = group_by_manual_tag(examples)
-   template_sets = {mode: template_instantiation(group) for mode, group in mode_groups.items()}
-   ```
-4. Learn constraints **separately for each mode group** using only that group's examples and templates
-5. Implement unification algorithm to classify constraints as:
-   - Truly global (same template and parameters across all modes)
-   - Conditional structure (template only in some modes)
-   - Conditional parameters (template in all modes, different parameters)
-6. Extend MaxSMT formulation to include mode selection variable and conditional constraint implications:
-   - Global constraints: always active
-   - Conditional constraints: `(layout_mode == mode_id) ⇒ constraint`
-7. Add soft preferences for modes based on screen aspect ratio
-8. Validate that the system can correctly learn and apply mode-specific constraints
-
-**Benefits of Phase 1:**
-- Validates that per-mode learning and unification algorithm work correctly
-- Confirms that conditional constraints and mode selection work correctly in MaxSMT
-- Confirms MaxSMT formulation with mode guards is sound
-- Allows testing with real examples without complex clustering logic
-- Verifies that mode-tagged constraints correctly switch layout behavior at inference time
-- Provides ground truth for validating Phase 2's automatic clustering
-
-#### Phase 2: Automatic Template-Based Clustering
-
-Once Phase 1 is validated and working, implement the automatic mode detection algorithm described above:
-
-1. Modify template instantiation to run **per-example** (not on all examples together)
-2. Implement template set comparison: group examples with identical template sets
-3. Remove manual `layout_mode` tags and verify automatic clustering produces same groups
-4. Validate that automatically detected modes produce equivalent constraints to manual tags
-
-**Phase 2 Implementation:**
-```python
-# For each example, get its individual template set
-template_sets = {}
-for i, example in enumerate(examples):
-    templates = template_instantiation([example])  # Single example
-    # Use structural signature (y, x anchors) not full constraint (includes a, b)
-    template_sigs = frozenset((t.y, t.x) for t in templates)
-    template_sets[i] = (template_sigs, templates)
-
-# Group examples by template signature equality
-clusters = defaultdict(list)
-for i, (sig, templates) in template_sets.items():
-    clusters[sig].append((i, templates))
-
-# Now learn constraints separately for each cluster
-cluster_constraints = {}
-for cluster_sig, cluster_data in clusters.items():
-    example_indices = [i for i, _ in cluster_data]
-    cluster_examples = [examples[i] for i in example_indices]
-    # Use templates from first example (all have same structure)
-    cluster_templates = cluster_data[0][1]
-    cluster_constraints[cluster_sig] = bayesian_learning(cluster_templates, cluster_examples)
-
-# Then run unification algorithm as described above...
-```
-
-**Important**: Template comparison must use **structural signature** (which anchors are related), not full constraint values (a, b parameters). Two templates are equivalent if `template1.y == template2.y` and `template1.x == template2.x`, regardless of their parameter values.
-
-**Phase 2 Validation:**
-- Run on Phase 1 test cases (with manual tags removed) and compare results
-- Ensure template sets correctly distinguish horizontal vs vertical layouts
-- Verify that 3-column examples cluster together and 1-column examples cluster together
-- Confirm template-based clustering matches manual tagging
-
-#### Phase 3: Extensions and Refinement
-
-After core algorithm is working:
-- Support hierarchical mode selection (different modes at different levels)
-- Improve mode preference heuristics beyond simple aspect ratio
-- Handle edge cases (mixed layouts, complex grid structures)
-- Optimize signature matching for performance
-
-This phased approach allows us to validate the conditional constraint synthesis algorithm independently of the clustering logic, reducing implementation risk and making debugging significantly easier.
+This design keeps the MaxSMT solver simple while enabling powerful conditional layout synthesis!
