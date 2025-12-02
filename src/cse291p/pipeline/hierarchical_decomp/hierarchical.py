@@ -167,7 +167,39 @@ class HierarchicalPruner(BasePruningMethod):
             print([short_str(c.constraint) for c in inconceivables])
             evaluate_constraints(self.hierarchy, to_rect(self.min_conf), list(baseline_set))
             raise Exception('inconceivable')
-        evaluate_constraints(self.hierarchy, to_rect(self.min_conf), list(constraints))
+        
+        # Log constraints and synthesized view
+        constraint_list = [c.constraint for c in constraints]
+        print("\n" + "="*80)
+        print("VALIDATION: Synthesized Constraints")
+        print("="*80)
+        for i, constr in enumerate(constraint_list, 1):
+            print(f"{i}. {short_str(constr)}")
+        print(f"\nTotal constraints: {len(constraint_list)}")
+        
+        # Solve with Kiwi and log the synthesized view
+        synthesized_view = evaluate_constraints(self.hierarchy, to_rect(self.min_conf), constraint_list)
+        
+        print("\n" + "="*80)
+        print("VALIDATION: Kiwi-Solved Layout")
+        print("="*80)
+        print(f"Root view: {synthesized_view.name}")
+        print(f"Root rect: left={synthesized_view.left}, top={synthesized_view.top}, "
+              f"right={synthesized_view.right}, bottom={synthesized_view.bottom}")
+        print(f"Root size: width={synthesized_view.width}, height={synthesized_view.height}")
+        
+        def print_view_tree(view, indent=0):
+            prefix = "  " * indent
+            print(f"{prefix}View: {view.name}")
+            print(f"{prefix}  Rect: ({view.left}, {view.top}, {view.right}, {view.bottom})")
+            print(f"{prefix}  Size: {view.width} x {view.height}")
+            for child in view.children:
+                print_view_tree(child, indent + 1)
+        
+        print("\nView hierarchy:")
+        print_view_tree(synthesized_view)
+        print("="*80 + "\n")
+        
         return
 
     def __call__(self, cands: List[ConstraintCandidate]) -> Tuple[List[IConstraint], Dict[str, Fraction], Dict[str, Fraction]]:
@@ -246,6 +278,41 @@ class HierarchicalPruner(BasePruningMethod):
             output_constrs = set(self.integrate_constraints(self.examples, self.min_conf, self.max_conf, list(output_constrs)))
         if debug and validate:
             self.validate_output_constrs(output_constrs)
+        
+        # Always log final constraints and Kiwi-solved layout when debug is enabled
+        if debug:
+            from cse291p.pipeline.integration.kiwi import evaluate_constraints
+            constraint_list = list(output_constrs)
+            print("\n" + "="*80)
+            print("FINAL SYNTHESIS: Synthesized Constraints")
+            print("="*80)
+            for i, constr in enumerate(constraint_list, 1):
+                print(f"{i}. {short_str(constr)}")
+            print(f"\nTotal constraints: {len(constraint_list)}")
+            
+            # Solve with Kiwi and log the synthesized view
+            synthesized_view = evaluate_constraints(self.hierarchy, to_rect(self.min_conf), constraint_list)
+            
+            print("\n" + "="*80)
+            print("FINAL SYNTHESIS: Kiwi-Solved Layout")
+            print("="*80)
+            print(f"Root view: {synthesized_view.name}")
+            print(f"Root rect: left={synthesized_view.left}, top={synthesized_view.top}, "
+                  f"right={synthesized_view.right}, bottom={synthesized_view.bottom}")
+            print(f"Root size: width={synthesized_view.width}, height={synthesized_view.height}")
+            
+            def print_view_tree(view, indent=0):
+                prefix = "  " * indent
+                print(f"{prefix}View: {view.name}")
+                print(f"{prefix}  Rect: ({view.left}, {view.top}, {view.right}, {view.bottom})")
+                print(f"{prefix}  Size: {view.width} x {view.height}")
+                for child in view.children:
+                    print_view_tree(child, indent + 1)
+            
+            print("\nView hierarchy:")
+            print_view_tree(synthesized_view)
+            print("="*80 + "\n")
+        
         if self.log_level != LogLevel.NONE:
             self.dump_constraints("output.smt2", self.hierarchy, list(output_constrs))
         return (list(output_constrs), {}, {})
