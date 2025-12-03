@@ -57,16 +57,20 @@ def anchor_to_z3_var(anchor: Anchor, test_rect_idx: int) -> z3.ArithRef:
 def constraint_to_z3_expr(
     constraint: LinearConstraint, test_rect_idx: int
 ) -> z3.BoolRef:
-    """Convert a LinearConstraint to a Z3 expression."""
+    """Convert a LinearConstraint to a Z3 expression.
+    
+    Note: We pass Fraction objects directly to Z3 (not floats) to preserve
+    exact rational arithmetic. Z3 handles Python Fractions natively.
+    """
     y_var = anchor_to_z3_var(constraint.y, test_rect_idx)
 
     if constraint.x is None:
         # Constant constraint: y = b
-        return y_var == float(constraint.b)
+        return y_var == constraint.b
     else:
         # Linear constraint: y = a * x + b
         x_var = anchor_to_z3_var(constraint.x, test_rect_idx)
-        return y_var == float(constraint.a) * x_var + float(constraint.b)
+        return y_var == constraint.a * x_var + constraint.b
 
 
 def add_layout_axioms(
@@ -107,18 +111,21 @@ def add_root_dims_constraints(
     is_horizontal: bool,
 ):
     """
-    Add z3 constraints that the root view must be the same size as the text rect.
+    Add z3 constraints that the root view must be the same size as the test rect.
+    
+    Note: We pass Fraction objects directly to Z3 (not floats) to preserve
+    exact rational arithmetic.
     """
     if is_horizontal:
         z3_width = anchor_to_z3_var(root.anchor("width"), test_rect_idx)
         z3_left = anchor_to_z3_var(root.anchor("left"), test_rect_idx)
-        solver.add(z3_width == float(test_rect.width))
-        solver.add(z3_left == float(test_rect.left))
+        solver.add(z3_width == test_rect.width)
+        solver.add(z3_left == test_rect.left)
     else:
         z3_height = anchor_to_z3_var(root.anchor("height"), test_rect_idx)
         z3_top = anchor_to_z3_var(root.anchor("top"), test_rect_idx)
-        solver.add(z3_height == float(test_rect.height))
-        solver.add(z3_top == float(test_rect.top))
+        solver.add(z3_height == test_rect.height)
+        solver.add(z3_top == test_rect.top)
 
 
 def z3_to_fraction(z3_val) -> Fraction:
@@ -157,7 +164,7 @@ class MaxSMTPruner:
         self.min_rect = min_rect
         self.max_rect = max_rect
 
-    def __call__(
+    def prune(
         self, candidates: list[LinearConstraint]
     ) -> tuple[list[LinearConstraint], dict[str, Fraction], dict[str, Fraction]]:
         """
@@ -351,7 +358,7 @@ class HierarchicalPruner:
             left=max(lefts), top=max(tops), width=max(widths), height=max(heights)
         )
 
-    def __call__(self, candidates: list[LinearConstraint]) -> list[LinearConstraint]:
+    def prune(self, candidates: list[LinearConstraint]) -> list[LinearConstraint]:
         # Worklist: (focus_view, min_rect, max_rect)
         worklist = [(self.root, self.min_rect, self.max_rect)]
         output_constraints = set()
@@ -360,14 +367,16 @@ class HierarchicalPruner:
             focus, min_rect, max_rect = worklist.pop()
 
             # Filter to relevant constraints for this level
-            relevant = [c for c in candidates if self._is_relevant(focus, c)]
+            relevant = [
+                c for c in candidates if HierarchicalPruner._is_relevant(focus, c)
+            ]
 
             if not relevant:
                 continue
 
             max_smt_solver = MaxSMTPruner(focus, min_rect, max_rect)
             constraints, anchor_to_min_size_map, anchor_to_max_size_map = (
-                max_smt_solver(relevant)
+                max_smt_solver.prune(relevant)
             )
             output_constraints.update(constraints)
 
@@ -390,7 +399,8 @@ class HierarchicalPruner:
 
         return list(output_constraints)
 
-    def _is_relevant(self, focus: View, constraint: LinearConstraint) -> bool:
+    @staticmethod
+    def _is_relevant(focus: View, constraint: LinearConstraint) -> bool:
         """
         Check if constraint contains anchors that are children of the focused view or
         the focused view itself. For constant constraints, the anchor must be a child
@@ -413,92 +423,99 @@ class HierarchicalPruner:
             return any(child.name == y_anchor_view_name for child in focus.children)
 
 
-def conditional_hierarchical_pruning(
-    conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
-    examples: list[View],
-) -> dict[tuple[int, ...], list[LinearConstraint]]:
-    """
-    Hierarchical pruning for conditional constraints.
+class ConditionalHierarchicalPruner:
 
-    CRITICAL: At inference time, we'll apply global constraints + ONE specific group's
-    constraints together. So they must be mutually compatible. We ensure this by pruning
-    them together using MaxSMT.
+    def __init__(self, examples: list[View]):
+        self.examples = examples
 
-    Key assumption: Specific groups are MUTUALLY EXCLUSIVE at inference time.
-    - We never apply constraints from group (0,1) AND group (2,3) simultaneously
-    - Therefore, we don't need to test compatibility between specific groups
-    - We only need to ensure each group is compatible with global constraints
+    def prune(
+        self,
+        conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
+    ) -> dict[tuple[int, ...], list[LinearConstraint]]:
+        """
+        Hierarchical pruning for conditional constraints.
 
-    Algorithm:
-    1. Identify global constraints (apply to all examples)
-    2. For each specific group:
-       - Prune group_constraints + global_constraints using that group's examples
-       - This ensures compatibility between group-specific and global constraints
-    3. Global constraints = intersection of what survives across all groups
-       (ensures global constraints work for EVERY group)
+        CRITICAL: At inference time, we'll apply global constraints + ONE specific 
+        group's constraints together. So they must be mutually compatible. We ensure
+        this by pruning them together using MaxSMT.
 
-    Args:
-        conditional_constraints: Dict mapping example index tuples to their learned
-                                 constraints
+        Key assumption: Specific groups are MUTUALLY EXCLUSIVE at inference time.
+        - We never apply constraints from group (0,1) AND group (2,3) simultaneously
+        - Therefore, we don't need to test compatibility between specific groups
+        - We only need to ensure each group is compatible with global constraints
+
+        Algorithm:
+        1. Identify global constraints (apply to all examples)
+        2. For each specific group:
+        - Prune group_constraints + global_constraints using that group's examples
+        - This ensures compatibility between group-specific and global constraints
+        3. Global constraints = intersection of what survives across all groups
+        (ensures global constraints work for EVERY group)
+
+        Args:
+            conditional_constraints: Dict mapping example index tuples to their learned
+                                    constraints
             e.g., {(0, 1): [constraints], (2, 3): [constraints], (0, 1, 2, 3): [global]}
-        examples: All example layouts
+            examples: All example layouts
 
-    Returns:
-        Dict with same structure, but constraints are pruned and guaranteed compatible
-    """
-    # Find the global key (all example indices)
-    global_key = tuple(range(len(examples)))
+        Returns:
+            Dict with same structure, but constraints are guaranteed compatible
+            e.g., {(0, 1): [constraints], (2, 3): [constraints], (0, 1, 2, 3): [global]}
+        """
+        # Find the global key (all example indices)
+        global_key = tuple(range(len(self.examples)))
 
-    # Separate global from specific groups
-    global_constraints = conditional_constraints.get(global_key, [])
+        # Separate global from specific groups
+        global_constraints = conditional_constraints.get(global_key, [])
 
-    pruned_output = {}
-    surviving_global_per_group = []
+        pruned_output = {}
+        surviving_global_per_group = []
 
-    # Prune each specific group together with global constraints
-    for group_key, group_constraints in conditional_constraints.items():
-        if group_key == global_key:
-            continue
+        # Prune each specific group together with global constraints
+        for group_key, group_constraints in conditional_constraints.items():
+            if group_key == global_key:
+                continue
 
-        group_examples = [examples[i] for i in group_key]
+            group_examples = [self.examples[i] for i in group_key]
 
-        # Combine and prune together - ensures compatibility!
-        combined = group_constraints + global_constraints
+            # Combine and prune together - ensures compatibility!
+            combined = group_constraints + global_constraints
 
-        logger.info(
-            f"  Pruning group {group_key}: {len(group_constraints)} group + "
-            f"{len(global_constraints)} global = {len(combined)} total"
-        )
+            logger.info(
+                f"  Pruning group {group_key}: {len(group_constraints)} group + "
+                f"{len(global_constraints)} global = {len(combined)} total"
+            )
 
-        pruner = HierarchicalPruner(group_examples)
-        pruned_combined = pruner(combined)
+            pruned_combined = HierarchicalPruner(group_examples).prune(combined)
 
-        # Separate back into group-specific vs global
-        group_set = set(group_constraints)
-        pruned_group = [c for c in pruned_combined if c in group_set]
-        pruned_global = [c for c in pruned_combined if c not in group_set]
+            # Separate back into group-specific vs global
+            group_set = set(group_constraints)
+            pruned_group = [c for c in pruned_combined if c in group_set]
+            pruned_global = [c for c in pruned_combined if c not in group_set]
 
-        pruned_output[group_key] = pruned_group
-        surviving_global_per_group.append(set(pruned_global))
+            pruned_output[group_key] = pruned_group
+            surviving_global_per_group.append(set(pruned_global))
 
-        logger.info(
-            f"    → {len(pruned_group)} group constraints, "
-            f"{len(pruned_global)} global constraints survived"
-        )
+            logger.info(
+                f"    → {len(pruned_group)} group constraints, "
+                f"{len(pruned_global)} global constraints survived"
+            )
 
-    # Global constraints must survive for ALL groups (intersection)
-    if surviving_global_per_group:
-        final_global = set.intersection(*surviving_global_per_group)
-        pruned_output[global_key] = list(final_global)
-        logger.info(
-            "  Final global constraints (intersection across groups): "
-            f"{len(final_global)}"
-        )
-    elif global_constraints:
-        # No specific groups, just prune global constraints alone
-        logger.info("  No specific groups, pruning global constraints alone")
-        all_examples = examples
-        pruned_output[global_key] = HierarchicalPruner(all_examples)(global_constraints)
-        logger.info(f"    → {len(pruned_output[global_key])} global constraints")
+        # Global constraints must survive for ALL groups (intersection)
+        if surviving_global_per_group:
+            final_global = set.intersection(*surviving_global_per_group)
+            pruned_output[global_key] = list(final_global)
+            logger.info(
+                "  Final global constraints (intersection across groups): "
+                f"{len(final_global)}"
+            )
+        elif global_constraints:
+            # No specific groups, just prune global constraints alone
+            logger.info("  No specific groups, pruning global constraints alone")
+            all_examples = self.examples
+            pruned_output[global_key] = HierarchicalPruner(all_examples)(
+                global_constraints
+            )
+            logger.info(f"    → {len(pruned_output[global_key])} global constraints")
 
-    return pruned_output
+        return pruned_output

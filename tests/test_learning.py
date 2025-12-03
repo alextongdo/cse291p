@@ -1,5 +1,5 @@
-from src.instantiation import template_instantiation
-from src.learning import bayesian_learning
+from src.instantiation import TemplateInstantiator
+from src.learning import BayesianLearning
 from src.types import View
 
 
@@ -28,8 +28,8 @@ def test_1x1_fixed_ltr_centered_x_aspectratio_4_3():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -67,8 +67,8 @@ def test_1x1_fixed_ltwh():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -106,8 +106,8 @@ def test_1x1_fixed_lw_relative_h_centered_y():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -144,8 +144,8 @@ def test_1x1_fixed_th_relative_w_centered_x():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -182,8 +182,8 @@ def test_1x1_fixed_whl_centered_y():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -221,8 +221,8 @@ def test_1x1_fixed_wht_centered_x():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -272,8 +272,8 @@ def test_1x2_fixed_ltwh():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -334,8 +334,8 @@ def test_2x1_fixed_ltwh():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -396,8 +396,8 @@ def test_2x1_fixed_ltrb_equal_wh():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {
@@ -459,8 +459,8 @@ def test_ieee_simple():
         },
     ]
     views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
-    candidates = bayesian_learning(sketches, views, seed=42)
+    sketches = TemplateInstantiator(views).instantiate()
+    candidates = BayesianLearning(examples=views, seed=42).learn(sketches)
 
     actual_constraints = {repr(c) for c in candidates}
     expected_constraints = {

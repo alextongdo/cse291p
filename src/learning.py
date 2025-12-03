@@ -15,95 +15,6 @@ from src.types import LinearConstraint, View
 logger = get_logger(__name__)
 
 
-@lru_cache(maxsize=1)
-def get_a_space(max_denominator: int) -> np.ndarray:
-    """Search space for all possible values of a in y = a * x + b."""
-
-    def _farey_sequence(n: int) -> np.ndarray:
-        """
-        Generate Farey sequence: all fractions p/q with 0 ≤ p ≤ q ≤ n.
-        Example n = 5: [0/1, 1/5, 1/4, 1/3, 2/5, 1/2, 3/5, 2/3, 3/4, 4/5, 1/1]
-        """
-        fractions = [Fraction(0, 1)]
-        fractions.extend(
-            sorted({Fraction(m, k) for k in range(1, n + 1) for m in range(1, k + 1)})
-        )
-        return np.array(fractions, dtype=object)
-
-    # Farey sequence only contains fractions less than 1.
-    proper_fractions = _farey_sequence(max_denominator)
-    # But a can be larger than 1, so also consider all the reciprocal fractions
-    reciprocals = [
-        Fraction(1) / a for a in reversed(proper_fractions[1:-1])
-    ]  # except 1/0 and 1/1
-    return np.append(proper_fractions, reciprocals)
-
-
-@lru_cache(maxsize=1)
-def get_b_space(max_offset: int):
-    """Search space for all possible values of b in y = a * x + b."""
-
-    def _z_ball(center: float = 0, radius: float = 1000) -> np.ndarray:
-        """
-        Integer ball: all integers in [center - radius, center + radius).
-        Example: z_ball(0, 1000) => [-1000, -999, ..., 0, 1, ..., 999]
-        """
-        return np.arange(
-            int(np.ceil(center - radius)), int(np.floor(center + radius)), dtype=int
-        )
-
-    return _z_ball(0, max_offset)
-
-
-@lru_cache(maxsize=1)
-def get_a_prior(max_denominator: int, expected_sb_depth: int):
-    """
-    Prior distribution over 'a' candidates based on Stern-Brocot depth.
-    Uses beta-binomial distribution favoring expected_sb_depth.
-    """
-
-    def _continued_fraction(fraction: Fraction) -> list[int]:
-        """
-        Compute continued fraction expansion of a rational number.
-        Example: 2/5 = [0; 2, 2] means 0 + 1/(2 + 1/2)
-        """
-        n1, n2 = fraction.numerator, fraction.denominator
-        terms = []
-        while n2:
-            n1, (term, n2) = n2, divmod(n1, n2)
-            terms.append(term)
-        return terms
-
-    def _sb_depth(fraction: Fraction) -> int:
-        """
-        Stern-Brocot depth = sum of continued fraction terms.
-        Measures fraction complexity/simplicity:
-        - 1/2 = [0; 2]        => depth = 2  (simple!)
-        - 2/5 = [0; 2, 2]     => depth = 4
-        - 47/83 = [0; 1,1,3,4,2] => depth = 11 (complex!)
-        """
-        return sum(_continued_fraction(fraction))
-
-    max_d, exp_d = max_denominator, expected_sb_depth
-    n = max_d
-    alpha = exp_d + 1
-    beta = (max_d - exp_d) + 1
-
-    # Compute sb_depth for each candidate in a_space
-    sb_depths = np.array([_sb_depth(a) for a in get_a_space(max_denominator)])
-
-    # Histogram of depths (for normalization)
-    sb_depth_hist, _ = np.histogram(sb_depths, bins=max_d + 1)
-
-    # Beta-binomial probabilities for each depth level
-    betabin = np.array([st.betabinom.pmf(k, n, alpha, beta) for k in range(max_d + 1)])
-
-    # Assign prior: P(depth_k) / count(fractions at depth_k)
-    # This makes it uniform within each depth level
-    prior = betabin[sb_depths] / (sb_depth_hist[sb_depths] + 1e-10)
-    return prior
-
-
 class TemplateBayesianLinearModel:
     """
     Bayesian learning for a single constraint template.
@@ -129,9 +40,9 @@ class TemplateBayesianLinearModel:
         self.is_add_only_form = template.x is not None and template.a == 1.0
 
         # Fit the model
-        self._fit_model()
+        self._fit()
 
-    def _fit_model(self):
+    def _fit(self):
         """Fit constrained GLM to the data."""
 
         y_data = self.y_data.copy()
@@ -163,7 +74,7 @@ class TemplateBayesianLinearModel:
                 y_data = np.append(y_data, y_data[0] - x_data[0])
 
         # Add tiny noise to avoid perfect separation
-        x_smudged, y_smudged = self._smudge_data(x_with_const, y_data)
+        x_smudged, y_smudged = self.smudge_data(x_with_const, y_data)
 
         # Fit GLM with form constraints
         # Note: statsmodels is finicky, may need retries
@@ -200,27 +111,12 @@ class TemplateBayesianLinearModel:
             except sm_exc.PerfectSeparationError:
                 # Numerical issue, try again with different noise
                 if attempt < max_retries - 1:
-                    x_smudged, y_smudged = self._smudge_data(x_with_const, y_data)
+                    x_smudged, y_smudged = TemplateBayesianLinearModel.smudge_data(
+                        x_with_const, y_data
+                    )
                     continue
                 else:
                     raise
-
-    def _smudge_data(
-        self, x: np.ndarray, y: np.ndarray
-    ) -> tuple[np.ndarray, np.ndarray]:
-        """Add tiny noise to avoid perfect separation in GLM."""
-        # Generate 1D noise for x and broadcast across columns
-        x_noise = np.random.randn(len(x)) * 1e-5
-        x_noise -= x_noise.mean()  # ALEX ADDDED
-        # Broadcasting: add noise to each row
-        x_smudged = x + x_noise[:, np.newaxis]
-
-        # Generate noise for y
-        y_noise = np.random.randn(len(y)) * 1e-5
-        y_noise -= y_noise.mean()  # ALEX ADDDED
-        y_smudged = y + y_noise
-
-        return x_smudged, y_smudged
 
     def should_reject(self) -> bool:
         """
@@ -232,7 +128,6 @@ class TemplateBayesianLinearModel:
         3. High residual variance (poor fit)
         """
         x_data = np.zeros(len(self.y_data)) if self.is_constant_form else self.x_data
-
         y_data = self.y_data
 
         # Check 1: No x variance but y varies
@@ -280,7 +175,7 @@ class TemplateBayesianLinearModel:
         (a_lower, a_upper), (b_lower, b_upper) = self.get_confidence_intervals()
 
         # Find a candidates in CI
-        a_space = get_a_space(self.config.max_denominator)
+        a_space = TemplateBayesianLinearModel.get_a_space(self.config.max_denominator)
         a_mask = (a_space >= a_lower) & (a_space <= a_upper)
         a_candidates = a_space[a_mask]
 
@@ -297,7 +192,7 @@ class TemplateBayesianLinearModel:
             )
 
         # Find b candidates in CI
-        b_space = get_b_space(self.config.max_offset)
+        b_space = TemplateBayesianLinearModel.get_b_space(self.config.max_offset)
         b_mask = (b_space >= b_lower) & (b_space <= b_upper)
         b_candidates = b_space[b_mask]
 
@@ -337,11 +232,11 @@ class TemplateBayesianLinearModel:
         Based on Stern-Brocot depth (favors simpler fractions).
         """
         # Find index of this a in a_space
-        a_space = get_a_space(self.config.max_denominator)
+        a_space = TemplateBayesianLinearModel.get_a_space(self.config.max_denominator)
         idx = np.searchsorted(a_space, a)
 
         # Get prior from pre-computed distribution
-        a_prior = get_a_prior(
+        a_prior = TemplateBayesianLinearModel.get_a_prior(
             self.config.max_denominator, self.config.expected_sb_depth
         )
         return a_prior[idx]
@@ -399,129 +294,258 @@ class TemplateBayesianLinearModel:
             )
         return sorted(results, key=lambda c: -c.score)
 
+    @staticmethod
+    def smudge_data(x: np.ndarray, y: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+        """Add tiny noise to avoid perfect separation in GLM."""
+        # Generate 1D noise for x and broadcast across columns
+        x_noise = np.random.randn(len(x)) * 1e-5
+        x_noise -= x_noise.mean()  # ALEX ADDDED
+        # Broadcasting: add noise to each row
+        x_smudged = x + x_noise[:, np.newaxis]
 
-def bayesian_learning(
-    templates: list[LinearConstraint],
-    examples: list[View],
-    seed: int | None = None,
-    config: LearningConfig | None = None,
-) -> list[LinearConstraint]:
-    """
-    Main interface for Bayesian parameter learning.
+        # Generate noise for y
+        y_noise = np.random.randn(len(y)) * 1e-5
+        y_noise -= y_noise.mean()  # ALEX ADDDED
+        y_smudged = y + y_noise
 
-    Args:
-        templates: List of constraint templates with unknown parameters
-        examples: List of example layouts to learn from
-        seed: Random seed for reproducibility
-        config: Learning configuration (auto-generated if None)
+        return x_smudged, y_smudged
 
-    Returns:
-        List of learned constraints with scores
-    """
-    if seed is not None:
-        np.random.seed(seed)
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def get_a_space(max_denominator: int) -> np.ndarray:
+        """Search space for all possible values of a in y = a * x + b."""
 
-    if config is None:
-        # Max page dimensions from examples
-        max_dim = max(max(root.width, root.height) for root in examples)
-        config = LearningConfig(max_offset=int(max_dim) + 10)
+        def _farey_sequence(n: int) -> np.ndarray:
+            """
+            Generate Farey sequence: all fractions p/q with 0 ≤ p ≤ q ≤ n.
+            Example n = 5: [0/1, 1/5, 1/4, 1/3, 2/5, 1/2, 3/5, 2/3, 3/4, 4/5, 1/1]
+            """
+            fractions = [Fraction(0, 1)]
+            fractions.extend(
+                sorted(
+                    {Fraction(m, k) for k in range(1, n + 1) for m in range(1, k + 1)}
+                )
+            )
+            return np.array(fractions, dtype=object)
 
-    anchor_to_data_map = defaultdict(list)
-    for example in examples:
-        for view in example._flattened_views_in_subtree:
-            anchor_to_data_map[f"{view.name}.width"].append(view.width)
-            anchor_to_data_map[f"{view.name}.height"].append(view.height)
-            anchor_to_data_map[f"{view.name}.left"].append(view.left)
-            anchor_to_data_map[f"{view.name}.right"].append(view.right)
-            anchor_to_data_map[f"{view.name}.top"].append(view.top)
-            anchor_to_data_map[f"{view.name}.bottom"].append(view.bottom)
-            anchor_to_data_map[f"{view.name}.center_x"].append(view.center_x)
-            anchor_to_data_map[f"{view.name}.center_y"].append(view.center_y)
+        # Farey sequence only contains fractions less than 1.
+        proper_fractions = _farey_sequence(max_denominator)
+        # But a can be larger than 1, so also consider all the reciprocal fractions
+        reciprocals = [
+            Fraction(1) / a for a in reversed(proper_fractions[1:-1])
+        ]  # except 1/0 and 1/1
+        return np.append(proper_fractions, reciprocals)
 
-    results = []
-    for template in templates:
-        logger.debug(f"Doing Bayesian learning for {repr(template)}")
-        # Extract anchor values data for the template from all examples.
-        y_data = np.array(
-            anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
-            dtype=float,
-        )
-        if template.x is None:
-            x_data = None
-        else:
-            x_data = np.array(
-                anchor_to_data_map[f"{template.x.view.name}.{template.x.type}"],
-                dtype=float,
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def get_b_space(max_offset: int):
+        """Search space for all possible values of b in y = a * x + b."""
+
+        def _z_ball(center: float = 0, radius: float = 1000) -> np.ndarray:
+            """
+            Integer ball: all integers in [center - radius, center + radius).
+            Example: z_ball(0, 1000) => [-1000, -999, ..., 0, 1, ..., 999]
+            """
+            return np.arange(
+                int(np.ceil(center - radius)), int(np.floor(center + radius)), dtype=int
             )
 
-        # Learn parameters for this template
-        model = TemplateBayesianLinearModel(
-            template=template, config=config, y_data=y_data, x_data=x_data
-        )
-        candidates = model.learn()
-        if len(candidates) == 0:
-            logger.debug("Learned 0 candidates")
-        for cand in candidates:
-            logger.debug(f"Learned {repr(cand)}")
-        results.extend(candidates)
+        return _z_ball(0, max_offset)
 
-    return results
+    @staticmethod
+    @lru_cache(maxsize=1)
+    def get_a_prior(max_denominator: int, expected_sb_depth: int):
+        """
+        Prior distribution over 'a' candidates based on Stern-Brocot depth.
+        Uses beta-binomial distribution favoring expected_sb_depth.
+        """
 
+        def _continued_fraction(fraction: Fraction) -> list[int]:
+            """
+            Compute continued fraction expansion of a rational number.
+            Example: 2/5 = [0; 2, 2] means 0 + 1/(2 + 1/2)
+            """
+            n1, n2 = fraction.numerator, fraction.denominator
+            terms = []
+            while n2:
+                n1, (term, n2) = n2, divmod(n1, n2)
+                terms.append(term)
+            return terms
 
-def conditional_bayesian_learning(
-    example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
-    examples: list[View],
-    seed: int | None = None,
-    config: LearningConfig | None = None,
-) -> dict[tuple[int, ...], list[LinearConstraint]]:
-    """
-    Perform Bayesian learning per structural set, then merge constraints across sets.
+        def _sb_depth(fraction: Fraction) -> int:
+            """
+            Stern-Brocot depth = sum of continued fraction terms.
+            Measures fraction complexity/simplicity:
+            - 1/2 = [0; 2]        => depth = 2  (simple!)
+            - 2/5 = [0; 2, 2]     => depth = 4
+            - 47/83 = [0; 1,1,3,4,2] => depth = 11 (complex!)
+            """
+            return sum(_continued_fraction(fraction))
 
-    Args:
-        example_idxs_to_templates_map: Maps example index tuples to their templates
-            e.g., {(0, 1): [templates], (2, 3): [templates]}
-        examples: All example layouts
-        seed: Random seed for reproducibility
-        config: Learning configuration
+        max_d, exp_d = max_denominator, expected_sb_depth
+        n = max_d
+        alpha = exp_d + 1
+        beta = (max_d - exp_d) + 1
 
-    Returns:
-        Dictionary mapping example index tuples to learned constraints:
-        - (0, 1): constraints specific to examples 0, 1
-        - (2, 3): constraints specific to examples 2, 3
-        - (0, 1, 2, 3): constraints that apply to both sets (merged)
-    """
-    if seed is not None:
-        np.random.seed(seed)
-
-    constr_to_sets_map: dict[LinearConstraint, set[int]] = defaultdict(set)
-    constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
-
-    for example_idxs, templates in example_idxs_to_templates_map.items():
-        logger.debug(f"\n\nLearning for structural set {example_idxs}")
-        set_examples = [examples[i] for i in example_idxs]
-        learned_constraints = bayesian_learning(
-            templates=templates, examples=set_examples, seed=seed, config=config
-        )
-        logger.debug(
-            f"  Learned {len(learned_constraints)} constraints for set {example_idxs}"
+        # Compute sb_depth for each candidate in a_space
+        sb_depths = np.array(
+            [
+                _sb_depth(a)
+                for a in TemplateBayesianLinearModel.get_a_space(max_denominator)
+            ]
         )
 
-        for constr in learned_constraints:
-            constr_to_sets_map[constr].update(example_idxs)
+        # Histogram of depths (for normalization)
+        sb_depth_hist, _ = np.histogram(sb_depths, bins=max_d + 1)
 
-            # Keep the constraint with highest score
-            if (
-                constr not in constr_to_max_score_map
-                or constr.score > constr_to_max_score_map[constr].score
-            ):
-                constr_to_max_score_map[constr] = constr
+        # Beta-binomial probabilities for each depth level
+        betabin = np.array(
+            [st.betabinom.pmf(k, n, alpha, beta) for k in range(max_d + 1)]
+        )
 
-    output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
-    for constr, example_idxs_set in constr_to_sets_map.items():
-        output[tuple(sorted(example_idxs_set))].append(constr_to_max_score_map[constr])
+        # Assign prior: P(depth_k) / count(fractions at depth_k)
+        # This makes it uniform within each depth level
+        prior = betabin[sb_depths] / (sb_depth_hist[sb_depths] + 1e-10)
+        return prior
 
-    # Sanity
-    for constr_list in output.values():
-        assert len(set(constr_list)) == len(constr_list)
 
-    return dict(output)
+class BayesianLearning:
+    def __init__(
+        self,
+        examples: list[View],
+        config: LearningConfig | None = None,
+        seed: int | None = None,
+    ):
+        self.examples = examples
+        if config is None:
+            max_dim = max(max(root.width, root.height) for root in examples)
+            self.config = LearningConfig(max_offset=int(max_dim) + 10)
+        else:
+            self.config = config
+
+        if seed is not None:
+            np.random.seed(seed)
+
+    def learn(self, templates: list[LinearConstraint]) -> list[LinearConstraint]:
+        """
+        Main interface for Bayesian parameter learning.
+
+        Args:
+            templates: List of constraint templates with unknown parameters
+
+        Returns:
+            List of learned constraints with scores
+        """
+        anchor_to_data_map = defaultdict(list)
+        for example in self.examples:
+            for view in example._flattened_views_in_subtree:
+                anchor_to_data_map[f"{view.name}.width"].append(view.width)
+                anchor_to_data_map[f"{view.name}.height"].append(view.height)
+                anchor_to_data_map[f"{view.name}.left"].append(view.left)
+                anchor_to_data_map[f"{view.name}.right"].append(view.right)
+                anchor_to_data_map[f"{view.name}.top"].append(view.top)
+                anchor_to_data_map[f"{view.name}.bottom"].append(view.bottom)
+                anchor_to_data_map[f"{view.name}.center_x"].append(view.center_x)
+                anchor_to_data_map[f"{view.name}.center_y"].append(view.center_y)
+
+        results = []
+        for template in templates:
+            logger.debug(f"Doing Bayesian learning for {repr(template)}")
+            # Extract anchor values data for the template from all examples.
+            y_data = np.array(
+                anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
+                dtype=float,
+            )
+            if template.x is None:
+                x_data = None
+            else:
+                x_data = np.array(
+                    anchor_to_data_map[f"{template.x.view.name}.{template.x.type}"],
+                    dtype=float,
+                )
+
+            # Learn parameters for this template
+            model = TemplateBayesianLinearModel(
+                template=template, config=self.config, y_data=y_data, x_data=x_data
+            )
+            candidates = model.learn()
+            if len(candidates) == 0:
+                logger.debug("Learned 0 candidates")
+            for cand in candidates:
+                logger.debug(f"Learned {repr(cand)}")
+            results.extend(candidates)
+
+        return results
+
+
+class ConditionalBayesianLearning:
+    def __init__(
+        self,
+        examples: list[View],
+        config: LearningConfig | None = None,
+        seed: int | None = None,
+    ):
+        self.examples = examples
+        if config is None:
+            max_dim = max(max(root.width, root.height) for root in examples)
+            self.config = LearningConfig(max_offset=int(max_dim) + 10)
+        else:
+            self.config = config
+
+        if seed is not None:
+            np.random.seed(seed)
+
+    def learn(
+        self,
+        example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
+    ) -> dict[tuple[int, ...], list[LinearConstraint]]:
+        """
+        Perform Bayesian learning per structural set, then merge
+        constraints across sets.
+
+        Args:
+            example_idxs_to_templates_map: 
+                Maps example index tuples to their templates
+                e.g., {(0, 1): [templates], (2, 3): [templates]}
+
+        Returns:
+            Dictionary mapping example index tuples to learned constraints:
+            - (0, 1): constraints specific to examples 0, 1
+            - (2, 3): constraints specific to examples 2, 3
+            - (0, 1, 2, 3): constraints that apply to both sets (merged)
+        """
+        constr_to_sets_map: dict[LinearConstraint, set[int]] = defaultdict(set)
+        constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
+
+        for example_idxs, templates in example_idxs_to_templates_map.items():
+            logger.debug(f"\n\nLearning for structural set {example_idxs}")
+            set_examples = [self.examples[i] for i in example_idxs]
+            learned_constraints = BayesianLearning(
+                examples=set_examples, config=self.config
+            ).learn(templates)
+            logger.debug(
+                f"  Learned {len(learned_constraints)}"
+                f" constraints for set {example_idxs}"
+            )
+
+            for constr in learned_constraints:
+                constr_to_sets_map[constr].update(example_idxs)
+
+                # Keep the constraint with highest score
+                if (
+                    constr not in constr_to_max_score_map
+                    or constr.score > constr_to_max_score_map[constr].score
+                ):
+                    constr_to_max_score_map[constr] = constr
+
+        output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
+        for constr, example_idxs_set in constr_to_sets_map.items():
+            output[tuple(sorted(example_idxs_set))].append(
+                constr_to_max_score_map[constr]
+            )
+
+        # Sanity
+        for constr_list in output.values():
+            assert len(set(constr_list)) == len(constr_list)
+
+        return dict(output)

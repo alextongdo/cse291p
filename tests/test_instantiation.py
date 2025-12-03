@@ -1,4 +1,4 @@
-from src.instantiation import template_instantiation
+from src.instantiation import TemplateInstantiator
 from src.types import View
 
 
@@ -26,7 +26,9 @@ def test_1x1_fixed_ltr_centered_x_aspectratio_4_3():
             "children": [{"name": "child", "rect": [30, 10, 70, 40]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -71,7 +73,9 @@ def test_1x1_fixed_ltwh():
             "children": [{"name": "child", "rect": [10, 10, 60, 60]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -116,7 +120,9 @@ def test_1x1_fixed_lw_relative_h_centered_y():
             "children": [{"name": "child", "rect": [25, 50, 75, 150]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -161,7 +167,9 @@ def test_1x1_fixed_th_relative_w_centered_x():
             "children": [{"name": "child", "rect": [25, 25, 75, 75]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -206,7 +214,9 @@ def test_1x1_fixed_whl_centered_y():
             "children": [{"name": "child", "rect": [25, 25, 75, 75]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -251,7 +261,9 @@ def test_1x1_fixed_wht_centered_x():
             "children": [{"name": "child", "rect": [25, 125, 75, 175]}],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(child.width = a * child.height + 0)",
@@ -308,7 +320,9 @@ def test_1x2_fixed_ltwh():
             ],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(bottom.width = a * bottom.height + 0)",
@@ -381,7 +395,9 @@ def test_2x1_fixed_ltwh():
             ],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(left.width = a * left.height + 0)",
@@ -454,7 +470,9 @@ def test_2x1_fixed_ltrb_equal_wh():
             ],
         },
     ]
-    sketches = template_instantiation([View(**example) for example in examples])
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(left.width = a * left.height + 0)",
@@ -529,8 +547,9 @@ def test_ieee_simple():
             ],
         },
     ]
-    views = [View(**example) for example in examples]
-    sketches = template_instantiation(views)
+    sketches = TemplateInstantiator(
+        examples=[View(**example) for example in examples]
+    ).instantiate()
     actual_constraints = {repr(s) for s in sketches}
     expected_constraints = {
         "LinearConstraint(author1.width = a * author1.height + 0)",

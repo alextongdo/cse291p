@@ -1,9 +1,9 @@
 from rich import print
 
-from src.instantiation import conditional_template_instantiation
-from src.learning import conditional_bayesian_learning
+from src.instantiation import ConditionalTemplateInstantiator
+from src.learning import ConditionalBayesianLearning
 from src.logging import setup_logging
-from src.pruning import conditional_hierarchical_pruning
+from src.pruning import ConditionalHierarchicalPruner
 from src.types import View
 
 setup_logging(debug=False)
@@ -72,15 +72,19 @@ examples = [
 ]
 
 views = [View(**example) for example in examples]
-example_idxs_to_templates_map = conditional_template_instantiation(views)
+example_idxs_to_templates_map = ConditionalTemplateInstantiator(
+    examples=views
+).instantiate()
 # print(repr(example_idxs_to_templates_map))
 print({ind: len(lst) for ind, lst in example_idxs_to_templates_map.items()})
-example_idxs_to_constrs_map = conditional_bayesian_learning(
-    example_idxs_to_templates_map, views, seed=42
-)
+example_idxs_to_constrs_map = ConditionalBayesianLearning(
+    examples=views, seed=42
+).learn(example_idxs_to_templates_map)
+
 # print(repr(example_idxs_to_constrs_map))
 print({ind: len(lst) for ind, lst in example_idxs_to_constrs_map.items()})
-
-outputs = conditional_hierarchical_pruning(example_idxs_to_constrs_map, views)
+outputs = ConditionalHierarchicalPruner(examples=views).prune(
+    example_idxs_to_constrs_map
+)
 
 print(repr(outputs))
