@@ -43,6 +43,7 @@ DEFAULT_EXCLUDED_SELECTORS = [
 PAYLOAD = """
     const rootElement = arguments[0];
     const excludedSelectors = arguments[1];
+    const useOriginalBuggyCoords = arguments[2] || false;
     
     // This has to be a WeakMap, as in a normal object, DOM node keys will be
     // coerced to strings, which are not unique and will cause collisions.
@@ -111,12 +112,20 @@ PAYLOAD = """
         }
 
         // A bunch of duplication, but it's convenient for debugging.
+        // If useOriginalBuggyCoords is true, match original Mockdown's buggy behavior:
+        // only add scroll to left/top, not right/bottom (for compatibility with original paper).
+        // Otherwise, use correct document coordinates for all four values.
         const data = {
             name: mangle(el),
             children: children.flatMap(c => scrape(c, el)),
-            // Use document coordinates for all four values so width/height are
-            // always non-negative, even after scrolling.
-            rect: [
+            rect: useOriginalBuggyCoords ? [
+                rect.left + window.scrollX,
+                rect.top + window.scrollY,
+                rect.right,        // Original bug: missing scrollX
+                rect.bottom        // Original bug: missing scrollY
+            ] : [
+                // Fixed: Use document coordinates for all four values so width/height are
+                // always non-negative, even after scrolling.
                 rect.left   + window.scrollX,
                 rect.top    + window.scrollY,
                 rect.right  + window.scrollX,
@@ -140,12 +149,16 @@ class MultiViewportScraper:
     (e.g., 3 columns -> 1 column) that occur when viewport dimensions change.
     """
 
-    def __init__(self, headless: bool = True):
+    def __init__(self, headless: bool = True, use_original_buggy_coords: bool = False):
         """Initialize the scraper.
 
         Args:
             headless: Whether to run Chrome in headless mode (default: True)
+            use_original_buggy_coords: If True, use original Mockdown's buggy coordinate system
+                (scroll offsets only on left/top) for compatibility with original paper data.
+                If False (default), use correct document coordinates for all four rect values.
         """
+        self.use_original_buggy_coords = use_original_buggy_coords
         opts = webdriver.ChromeOptions()
         if headless:
             opts.add_argument("--headless")
@@ -257,7 +270,9 @@ class MultiViewportScraper:
             el = self.driver.find_element(By.CSS_SELECTOR, root_selector)
 
             # Execute scraping script
-            data = self.driver.execute_script(PAYLOAD, el, DEFAULT_EXCLUDED_SELECTORS)
+            data = self.driver.execute_script(
+                PAYLOAD, el, DEFAULT_EXCLUDED_SELECTORS, self.use_original_buggy_coords
+            )
             screenshot = (
                 "data:image/png;base64," + self.driver.get_screenshot_as_base64()
             )
@@ -453,6 +468,7 @@ def scrape_website_multiple_viewports(
     root_selector: str = "body",
     wait_time: float = 1.0,
     headless: bool = True,
+    use_original_buggy_coords: bool = False,
 ) -> dict[str, Any]:
     """Convenience function to scrape a website at multiple viewport sizes.
 
@@ -472,7 +488,7 @@ def scrape_website_multiple_viewports(
         >>> result = scrape_website_multiple_viewports("https://example.com", viewports)
         >>> # result['examples'] contains 3 layout examples
     """
-    scraper = MultiViewportScraper(headless=headless)
+    scraper = MultiViewportScraper(headless=headless, use_original_buggy_coords=use_original_buggy_coords)
     try:
         return scraper.scrape_multiple_viewports(
             url, viewports, root_selector, wait_time
@@ -487,6 +503,7 @@ def scrape_website_responsive_breakpoints(
     wait_time: float = 1.0,
     headless: bool = True,
     custom_viewports: list[tuple[int, int]] | None = None,
+    use_original_buggy_coords: bool = False,
 ) -> dict[str, Any]:
     """Convenience function to scrape a website at common responsive breakpoints.
 
@@ -504,7 +521,7 @@ def scrape_website_responsive_breakpoints(
         >>> result = scrape_website_responsive_breakpoints("https://example.com")
         >>> # result['examples'] contains 7 layout examples at different breakpoints
     """
-    scraper = MultiViewportScraper(headless=headless)
+    scraper = MultiViewportScraper(headless=headless, use_original_buggy_coords=use_original_buggy_coords)
     try:
         return scraper.scrape_responsive_breakpoints(
             url, root_selector, wait_time, custom_viewports
@@ -514,7 +531,7 @@ def scrape_website_responsive_breakpoints(
 
 
 def scrape_website_structured_viewports(
-    url: str, root_selector: str = "body", wait_time: float = 1.0, headless: bool = True
+    url: str, root_selector: str = "body", wait_time: float = 1.0, headless: bool = True, use_original_buggy_coords: bool = False
 ) -> dict[str, Any]:
     """Convenience function to scrape a website with structured viewport sizes.
 
@@ -534,7 +551,7 @@ def scrape_website_structured_viewports(
         >>> # result['examples'] contains 10 layout examples with
               different aspect ratios
     """
-    scraper = MultiViewportScraper(headless=headless)
+    scraper = MultiViewportScraper(headless=headless, use_original_buggy_coords=use_original_buggy_coords)
     try:
         return scraper.scrape_structured_viewports(url, root_selector, wait_time)
     finally:
@@ -647,6 +664,15 @@ By default, output is saved to src/cse291p/util/websites/<website-name>/scraped.
         "--verbose", "-v", action="store_true", help="Enable verbose logging"
     )
 
+    parser.add_argument(
+        "--use-original-buggy-coords",
+        action="store_true",
+        help=(
+            "Use original Mockdown's buggy coordinate system (scroll offsets only on left/top) "
+            "for compatibility with original paper data. Default: False (uses correct coordinates)."
+        ),
+    )
+
     args = parser.parse_args()
 
     # Set up logging
@@ -680,6 +706,7 @@ By default, output is saved to src/cse291p/util/websites/<website-name>/scraped.
                 root_selector=args.root,
                 wait_time=args.wait_time,
                 headless=not args.no_headless,
+                use_original_buggy_coords=args.use_original_buggy_coords,
             )
         elif args.use_breakpoints:
             result = scrape_website_responsive_breakpoints(
@@ -688,6 +715,7 @@ By default, output is saved to src/cse291p/util/websites/<website-name>/scraped.
                 wait_time=args.wait_time,
                 headless=not args.no_headless,
                 custom_viewports=None,
+                use_original_buggy_coords=args.use_original_buggy_coords,
             )
         else:
             # Default: use structured viewports
@@ -697,6 +725,7 @@ By default, output is saved to src/cse291p/util/websites/<website-name>/scraped.
                 root_selector=args.root,
                 wait_time=args.wait_time,
                 headless=not args.no_headless,
+                use_original_buggy_coords=args.use_original_buggy_coords,
             )
 
         # Determine output path
