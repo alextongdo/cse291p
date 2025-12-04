@@ -87,7 +87,12 @@ PAYLOAD = """
             || rect1.bottom < rect2.top    // R1 is completely above R2.
     }
     
-    function scrape(el, parent) {
+    function scrape(el, parent, depth) {
+        // Limit depth to 8 (root is depth 0, so max depth 8 = 9 levels total)
+        if (depth >= 8) {
+            return [];
+        }
+        
         const children = Array.from(el.children);
         const rect = el.getBoundingClientRect();
         
@@ -104,7 +109,7 @@ PAYLOAD = """
         // A bunch of duplication, but it's convenient for debugging.
         const data = {
             name: mangle(el),
-            children: children.flatMap(c => scrape(c, el)),
+            children: children.flatMap(c => scrape(c, el, depth + 1)),
             rect: [
                 rect.left + window.scrollX,
                 rect.top + window.scrollY,
@@ -115,7 +120,7 @@ PAYLOAD = """
         return data;
     }
     
-    return scrape(rootElement, undefined);
+    return scrape(rootElement, undefined, 0);
 """
 
 SANITIZED_KEY_ORDER = ('name', 'rect', 'children')

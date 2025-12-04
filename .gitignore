@@ -207,6 +207,21 @@ marimo/_lsp/
 __marimo__/
 
 tmp*
+tmp_html/
+outputs/
+
+# Temporary scripts and test files
+organize_benchmarks.py
+visualize_scraped.py
+verify_viewport_dimensions.py
+test_scraper_*.py
+VERIFICATION_VIEWPORT.md
+
+# Output files
+*.log
+*.smt2
+mockdown_output.json
+scraper_output.log
 
 # Migration planning directory
 migration/
