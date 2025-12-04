@@ -3,7 +3,6 @@ Evaluation metrics for synthesized layout constraints.
 """
 
 import math
-from typing import Dict, List
 
 import kiwisolver
 
@@ -15,8 +14,8 @@ from src.types import LinearConstraint, View
 
 
 def calculate_rmsd(
-    examples: List[View],
-    outputs: Dict[tuple[int, ...], List[LinearConstraint]],
+    examples: list[View],
+    outputs: dict[tuple[int, ...], list[LinearConstraint]],
     debug: bool = False,
 ) -> float:
     """
@@ -40,7 +39,6 @@ def calculate_rmsd(
     if not examples:
         return 0.0
 
-    root = examples[0]
     all_errors = []
     example_errors = []
 
@@ -54,13 +52,13 @@ def calculate_rmsd(
         # This ensures we use the correct group-specific constraints
         group_constraints = []
         candidate_groups = []
-        
+
         for group_key, constraints in outputs.items():
             if group_key == global_key:
                 continue
             if example_idx in group_key:
                 candidate_groups.append((len(group_key), group_key, constraints))
-        
+
         # Sort by group size (smallest first) to get most specific group
         if candidate_groups:
             candidate_groups.sort(key=lambda x: x[0])
@@ -75,11 +73,13 @@ def calculate_rmsd(
             continue
 
         if debug:
-            print(f"\nExample {example_idx}: Using {len(global_constraints)} global + "
-                  f"{len(group_constraints)} group constraints")
+            print(
+                f"\nExample {example_idx}: Using {len(global_constraints)} global + "
+                f"{len(group_constraints)} group constraints"
+            )
             # Show some key constraints
             if group_constraints:
-                print(f"  Sample group constraints:")
+                print("  Sample group constraints:")
                 for c in group_constraints[:5]:
                     print(f"    {c}")
                 if len(group_constraints) > 5:
@@ -95,7 +95,9 @@ def calculate_rmsd(
             )
         except Exception as e:
             # If solving fails, skip this example
-            print(f"Warning: Failed to solve constraints for example {example_idx}: {e}")
+            print(
+                f"Warning: Failed to solve constraints for example {example_idx}: {e}"
+            )
             continue
 
         # Compare predicted vs actual for all anchors
@@ -141,15 +143,24 @@ def calculate_rmsd(
                     squared_error = error * error
                     all_errors.append(squared_error)  # squared error
                     example_error_count += 1
-                    
+
                     if debug and abs(error) > 1.0:  # Only show significant errors
-                        print(f"  {anchor_key}: predicted={predicted:.2f}, "
-                              f"actual={actual:.2f}, error={error:.2f}")
+                        print(
+                            f"  {anchor_key}: predicted={predicted:.2f}, "
+                            f"actual={actual:.2f}, error={error:.2f}"
+                        )
 
         if debug:
-            example_rmsd = math.sqrt(sum(all_errors[-example_error_count:]) / example_error_count) if example_error_count > 0 else 0.0
+            example_rmsd = (
+                math.sqrt(sum(all_errors[-example_error_count:]) / example_error_count)
+                if example_error_count > 0
+                else 0.0
+            )
             example_errors.append((example_idx, example_error_count, example_rmsd))
-            print(f"  Example {example_idx} RMSD: {example_rmsd:.4f} ({example_error_count} anchors)")
+            print(
+                f"  Example {example_idx} RMSD: {example_rmsd:.4f}"
+                f"({example_error_count} anchors)"
+            )
 
     # Calculate RMSD
     if not all_errors:
@@ -157,17 +168,17 @@ def calculate_rmsd(
 
     mse = sum(all_errors) / len(all_errors)
     rmsd = math.sqrt(mse)
-    
+
     if debug:
         print(f"\nTotal: {len(all_errors)} anchor comparisons")
         print(f"Overall RMSD: {rmsd:.4f}")
-    
+
     return rmsd
 
 
 def solve_layout_for_evaluation(
-    root: View, constraints: List[LinearConstraint], width: float, height: float
-) -> Dict[str, float]:
+    root: View, constraints: list[LinearConstraint], width: float, height: float
+) -> dict[str, float]:
     """
     Solve constraints for a specific screen size (for evaluation).
 
@@ -218,4 +229,3 @@ def solve_layout_for_evaluation(
 
     # Extract values
     return {key: var.value() for key, var in var_map.items()}
-

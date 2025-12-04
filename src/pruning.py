@@ -1,4 +1,5 @@
 import logging
+from collections import defaultdict
 from fractions import Fraction
 
 import z3
@@ -58,7 +59,7 @@ def constraint_to_z3_expr(
     constraint: LinearConstraint, test_rect_idx: int
 ) -> z3.BoolRef:
     """Convert a LinearConstraint to a Z3 expression.
-    
+
     Note: We pass Fraction objects directly to Z3 (not floats) to preserve
     exact rational arithmetic. Z3 handles Python Fractions natively.
     """
@@ -112,7 +113,7 @@ def add_root_dims_constraints(
 ):
     """
     Add z3 constraints that the root view must be the same size as the test rect.
-    
+
     Note: We pass Fraction objects directly to Z3 (not floats) to preserve
     exact rational arithmetic.
     """
@@ -424,6 +425,12 @@ class HierarchicalPruner:
 
 
 class ConditionalHierarchicalPruner:
+    """
+    Hierarchical pruning for conditional constraints with overlapping groups.
+
+    Handles cases where groups overlap (e.g., constraints in (0,1) must be
+    compatible with constraints in (0,) when applied to example 0).
+    """
 
     def __init__(self, examples: list[View]):
         self.examples = examples
@@ -433,89 +440,72 @@ class ConditionalHierarchicalPruner:
         conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
     ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         """
-        Hierarchical pruning for conditional constraints.
-
-        CRITICAL: At inference time, we'll apply global constraints + ONE specific 
-        group's constraints together. So they must be mutually compatible. We ensure
-        this by pruning them together using MaxSMT.
-
-        Key assumption: Specific groups are MUTUALLY EXCLUSIVE at inference time.
-        - We never apply constraints from group (0,1) AND group (2,3) simultaneously
-        - Therefore, we don't need to test compatibility between specific groups
-        - We only need to ensure each group is compatible with global constraints
+        Per-example pruning for conditional constraints.
 
         Algorithm:
-        1. Identify global constraints (apply to all examples)
-        2. For each specific group:
-        - Prune group_constraints + global_constraints using that group's examples
-        - This ensures compatibility between group-specific and global constraints
-        3. Global constraints = intersection of what survives across all groups
-        (ensures global constraints work for EVERY group)
+        1. For each example, collect ALL constraints that apply to it
+           (from any group containing that example)
+        2. Run HierarchicalPruner using that single example's screen size
+        3. A constraint survives if it survives for ALL examples in its group
+
+        This handles overlapping groups correctly:
+        - Constraint in (0,1) is tested on example 0 AND example 1
+        - Constraint in (0,) is tested only on example 0
+        - When testing example 0, both constraints are tested together,
+          ensuring they're compatible
 
         Args:
-            conditional_constraints: Dict mapping example index tuples to their learned
-                                    constraints
-            e.g., {(0, 1): [constraints], (2, 3): [constraints], (0, 1, 2, 3): [global]}
-            examples: All example layouts
+            conditional_constraints: Dict mapping example index tuples to constraints
+                e.g., {(0,): [...], (0, 1): [...], (0, 1, 2): [...]}
 
         Returns:
-            Dict with same structure, but constraints are guaranteed compatible
-            e.g., {(0, 1): [constraints], (2, 3): [constraints], (0, 1, 2, 3): [global]}
+            Dict with same structure, constraints pruned for compatibility
         """
-        # Find the global key (all example indices)
-        global_key = tuple(range(len(self.examples)))
 
-        # Separate global from specific groups
-        global_constraints = conditional_constraints.get(global_key, [])
+        # Step 1: Map each example to all constraints that apply to it
+        example_to_constraints: dict[int, list[LinearConstraint]] = defaultdict(list)
+        constraint_to_group: dict[LinearConstraint, tuple[int, ...]] = {}
 
-        pruned_output = {}
-        surviving_global_per_group = []
+        for group_key, constraints in conditional_constraints.items():
+            for constraint in constraints:
+                constraint_to_group[constraint] = group_key
+                for example_idx in group_key:
+                    example_to_constraints[example_idx].append(constraint)
 
-        # Prune each specific group together with global constraints
-        for group_key, group_constraints in conditional_constraints.items():
-            if group_key == global_key:
-                continue
+        constr_p_ex = {k: len(v) for k, v in sorted(example_to_constraints.items())}
+        logger.info("  Constraints per example: " f"{constr_p_ex}")
 
-            group_examples = [self.examples[i] for i in group_key]
+        # Step 2: Prune per-example
+        survived_per_example: dict[int, set[LinearConstraint]] = {}
 
-            # Combine and prune together - ensures compatibility!
-            combined = group_constraints + global_constraints
-
-            logger.info(
-                f"  Pruning group {group_key}: {len(group_constraints)} group + "
-                f"{len(global_constraints)} global = {len(combined)} total"
-            )
-
-            pruned_combined = HierarchicalPruner(group_examples).prune(combined)
-
-            # Separate back into group-specific vs global
-            group_set = set(group_constraints)
-            pruned_group = [c for c in pruned_combined if c in group_set]
-            pruned_global = [c for c in pruned_combined if c not in group_set]
-
-            pruned_output[group_key] = pruned_group
-            surviving_global_per_group.append(set(pruned_global))
+        for example_idx, constraints in example_to_constraints.items():
+            example = self.examples[example_idx]
 
             logger.info(
-                f"    → {len(pruned_group)} group constraints, "
-                f"{len(pruned_global)} global constraints survived"
+                f"  Pruning for example {example_idx}: {len(constraints)} constraints"
             )
 
-        # Global constraints must survive for ALL groups (intersection)
-        if surviving_global_per_group:
-            final_global = set.intersection(*surviving_global_per_group)
-            pruned_output[global_key] = list(final_global)
+            # Use single example for pruning
+            pruned = HierarchicalPruner([example]).prune(constraints)
+            survived_per_example[example_idx] = set(pruned)
+
+            logger.info(f"    → {len(pruned)} constraints survived")
+
+        # Step 3: Constraint survives if it survives for ALL examples in its group
+        pruned_output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
+
+        for group_key, constraints in conditional_constraints.items():
+            for constraint in constraints:
+                # Check if constraint survived for all examples in its group
+                if all(
+                    constraint in survived_per_example.get(ex_idx, set())
+                    for ex_idx in group_key
+                ):
+                    pruned_output[group_key].append(constraint)
+
             logger.info(
-                "  Final global constraints (intersection across groups): "
-                f"{len(final_global)}"
+                f"  Group {group_key}: {len(constraints)} → "
+                f"{len(pruned_output[group_key])} constraints"
             )
-        elif global_constraints:
-            # No specific groups, just prune global constraints alone
-            logger.info("  No specific groups, pruning global constraints alone")
-            all_examples = self.examples
-            pruned_output[global_key] = HierarchicalPruner(all_examples)(
-                global_constraints
-            )
-            logger.info(f"    → {len(pruned_output[global_key])} global constraints")
 
-        return pruned_output
+        return dict(pruned_output)

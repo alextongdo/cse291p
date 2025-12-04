@@ -63,21 +63,15 @@ def cluster_based_learning(
     if template.x is None:
         # Constant form: y = b → observed b = y
         observed_values = y_values
-        clusters = cluster_by_observed_param(
-            observed_values, b_threshold=config.b_cluster_threshold
-        )
+        clusters = cluster_1d(observed_values, b_threshold=config.b_cluster_threshold)
     elif template.b == 0.0:
         # Multiplicative form: y = a*x → observed a = y/x
         observed_values = [y/x if x != 0 else 0 for y, x in zip(y_values, x_values)]
-        clusters = cluster_by_observed_param(
-            observed_values, a_threshold=config.a_cluster_threshold
-        )
+        clusters = cluster_1d(observed_values, a_threshold=config.a_cluster_threshold)
     else:  # template.a == 1.0
         # Additive form: y = x + b → observed b = y - x
         observed_values = [y - x for y, x in zip(y_values, x_values)]
-        clusters = cluster_by_observed_param(
-            observed_values, b_threshold=config.b_cluster_threshold
-        )
+        clusters = cluster_1d(observed_values, b_threshold=config.b_cluster_threshold)
     
     # Step 4: For each cluster, run standard Bayesian learning
     results = []
@@ -112,71 +106,60 @@ So we don't need complex multi-dimensional clustering - just cluster on the sing
 **Important**: `b` values use **absolute** threshold (e.g., |10-15| ≤ 5), while `a` values use **relative** threshold (e.g., |1.0-1.1|/1.05 ≤ 0.1).
 
 ```python
-def cluster_by_observed_param(
-    observed_values: list[float],
+def cluster_1d(
+    values: list[float],
     a_threshold: float | None = None,
     b_threshold: float | None = None,
 ) -> list[list[int]]:
     """
-    Cluster examples by their observed parameter values.
-    
-    Simple 1D clustering since Mockdown only learns one parameter at a time.
-    Exactly one of a_threshold or b_threshold must be provided.
-    
+    Cluster 1D values using greedy gap-based clustering.
+
+    Sorts values, then greedily groups consecutive values whose gap
+    is within the threshold. Exactly one threshold must be provided.
+
     Args:
-        observed_values: The observed parameter value for each example
-            - For constant/additive forms: b values
-            - For multiplicative form: a values
-        a_threshold: Relative threshold for 'a' values (e.g., 0.1 means 10% difference)
-        b_threshold: Absolute threshold for 'b' values (e.g., 5 means |b1-b2| ≤ 5)
-    
+        values: List of values to cluster
+        a_threshold: Relative threshold for ratio values (e.g., 0.1 = 10% difference)
+        b_threshold: Absolute threshold for offset values (e.g., 5 = |v1-v2| ≤ 5)
+
     Returns:
-        List of clusters, where each cluster is a list of example indices
-    
-    Raises:
-        ValueError: If both or neither threshold is provided
+        List of clusters, where each cluster is a list of indices into `values`
+
+    Example:
+        >>> cluster_1d([10, 50, 12, 48], b_threshold=5)
+        [[0, 2], [1, 3]]  # [10, 12] and [48, 50] are grouped
     """
-    # Validate exactly one threshold is set
     if (a_threshold is None) == (b_threshold is None):
         raise ValueError("Exactly one of a_threshold or b_threshold must be provided")
-    
-    n = len(observed_values)
-    
-    # Handle trivial cases
+
+    n = len(values)
     if n <= 1:
         return [[i] for i in range(n)]
-    
-    # Sort by value to make clustering easier
-    sorted_indices = sorted(range(n), key=lambda i: observed_values[i])
-    
-    # Greedy clustering: start new cluster when gap exceeds threshold
+
+    sorted_indices = sorted(range(n), key=lambda i: values[i])
     clusters = [[sorted_indices[0]]]
-    
+
     for i in range(1, n):
         curr_idx = sorted_indices[i]
         prev_idx = sorted_indices[i - 1]
-        
-        curr_val = observed_values[curr_idx]
-        prev_val = observed_values[prev_idx]
-        
-        # Compute distance based on which threshold was provided
+        curr_val = values[curr_idx]
+        prev_val = values[prev_idx]
+
         if a_threshold is not None:
-            # Relative comparison for 'a' (ratios)
-            # e.g., 1.0 vs 1.1 → |1.0-1.1| / 1.05 = 0.095 (9.5% difference)
-            avg_val = (abs(curr_val) + abs(prev_val)) / 2 + 1e-10  # avoid div by zero
-            distance = abs(curr_val - prev_val) / avg_val
+            # Relative distance for ratios
+            avg_val = (abs(curr_val) + abs(prev_val)) / 2 + 1e-10
+            gap = abs(curr_val - prev_val) / avg_val
             threshold = a_threshold
         else:
-            # Absolute comparison for 'b' (offsets)
-            # e.g., 10 vs 15 → |10-15| = 5
-            distance = abs(curr_val - prev_val)
+            # Absolute distance for offsets
+            gap = abs(curr_val - prev_val)
             threshold = b_threshold
-        
-        if distance <= threshold:
+
+        if gap <= threshold:
             clusters[-1].append(curr_idx)
         else:
             clusters.append([curr_idx])
-    
+
     return clusters
 ```
 
@@ -236,42 +219,32 @@ This means even with small noise, the algorithm finds the "simplest" value in th
 
 ### Integration with Conditional Learning
 
-This slots perfectly into your existing `conditional_bayesian_learning`:
+`ConditionalBayesianLearning` uses clustering by default - it's the key innovation:
 
 ```python
-def conditional_bayesian_learning(
-    example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
-    examples: list[View],
-    seed: int | None = None,
-    config: LearningConfig | None = None,
-    enable_clustering: bool = True,  # New parameter
-) -> dict[tuple[int, ...], list[LinearConstraint]]:
+class ConditionalBayesianLearning:
+    """Bayesian learning with clustering-based parameter mode detection."""
     
-    constr_to_sets_map = defaultdict(set)
-    constr_to_max_score_map = {}
-    
-    for example_idxs, templates in example_idxs_to_templates_map.items():
-        set_examples = [examples[i] for i in example_idxs]
+    def learn(
+        self,
+        example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
+    ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         
-        if enable_clustering:
-            # Use clustering-based learning
-            learned_constraints = cluster_based_bayesian_learning(
-                templates=templates,
-                examples=set_examples,
-                seed=seed,
-                config=config
-            )
-        else:
-            # Use standard learning
-            learned_constraints = bayesian_learning(
-                templates=templates,
-                examples=set_examples,
-                seed=seed,
-                config=config
-            )
-        
-        # Rest of merging logic remains the same...
+        for example_idxs, templates in example_idxs_to_templates_map.items():
+            for template in templates:
+                # Cluster examples by observed parameter values
+                clusters = self._cluster_template_examples(template, example_idxs)
+                
+                # Learn separately for each cluster
+                for cluster_example_idxs in clusters:
+                    cluster_examples = [self.examples[i] for i in cluster_example_idxs]
+                    learned = BayesianLearning(
+                        examples=cluster_examples, config=self.config
+                    ).learn([template])
+                    # ... merge logic ...
 ```
+
+If you want standard Mockdown learning without clustering, use `BayesianLearning` directly.
 
 ### When Clustering Helps
 

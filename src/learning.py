@@ -8,7 +8,7 @@ import scipy.stats as st
 import statsmodels.api as sm
 import statsmodels.tools.sm_exceptions as sm_exc
 
-from src.config import LearningConfig
+from src.config import ConditionalLearningConfig, LearningConfig
 from src.logging import get_logger
 from src.types import LinearConstraint, View
 
@@ -426,17 +426,8 @@ class BayesianLearning:
         if seed is not None:
             np.random.seed(seed)
 
-    def learn(self, templates: list[LinearConstraint]) -> list[LinearConstraint]:
-        """
-        Main interface for Bayesian parameter learning.
-
-        Args:
-            templates: List of constraint templates with unknown parameters
-
-        Returns:
-            List of learned constraints with scores
-        """
-        anchor_to_data_map = defaultdict(list)
+        # Pre-compute anchor data map for all examples
+        anchor_to_data_map: dict[str, list[float]] = defaultdict(list)
         for example in self.examples:
             for view in example._flattened_views_in_subtree:
                 anchor_to_data_map[f"{view.name}.width"].append(view.width)
@@ -447,20 +438,34 @@ class BayesianLearning:
                 anchor_to_data_map[f"{view.name}.bottom"].append(view.bottom)
                 anchor_to_data_map[f"{view.name}.center_x"].append(view.center_x)
                 anchor_to_data_map[f"{view.name}.center_y"].append(view.center_y)
+        self.anchor_to_data_map = anchor_to_data_map
+
+    def learn(self, templates: list[LinearConstraint]) -> list[LinearConstraint]:
+        """
+        Main interface for Bayesian parameter learning.
+
+        Args:
+            templates: List of constraint templates with unknown parameters
+
+        Returns:
+            List of learned constraints with scores
+        """
 
         results = []
         for template in templates:
-            logger.debug(f"Doing Bayesian learning for {repr(template)}")
+            # logger.debug(f"Doing Bayesian learning for {repr(template)}")
             # Extract anchor values data for the template from all examples.
             y_data = np.array(
-                anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
+                self.anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
                 dtype=float,
             )
             if template.x is None:
                 x_data = None
             else:
                 x_data = np.array(
-                    anchor_to_data_map[f"{template.x.view.name}.{template.x.type}"],
+                    self.anchor_to_data_map[
+                        f"{template.x.view.name}.{template.x.type}"
+                    ],
                     dtype=float,
                 )
 
@@ -469,42 +474,137 @@ class BayesianLearning:
                 template=template, config=self.config, y_data=y_data, x_data=x_data
             )
             candidates = model.learn()
-            if len(candidates) == 0:
-                logger.debug("Learned 0 candidates")
-            for cand in candidates:
-                logger.debug(f"Learned {repr(cand)}")
+            # if len(candidates) == 0:
+            #     logger.debug("Learned 0 candidates")
+            # for cand in candidates:
+            #     logger.debug(f"Learned {repr(cand)}")
             results.extend(candidates)
 
         return results
 
 
 class ConditionalBayesianLearning:
+    """
+    Bayesian learning with clustering-based parameter mode detection.
+
+    Key innovation: Examples within each structural set are clustered by their
+    observed parameter values before learning. This handles cases where the same
+    structural set has multiple parameter modes (e.g., margin=10 for some examples,
+    margin=50 for others).
+    """
+
     def __init__(
         self,
         examples: list[View],
-        config: LearningConfig | None = None,
+        config: ConditionalLearningConfig | None = None,
         seed: int | None = None,
     ):
         self.examples = examples
         if config is None:
             max_dim = max(max(root.width, root.height) for root in examples)
-            self.config = LearningConfig(max_offset=int(max_dim) + 10)
+            self.config = ConditionalLearningConfig(max_offset=int(max_dim) + 10)
         else:
             self.config = config
 
         if seed is not None:
             np.random.seed(seed)
 
+        # Pre-compute anchor data map for all examples
+        anchor_to_data_map: dict[str, list[float]] = defaultdict(list)
+        for example in self.examples:
+            for view in example._flattened_views_in_subtree:
+                anchor_to_data_map[f"{view.name}.width"].append(view.width)
+                anchor_to_data_map[f"{view.name}.height"].append(view.height)
+                anchor_to_data_map[f"{view.name}.left"].append(view.left)
+                anchor_to_data_map[f"{view.name}.right"].append(view.right)
+                anchor_to_data_map[f"{view.name}.top"].append(view.top)
+                anchor_to_data_map[f"{view.name}.bottom"].append(view.bottom)
+                anchor_to_data_map[f"{view.name}.center_x"].append(view.center_x)
+                anchor_to_data_map[f"{view.name}.center_y"].append(view.center_y)
+        self.anchor_to_data_map = anchor_to_data_map
+
+    def _get_anchor_value(self, example_idx: int, anchor_key: str) -> float:
+        """Get anchor value for a specific example."""
+        return self.anchor_to_data_map[anchor_key][example_idx]
+
+    def _cluster_template_examples(
+        self,
+        template: LinearConstraint,
+        example_idxs: tuple[int, ...],
+    ) -> list[list[int]]:
+        """
+        Cluster examples within a structural set based on observed parameter values.
+
+        Args:
+            template: The constraint template
+            example_idxs: Indices of examples in this structural set
+
+        Returns:
+            List of clusters, where each cluster contains original example indices
+        """
+        y_key = f"{template.y.view.name}.{template.y.type}"
+        y_values = [self._get_anchor_value(i, y_key) for i in example_idxs]
+
+        is_constant_form = template.x is None
+        is_mul_only_form = template.x is not None and template.b == 0.0
+        is_add_only_form = template.x is not None and template.a == 1.0
+
+        if is_constant_form:
+            # Constant form: y = b → observed b = y
+            observed = y_values
+            observations = list(zip(observed, example_idxs, strict=True))
+            clusters = cluster_by_observed_param(
+                observations, b_threshold=self.config.b_cluster_threshold
+            )
+        elif is_mul_only_form:
+            # Multiplicative form: y = a*x → observed a = y/x
+            x_key = f"{template.x.view.name}.{template.x.type}"
+            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
+            observed = [
+                y / x if x != 0 else 0.0
+                for y, x in zip(y_values, x_values, strict=True)
+            ]
+            observations = list(zip(observed, example_idxs, strict=True))
+            clusters = cluster_by_observed_param(
+                observations, a_threshold=self.config.a_cluster_threshold
+            )
+        elif is_add_only_form:
+            # Additive form: y = x + b → observed b = y - x
+            x_key = f"{template.x.view.name}.{template.x.type}"
+            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
+            observed = [y - x for y, x in zip(y_values, x_values, strict=True)]
+            observations = list(zip(observed, example_idxs, strict=True))
+            clusters = cluster_by_observed_param(
+                observations, b_threshold=self.config.b_cluster_threshold
+            )
+        else:
+            raise NotImplementedError(
+                "Mockdown in practice only learns a or b, not both."
+            )
+
+        if len(clusters) > 1:
+            logger.debug(
+                f"  Template {repr(template)} split into "
+                f"{len(clusters)} clusters: {clusters}"
+            )
+            logger.debug(f"    Observations: {observations}")
+
+        return clusters
+
     def learn(
         self,
         example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
     ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         """
-        Perform Bayesian learning per structural set, then merge
+        Perform Bayesian learning per structural set with clustering, then merge
         constraints across sets.
 
+        For each template, examples are clustered by their observed parameter
+        values before learning. This handles cases where the same structural set
+        has multiple parameter modes (e.g., margin=10 for some, margin=50 for others).
+
         Args:
-            example_idxs_to_templates_map: 
+            example_idxs_to_templates_map:
                 Maps example index tuples to their templates
                 e.g., {(0, 1): [templates], (2, 3): [templates]}
 
@@ -512,40 +612,101 @@ class ConditionalBayesianLearning:
             Dictionary mapping example index tuples to learned constraints:
             - (0, 1): constraints specific to examples 0, 1
             - (2, 3): constraints specific to examples 2, 3
-            - (0, 1, 2, 3): constraints that apply to both sets (merged)
+            - (0, 1, 2, 3): constraints that apply to all (merged)
         """
+        # Map cosntraints to examples they apply to
         constr_to_sets_map: dict[LinearConstraint, set[int]] = defaultdict(set)
+        # Map constraints to their max score equivalents
         constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
 
         for example_idxs, templates in example_idxs_to_templates_map.items():
             logger.debug(f"\n\nLearning for structural set {example_idxs}")
-            set_examples = [self.examples[i] for i in example_idxs]
-            learned_constraints = BayesianLearning(
-                examples=set_examples, config=self.config
-            ).learn(templates)
-            logger.debug(
-                f"  Learned {len(learned_constraints)}"
-                f" constraints for set {example_idxs}"
-            )
 
-            for constr in learned_constraints:
-                constr_to_sets_map[constr].update(example_idxs)
+            for template in templates:
+                # Cluster examples by observed parameter values
+                clusters = self._cluster_template_examples(template, example_idxs)
 
-                # Keep the constraint with highest score
-                if (
-                    constr not in constr_to_max_score_map
-                    or constr.score > constr_to_max_score_map[constr].score
-                ):
-                    constr_to_max_score_map[constr] = constr
+                # Learn separately for each cluster
+                for cluster_example_idxs in clusters:
+                    cluster_examples = [self.examples[i] for i in cluster_example_idxs]
+                    learned = BayesianLearning(
+                        examples=cluster_examples, config=self.config
+                    ).learn([template])
 
+                    for constr in learned:
+                        constr_to_sets_map[constr].update(cluster_example_idxs)
+                        if (
+                            constr not in constr_to_max_score_map
+                            or constr.score > constr_to_max_score_map[constr].score
+                        ):
+                            constr_to_max_score_map[constr] = constr
+
+        # Map examples to which constraints apply to them
         output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
         for constr, example_idxs_set in constr_to_sets_map.items():
             output[tuple(sorted(example_idxs_set))].append(
                 constr_to_max_score_map[constr]
             )
 
-        # Sanity
+        # Sanity check: no duplicate constraints in any list
         for constr_list in output.values():
             assert len(set(constr_list)) == len(constr_list)
 
         return dict(output)
+
+
+def cluster_by_observed_param(
+    observations: list[tuple[float, int]],
+    a_threshold: float | None = None,
+    b_threshold: float | None = None,
+) -> list[list[int]]:
+    """
+    Cluster examples by their observed parameter values.
+    Simple 1D greedy clustering. Exactly one threshold must be provided.
+
+    Args:
+        observations: List of (value, example_idx) tuples
+        a_threshold: Relative threshold for ratios (e.g., 0.1 = 10% difference)
+        b_threshold: Absolute threshold for offsets (e.g., 5 = |b1-b2| ≤ 5)
+
+    Returns:
+        List of clusters, where each cluster is a list of example indices
+
+    Example:
+        >>> cluster_by_observed_param(
+        >>>     [(10, 0), (50, 1), (12, 2), (48, 3)], b_threshold=5
+        >>> )
+        [[0, 2], [1, 3]]  # examples with values [10, 12] and [48, 50] grouped
+    """
+    if (a_threshold is None) == (b_threshold is None):
+        raise ValueError("Exactly one of a_threshold or b_threshold must be provided")
+
+    if len(observations) <= 1:
+        return [[idx for _, idx in observations]]
+
+    # Sort by value
+    sorted_obs = sorted(observations, key=lambda x: x[0])
+
+    # Greedy clustering: start new cluster when gap exceeds threshold
+    clusters = [[sorted_obs[0][1]]]
+
+    for i in range(1, len(sorted_obs)):
+        curr_val, curr_idx = sorted_obs[i]
+        prev_val, _ = sorted_obs[i - 1]
+
+        if a_threshold is not None:
+            # Relative distance for ratios
+            avg_val = ((abs(curr_val) + abs(prev_val)) / 2) + 1e-10
+            distance = abs(curr_val - prev_val) / avg_val
+            threshold = a_threshold
+        else:
+            # Absolute distance for offsets
+            distance = abs(curr_val - prev_val)
+            threshold = b_threshold
+
+        if distance <= threshold:
+            clusters[-1].append(curr_idx)
+        else:
+            clusters.append([curr_idx])
+
+    return clusters
