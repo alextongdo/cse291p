@@ -114,12 +114,14 @@ PAYLOAD = """
         const data = {
             name: mangle(el),
             children: children.flatMap(c => scrape(c, el)),
+            // Use document coordinates for all four values so width/height are
+            // always non-negative, even after scrolling.
             rect: [
-                rect.left + window.scrollX,
-                rect.top + window.scrollY,
-                rect.right,
-                rect.bottom
-            ]           
+                rect.left   + window.scrollX,
+                rect.top    + window.scrollY,
+                rect.right  + window.scrollX,
+                rect.bottom + window.scrollY
+            ]
         };
         return data;
     }
@@ -301,12 +303,10 @@ class MultiViewportScraper:
 
         for i, (width, height) in enumerate(viewports, 1):
             log.info(f"  [{i}/{len(viewports)}] Scraping at {width}x{height}...")
-            result = self.scrape_single_viewport(
-                url, (width, height), root_selector, wait_time
-            )
-            examples.append(result["example"])
-            captures.append(result["screenshot"])
-
+            result = self.scrape_single_viewport(url, (width, height), root_selector, wait_time)
+            examples.append(result['example'])
+            captures.append(result['screenshot'])
+        
         return {
             "meta": {
                 "scrape": {
@@ -437,14 +437,10 @@ class MultiViewportScraper:
         Puts 'children' last for better readability during inspection.
         """
         return {
-            k: (
-                [self._clean_output(c, order) for c in data[k]]
-                if k == "children"
-                else data[k]
-            )
+            k: [self._clean_output(c, order) for c in data[k]] if k == 'children' else data[k]
             for k in order
         }
-
+    
     def cleanup(self):
         """Close the browser driver."""
         if hasattr(self, "driver"):

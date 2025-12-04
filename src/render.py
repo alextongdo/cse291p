@@ -120,9 +120,19 @@ def solve_layout(
     # Add layout axioms
     add_layout_axioms(solver, root._flattened_views_in_subtree, var_map)
 
-    # Add synthesized constraints
+    # Add synthesized constraints, skipping any that make the system infeasible
+    dropped_constraints: list[tuple[LinearConstraint, Exception]] = []
     for constraint in constraints:
-        solver.addConstraint(constraint_to_kiwi(constraint, var_map))
+        try:
+            solver.addConstraint(constraint_to_kiwi(constraint, var_map))
+        except kiwisolver.KiwiException as exc:
+            dropped_constraints.append((constraint, exc))
+
+    if dropped_constraints:
+        print(
+            f"[render] Dropped {len(dropped_constraints)} constraints that conflicted "
+            "with previously added ones."
+        )
 
     # Fix root dimensions to desired size
     solver.addConstraint((var_map[f"{root.name}.width"] == width) | "required")
