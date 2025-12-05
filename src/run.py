@@ -106,11 +106,11 @@ if (1, 2) in example_idxs_to_templates_map:
     print(f"Author top/bottom templates: {len(author_top_bottom_templates)}")
     print("All author top/bottom templates:")
     for t in author_top_bottom_templates:
-        print(f"  {t}")
+        print(f"  {repr(t)}")
     
     print("\nSample vertical templates:")
     for t in vertical_templates[:10]:
-        print(f"  {t}")
+        print(f"  {repr(t)}")
 
 # 2. Conditional Bayesian Learning (Local Inference)
 # Debug: Check what happens to author top/bottom templates during learning
@@ -131,7 +131,7 @@ if (1, 2) in example_idxs_to_templates_map:
     # Extract data for one template
     if author_top_bottom_templates:
         template = author_top_bottom_templates[0]
-        print(f"\nTemplate: {template}")
+        print(f"\nTemplate: {repr(template)}")
         
         anchor_to_data_map = defaultdict(list)
         for example in set_examples:
@@ -208,7 +208,7 @@ if (1, 2) in example_idxs_to_constrs_map:
     print(f"Vertical constraints: {len(vertical_constrs)}")
     print("All vertical constraints:")
     for c in vertical_constrs:
-        print(f"  {c}")
+        print(f"  {repr(c)}")
     
     # Check specifically for author top/bottom constraints
     author_vertical = [
@@ -217,7 +217,7 @@ if (1, 2) in example_idxs_to_constrs_map:
     ]
     print(f"\nAuthor top/bottom constraints: {len(author_vertical)}")
     for c in author_vertical:
-        print(f"  {c}")
+        print(f"  {repr(c)}")
 
 # 3. Conditional Hierarchical Pruning (Global Inference)
 pruning_start = time.perf_counter()
@@ -237,7 +237,7 @@ if (1, 2) in outputs:
     print(f"Vertical constraints: {len(vertical_constrs)}")
     print("All vertical constraints:")
     for c in vertical_constrs:
-        print(f"  {c}")
+        print(f"  {repr(c)}")
     
     # Check specifically for author top/bottom constraints
     author_vertical = [
@@ -246,7 +246,7 @@ if (1, 2) in outputs:
     ]
     print(f"\nAuthor top/bottom constraints: {len(author_vertical)}")
     for c in author_vertical:
-        print(f"  {c}")
+        print(f"  {repr(c)}")
     
     # Compare what was pruned
     before = set(example_idxs_to_constrs_map.get((1, 2), []))
@@ -258,7 +258,7 @@ if (1, 2) in outputs:
     ]
     print(f"\nPruned author top/bottom constraints: {len(pruned_vertical)}")
     for c in pruned_vertical[:10]:
-        print(f"  {c}")
+        print(f"  {repr(c)}")
 
 overall_time = time.perf_counter() - overall_start
 
