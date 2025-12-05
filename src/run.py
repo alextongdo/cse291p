@@ -1,4 +1,5 @@
 import time
+
 from rich import print
 
 from src.evaluation import calculate_rmsd
@@ -115,8 +116,8 @@ if (1, 2) in example_idxs_to_templates_map:
 # 2. Conditional Bayesian Learning (Local Inference)
 # Debug: Check what happens to author top/bottom templates during learning
 if (1, 2) in example_idxs_to_templates_map:
-    from src.learning import BayesianLearning
     from collections import defaultdict
+
     import numpy as np
     
     author_top_bottom_templates = [
@@ -164,8 +165,8 @@ if (1, 2) in example_idxs_to_templates_map:
             print("X data: None (constant constraint)")
         
         # Try to learn this template
-        from src.learning import TemplateBayesianLinearModel
         from src.config import LearningConfig
+        from src.learning import TemplateBayesianLinearModel
         max_dim = max(max(root.width, root.height) for root in set_examples)
         config = LearningConfig(max_offset=int(max_dim) + 10)
         

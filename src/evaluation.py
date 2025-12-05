@@ -5,11 +5,11 @@ Evaluation metrics for synthesized layout constraints.
 import math
 
 import kiwisolver
-
 from src.render import (
     add_layout_axioms,
     constraint_to_kiwi,
 )
+
 from src.types import LinearConstraint, View
 
 

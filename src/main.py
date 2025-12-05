@@ -1,8 +1,10 @@
+from bisect import bisect_left
+
 import kiwisolver
 
-from src.logging import get_logger, setup_logging
 from src.instantiation import ConditionalTemplateInstantiator, TemplateInstantiator
 from src.learning import BayesianLearning, ConditionalBayesianLearning
+from src.logging import get_logger, setup_logging
 from src.pruning import ConditionalHierarchicalPruner, HierarchicalPruner
 from src.types import LinearConstraint, View
 
@@ -139,10 +141,10 @@ def _solve_layout(
         vwidth = var_map[f"{view.name}.width"].value()
         vheight = var_map[f"{view.name}.height"].value()
         logger.debug(
-            (
+            
                 f"  {view.name}: left={vleft:.2f}, top={vtop:.2f}, "
                 f"width={vwidth:.2f}, height={vheight:.2f}"
-            )
+            
         )
 
     return {key: var.value() for key, var in var_map.items()}
@@ -199,6 +201,51 @@ class ConditionalMockdown:
     def predict(
         self, width: int, height: int
     ) -> dict[str, tuple[float, float, float, float]]:
-        # Should use kiwi solver to solver for a layout for the unseen width + height
-        # Conditional will need to finding the closest example root size to the width + height
-        pass
+        """
+        Use Kiwi solver to solve for a layout at the given width and height.
+
+        Uses width-based midpoint breakpoints to select which example's constraints
+        apply.
+        """
+        # Sort examples by width and compute midpoint breakpoints
+        sorted_indices = sorted(
+            range(len(self.examples)), key=lambda i: self.examples[i].width
+        )
+        sorted_widths = [self.examples[i].width for i in sorted_indices]
+        midpoints = [
+            (sorted_widths[i] + sorted_widths[i + 1]) / 2
+            for i in range(len(sorted_widths) - 1)
+        ]
+
+        # Find which example the test width maps to
+        selected_idx = sorted_indices[bisect_left(midpoints, width)]
+
+        logger.debug(
+            f"Test width={width} mapped to example={selected_idx} "
+            f"(width={self.examples[selected_idx].width})"
+        )
+
+        # Collect all constraints that apply to the selected example
+        constraints: list[LinearConstraint] = []
+        for example_idxs, constrs in self.ex_to_constrs_map.items():
+            if selected_idx in example_idxs:
+                constraints.extend(constrs)
+
+        for c in constraints:
+            if c.y.view.name == "root" or c.x is not None and c.x.view.name == "root":
+                logger.debug(f"{repr(c)}")
+
+        # Solve layout
+        root = self.examples[selected_idx]
+        solved_values = _solve_layout(root, constraints, width, height)
+
+        # Convert solved anchor values to rect tuples per view
+        result: dict[str, tuple[float, float, float, float]] = {}
+        for view in root._flattened_views_in_subtree:
+            left = solved_values[f"{view.name}.left"]
+            top = solved_values[f"{view.name}.top"]
+            right = solved_values[f"{view.name}.right"]
+            bottom = solved_values[f"{view.name}.bottom"]
+            result[view.name] = (left, top, right, bottom)
+
+        return result

@@ -51,12 +51,16 @@ HTML_TEMPLATE = """
 <body>
     <div class="labels">
         {% for view in views %}
-        <div class="label" data-view="{{ view.name }}" data-color="{{ view.color }}">{{ view.name }}</div>
+        <div class="label"
+             data-view="{{ view.name }}"
+             data-color="{{ view.color }}">
+            {{ view.name }}
+        </div>
         {% endfor %}
     </div>
     <div class="viewport" style="width: {{ width }}px; height: {{ height }}px;">
         {% for view in views %}
-        <div class="view" 
+        <div class="view"
              data-name="{{ view.name }}"
              data-color="{{ view.color }}"
              style="left: {{ view.left }}px; 
@@ -111,7 +115,7 @@ def visualize(
         height = int(layout.height)
         views = layout._flattened_views_in_subtree
         colors = distinctipy.get_colors(len(views), pastel_factor=0.7)
-        for view, color in zip(views, colors):
+        for view, color in zip(views, colors, strict=True):
             r, g, b = [int(c * 255) for c in color]
             view_list.append(
                 {
@@ -131,7 +135,7 @@ def visualize(
         width = int(root_rect[2] - root_rect[0])  # right - left
         height = int(root_rect[3] - root_rect[1])  # bottom - top
         colors = distinctipy.get_colors(len(layout), pastel_factor=0.7)
-        for (name, rect), color in zip(layout.items(), colors):
+        for (name, rect), color in zip(layout.items(), colors, strict=True):
             left, top, right, bottom = rect
             r, g, b = [int(c * 255) for c in color]
             view_list.append(

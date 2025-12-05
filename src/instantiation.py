@@ -179,7 +179,7 @@ class TemplateInstantiator:
         # Constant Constraints: (y = b)
         # y = [anchor].width/height
         for i in range(n):
-            if anchors[i].is_size():
+            if anchors[i].is_size() and anchors[i].view.parent is not None:
                 sketches.append(LinearConstraint(y=anchors[i], x=None, a=0, b=None))
 
         return sketches

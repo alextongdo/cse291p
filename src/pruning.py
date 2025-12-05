@@ -26,13 +26,11 @@ def test_rect_range(
     smaller: TestRect, larger: TestRect, num: int = 5
 ) -> list[TestRect]:
     """Generate evenly-spaced test rects between a smaller and larger rect."""
-    # Calculate differences
     diff_w = Fraction(larger.width - smaller.width, num)
     diff_h = Fraction(larger.height - smaller.height, num)
     diff_l = Fraction(larger.left - smaller.left, num)
     diff_t = Fraction(larger.top - smaller.top, num)
 
-    # If all diffs are zero, just return the smaller bound
     if diff_w == 0 and diff_h == 0 and diff_l == 0 and diff_t == 0:
         return [smaller]
 
@@ -335,29 +333,40 @@ class HierarchicalPruner:
     using BlackBoxPruner, then infer child bounds from parent solutions.
     """
 
-    def __init__(self, examples: list[View]):
+    def __init__(
+        self,
+        examples: list[View],
+        min_rect: TestRect | None = None,
+        max_rect: TestRect | None = None,
+    ):
         """
         Initialize the hierarchical pruner.
 
         Args:
             examples: List of example layout instances
+            min_rect: Optional minimum test rect (if None, computed from examples)
+            max_rect: Optional maximum test rect (if None, computed from examples)
         """
         assert len(examples) > 0, "Pruner requires non-empty learning examples"
 
         self.examples = examples
         self.root = examples[0]
 
-        widths = [Fraction(ex.width) for ex in examples]
-        heights = [Fraction(ex.height) for ex in examples]
-        lefts = [Fraction(ex.left) for ex in examples]
-        tops = [Fraction(ex.top) for ex in examples]
+        if min_rect is not None and max_rect is not None:
+            self.min_rect = min_rect
+            self.max_rect = max_rect
+        else:
+            widths = [Fraction(ex.width) for ex in examples]
+            heights = [Fraction(ex.height) for ex in examples]
+            lefts = [Fraction(ex.left) for ex in examples]
+            tops = [Fraction(ex.top) for ex in examples]
 
-        self.min_rect = TestRect(
-            left=min(lefts), top=min(tops), width=min(widths), height=min(heights)
-        )
-        self.max_rect = TestRect(
-            left=max(lefts), top=max(tops), width=max(widths), height=max(heights)
-        )
+            self.min_rect = TestRect(
+                left=min(lefts), top=min(tops), width=min(widths), height=min(heights)
+            )
+            self.max_rect = TestRect(
+                left=max(lefts), top=max(tops), width=max(widths), height=max(heights)
+            )
 
     def prune(self, candidates: list[LinearConstraint]) -> list[LinearConstraint]:
         # Worklist: (focus_view, min_rect, max_rect)
@@ -430,10 +439,73 @@ class ConditionalHierarchicalPruner:
 
     Handles cases where groups overlap (e.g., constraints in (0,1) must be
     compatible with constraints in (0,) when applied to example 0).
+
+    Uses width-based midpoint breakpoints to define the test range for each
+    example, ensuring constraints generalize within their applicable range.
     """
 
     def __init__(self, examples: list[View]):
         self.examples = examples
+        self._compute_test_rect_ranges()
+
+    def _compute_test_rect_ranges(self):
+        """
+        Compute the test rect range for each example using midpoint breakpoints.
+
+        Examples are sorted by width, then midpoint rects are computed by
+        interpolating both width AND height between consecutive examples.
+
+        For examples [(400, 300), (800, 600), (1200, 900)] sorted by width:
+        - Midpoint rects: [(600, 450), (1000, 750)]
+        - Example 0: test range from (100, 100) to midpoint (600, 450)
+        - Example 1: test range from (600, 450) to (1000, 750)
+        - Example 2: test range from (1000, 750) to (2400, 1800)
+        """
+
+        # Sort examples by width
+        sorted_example_idxs = sorted(
+            range(len(self.examples)), key=lambda i: self.examples[i].width
+        )
+        sorted_examples = [self.examples[i] for i in sorted_example_idxs]
+
+        # Compute breakpoints in the middle of example rects
+        breakpoint_rects: list[TestRect] = [
+            TestRect(
+                left=Fraction(0),
+                top=Fraction(0),
+                width=Fraction(1000),
+                height=Fraction(600),
+            )
+        ]
+        for smaller, larger in zip(
+            sorted_examples[:-1], sorted_examples[1:], strict=True
+        ):
+            breakpoint_rects.append(
+                TestRect(
+                    left=Fraction(0),
+                    top=Fraction(0),
+                    width=(Fraction(smaller.width) + Fraction(larger.width)) / 2,
+                    height=(Fraction(smaller.height) + Fraction(larger.height)) / 2,
+                )
+            )
+        breakpoint_rects.append(
+            TestRect(
+                left=Fraction(0),
+                top=Fraction(0),
+                width=Fraction(sorted_examples[-1].width) + 100,
+                height=Fraction(sorted_examples[-1].height) + 0,
+            )
+        )
+
+        # Map each example index to its (min_rect, max_rect) range
+        self.example_to_rect_range: dict[int, tuple[TestRect, TestRect]] = {}
+        for ex_idx, min_rect, max_rect in zip(
+            sorted_example_idxs,
+            breakpoint_rects[:-1],
+            breakpoint_rects[1:],
+            strict=True,
+        ):
+            self.example_to_rect_range[ex_idx] = (min_rect, max_rect)
 
     def prune(
         self,
@@ -445,7 +517,8 @@ class ConditionalHierarchicalPruner:
         Algorithm:
         1. For each example, collect ALL constraints that apply to it
            (from any group containing that example)
-        2. Run HierarchicalPruner using that single example's screen size
+        2. Run HierarchicalPruner using that example's width range (from midpoint
+           breakpoints) to ensure constraints generalize
         3. A constraint survives if it survives for ALL examples in its group
 
         This handles overlapping groups correctly:
@@ -473,20 +546,25 @@ class ConditionalHierarchicalPruner:
                     example_to_constraints[example_idx].append(constraint)
 
         constr_p_ex = {k: len(v) for k, v in sorted(example_to_constraints.items())}
-        logger.info("  Constraints per example: " f"{constr_p_ex}")
+        logger.info(f"  Constraints per example: {constr_p_ex}")
 
-        # Step 2: Prune per-example
+        # Step 2: Prune per-example using rect range from midpoint breakpoints
         survived_per_example: dict[int, set[LinearConstraint]] = {}
 
         for example_idx, constraints in example_to_constraints.items():
             example = self.examples[example_idx]
+            min_rect, max_rect = self.example_to_rect_range[example_idx]
 
             logger.info(
-                f"  Pruning for example {example_idx}: {len(constraints)} constraints"
+                f"  Pruning for example {example_idx}: {len(constraints)} constraints "
+                "(size range: "
+                f"[{float(min_rect.width):.0f}x{float(min_rect.height):.0f}] to "
+                f"[{float(max_rect.width):.0f}x{float(max_rect.height):.0f}])"
             )
 
-            # Use single example for pruning
-            pruned = HierarchicalPruner([example]).prune(constraints)
+            pruned = HierarchicalPruner(
+                [example], min_rect=min_rect, max_rect=max_rect
+            ).prune(constraints)
             survived_per_example[example_idx] = set(pruned)
 
             logger.info(f"    → {len(pruned)} constraints survived")
