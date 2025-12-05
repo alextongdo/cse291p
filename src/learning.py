@@ -453,7 +453,7 @@ class BayesianLearning:
 
         results = []
         for template in templates:
-            # logger.debug(f"Doing Bayesian learning for {repr(template)}")
+            logger.debug(f"Doing Bayesian learning for {repr(template)}")
             # Extract anchor values data for the template from all examples.
             y_data = np.array(
                 self.anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
@@ -474,10 +474,10 @@ class BayesianLearning:
                 template=template, config=self.config, y_data=y_data, x_data=x_data
             )
             candidates = model.learn()
-            # if len(candidates) == 0:
-            #     logger.debug("Learned 0 candidates")
-            # for cand in candidates:
-            #     logger.debug(f"Learned {repr(cand)}")
+            if len(candidates) == 0:
+                logger.debug("Learned 0 candidates")
+            for cand in candidates:
+                logger.debug(f"Learned {repr(cand)}")
             results.extend(candidates)
 
         return results
