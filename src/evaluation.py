@@ -5,10 +5,7 @@ Evaluation metrics for synthesized layout constraints.
 import math
 
 import kiwisolver
-from src.render import (
-    add_layout_axioms,
-    constraint_to_kiwi,
-)
+from src.main import _add_layout_axioms, _constraint_to_kiwi
 
 from src.types import LinearConstraint, View
 
@@ -212,11 +209,11 @@ def solve_layout_for_evaluation(
             var_map[key] = kiwisolver.Variable(key)
 
     # Add layout axioms
-    add_layout_axioms(solver, root._flattened_views_in_subtree, var_map)
+    _add_layout_axioms(solver, root._flattened_views_in_subtree, var_map)
 
     # Add synthesized constraints
     for constraint in constraints:
-        solver.addConstraint(constraint_to_kiwi(constraint, var_map))
+        solver.addConstraint(_constraint_to_kiwi(constraint, var_map))
 
     # Fix root dimensions to desired size
     solver.addConstraint((var_map[f"{root.name}.width"] == width) | "required")

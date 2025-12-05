@@ -525,7 +525,12 @@ class ConditionalBayesianLearning:
 
     def _get_anchor_value(self, example_idx: int, anchor_key: str) -> float:
         """Get anchor value for a specific example."""
-        return self.anchor_to_data_map[anchor_key][example_idx]
+        if anchor_key not in self.anchor_to_data_map:
+            raise ValueError(f"Anchor {anchor_key} not found in any example")
+        anchor_list = self.anchor_to_data_map[anchor_key]
+        if example_idx >= len(anchor_list):
+            raise ValueError(f"Anchor {anchor_key} not found in example {example_idx} (only {len(anchor_list)} examples have this anchor)")
+        return anchor_list[example_idx]
 
     def _cluster_template_examples(
         self,
@@ -543,7 +548,24 @@ class ConditionalBayesianLearning:
             List of clusters, where each cluster contains original example indices
         """
         y_key = f"{template.y.view.name}.{template.y.type}"
-        y_values = [self._get_anchor_value(i, y_key) for i in example_idxs]
+        # Filter to only examples where the anchor exists
+        valid_idxs = []
+        y_values = []
+        for i in example_idxs:
+            try:
+                val = self._get_anchor_value(i, y_key)
+                valid_idxs.append(i)
+                y_values.append(val)
+            except (ValueError, IndexError):
+                # Skip examples where this anchor doesn't exist
+                continue
+        
+        if not valid_idxs:
+            # No valid examples, return empty clusters
+            return []
+        
+        # Use valid_idxs instead of example_idxs for the rest
+        example_idxs = tuple(valid_idxs)
 
         is_constant_form = template.x is None
         is_mul_only_form = template.x is not None and template.b == 0.0
@@ -559,7 +581,25 @@ class ConditionalBayesianLearning:
         elif is_mul_only_form:
             # Multiplicative form: y = a*x → observed a = y/x
             x_key = f"{template.x.view.name}.{template.x.type}"
-            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
+            # Filter to examples where both y and x anchors exist
+            final_valid_idxs = []
+            final_y_values = []
+            x_values = []
+            for idx, y_val in zip(example_idxs, y_values):
+                try:
+                    x_val = self._get_anchor_value(idx, x_key)
+                    final_valid_idxs.append(idx)
+                    final_y_values.append(y_val)
+                    x_values.append(x_val)
+                except (ValueError, IndexError):
+                    continue
+            
+            if not final_valid_idxs:
+                return []
+            
+            example_idxs = tuple(final_valid_idxs)
+            y_values = final_y_values
+            
             observed = [
                 y / x if x != 0 else 0.0
                 for y, x in zip(y_values, x_values, strict=True)
@@ -571,7 +611,25 @@ class ConditionalBayesianLearning:
         elif is_add_only_form:
             # Additive form: y = x + b → observed b = y - x
             x_key = f"{template.x.view.name}.{template.x.type}"
-            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
+            # Filter to examples where both y and x anchors exist
+            final_valid_idxs = []
+            final_y_values = []
+            x_values = []
+            for idx, y_val in zip(example_idxs, y_values):
+                try:
+                    x_val = self._get_anchor_value(idx, x_key)
+                    final_valid_idxs.append(idx)
+                    final_y_values.append(y_val)
+                    x_values.append(x_val)
+                except (ValueError, IndexError):
+                    continue
+            
+            if not final_valid_idxs:
+                return []
+            
+            example_idxs = tuple(final_valid_idxs)
+            y_values = final_y_values
+            
             observed = [y - x for y, x in zip(y_values, x_values, strict=True)]
             observations = list(zip(observed, example_idxs, strict=True))
             clusters = cluster_by_observed_param(
