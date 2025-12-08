@@ -1,0 +1,57 @@
+{
+  "sites": [
+    {
+      "url": "https://news.ycombinator.com",
+      "name": "hacker_news",
+      "selectors": [
+        "body",
+        "#hnmain",
+        "table",
+        "tr.athing",
+        ".title",
+        ".subtext",
+        ".morelink"
+      ]
+    },
+    {
+      "url": "https://example.com",
+      "name": "example_site",
+      "selectors": [
+        "body",
+        "div",
+        "h1",
+        "p",
+        "a"
+      ]
+    },
+    {
+      "url": "https://www.wikipedia.org",
+      "name": "wikipedia_home",
+      "selectors": [
+        "body",
+        ".central-textlogo",
+        ".search-container",
+        "#searchInput",
+        ".lang-list-container",
+        ".other-projects"
+      ]
+    }
+  ],
+  "viewports": {
+    "wide": [
+      {"width": 1920, "height": 1080, "label": "desktop_large"},
+      {"width": 1366, "height": 768, "label": "desktop_medium"},
+      {"width": 1024, "height": 768, "label": "tablet_landscape"}
+    ],
+    "thin": [
+      {"width": 375, "height": 812, "label": "iphone_x"},
+      {"width": 414, "height": 896, "label": "iphone_xr"},
+      {"width": 360, "height": 800, "label": "android_small"}
+    ]
+  },
+  "settings": {
+    "wait_after_resize_ms": 1000,
+    "timeout_ms": 30000
+  }
+}
+

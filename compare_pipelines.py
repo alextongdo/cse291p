@@ -33,7 +33,8 @@ from src.evaluation import calculate_rmsd
 from src.instantiation import ConditionalTemplateInstantiator
 from src.learning import ConditionalBayesianLearning
 from src.pruning import ConditionalHierarchicalPruner
-from src.types import View
+from src.types import View, LinearConstraint
+from src.main import _solve_layout
 
 
 def load_examples_legacy(path: Path) -> list[View]:
@@ -84,6 +85,95 @@ def load_examples_legacy(path: Path) -> list[View]:
     return [View(**normalize_view(ex)) for ex in examples]
 
 
+def _view_to_dict(v: View) -> dict:
+    return {
+        "name": v.name,
+        "rect": list(v.rect),
+        "children": [_view_to_dict(c) for c in v.children],
+    }
+
+
+def _filter_dict_to_common_names(d: dict, common: set[str], keep_root: bool = False):
+    name = d.get("name")
+    children = d.get("children", [])
+    filtered_children = []
+    for c in children:
+        fc = _filter_dict_to_common_names(c, common, keep_root=False)
+        if fc is not None:
+            filtered_children.append(fc)
+    if keep_root or name in common:
+        nd = dict(d)
+        nd["children"] = filtered_children
+        return nd
+    if filtered_children:
+        nd = dict(d)
+        nd["children"] = filtered_children
+        return nd
+    return None
+
+
+def filter_views_to_common_names(views: list[View]) -> list[View]:
+    """Retain only views whose names appear in all examples (root always kept)."""
+    if not views:
+        return views
+    name_sets = [set(v.name for v in ex._flattened_views_in_subtree) for ex in views]
+    common = set.intersection(*name_sets) if name_sets else set()
+    if not common:
+        return views
+    filtered = []
+    for v in views:
+        d = _view_to_dict(v)
+        fd = _filter_dict_to_common_names(d, common, keep_root=True)
+        if fd:
+            filtered.append(View(**fd))
+    return filtered
+
+
+def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]]) -> float:
+    """
+    Compute RMSD for conditional outputs by selecting constraints per example:
+    - global constraints: key = tuple(range(len(examples)))
+    - group-specific: pick the smallest group that contains the example
+    """
+    n = len(examples)
+    global_key = tuple(range(n))
+    global_constr = outputs.get(global_key, [])
+
+    all_errors = []
+
+    for idx, ex in enumerate(examples):
+        # pick most specific group containing idx
+        group_constr = []
+        candidate = [
+            (len(k), k, v)
+            for k, v in outputs.items()
+            if k != global_key and idx in k
+        ]
+        if candidate:
+            candidate.sort(key=lambda x: x[0])
+            _, _, group_constr = candidate[0]
+
+        constrs = global_constr + group_constr
+        if not constrs:
+            continue
+
+        solved = _solve_layout(ex, constrs, ex.width, ex.height)
+        predicted = {}
+        for v in ex._flattened_views_in_subtree:
+            predicted[v.name] = (
+                solved[f"{v.name}.left"],
+                solved[f"{v.name}.top"],
+                solved[f"{v.name}.right"],
+                solved[f"{v.name}.bottom"],
+            )
+        # use existing rmsd metric
+        all_errors.append(calculate_rmsd(predicted, ex))
+
+    if not all_errors:
+        return 0.0
+    return sum(all_errors) / len(all_errors)
+
+
 def run_new_pipeline(examples_file: Path) -> dict:
     """
     Run new conditional pipeline and return results.
@@ -95,6 +185,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     print("=" * 80)
     
     views = load_examples_legacy(examples_file)
+    views = filter_views_to_common_names(views)
     print(f"Loaded {len(views)} examples")
     
     overall_start = time.perf_counter()
@@ -123,7 +214,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     overall_time = time.perf_counter() - overall_start
     
     # Calculate RMSD
-    rmsd = calculate_rmsd(views, outputs, debug=False)
+    rmsd = rmsd_conditional(views, outputs)
     num_constraints = sum(len(cs) for cs in outputs.values())
     
     print(f"✓ Completed in {overall_time:.4f}s")
