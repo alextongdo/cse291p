@@ -36,6 +36,54 @@ from src.pruning import ConditionalHierarchicalPruner
 from src.types import View
 
 
+def load_examples_legacy(path: Path) -> list[View]:
+    """
+    Load examples from multiple possible formats:
+    - {"examples": [...]} (new scraped format)
+    - {"train": [...]} (legacy mockdown paper format)
+    - raw list [...]
+    """
+    with open(path) as f:
+        data = json.load(f)
+
+    if isinstance(data, list):
+        examples = data
+    elif isinstance(data, dict):
+        if "examples" in data:
+            examples = data["examples"]
+        elif "train" in data:
+            examples = data["train"]
+        else:
+            # fallback: maybe the dict itself is an example list keyed differently
+            # try to interpret values as list if there's only one key
+            if len(data.values()) == 1 and isinstance(list(data.values())[0], list):
+                examples = list(data.values())[0]
+            else:
+                raise KeyError("Could not find examples or train keys in JSON file")
+    else:
+        raise ValueError("Unsupported JSON format for examples")
+
+    def normalize_view(d: dict) -> dict:
+        """
+        Ensure rect exists; mirror original Mockdown tolerance:
+        - If rect missing but left/top/width/height present, derive rect.
+        - If neither present, default rect to [0,0,0,0].
+        - Recurse into children.
+        """
+        v = dict(d)
+        if "rect" not in v:
+            if all(k in v for k in ("left", "top", "width", "height")):
+                l, t, w, h = v["left"], v["top"], v["width"], v["height"]
+                v["rect"] = [l, t, l + w, t + h]
+            else:
+                v["rect"] = [0, 0, 0, 0]
+        if "children" in v and isinstance(v["children"], list):
+            v["children"] = [normalize_view(c) for c in v["children"]]
+        return v
+
+    return [View(**normalize_view(ex)) for ex in examples]
+
+
 def run_new_pipeline(examples_file: Path) -> dict:
     """
     Run new conditional pipeline and return results.
@@ -46,9 +94,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     print("RUNNING NEW PIPELINE (Conditional Mockdown)")
     print("=" * 80)
     
-    with open(examples_file) as f:
-        data = json.load(f)
-    views = [View(**ex) for ex in data['examples']]
+    views = load_examples_legacy(examples_file)
     print(f"Loaded {len(views)} examples")
     
     overall_start = time.perf_counter()
