@@ -1,0 +1,1054 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 1080,
+      "width": 1920,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1920,
+            1080
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 1080,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1920,
+            1396
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 1396,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8717.25,
+            1920,
+            9929.25
+          ],
+          "top": 8717.25,
+          "left": 0,
+          "height": 1212,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            276,
+            1920,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            276,
+            1920,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8717.25,
+            1920,
+            9929.25
+          ],
+          "top": 8717.25,
+          "left": 0,
+          "height": 1212,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            272,
+            348,
+            1648,
+            371
+          ],
+          "top": 348,
+          "left": 272,
+          "height": 23,
+          "width": 1376,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            272,
+            348,
+            567.27,
+            371
+          ],
+          "top": 348,
+          "left": 272,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            629.33,
+            403,
+            1290.66,
+            479
+          ],
+          "top": 403,
+          "left": 629.33,
+          "height": 76,
+          "width": 661.33,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            272,
+            403,
+            589.3299999999999,
+            581.48
+          ],
+          "top": 403,
+          "left": 272,
+          "height": 178.48,
+          "width": 317.33,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            320,
+            276,
+            366,
+            316
+          ],
+          "top": 276,
+          "left": 320,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1366,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1366,
+            768
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 768,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1366,
+            316
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 316,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8790.7,
+            1366,
+            10002.7
+          ],
+          "top": 8790.7,
+          "left": 0,
+          "height": 1212,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            276,
+            1366,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            276,
+            1366,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8790.7,
+            1366,
+            10002.7
+          ],
+          "top": 8790.7,
+          "left": 0,
+          "height": 1212,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            32,
+            348,
+            1334,
+            371
+          ],
+          "top": 348,
+          "left": 32,
+          "height": 23,
+          "width": 1302,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            32,
+            348,
+            327.27,
+            371
+          ],
+          "top": 348,
+          "left": 32,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            370.83,
+            403,
+            995.1600000000001,
+            479
+          ],
+          "top": 403,
+          "left": 370.83,
+          "height": 76,
+          "width": 624.33,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            32,
+            403,
+            330.83,
+            571.08
+          ],
+          "top": 403,
+          "left": 32,
+          "height": 168.08,
+          "width": 298.83,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            80,
+            276,
+            126,
+            316
+          ],
+          "top": 276,
+          "left": 80,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1024,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1024,
+            768
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 768,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1024,
+            316
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 316,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8817.69,
+            1024,
+            10523.69
+          ],
+          "top": 8817.69,
+          "left": 0,
+          "height": 1706,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            276,
+            1024,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            276,
+            1024,
+            316
+          ],
+          "top": 276,
+          "left": 0,
+          "height": 40,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            8817.69,
+            1024,
+            10523.69
+          ],
+          "top": 8817.69,
+          "left": 0,
+          "height": 1706,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            32,
+            348,
+            992,
+            371
+          ],
+          "top": 348,
+          "left": 32,
+          "height": 23,
+          "width": 960,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            32,
+            348,
+            327.27,
+            371
+          ],
+          "top": 348,
+          "left": 32,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            330.67,
+            403,
+            693.33,
+            555
+          ],
+          "top": 403,
+          "left": 330.67,
+          "height": 152,
+          "width": 362.66,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            32,
+            403,
+            298.66,
+            552.98
+          ],
+          "top": 403,
+          "left": 32,
+          "height": 149.98,
+          "width": 266.66,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            80,
+            276,
+            126,
+            316
+          ],
+          "top": 276,
+          "left": 80,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        375,
+        812
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 812,
+      "width": 375,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            375,
+            812
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 812,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            375,
+            902
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 902,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            20948.27,
+            375,
+            22489.27
+          ],
+          "top": 20948.27,
+          "left": 0,
+          "height": 1541,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            50,
+            375,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            50,
+            375,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            20948.27,
+            375,
+            22489.27
+          ],
+          "top": 20948.27,
+          "left": 0,
+          "height": 1541,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            16,
+            114,
+            359,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 343,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            16,
+            114,
+            311.27,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            16,
+            1212.81,
+            359,
+            1326.81
+          ],
+          "top": 1212.81,
+          "left": 16,
+          "height": 114,
+          "width": 343,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            16,
+            201,
+            359,
+            393.94
+          ],
+          "top": 201,
+          "left": 16,
+          "height": 192.94,
+          "width": 343,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            44,
+            50,
+            90,
+            90
+          ],
+          "top": 50,
+          "left": 44,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        414,
+        896
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 896,
+      "width": 414,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            414,
+            896
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 896,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            414,
+            90
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 90,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            21472.42,
+            414,
+            23013.42
+          ],
+          "top": 21472.42,
+          "left": 0,
+          "height": 1541,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            50,
+            414,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            50,
+            414,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            21472.42,
+            414,
+            23013.42
+          ],
+          "top": 21472.42,
+          "left": 0,
+          "height": 1541,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            16,
+            114,
+            398,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 382,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            16,
+            114,
+            311.27,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            16,
+            1252.62,
+            398,
+            1366.62
+          ],
+          "top": 1252.62,
+          "left": 16,
+          "height": 114,
+          "width": 382,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            16,
+            201,
+            398,
+            415.88
+          ],
+          "top": 201,
+          "left": 16,
+          "height": 214.88,
+          "width": 382,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            44,
+            50,
+            90,
+            90
+          ],
+          "top": 50,
+          "left": 44,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        800
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 800,
+      "width": 360,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            360,
+            800
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 800,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            90
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 90,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            20939.05,
+            360,
+            22480.05
+          ],
+          "top": 20939.05,
+          "left": 0,
+          "height": 1541,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            50,
+            360,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            50,
+            360,
+            90
+          ],
+          "top": 50,
+          "left": 0,
+          "height": 40,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            20939.05,
+            360,
+            22480.05
+          ],
+          "top": 20939.05,
+          "left": 0,
+          "height": 1541,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "container",
+          "rect": [
+            16,
+            114,
+            344,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 328,
+          "children": []
+        },
+        {
+          "name": "card",
+          "rect": [
+            16,
+            114,
+            311.27,
+            137
+          ],
+          "top": 114,
+          "left": 16,
+          "height": 23,
+          "width": 295.27,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            16,
+            1187.5,
+            344,
+            1339.5
+          ],
+          "top": 1187.5,
+          "left": 16,
+          "height": 152,
+          "width": 328,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            16,
+            201,
+            344,
+            385.5
+          ],
+          "top": 201,
+          "left": 16,
+          "height": 184.5,
+          "width": 328,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            44,
+            50,
+            90,
+            90
+          ],
+          "top": 50,
+          "left": 44,
+          "height": 40,
+          "width": 46,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      }
+    }
+  ]
+}

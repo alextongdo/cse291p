@@ -1,0 +1,467 @@
+{
+  "site": {
+    "url": "https://www.wikipedia.org",
+    "name": "wikipedia_home",
+    "captured_at": "2025-12-07T22:53:57.890416"
+  },
+  "selectors": [
+    "body",
+    ".central-textlogo",
+    ".search-container",
+    "#searchInput",
+    ".lang-list-container",
+    ".other-projects"
+  ],
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 40,
+            "width": 1920,
+            "height": 1134.16,
+            "right": 1920,
+            "bottom": 1174.16
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 825,
+            "y": 40,
+            "width": 270,
+            "height": 90.08,
+            "right": 1095,
+            "bottom": 130.08
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 690,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 1230,
+            "bottom": 525.67
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 734.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 1129.09,
+            "bottom": 513.67
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 675.83,
+            "y": 659.36,
+            "width": 1231.36,
+            "height": 450,
+            "right": 1907.19,
+            "bottom": 1109.36
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 40,
+            "width": 1366,
+            "height": 1134.16,
+            "right": 1366,
+            "bottom": 1174.16
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 548,
+            "y": 40,
+            "width": 270,
+            "height": 90.08,
+            "right": 818,
+            "bottom": 130.08
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 413,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 953,
+            "bottom": 525.67
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 457.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 852.09,
+            "bottom": 513.67
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 481.94,
+            "y": 659.36,
+            "width": 871.25,
+            "height": 450,
+            "right": 1353.19,
+            "bottom": 1109.36
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 40,
+            "width": 1024,
+            "height": 1134.16,
+            "right": 1024,
+            "bottom": 1174.16
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 377,
+            "y": 40,
+            "width": 270,
+            "height": 90.08,
+            "right": 647,
+            "bottom": 130.08
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 242,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 782,
+            "bottom": 525.67
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 286.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 681.09,
+            "bottom": 513.67
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 362.23,
+            "y": 659.36,
+            "width": 648.95,
+            "height": 450,
+            "right": 1011.19,
+            "bottom": 1109.36
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 20,
+            "width": 375,
+            "height": 1653.67,
+            "right": 375,
+            "bottom": 1673.67
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 12.8,
+            "y": 20,
+            "width": 349.41,
+            "height": 70,
+            "right": 362.2,
+            "bottom": 90
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 375,
+            "height": 78,
+            "right": 375,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 299,
+            "height": 44,
+            "right": 309,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 717.48,
+            "width": 362.22,
+            "height": 630,
+            "right": 368.61,
+            "bottom": 1347.48
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 20,
+            "width": 414,
+            "height": 1634.17,
+            "right": 414,
+            "bottom": 1654.17
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 12.8,
+            "y": 20,
+            "width": 388.41,
+            "height": 70,
+            "right": 401.2,
+            "bottom": 90
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 414,
+            "height": 78,
+            "right": 414,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 338,
+            "height": 44,
+            "right": 348,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 717.48,
+            "width": 401.22,
+            "height": 630,
+            "right": 407.61,
+            "bottom": 1347.48
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 0,
+            "y": 20,
+            "width": 360,
+            "height": 1673.17,
+            "right": 360,
+            "bottom": 1693.17
+          },
+          "all": null,
+          "count": 1
+        },
+        ".central-textlogo": {
+          "first": {
+            "x": 12.8,
+            "y": 20,
+            "width": 334.41,
+            "height": 70,
+            "right": 347.2,
+            "bottom": 90
+          },
+          "all": null,
+          "count": 1
+        },
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 360,
+            "height": 78,
+            "right": 360,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 284,
+            "height": 44,
+            "right": 294,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 736.98,
+            "width": 347.22,
+            "height": 630,
+            "right": 353.61,
+            "bottom": 1366.98
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    }
+  ]
+}

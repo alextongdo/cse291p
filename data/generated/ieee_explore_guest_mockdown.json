@@ -1,0 +1,214 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 1080,
+      "width": 1920,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1912,
+            1072
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 1064,
+          "width": 1904,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1366,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1358,
+            760
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 752,
+          "width": 1350,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1024,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1016,
+            760
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 752,
+          "width": 1008,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        375,
+        812
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 812,
+      "width": 375,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            367,
+            804
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 796,
+          "width": 359,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        414,
+        896
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 896,
+      "width": 414,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            406,
+            888
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 880,
+          "width": 398,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        800
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 800,
+      "width": 360,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            352,
+            792
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 784,
+          "width": 344,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      }
+    }
+  ]
+}

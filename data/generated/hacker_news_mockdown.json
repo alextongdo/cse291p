@@ -1,0 +1,526 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1912,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            150.8,
+            8,
+            1769.19,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            150.8,
+            8,
+            1769.19,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            150.8,
+            42,
+            741.12,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            150.8,
+            42,
+            172.61,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            186.61,
+            61,
+            741.12,
+            72
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            186.61,
+            1102,
+            219.58,
+            1118
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1358,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            109.25,
+            8,
+            1256.75,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            109.25,
+            8,
+            1256.75,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            109.25,
+            42,
+            699.58,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            109.25,
+            42,
+            131.06,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            145.06,
+            61,
+            699.58,
+            72
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            145.06,
+            1102,
+            178.03,
+            1118
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1016,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            83.59,
+            8,
+            940.39,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            83.59,
+            8,
+            940.39,
+            1209.33
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            83.59,
+            42,
+            673.92,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            83.59,
+            42,
+            105.41,
+            61
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            119.41,
+            61,
+            673.92,
+            72
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            119.41,
+            1102,
+            152.38,
+            1118
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        375,
+        812
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            375,
+            2200.91
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            0,
+            0,
+            375,
+            2200.91
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            0,
+            0,
+            375,
+            2200.91
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            0,
+            68,
+            375,
+            90
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            68,
+            23.98,
+            90
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            41.98,
+            90,
+            375.0,
+            105
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            41.98,
+            2058.91,
+            78.23,
+            2076.91
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        414,
+        896
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            414,
+            1922.56
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            0,
+            0,
+            414,
+            1922.56
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            0,
+            0,
+            414,
+            1922.56
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            0,
+            53,
+            414,
+            75
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            53,
+            23.98,
+            75
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            41.98,
+            75,
+            414.0,
+            90
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            41.98,
+            1793.56,
+            78.23,
+            1811.56
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        800
+      ],
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            360,
+            2306.27
+          ],
+          "children": []
+        },
+        {
+          "name": "hnmain",
+          "rect": [
+            0,
+            0,
+            360,
+            2306.27
+          ],
+          "children": []
+        },
+        {
+          "name": "table",
+          "rect": [
+            0,
+            0,
+            360,
+            2306.27
+          ],
+          "children": []
+        },
+        {
+          "name": "trathing",
+          "rect": [
+            0,
+            68,
+            360,
+            90
+          ],
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            68,
+            23.98,
+            90
+          ],
+          "children": []
+        },
+        {
+          "name": "subtext",
+          "rect": [
+            41.98,
+            90,
+            360.0,
+            120
+          ],
+          "children": []
+        },
+        {
+          "name": "morelink",
+          "rect": [
+            41.98,
+            2164.27,
+            78.23,
+            2182.27
+          ],
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      }
+    }
+  ]
+}

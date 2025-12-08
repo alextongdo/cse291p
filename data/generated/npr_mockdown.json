@@ -1,0 +1,1236 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 1080,
+      "width": 1920,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1920,
+            15357.58
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 15357.58,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1920,
+            153
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 153,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            168,
+            1920,
+            15357.58
+          ],
+          "top": 168,
+          "left": 0,
+          "height": 15189.58,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            300,
+            14872.98,
+            1300,
+            15357.57
+          ],
+          "top": 14872.98,
+          "left": 300,
+          "height": 484.59,
+          "width": 1000,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            1920,
+            153
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 153,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            1318,
+            15,
+            1618,
+            153
+          ],
+          "top": 15,
+          "left": 1318,
+          "height": 138,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            1318,
+            15,
+            1618,
+            103
+          ],
+          "top": 15,
+          "left": 1318,
+          "height": 88,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "menu",
+          "rect": [
+            0,
+            103,
+            1920,
+            153
+          ],
+          "top": 103,
+          "left": 0,
+          "height": 50,
+          "width": 1920,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            319,
+            215.59,
+            780,
+            335.59000000000003
+          ],
+          "top": 215.59,
+          "left": 319,
+          "height": 120,
+          "width": 461,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -8682,
+            27,
+            -8666,
+            33
+          ],
+          "top": 27,
+          "left": -8682,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            320,
+            188,
+            386.31,
+            207.59
+          ],
+          "top": 188,
+          "left": 320,
+          "height": 19.59,
+          "width": 66.31,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            319,
+            215.59,
+            780,
+            335.59000000000003
+          ],
+          "top": 215.59,
+          "left": 319,
+          "height": 120,
+          "width": 461,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1366,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1366,
+            15357.58
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 15357.58,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1366,
+            153
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 153,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            168,
+            1366,
+            15357.58
+          ],
+          "top": 168,
+          "left": 0,
+          "height": 15189.58,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            23,
+            14872.98,
+            1023,
+            15357.57
+          ],
+          "top": 14872.98,
+          "left": 23,
+          "height": 484.59,
+          "width": 1000,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            1366,
+            153
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 153,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            1041,
+            15,
+            1341,
+            153
+          ],
+          "top": 15,
+          "left": 1041,
+          "height": 138,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            1041,
+            15,
+            1341,
+            103
+          ],
+          "top": 15,
+          "left": 1041,
+          "height": 88,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "aside",
+          "rect": [
+            23,
+            857.52,
+            1023,
+            1020.52
+          ],
+          "top": 857.52,
+          "left": 23,
+          "height": 163,
+          "width": 1000,
+          "children": []
+        },
+        {
+          "name": "menu",
+          "rect": [
+            0,
+            103,
+            1366,
+            153
+          ],
+          "top": 103,
+          "left": 0,
+          "height": 50,
+          "width": 1366,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            42,
+            215.59,
+            503,
+            335.59000000000003
+          ],
+          "top": 215.59,
+          "left": 42,
+          "height": 120,
+          "width": 461,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -8959,
+            27,
+            -8943,
+            33
+          ],
+          "top": 27,
+          "left": -8959,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            43,
+            188,
+            109.31,
+            207.59
+          ],
+          "top": 188,
+          "left": 43,
+          "height": 19.59,
+          "width": 66.31,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            42,
+            215.59,
+            503,
+            335.59000000000003
+          ],
+          "top": 215.59,
+          "left": 42,
+          "height": 120,
+          "width": 461,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1024,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            1024,
+            14961.52
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 14961.52,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1024,
+            56
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 56,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            71,
+            1024,
+            14961.52
+          ],
+          "top": 71,
+          "left": 0,
+          "height": 14890.52,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            14476.92,
+            1024,
+            14961.51
+          ],
+          "top": 14476.92,
+          "left": 0,
+          "height": 484.59,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            1024,
+            56
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 56,
+          "width": 1024,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            709,
+            0,
+            1009,
+            90
+          ],
+          "top": 0,
+          "left": 709,
+          "height": 90,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            709,
+            0,
+            1009,
+            55
+          ],
+          "top": 0,
+          "left": 709,
+          "height": 55,
+          "width": 300,
+          "children": []
+        },
+        {
+          "name": "aside",
+          "rect": [
+            15,
+            757.98,
+            1009,
+            920.98
+          ],
+          "top": 757.98,
+          "left": 15,
+          "height": 163,
+          "width": 994,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            34,
+            118.59,
+            492,
+            173.59
+          ],
+          "top": 118.59,
+          "left": 34,
+          "height": 55,
+          "width": 458,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -9291,
+            12,
+            -9275,
+            18
+          ],
+          "top": 12,
+          "left": -9291,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            35,
+            91,
+            101.31,
+            110.59
+          ],
+          "top": 91,
+          "left": 35,
+          "height": 19.59,
+          "width": 66.31,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            34,
+            118.59,
+            492,
+            173.59
+          ],
+          "top": 118.59,
+          "left": 34,
+          "height": 55,
+          "width": 458,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        375,
+        812
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 812,
+      "width": 375,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            375,
+            16098.61
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 16098.61,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            375,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            65,
+            375,
+            16048.61
+          ],
+          "top": 65,
+          "left": 0,
+          "height": 15983.61,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            15116.42,
+            375,
+            16048.61
+          ],
+          "top": 15116.42,
+          "left": 0,
+          "height": 932.19,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            375,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            0,
+            762,
+            375,
+            812
+          ],
+          "top": 762,
+          "left": 0,
+          "height": 50,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            0,
+            762,
+            375,
+            812
+          ],
+          "top": 762,
+          "left": 0,
+          "height": 50,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "aside",
+          "rect": [
+            15,
+            1479.41,
+            360,
+            1642.41
+          ],
+          "top": 1479.41,
+          "left": 15,
+          "height": 163,
+          "width": 345,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            14,
+            334.53,
+            360,
+            402.03
+          ],
+          "top": 334.53,
+          "left": 14,
+          "height": 67.5,
+          "width": 346,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -10000,
+            774,
+            -9984,
+            780
+          ],
+          "top": 774,
+          "left": -10000,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            15,
+            306.94,
+            360,
+            326.53
+          ],
+          "top": 306.94,
+          "left": 15,
+          "height": 19.59,
+          "width": 345,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            14,
+            334.53,
+            360,
+            402.03
+          ],
+          "top": 334.53,
+          "left": 14,
+          "height": 67.5,
+          "width": 346,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        414,
+        896
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 896,
+      "width": 414,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            414,
+            15605.2
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 15605.2,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            414,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            65,
+            414,
+            15555.2
+          ],
+          "top": 65,
+          "left": 0,
+          "height": 15490.2,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            14623.02,
+            414,
+            15555.210000000001
+          ],
+          "top": 14623.02,
+          "left": 0,
+          "height": 932.19,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            414,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            0,
+            846,
+            414,
+            896
+          ],
+          "top": 846,
+          "left": 0,
+          "height": 50,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            0,
+            846,
+            414,
+            896
+          ],
+          "top": 846,
+          "left": 0,
+          "height": 50,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "aside",
+          "rect": [
+            15,
+            1396.16,
+            399,
+            1559.16
+          ],
+          "top": 1396.16,
+          "left": 15,
+          "height": 163,
+          "width": 384,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            14,
+            356.47,
+            399,
+            401.47
+          ],
+          "top": 356.47,
+          "left": 14,
+          "height": 45,
+          "width": 385,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -10000,
+            858,
+            -9984,
+            864
+          ],
+          "top": 858,
+          "left": -10000,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            15,
+            328.88,
+            399,
+            348.46999999999997
+          ],
+          "top": 328.88,
+          "left": 15,
+          "height": 19.59,
+          "width": 384,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            14,
+            356.47,
+            399,
+            401.47
+          ],
+          "top": 356.47,
+          "left": 14,
+          "height": 45,
+          "width": 385,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        800
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 800,
+      "width": 360,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            360,
+            800
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 800,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "main",
+          "rect": [
+            0,
+            65,
+            360,
+            16381.55
+          ],
+          "top": 65,
+          "left": 0,
+          "height": 16316.55,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "footer",
+          "rect": [
+            0,
+            15449.36,
+            360,
+            16381.550000000001
+          ],
+          "top": 15449.36,
+          "left": 0,
+          "height": 932.19,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            0,
+            0,
+            360,
+            50
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 50,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "section",
+          "rect": [
+            0,
+            750,
+            360,
+            800
+          ],
+          "top": 750,
+          "left": 0,
+          "height": 50,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "article",
+          "rect": [
+            0,
+            750,
+            360,
+            800
+          ],
+          "top": 750,
+          "left": 0,
+          "height": 50,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "aside",
+          "rect": [
+            15,
+            1583.47,
+            345,
+            1746.47
+          ],
+          "top": 1583.47,
+          "left": 15,
+          "height": 163,
+          "width": 330,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            14,
+            326.09,
+            345,
+            393.59
+          ],
+          "top": 326.09,
+          "left": 14,
+          "height": 67.5,
+          "width": 331,
+          "children": []
+        },
+        {
+          "name": "button",
+          "rect": [
+            -10000,
+            762,
+            -9984,
+            768
+          ],
+          "top": 762,
+          "left": -10000,
+          "height": 6,
+          "width": 16,
+          "children": []
+        },
+        {
+          "name": "h2",
+          "rect": [
+            15,
+            298.5,
+            345,
+            318.09
+          ],
+          "top": 298.5,
+          "left": 15,
+          "height": 19.59,
+          "width": 330,
+          "children": []
+        },
+        {
+          "name": "h3",
+          "rect": [
+            14,
+            326.09,
+            345,
+            393.59
+          ],
+          "top": 326.09,
+          "left": 14,
+          "height": 67.5,
+          "width": 331,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            -10000,
+            0,
+            -9999,
+            1
+          ],
+          "top": 0,
+          "left": -10000,
+          "height": 1,
+          "width": 1,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      }
+    }
+  ]
+}

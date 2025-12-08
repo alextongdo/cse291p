@@ -1,0 +1,550 @@
+{
+  "site": {
+    "url": "https://example.com",
+    "name": "example_site",
+    "captured_at": "2025-12-07T22:53:50.699101"
+  },
+  "selectors": [
+    "body",
+    "div",
+    "h1",
+    "p",
+    "a"
+  ],
+  "viewports": [
+    {
+      "viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 384,
+            "y": 162,
+            "width": 1152,
+            "height": 96.08,
+            "right": 1536,
+            "bottom": 258.08
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 384,
+            "y": 162,
+            "width": 1152,
+            "height": 96.08,
+            "right": 1536,
+            "bottom": 258.08
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 384,
+            "y": 162,
+            "width": 1152,
+            "height": 28,
+            "right": 1536,
+            "bottom": 190
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 384,
+            "y": 206.08,
+            "width": 1152,
+            "height": 18,
+            "right": 1536,
+            "bottom": 224.08
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 384,
+              "y": 206.08,
+              "width": 1152,
+              "height": 18,
+              "right": 1536,
+              "bottom": 224.08
+            },
+            {
+              "index": 1,
+              "x": 384,
+              "y": 240.08,
+              "width": 1152,
+              "height": 18,
+              "right": 1536,
+              "bottom": 258.08
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 384,
+            "y": 240.08,
+            "width": 82,
+            "height": 18,
+            "right": 466,
+            "bottom": 258.08
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 273.2,
+            "y": 115.19,
+            "width": 819.59,
+            "height": 96.08,
+            "right": 1092.8,
+            "bottom": 211.27
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 273.2,
+            "y": 115.19,
+            "width": 819.59,
+            "height": 96.08,
+            "right": 1092.8,
+            "bottom": 211.27
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 273.2,
+            "y": 115.19,
+            "width": 819.59,
+            "height": 28,
+            "right": 1092.8,
+            "bottom": 143.19
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 273.2,
+            "y": 159.27,
+            "width": 819.59,
+            "height": 18,
+            "right": 1092.8,
+            "bottom": 177.27
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 273.2,
+              "y": 159.27,
+              "width": 819.59,
+              "height": 18,
+              "right": 1092.8,
+              "bottom": 177.27
+            },
+            {
+              "index": 1,
+              "x": 273.2,
+              "y": 193.27,
+              "width": 819.59,
+              "height": 18,
+              "right": 1092.8,
+              "bottom": 211.27
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 273.2,
+            "y": 193.27,
+            "width": 82,
+            "height": 18,
+            "right": 355.2,
+            "bottom": 211.27
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 204.8,
+            "y": 115.19,
+            "width": 614.39,
+            "height": 114.08,
+            "right": 819.19,
+            "bottom": 229.27
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 204.8,
+            "y": 115.19,
+            "width": 614.39,
+            "height": 114.08,
+            "right": 819.19,
+            "bottom": 229.27
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 204.8,
+            "y": 115.19,
+            "width": 614.39,
+            "height": 28,
+            "right": 819.19,
+            "bottom": 143.19
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 204.8,
+            "y": 159.27,
+            "width": 614.39,
+            "height": 36,
+            "right": 819.19,
+            "bottom": 195.27
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 204.8,
+              "y": 159.27,
+              "width": 614.39,
+              "height": 36,
+              "right": 819.19,
+              "bottom": 195.27
+            },
+            {
+              "index": 1,
+              "x": 204.8,
+              "y": 211.27,
+              "width": 614.39,
+              "height": 18,
+              "right": 819.19,
+              "bottom": 229.27
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 204.8,
+            "y": 211.27,
+            "width": 82,
+            "height": 18,
+            "right": 286.8,
+            "bottom": 229.27
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 75,
+            "y": 121.8,
+            "width": 225,
+            "height": 150.08,
+            "right": 300,
+            "bottom": 271.88
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 75,
+            "y": 121.8,
+            "width": 225,
+            "height": 150.08,
+            "right": 300,
+            "bottom": 271.88
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 75,
+            "y": 121.8,
+            "width": 225,
+            "height": 28,
+            "right": 300,
+            "bottom": 149.8
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 75,
+            "y": 165.88,
+            "width": 225,
+            "height": 72,
+            "right": 300,
+            "bottom": 237.88
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 75,
+              "y": 165.88,
+              "width": 225,
+              "height": 72,
+              "right": 300,
+              "bottom": 237.88
+            },
+            {
+              "index": 1,
+              "x": 75,
+              "y": 253.88,
+              "width": 225,
+              "height": 18,
+              "right": 300,
+              "bottom": 271.88
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 75,
+            "y": 253.88,
+            "width": 82,
+            "height": 18,
+            "right": 157,
+            "bottom": 271.88
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 82.8,
+            "y": 134.39,
+            "width": 248.39,
+            "height": 150.08,
+            "right": 331.19,
+            "bottom": 284.47
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 82.8,
+            "y": 134.39,
+            "width": 248.39,
+            "height": 150.08,
+            "right": 331.19,
+            "bottom": 284.47
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 82.8,
+            "y": 134.39,
+            "width": 248.39,
+            "height": 28,
+            "right": 331.19,
+            "bottom": 162.39
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 82.8,
+            "y": 178.47,
+            "width": 248.39,
+            "height": 72,
+            "right": 331.19,
+            "bottom": 250.47
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 82.8,
+              "y": 178.47,
+              "width": 248.39,
+              "height": 72,
+              "right": 331.19,
+              "bottom": 250.47
+            },
+            {
+              "index": 1,
+              "x": 82.8,
+              "y": 266.47,
+              "width": 248.39,
+              "height": 18,
+              "right": 331.19,
+              "bottom": 284.47
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 82.8,
+            "y": 266.47,
+            "width": 82,
+            "height": 18,
+            "right": 164.8,
+            "bottom": 284.47
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    },
+    {
+      "viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      },
+      "elements": {
+        "body": {
+          "first": {
+            "x": 72,
+            "y": 120,
+            "width": 216,
+            "height": 150.08,
+            "right": 288,
+            "bottom": 270.08
+          },
+          "all": null,
+          "count": 1
+        },
+        "div": {
+          "first": {
+            "x": 72,
+            "y": 120,
+            "width": 216,
+            "height": 150.08,
+            "right": 288,
+            "bottom": 270.08
+          },
+          "all": null,
+          "count": 1
+        },
+        "h1": {
+          "first": {
+            "x": 72,
+            "y": 120,
+            "width": 216,
+            "height": 28,
+            "right": 288,
+            "bottom": 148
+          },
+          "all": null,
+          "count": 1
+        },
+        "p": {
+          "first": {
+            "x": 72,
+            "y": 164.08,
+            "width": 216,
+            "height": 72,
+            "right": 288,
+            "bottom": 236.08
+          },
+          "all": [
+            {
+              "index": 0,
+              "x": 72,
+              "y": 164.08,
+              "width": 216,
+              "height": 72,
+              "right": 288,
+              "bottom": 236.08
+            },
+            {
+              "index": 1,
+              "x": 72,
+              "y": 252.08,
+              "width": 216,
+              "height": 18,
+              "right": 288,
+              "bottom": 270.08
+            }
+          ],
+          "count": 2
+        },
+        "a": {
+          "first": {
+            "x": 72,
+            "y": 252.08,
+            "width": 82,
+            "height": 18,
+            "right": 154,
+            "bottom": 270.08
+          },
+          "all": null,
+          "count": 1
+        }
+      }
+    }
+  ]
+}

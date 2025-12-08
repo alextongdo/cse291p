@@ -1,0 +1,634 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1920,
+        1080
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 1080,
+      "width": 1920,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1912,
+            1206.33
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 1198.33,
+          "width": 1904,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            150.8,
+            42,
+            172.61,
+            61
+          ],
+          "top": 42,
+          "left": 150.8,
+          "height": 19,
+          "width": 21.81,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            150.8,
+            1172,
+            1769.19,
+            1193
+          ],
+          "top": 1172,
+          "left": 150.8,
+          "height": 21,
+          "width": 1618.39,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            914.42,
+            1172,
+            1062.42,
+            1193
+          ],
+          "top": 1172,
+          "left": 914.42,
+          "height": 21,
+          "width": 148,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            152.8,
+            10,
+            172.8,
+            30
+          ],
+          "top": 10,
+          "left": 152.8,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            152.8,
+            10,
+            172.8,
+            30
+          ],
+          "top": 10,
+          "left": 152.8,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1366,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1366,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1358,
+            1206.33
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 1198.33,
+          "width": 1350,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            109.25,
+            42,
+            131.06,
+            61
+          ],
+          "top": 42,
+          "left": 109.25,
+          "height": 19,
+          "width": 21.81,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            109.25,
+            1172,
+            1256.75,
+            1193
+          ],
+          "top": 1172,
+          "left": 109.25,
+          "height": 21,
+          "width": 1147.5,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            637.44,
+            1172,
+            785.44,
+            1193
+          ],
+          "top": 1172,
+          "left": 637.44,
+          "height": 21,
+          "width": 148,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            111.25,
+            10,
+            131.25,
+            30
+          ],
+          "top": 10,
+          "left": 111.25,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            111.25,
+            10,
+            131.25,
+            30
+          ],
+          "top": 10,
+          "left": 111.25,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        768
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 768,
+      "width": 1024,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            8,
+            8,
+            1016,
+            1206.33
+          ],
+          "top": 8,
+          "left": 8,
+          "height": 1198.33,
+          "width": 1008,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            83.59,
+            42,
+            105.4,
+            61
+          ],
+          "top": 42,
+          "left": 83.59,
+          "height": 19,
+          "width": 21.81,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            83.59,
+            1172,
+            940.39,
+            1193
+          ],
+          "top": 1172,
+          "left": 83.59,
+          "height": 21,
+          "width": 856.8,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            466.42,
+            1172,
+            614.4200000000001,
+            1193
+          ],
+          "top": 1172,
+          "left": 466.42,
+          "height": 21,
+          "width": 148,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            85.59,
+            10,
+            105.59,
+            30
+          ],
+          "top": 10,
+          "left": 85.59,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            85.59,
+            10,
+            105.59,
+            30
+          ],
+          "top": 10,
+          "left": 85.59,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape",
+        "category": "wide"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        375,
+        812
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 812,
+      "width": 375,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            375,
+            2201.25
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 2201.25,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            68,
+            23.98,
+            90
+          ],
+          "top": 68,
+          "left": 0,
+          "height": 22,
+          "width": 23.98,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            0,
+            2147.92,
+            375,
+            2187.92
+          ],
+          "top": 2147.92,
+          "left": 0,
+          "height": 40,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            18.75,
+            2163.92,
+            356.25,
+            2187.92
+          ],
+          "top": 2163.92,
+          "left": 18.75,
+          "height": 24,
+          "width": 337.5,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            2,
+            19,
+            22,
+            39
+          ],
+          "top": 19,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            2,
+            19,
+            22,
+            39
+          ],
+          "top": 19,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        414,
+        896
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 896,
+      "width": 414,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            414,
+            1906.23
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 1906.23,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            53,
+            23.98,
+            75
+          ],
+          "top": 53,
+          "left": 0,
+          "height": 22,
+          "width": 23.98,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            0,
+            1852.91,
+            414,
+            1892.91
+          ],
+          "top": 1852.91,
+          "left": 0,
+          "height": 40,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            20.7,
+            1868.91,
+            393.28999999999996,
+            1892.91
+          ],
+          "top": 1868.91,
+          "left": 20.7,
+          "height": 24,
+          "width": 372.59,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            2,
+            11.5,
+            22,
+            31.5
+          ],
+          "top": 11.5,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            2,
+            11.5,
+            22,
+            31.5
+          ],
+          "top": 11.5,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr",
+        "category": "thin"
+      }
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        800
+      ],
+      "top": 0,
+      "left": 0,
+      "height": 800,
+      "width": 360,
+      "children": [
+        {
+          "name": "body",
+          "rect": [
+            0,
+            0,
+            360,
+            2353.28
+          ],
+          "top": 0,
+          "left": 0,
+          "height": 2353.28,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "title",
+          "rect": [
+            0,
+            68,
+            23.98,
+            90
+          ],
+          "top": 68,
+          "left": 0,
+          "height": 22,
+          "width": 23.98,
+          "children": []
+        },
+        {
+          "name": "form",
+          "rect": [
+            0,
+            2299.95,
+            360,
+            2339.95
+          ],
+          "top": 2299.95,
+          "left": 0,
+          "height": 40,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "input",
+          "rect": [
+            18,
+            2315.95,
+            342,
+            2339.95
+          ],
+          "top": 2315.95,
+          "left": 18,
+          "height": 24,
+          "width": 324,
+          "children": []
+        },
+        {
+          "name": "img",
+          "rect": [
+            2,
+            19,
+            22,
+            39
+          ],
+          "top": 19,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        },
+        {
+          "name": "a",
+          "rect": [
+            2,
+            19,
+            22,
+            39
+          ],
+          "top": 19,
+          "left": 2,
+          "height": 20,
+          "width": 20,
+          "children": []
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 800,
+        "label": "android_small",
+        "category": "thin"
+      }
+    }
+  ]
+}
