@@ -1,7 +1,7 @@
 {
   "sites": [
     {
-      "url": "https://ieeexplore.ieee.org/Xplore/",
+      "url": "https://ieeexplore.ieee.org/Xplore/home.jsp",
       "name": "ieee_explore",
       "selectors": [
         "body",
@@ -36,6 +36,7 @@
         ".content",
         ".content .row",
         ".content .col",
+        ".homepage-module",
         ".highlight",
         ".card",
         ".card-body",
@@ -46,6 +47,8 @@
         ".page-footer",
         ".page-footer .row",
         ".page-footer .col",
+        ".hero",
+        ".hero .row",
         "nav",
         "section",
         "article"
@@ -65,8 +68,9 @@
     ]
   },
   "settings": {
-    "wait_after_resize_ms": 1000,
-    "timeout_ms": 30000
+    "wait_after_resize_ms": 1500,
+    "timeout_ms": 60000,
+    "wait_until": "domcontentloaded"
   }
 }
 

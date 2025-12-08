@@ -19,11 +19,11 @@
             0,
             0,
             1920,
-            17944.34
+            19594.25
           ],
           "top": 0,
           "left": 0,
-          "height": 17944.34,
+          "height": 19594.25,
           "width": 1920,
           "children": []
         },
@@ -33,11 +33,11 @@
             0,
             370,
             1920,
-            17355.61
+            19005.52
           ],
           "top": 370,
           "left": 0,
-          "height": 16985.61,
+          "height": 18635.52,
           "width": 1920,
           "children": []
         },
@@ -45,11 +45,11 @@
           "name": "footer",
           "rect": [
             0,
-            17315.61,
+            18965.52,
             1920,
-            17944.34
+            19594.25
           ],
-          "top": 17315.61,
+          "top": 18965.52,
           "left": 0,
           "height": 628.73,
           "width": 1920,
@@ -70,87 +70,73 @@
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            1464,
-            436,
-            1510,
-            502
-          ],
-          "top": 436,
-          "left": 1464,
-          "height": 66,
-          "width": 46,
-          "children": []
-        },
-        {
-          "name": "h2",
-          "rect": [
-            1170,
-            592,
-            1255.7,
-            611.2
-          ],
-          "top": 592,
-          "left": 1170,
-          "height": 19.2,
-          "width": 85.7,
-          "children": []
-        },
-        {
-          "name": "img",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             410,
-            592,
-            1000,
-            1064
+            1988.19,
+            1510,
+            18905.52
           ],
-          "top": 592,
+          "top": 1988.19,
           "left": 410,
-          "height": 472,
-          "width": 590,
+          "height": 16917.33,
+          "width": 1100,
           "children": []
         },
         {
-          "name": "ul",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            828.23,
-            455,
-            1510.0,
-            488
+            410,
+            442,
+            1090,
+            1180.5900000000001
           ],
-          "top": 455,
-          "left": 828.23,
-          "height": 33,
-          "width": 681.77,
+          "top": 442,
+          "left": 410,
+          "height": 738.59,
+          "width": 680,
           "children": []
         },
         {
-          "name": "li",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            984.23,
-            455,
-            1040.06,
-            488
+            410,
+            442,
+            1090,
+            1180.5900000000001
           ],
-          "top": 455,
-          "left": 984.23,
-          "height": 33,
-          "width": 55.83,
+          "top": 442,
+          "left": 410,
+          "height": 738.59,
+          "width": 680,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--quick-post",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            410,
+            2114.38,
+            960,
+            2400.54
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 2114.38,
+          "left": 410,
+          "height": 286.16,
+          "width": 550,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            689.56,
+            1163.59,
+            774.75,
+            1176.59
+          ],
+          "top": 1163.59,
+          "left": 689.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],
@@ -180,11 +166,11 @@
             0,
             0,
             1366,
-            19572.31
+            19594.25
           ],
           "top": 0,
           "left": 0,
-          "height": 19572.31,
+          "height": 19594.25,
           "width": 1366,
           "children": []
         },
@@ -192,13 +178,13 @@
           "name": "main",
           "rect": [
             0,
-            520,
+            370,
             1366,
-            18983.58
+            19005.52
           ],
-          "top": 520,
+          "top": 370,
           "left": 0,
-          "height": 18463.58,
+          "height": 18635.52,
           "width": 1366,
           "children": []
         },
@@ -206,11 +192,11 @@
           "name": "footer",
           "rect": [
             0,
-            18943.58,
+            18965.52,
             1366,
-            19572.31
+            19594.25
           ],
-          "top": 18943.58,
+          "top": 18965.52,
           "left": 0,
           "height": 628.73,
           "width": 1366,
@@ -220,98 +206,84 @@
           "name": "nav",
           "rect": [
             551.23,
-            455,
+            305,
             1233.0,
-            491
+            341
           ],
-          "top": 455,
+          "top": 305,
           "left": 551.23,
           "height": 36,
           "width": 681.77,
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            1187,
-            436,
-            1233,
-            502
-          ],
-          "top": 436,
-          "left": 1187,
-          "height": 66,
-          "width": 46,
-          "children": []
-        },
-        {
-          "name": "h2",
-          "rect": [
-            893,
-            592,
-            978.7,
-            611.2
-          ],
-          "top": 592,
-          "left": 893,
-          "height": 19.2,
-          "width": 85.7,
-          "children": []
-        },
-        {
-          "name": "img",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             133,
-            592,
-            723,
-            1064
+            1988.19,
+            1233,
+            18905.52
           ],
-          "top": 592,
+          "top": 1988.19,
           "left": 133,
-          "height": 472,
-          "width": 590,
+          "height": 16917.33,
+          "width": 1100,
           "children": []
         },
         {
-          "name": "ul",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            551.23,
-            455,
-            1233.0,
-            488
+            133,
+            442,
+            813,
+            1180.5900000000001
           ],
-          "top": 455,
-          "left": 551.23,
-          "height": 33,
-          "width": 681.77,
+          "top": 442,
+          "left": 133,
+          "height": 738.59,
+          "width": 680,
           "children": []
         },
         {
-          "name": "li",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            707.23,
-            455,
-            763.0600000000001,
-            488
+            133,
+            442,
+            813,
+            1180.5900000000001
           ],
-          "top": 455,
-          "left": 707.23,
-          "height": 33,
-          "width": 55.83,
+          "top": 442,
+          "left": 133,
+          "height": 738.59,
+          "width": 680,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--quick-post",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            133,
+            2114.38,
+            683,
+            2400.54
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 2114.38,
+          "left": 133,
+          "height": 286.16,
+          "width": 550,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            412.56,
+            1163.59,
+            497.75,
+            1176.59
+          ],
+          "top": 1163.59,
+          "left": 412.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],
@@ -341,11 +313,11 @@
             0,
             0,
             1024,
-            24257.22
+            24390.17
           ],
           "top": 0,
           "left": 0,
-          "height": 24257.22,
+          "height": 24390.17,
           "width": 1024,
           "children": []
         },
@@ -355,11 +327,11 @@
             0,
             370,
             1024,
-            23788.48
+            23921.44
           ],
           "top": 370,
           "left": 0,
-          "height": 23418.48,
+          "height": 23551.44,
           "width": 1024,
           "children": []
         },
@@ -367,11 +339,11 @@
           "name": "footer",
           "rect": [
             0,
-            23748.48,
+            23881.44,
             1024,
-            24257.21
+            24390.17
           ],
-          "top": 23748.48,
+          "top": 23881.44,
           "left": 0,
           "height": 508.73,
           "width": 1024,
@@ -392,87 +364,73 @@
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            958,
-            286,
-            1004,
-            352
-          ],
-          "top": 286,
-          "left": 958,
-          "height": 66,
-          "width": 46,
-          "children": []
-        },
-        {
-          "name": "h2",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             212,
-            1163,
-            297.7,
-            1182.2
-          ],
-          "top": 1163,
-          "left": 212,
-          "height": 19.2,
-          "width": 85.7,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            212,
-            442,
+            2583.98,
             812,
-            922
+            23821.43
           ],
-          "top": 442,
+          "top": 2583.98,
           "left": 212,
-          "height": 480,
+          "height": 21237.45,
           "width": 600,
           "children": []
         },
         {
-          "name": "ul",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            322.23,
-            305,
-            1004.0,
-            338
+            212,
+            442,
+            812,
+            1067
           ],
-          "top": 305,
-          "left": 322.23,
-          "height": 33,
-          "width": 681.77,
+          "top": 442,
+          "left": 212,
+          "height": 625,
+          "width": 600,
           "children": []
         },
         {
-          "name": "li",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            478.23,
-            305,
-            534.0600000000001,
-            338
+            212,
+            442,
+            812,
+            1067
           ],
-          "top": 305,
-          "left": 478.23,
-          "height": 33,
-          "width": 55.83,
+          "top": 442,
+          "left": 212,
+          "height": 625,
+          "width": 600,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--quick-post",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            212,
+            2710.17,
+            812,
+            2956.34
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 2710.17,
+          "left": 212,
+          "height": 246.17,
+          "width": 600,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            491.56,
+            1050,
+            576.75,
+            1063
+          ],
+          "top": 1050,
+          "left": 491.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],
@@ -502,11 +460,11 @@
             0,
             0,
             375,
-            23814.67
+            24379.84
           ],
           "top": 0,
           "left": 0,
-          "height": 23814.67,
+          "height": 24379.84,
           "width": 375,
           "children": []
         },
@@ -516,11 +474,11 @@
             0,
             45,
             375,
-            23056.16
+            23621.33
           ],
           "top": 45,
           "left": 0,
-          "height": 23011.16,
+          "height": 23576.33,
           "width": 375,
           "children": []
         },
@@ -528,56 +486,84 @@
           "name": "footer",
           "rect": [
             0,
-            23016.16,
+            23581.33,
             375,
-            23814.68
+            24379.850000000002
           ],
-          "top": 23016.16,
+          "top": 23581.33,
           "left": 0,
           "height": 798.52,
           "width": 375,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             10,
-            995.77,
-            95.7,
-            1014.97
+            2511.94,
+            365,
+            23521.329999999998
           ],
-          "top": 995.77,
+          "top": 2511.94,
           "left": 10,
-          "height": 19.2,
-          "width": 85.7,
+          "height": 21009.39,
+          "width": 355,
           "children": []
         },
         {
-          "name": "img",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            50,
+            10,
             193.77,
             365,
-            445.77
+            666.77
           ],
           "top": 193.77,
-          "left": 50,
-          "height": 252,
-          "width": 315,
+          "left": 10,
+          "height": 473,
+          "width": 355,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            10,
+            193.77,
+            365,
+            666.77
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 193.77,
+          "left": 10,
+          "height": 473,
+          "width": 355,
+          "children": []
+        },
+        {
+          "name": "duet--content-cards--quick-post",
+          "rect": [
+            10,
+            2595.31,
+            365,
+            2968.65
+          ],
+          "top": 2595.31,
+          "left": 10,
+          "height": 373.34,
+          "width": 355,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            119.56,
+            649.77,
+            204.75,
+            662.77
+          ],
+          "top": 649.77,
+          "left": 119.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],
@@ -607,11 +593,11 @@
             0,
             0,
             414,
-            23178.88
+            23779.44
           ],
           "top": 0,
           "left": 0,
-          "height": 23178.88,
+          "height": 23779.44,
           "width": 414,
           "children": []
         },
@@ -621,11 +607,11 @@
             0,
             45,
             414,
-            22420.36
+            23020.92
           ],
           "top": 45,
           "left": 0,
-          "height": 22375.36,
+          "height": 22975.92,
           "width": 414,
           "children": []
         },
@@ -633,56 +619,84 @@
           "name": "footer",
           "rect": [
             0,
-            22380.36,
+            22980.92,
             414,
-            23178.88
+            23779.44
           ],
-          "top": 22380.36,
+          "top": 22980.92,
           "left": 0,
           "height": 798.52,
           "width": 414,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             10,
-            1002.95,
-            95.7,
-            1022.1500000000001
+            2466.53,
+            404,
+            22920.92
           ],
-          "top": 1002.95,
+          "top": 2466.53,
           "left": 10,
-          "height": 19.2,
-          "width": 85.7,
+          "height": 20454.39,
+          "width": 394,
           "children": []
         },
         {
-          "name": "img",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            50,
+            10,
             193.77,
             404,
-            476.96000000000004
+            697.96
           ],
           "top": 193.77,
-          "left": 50,
-          "height": 283.19,
-          "width": 354,
+          "left": 10,
+          "height": 504.19,
+          "width": 394,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            10,
+            193.77,
+            404,
+            697.96
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 193.77,
+          "left": 10,
+          "height": 504.19,
+          "width": 394,
+          "children": []
+        },
+        {
+          "name": "duet--content-cards--quick-post",
+          "rect": [
+            10,
+            2549.91,
+            404,
+            2879.66
+          ],
+          "top": 2549.91,
+          "left": 10,
+          "height": 329.75,
+          "width": 394,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            119.56,
+            680.95,
+            204.75,
+            693.95
+          ],
+          "top": 680.95,
+          "left": 119.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],
@@ -712,11 +726,11 @@
             0,
             0,
             360,
-            24193.64
+            24745.64
           ],
           "top": 0,
           "left": 0,
-          "height": 24193.64,
+          "height": 24745.64,
           "width": 360,
           "children": []
         },
@@ -726,11 +740,11 @@
             0,
             45,
             360,
-            23409.53
+            23961.53
           ],
           "top": 45,
           "left": 0,
-          "height": 23364.53,
+          "height": 23916.53,
           "width": 360,
           "children": []
         },
@@ -738,56 +752,84 @@
           "name": "footer",
           "rect": [
             0,
-            23369.53,
+            23921.53,
             360,
-            24193.64
+            24745.64
           ],
-          "top": 23369.53,
+          "top": 23921.53,
           "left": 0,
           "height": 824.11,
           "width": 360,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "_class*='duet--layout--river'",
           "rect": [
             10,
-            983.77,
-            95.7,
-            1002.97
+            2552.53,
+            350,
+            23861.53
           ],
-          "top": 983.77,
+          "top": 2552.53,
           "left": 10,
-          "height": 19.2,
-          "width": 85.7,
+          "height": 21309,
+          "width": 340,
           "children": []
         },
         {
-          "name": "img",
+          "name": "_class*='duet--content-cards'",
           "rect": [
-            50,
+            10,
             193.77,
             350,
-            433.77
+            654.77
           ],
           "top": 193.77,
-          "left": 50,
-          "height": 240,
-          "width": 300,
+          "left": 10,
+          "height": 461,
+          "width": 340,
           "children": []
         },
         {
-          "name": "a",
+          "name": "duet--content-cards--content-card",
           "rect": [
-            0,
-            -40,
-            197.77,
-            0
+            10,
+            193.77,
+            350,
+            654.77
           ],
-          "top": -40,
-          "left": 0,
-          "height": 40,
-          "width": 197.77,
+          "top": 193.77,
+          "left": 10,
+          "height": 461,
+          "width": 340,
+          "children": []
+        },
+        {
+          "name": "duet--content-cards--quick-post",
+          "rect": [
+            10,
+            2635.91,
+            350,
+            3009.25
+          ],
+          "top": 2635.91,
+          "left": 10,
+          "height": 373.34,
+          "width": 340,
+          "children": []
+        },
+        {
+          "name": "duet--article--timestamp",
+          "rect": [
+            119.56,
+            637.77,
+            204.75,
+            650.77
+          ],
+          "top": 637.77,
+          "left": 119.56,
+          "height": 13,
+          "width": 85.19,
           "children": []
         }
       ],

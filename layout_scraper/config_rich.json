@@ -1,15 +1,113 @@
 {
   "sites": [
-    { "url": "https://www.wikipedia.org", "name": "wikipedia", "selectors": [] },
-    { "url": "https://developer.mozilla.org/en-US/", "name": "mdn", "selectors": [] },
-    { "url": "https://news.ycombinator.com", "name": "hackernews", "selectors": [] },
-    { "url": "https://www.bbc.com", "name": "bbc", "selectors": [] },
-    { "url": "https://www.theguardian.com/international", "name": "guardian", "selectors": [] },
-    { "url": "https://www.cnn.com", "name": "cnn", "selectors": [] },
-    { "url": "https://www.theverge.com", "name": "theverge", "selectors": [] },
-    { "url": "https://www.nytimes.com", "name": "nytimes", "selectors": [] },
-    { "url": "https://www.mozilla.org", "name": "mozilla", "selectors": [] },
-    { "url": "https://www.npr.org", "name": "npr", "selectors": [] }
+    {
+      "url": "https://www.bbc.com",
+      "name": "bbc",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        ".gs-container", ".nw-c-top-stories", ".nw-o-news-wide-navigation", ".nw-c-nav__wide",
+        ".nw-c-promo", ".nw-c-most-read", ".gel-layout", ".gel-layout__item",
+        "section[data-entityid]", "section[role='region']", ".media-list__item"
+      ]
+    },
+    {
+      "url": "https://www.theguardian.com/international",
+      "name": "guardian",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        ".pillars", ".content__main", ".content__secondary", ".l-side-margins",
+        ".fc-container", ".fc-item", ".fc-item__content", ".fc-item__title",
+        ".fc-item__media-wrapper", "section[data-link-name='block']",
+        "section[id^='most-']", "section[id^='news']", ".front-page"
+      ]
+    },
+    {
+      "url": "https://www.cnn.com",
+      "name": "cnn",
+      "selectors": [
+        "body", "header", "footer", "nav",
+        ".subnav__section", ".subnav__section-link", ".subnav__subsection", ".subnav__subsection-link",
+        ".container", ".container__item", ".container__headline", ".container__headline-text", ".container__text",
+        ".container__item-media-wrapper", ".container__item-media", ".container__link--type-article",
+        ".container_lead-plus-headlines-with-images__item", ".container_lead-plus-headlines__link",
+        ".container_vertical-shelf-carousel__link", ".card", ".zone"
+      ]
+    },
+    {
+      "url": "https://www.nytimes.com",
+      "name": "nytimes",
+      "selectors": [
+        "body", "header", "main", "footer", "nav", "#site-content",
+        "section[name]", "section[data-block-tracking-id]", "article",
+        "div.story-wrapper", ".story-wrapper",
+        ".css-1ez5fsm", ".css-13mho3u", ".css-1l4spti", ".css-kz1pwz", ".container-margin"
+      ]
+    },
+    {
+      "url": "https://www.theverge.com",
+      "name": "theverge",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        "[class*='duet--layout--river']", "[class*='duet--content-cards']",
+        ".duet--content-cards--content-card", ".duet--content-cards--quick-post",
+        ".duet--article--timestamp", "article", ".c-entry-box--compact",
+        ".l-col__main", ".l-col__sidebar", ".c-feature-grid"
+      ]
+    },
+    {
+      "url": "https://www.npr.org",
+      "name": "npr",
+      "selectors": [
+        "body", "header", "main", "footer", "nav", "section", "article", "aside",
+        ".story-wrap", ".story-text", ".bucketwrap",
+        ".playlist-item", ".playlist-item-link", ".playlist-thumbnail-wrapper",
+        ".audio-module", ".audio-module-controls", ".audio-module-listen",
+        ".respArchListImg", ".imagewrap", ".story-link", ".npr-footer__module"
+      ]
+    },
+    {
+      "url": "https://developer.mozilla.org/en-US/",
+      "name": "mdn",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        ".main-page-content", ".document", "article", ".sidebar", ".toc",
+        ".page-header", ".callout", ".code-example", ".card", "section", "h1", "h2"
+      ]
+    },
+    {
+      "url": "https://www.mozilla.org",
+      "name": "mozilla",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        "#outer-wrapper", "#content", ".mzp-c-hero", ".mzp-c-card", ".mzp-c-picto",
+        ".mzp-l-content", ".mzp-l-card-third", ".mzp-c-billboard", ".mzp-c-call-out", ".mzp-c-newsletter"
+      ]
+    },
+    {
+      "url": "https://news.ycombinator.com",
+      "name": "hackernews",
+      "selectors": [
+        "body", "#hnmain", "table", "tr.athing", ".title", ".subtext", ".morelink"
+      ]
+    },
+    {
+      "url": "https://www.wikipedia.org",
+      "name": "wikipedia",
+      "selectors": [
+        "body", ".central-textlogo", ".search-container", "#searchInput",
+        ".lang-list-container", ".other-projects", ".footer", "form", "button"
+      ]
+    },
+    {
+      "url": "https://www.reuters.com/world/",
+      "name": "reuters",
+      "selectors": [
+        "body", "header", "main", "footer", "nav",
+        "section", "article", "[data-testid='BodyWrapper']", "[data-testid='Heading']",
+        "[data-testid='MediaStoryCard']", "[class*='media-story-card']", "[class*='story-collection']",
+        "[class*='story-card']", "[class*='story-content']", ".layout__grid", ".layout__content"
+      ]
+    }
   ],
   "viewports": {
     "wide": [
@@ -24,7 +122,7 @@
     ]
   },
   "settings": {
-    "wait_after_resize_ms": 1000,
+    "wait_after_resize_ms": 1500,
     "timeout_ms": 60000,
     "wait_until": "domcontentloaded"
   },

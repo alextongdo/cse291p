@@ -1,8 +1,8 @@
 {
   "site": {
-    "url": "https://ieeexplore.ieee.org/Xplore/",
+    "url": "https://ieeexplore.ieee.org/Xplore/home.jsp",
     "name": "ieee_explore",
-    "captured_at": "2025-12-07T23:11:27.263778"
+    "captured_at": "2025-12-08T13:41:37.714488"
   },
   "selectors": [
     "body",
@@ -37,6 +37,7 @@
     ".content",
     ".content .row",
     ".content .col",
+    ".homepage-module",
     ".highlight",
     ".card",
     ".card-body",
@@ -47,6 +48,8 @@
     ".page-footer",
     ".page-footer .row",
     ".page-footer .col",
+    ".hero",
+    ".hero .row",
     "nav",
     "section",
     "article"
@@ -227,6 +230,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -273,6 +281,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0
@@ -469,6 +487,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -515,6 +538,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0
@@ -711,6 +744,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -757,6 +795,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0
@@ -953,6 +1001,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -999,6 +1052,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0
@@ -1195,6 +1258,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -1241,6 +1309,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0
@@ -1437,6 +1515,11 @@
           "all": null,
           "count": 0
         },
+        ".homepage-module": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
         ".highlight": {
           "first": null,
           "all": null,
@@ -1483,6 +1566,16 @@
           "count": 0
         },
         ".page-footer .col": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero": {
+          "first": null,
+          "all": null,
+          "count": 0
+        },
+        ".hero .row": {
           "first": null,
           "all": null,
           "count": 0

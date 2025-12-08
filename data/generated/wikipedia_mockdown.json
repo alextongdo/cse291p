@@ -28,45 +28,59 @@
           "children": []
         },
         {
-          "name": "main",
+          "name": "central-textlogo",
           "rect": [
-            0,
+            825,
             40,
-            1920,
-            615.17
+            1095,
+            130.07999999999998
           ],
           "top": 40,
-          "left": 0,
-          "height": 575.17,
-          "width": 1920,
+          "left": 825,
+          "height": 90.08,
+          "width": 270,
           "children": []
         },
         {
-          "name": "footer",
+          "name": "search-container",
           "rect": [
-            0,
-            617.77,
-            1920,
-            1174.1599999999999
+            690,
+            464.08,
+            1230,
+            525.67
           ],
-          "top": 617.77,
-          "left": 0,
-          "height": 556.39,
-          "width": 1920,
+          "top": 464.08,
+          "left": 690,
+          "height": 61.59,
+          "width": 540,
           "children": []
         },
         {
-          "name": "nav",
+          "name": "searchInput",
           "rect": [
-            687,
-            135.08,
-            1233,
-            460.08000000000004
+            734.91,
+            469.67,
+            1129.1,
+            513.6700000000001
           ],
-          "top": 135.08,
-          "left": 687,
-          "height": 325,
-          "width": 546,
+          "top": 469.67,
+          "left": 734.91,
+          "height": 44,
+          "width": 394.19,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            675.83,
+            659.36,
+            1907.19,
+            1109.3600000000001
+          ],
+          "top": 659.36,
+          "left": 675.83,
+          "height": 450,
+          "width": 1231.36,
           "children": []
         },
         {
@@ -110,62 +124,6 @@
           "height": 44,
           "width": 56,
           "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            872,
-            52,
-            1048,
-            118.08
-          ],
-          "top": 52,
-          "left": 872,
-          "height": 66.08,
-          "width": 176,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            240,
-            1092.25,
-            1440,
-            1128.25
-          ],
-          "top": 1092.25,
-          "left": 240,
-          "height": 36,
-          "width": 1200,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            860,
-            198,
-            1060,
-            381
-          ],
-          "top": 198,
-          "left": 860,
-          "height": 183,
-          "width": 200,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            749.41,
-            135.08,
-            905.41,
-            180.88
-          ],
-          "top": 135.08,
-          "left": 749.41,
-          "height": 45.8,
-          "width": 156,
-          "children": []
         }
       ],
       "_viewport": {
@@ -203,45 +161,59 @@
           "children": []
         },
         {
-          "name": "main",
+          "name": "central-textlogo",
           "rect": [
-            0,
+            548,
             40,
-            1366,
-            615.17
+            818,
+            130.07999999999998
           ],
           "top": 40,
-          "left": 0,
-          "height": 575.17,
-          "width": 1366,
+          "left": 548,
+          "height": 90.08,
+          "width": 270,
           "children": []
         },
         {
-          "name": "footer",
+          "name": "search-container",
           "rect": [
-            0,
-            617.77,
-            1366,
-            1174.1599999999999
+            413,
+            464.08,
+            953,
+            525.67
           ],
-          "top": 617.77,
-          "left": 0,
-          "height": 556.39,
-          "width": 1366,
+          "top": 464.08,
+          "left": 413,
+          "height": 61.59,
+          "width": 540,
           "children": []
         },
         {
-          "name": "nav",
+          "name": "searchInput",
           "rect": [
-            410,
-            135.08,
-            956,
-            460.08000000000004
+            457.91,
+            469.67,
+            852.1,
+            513.6700000000001
           ],
-          "top": 135.08,
-          "left": 410,
-          "height": 325,
-          "width": 546,
+          "top": 469.67,
+          "left": 457.91,
+          "height": 44,
+          "width": 394.19,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            481.94,
+            659.36,
+            1353.19,
+            1109.3600000000001
+          ],
+          "top": 659.36,
+          "left": 481.94,
+          "height": 450,
+          "width": 871.25,
           "children": []
         },
         {
@@ -285,62 +257,6 @@
           "height": 44,
           "width": 56,
           "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            595,
-            52,
-            771,
-            118.08
-          ],
-          "top": 52,
-          "left": 595,
-          "height": 66.08,
-          "width": 176,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            20,
-            780.25,
-            1106,
-            816.25
-          ],
-          "top": 780.25,
-          "left": 20,
-          "height": 36,
-          "width": 1086,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            583,
-            198,
-            783,
-            381
-          ],
-          "top": 198,
-          "left": 583,
-          "height": 183,
-          "width": 200,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            472.41,
-            135.08,
-            628.4100000000001,
-            180.88
-          ],
-          "top": 135.08,
-          "left": 472.41,
-          "height": 45.8,
-          "width": 156,
-          "children": []
         }
       ],
       "_viewport": {
@@ -378,45 +294,59 @@
           "children": []
         },
         {
-          "name": "main",
+          "name": "central-textlogo",
           "rect": [
-            0,
+            377,
             40,
-            1024,
-            615.17
+            647,
+            130.07999999999998
           ],
           "top": 40,
-          "left": 0,
-          "height": 575.17,
-          "width": 1024,
+          "left": 377,
+          "height": 90.08,
+          "width": 270,
           "children": []
         },
         {
-          "name": "footer",
+          "name": "search-container",
           "rect": [
-            0,
-            617.77,
-            1024,
-            1174.1599999999999
+            242,
+            464.08,
+            782,
+            525.67
           ],
-          "top": 617.77,
-          "left": 0,
-          "height": 556.39,
-          "width": 1024,
+          "top": 464.08,
+          "left": 242,
+          "height": 61.59,
+          "width": 540,
           "children": []
         },
         {
-          "name": "nav",
+          "name": "searchInput",
           "rect": [
-            239,
-            135.08,
-            785,
-            460.08000000000004
+            286.91,
+            469.67,
+            681.1,
+            513.6700000000001
           ],
-          "top": 135.08,
-          "left": 239,
-          "height": 325,
-          "width": 546,
+          "top": 469.67,
+          "left": 286.91,
+          "height": 44,
+          "width": 394.19,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            362.23,
+            659.36,
+            1011.1800000000001,
+            1109.3600000000001
+          ],
+          "top": 659.36,
+          "left": 362.23,
+          "height": 450,
+          "width": 648.95,
           "children": []
         },
         {
@@ -460,62 +390,6 @@
           "height": 44,
           "width": 56,
           "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            424,
-            52,
-            600,
-            118.08
-          ],
-          "top": 52,
-          "left": 424,
-          "height": 66.08,
-          "width": 176,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            20,
-            780,
-            764,
-            816
-          ],
-          "top": 780,
-          "left": 20,
-          "height": 36,
-          "width": 744,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            412,
-            198,
-            612,
-            381
-          ],
-          "top": 198,
-          "left": 412,
-          "height": 183,
-          "width": 200,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            301.41,
-            135.08,
-            457.41,
-            180.88
-          ],
-          "top": 135.08,
-          "left": 301.41,
-          "height": 45.8,
-          "width": 156,
-          "children": []
         }
       ],
       "_viewport": {
@@ -553,45 +427,59 @@
           "children": []
         },
         {
-          "name": "main",
-          "rect": [
-            0,
-            20,
-            375,
-            560
-          ],
-          "top": 20,
-          "left": 0,
-          "height": 540,
-          "width": 375,
-          "children": []
-        },
-        {
-          "name": "footer",
-          "rect": [
-            0,
-            562.59,
-            375,
-            1673.67
-          ],
-          "top": 562.59,
-          "left": 0,
-          "height": 1111.08,
-          "width": 375,
-          "children": []
-        },
-        {
-          "name": "nav",
+          "name": "central-textlogo",
           "rect": [
             12.8,
-            170,
+            20,
             362.21000000000004,
-            490
+            90
           ],
-          "top": 170,
+          "top": 20,
           "left": 12.8,
-          "height": 320,
+          "height": 70,
           "width": 349.41,
+          "children": []
+        },
+        {
+          "name": "search-container",
+          "rect": [
+            0,
+            96,
+            375,
+            174
+          ],
+          "top": 96,
+          "left": 0,
+          "height": 78,
+          "width": 375,
+          "children": []
+        },
+        {
+          "name": "searchInput",
+          "rect": [
+            10,
+            101.59,
+            309,
+            145.59
+          ],
+          "top": 101.59,
+          "left": 10,
+          "height": 44,
+          "width": 299,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            6.39,
+            717.48,
+            368.61,
+            1347.48
+          ],
+          "top": 717.48,
+          "left": 6.39,
+          "height": 630,
+          "width": 362.22,
           "children": []
         },
         {
@@ -635,62 +523,6 @@
           "height": 44,
           "width": 56,
           "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            136.75,
-            44,
-            288.75,
-            94.58
-          ],
-          "top": 44,
-          "left": 136.75,
-          "height": 50.58,
-          "width": 152,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            20,
-            824,
-            355,
-            854
-          ],
-          "top": 824,
-          "left": 20,
-          "height": 30,
-          "width": 335,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            76.25,
-            42.44,
-            133.25,
-            94.58
-          ],
-          "top": 42.44,
-          "left": 76.25,
-          "height": 52.14,
-          "width": 57,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            28.8,
-            170,
-            112.1,
-            232.69
-          ],
-          "top": 170,
-          "left": 28.8,
-          "height": 62.69,
-          "width": 83.3,
-          "children": []
         }
       ],
       "_viewport": {
@@ -728,45 +560,59 @@
           "children": []
         },
         {
-          "name": "main",
-          "rect": [
-            0,
-            20,
-            414,
-            560
-          ],
-          "top": 20,
-          "left": 0,
-          "height": 540,
-          "width": 414,
-          "children": []
-        },
-        {
-          "name": "footer",
-          "rect": [
-            0,
-            562.59,
-            414,
-            1654.17
-          ],
-          "top": 562.59,
-          "left": 0,
-          "height": 1091.58,
-          "width": 414,
-          "children": []
-        },
-        {
-          "name": "nav",
+          "name": "central-textlogo",
           "rect": [
             12.8,
-            170,
+            20,
             401.21000000000004,
-            490
+            90
           ],
-          "top": 170,
+          "top": 20,
           "left": 12.8,
-          "height": 320,
+          "height": 70,
           "width": 388.41,
+          "children": []
+        },
+        {
+          "name": "search-container",
+          "rect": [
+            0,
+            96,
+            414,
+            174
+          ],
+          "top": 96,
+          "left": 0,
+          "height": 78,
+          "width": 414,
+          "children": []
+        },
+        {
+          "name": "searchInput",
+          "rect": [
+            10,
+            101.59,
+            348,
+            145.59
+          ],
+          "top": 101.59,
+          "left": 10,
+          "height": 44,
+          "width": 338,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            6.39,
+            717.48,
+            407.61,
+            1347.48
+          ],
+          "top": 717.48,
+          "left": 6.39,
+          "height": 630,
+          "width": 401.22,
           "children": []
         },
         {
@@ -810,62 +656,6 @@
           "height": 44,
           "width": 56,
           "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            156.25,
-            44,
-            308.25,
-            94.58
-          ],
-          "top": 44,
-          "left": 156.25,
-          "height": 50.58,
-          "width": 152,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            20,
-            908.25,
-            394,
-            938.25
-          ],
-          "top": 908.25,
-          "left": 20,
-          "height": 30,
-          "width": 374,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            95.75,
-            42.44,
-            152.75,
-            94.58
-          ],
-          "top": 42.44,
-          "left": 95.75,
-          "height": 52.14,
-          "width": 57,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            28.8,
-            170,
-            124.97,
-            232.19
-          ],
-          "top": 170,
-          "left": 28.8,
-          "height": 62.19,
-          "width": 96.17,
-          "children": []
         }
       ],
       "_viewport": {
@@ -903,45 +693,59 @@
           "children": []
         },
         {
-          "name": "main",
-          "rect": [
-            0,
-            20,
-            360,
-            560
-          ],
-          "top": 20,
-          "left": 0,
-          "height": 540,
-          "width": 360,
-          "children": []
-        },
-        {
-          "name": "footer",
-          "rect": [
-            0,
-            562.59,
-            360,
-            1693.17
-          ],
-          "top": 562.59,
-          "left": 0,
-          "height": 1130.58,
-          "width": 360,
-          "children": []
-        },
-        {
-          "name": "nav",
+          "name": "central-textlogo",
           "rect": [
             12.8,
-            170,
+            20,
             347.21000000000004,
-            490
+            90
           ],
-          "top": 170,
+          "top": 20,
           "left": 12.8,
-          "height": 320,
+          "height": 70,
           "width": 334.41,
+          "children": []
+        },
+        {
+          "name": "search-container",
+          "rect": [
+            0,
+            96,
+            360,
+            174
+          ],
+          "top": 96,
+          "left": 0,
+          "height": 78,
+          "width": 360,
+          "children": []
+        },
+        {
+          "name": "searchInput",
+          "rect": [
+            10,
+            101.59,
+            294,
+            145.59
+          ],
+          "top": 101.59,
+          "left": 10,
+          "height": 44,
+          "width": 284,
+          "children": []
+        },
+        {
+          "name": "other-projects",
+          "rect": [
+            6.39,
+            736.98,
+            353.61,
+            1366.98
+          ],
+          "top": 736.98,
+          "left": 6.39,
+          "height": 630,
+          "width": 347.22,
           "children": []
         },
         {
@@ -984,62 +788,6 @@
           "left": 294,
           "height": 44,
           "width": 56,
-          "children": []
-        },
-        {
-          "name": "h1",
-          "rect": [
-            129.25,
-            44,
-            281.25,
-            94.58
-          ],
-          "top": 44,
-          "left": 129.25,
-          "height": 50.58,
-          "width": 152,
-          "children": []
-        },
-        {
-          "name": "h3",
-          "rect": [
-            20,
-            812,
-            340,
-            872
-          ],
-          "top": 812,
-          "left": 20,
-          "height": 60,
-          "width": 320,
-          "children": []
-        },
-        {
-          "name": "img",
-          "rect": [
-            68.75,
-            42.44,
-            125.75,
-            94.58
-          ],
-          "top": 42.44,
-          "left": 68.75,
-          "height": 52.14,
-          "width": 57,
-          "children": []
-        },
-        {
-          "name": "a",
-          "rect": [
-            28.8,
-            170,
-            107.14,
-            232.69
-          ],
-          "top": 170,
-          "left": 28.8,
-          "height": 62.69,
-          "width": 78.34,
           "children": []
         }
       ],

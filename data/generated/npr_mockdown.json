@@ -19,11 +19,11 @@
             0,
             0,
             1920,
-            15357.58
+            14825.53
           ],
           "top": 0,
           "left": 0,
-          "height": 15357.58,
+          "height": 14825.53,
           "width": 1920,
           "children": []
         },
@@ -47,11 +47,11 @@
             0,
             168,
             1920,
-            15357.58
+            14825.53
           ],
           "top": 168,
           "left": 0,
-          "height": 15189.58,
+          "height": 14657.53,
           "width": 1920,
           "children": []
         },
@@ -59,11 +59,11 @@
           "name": "footer",
           "rect": [
             300,
-            14872.98,
+            14340.94,
             1300,
-            15357.57
+            14825.53
           ],
-          "top": 14872.98,
+          "top": 14340.94,
           "left": 300,
           "height": 484.59,
           "width": 1000,
@@ -112,87 +112,143 @@
           "children": []
         },
         {
-          "name": "menu",
+          "name": "story-wrap",
           "rect": [
-            0,
-            103,
-            1920,
-            153
+            300,
+            168,
+            1300,
+            467.75
           ],
-          "top": 103,
-          "left": 0,
-          "height": 50,
-          "width": 1920,
+          "top": 168,
+          "left": 300,
+          "height": 299.75,
+          "width": 1000,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-text",
           "rect": [
-            319,
-            215.59,
-            780,
-            335.59000000000003
+            300,
+            168,
+            800,
+            443.59
           ],
-          "top": 215.59,
-          "left": 319,
-          "height": 120,
-          "width": 461,
+          "top": 168,
+          "left": 300,
+          "height": 275.59,
+          "width": 500,
           "children": []
         },
         {
-          "name": "button",
+          "name": "bucketwrap",
           "rect": [
-            -8682,
-            27,
-            -8666,
-            33
+            300,
+            168,
+            1300,
+            487.75
           ],
-          "top": 27,
-          "left": -8682,
-          "height": 6,
-          "width": 16,
+          "top": 168,
+          "left": 300,
+          "height": 319.75,
+          "width": 1000,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "playlist-item",
           "rect": [
-            320,
-            188,
-            386.31,
-            207.59
+            1098,
+            2799.86,
+            1286,
+            2948.98
           ],
-          "top": 188,
-          "left": 320,
-          "height": 19.59,
-          "width": 66.31,
+          "top": 2799.86,
+          "left": 1098,
+          "height": 149.12,
+          "width": 188,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "playlist-item-link",
           "rect": [
-            319,
-            215.59,
-            780,
-            335.59000000000003
+            1103,
+            2804.86,
+            1281,
+            2940.98
           ],
-          "top": 215.59,
-          "left": 319,
-          "height": 120,
-          "width": 461,
+          "top": 2804.86,
+          "left": 1103,
+          "height": 136.12,
+          "width": 178,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-thumbnail-wrapper",
           "rect": [
-            -10000,
-            0,
-            -9999,
-            1
+            1103,
+            2804.86,
+            1281,
+            2904.98
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 2804.86,
+          "left": 1103,
+          "height": 100.12,
+          "width": 178,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            569.75,
+            789.06,
+            776.5,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 569.75,
+          "height": 30,
+          "width": 206.75,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            569.75,
+            789.06,
+            754.11,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 569.75,
+          "height": 30,
+          "width": 184.36,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            569.75,
+            789.06,
+            641.05,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 569.75,
+          "height": 30,
+          "width": 71.3,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
+            300,
+            14340.94,
+            550,
+            14737.53
+          ],
+          "top": 14340.94,
+          "left": 300,
+          "height": 396.59,
+          "width": 250,
           "children": []
         }
       ],
@@ -222,11 +278,11 @@
             0,
             0,
             1366,
-            15357.58
+            14825.53
           ],
           "top": 0,
           "left": 0,
-          "height": 15357.58,
+          "height": 14825.53,
           "width": 1366,
           "children": []
         },
@@ -250,11 +306,11 @@
             0,
             168,
             1366,
-            15357.58
+            14825.53
           ],
           "top": 168,
           "left": 0,
-          "height": 15189.58,
+          "height": 14657.53,
           "width": 1366,
           "children": []
         },
@@ -262,11 +318,11 @@
           "name": "footer",
           "rect": [
             23,
-            14872.98,
+            14340.94,
             1023,
-            15357.57
+            14825.53
           ],
-          "top": 14872.98,
+          "top": 14340.94,
           "left": 23,
           "height": 484.59,
           "width": 1000,
@@ -318,98 +374,154 @@
           "name": "aside",
           "rect": [
             23,
-            857.52,
+            885.06,
             1023,
-            1020.52
+            1048.06
           ],
-          "top": 857.52,
+          "top": 885.06,
           "left": 23,
           "height": 163,
           "width": 1000,
           "children": []
         },
         {
-          "name": "menu",
+          "name": "story-wrap",
           "rect": [
-            0,
-            103,
-            1366,
-            153
+            23,
+            168,
+            1023,
+            467.75
           ],
-          "top": 103,
-          "left": 0,
-          "height": 50,
-          "width": 1366,
+          "top": 168,
+          "left": 23,
+          "height": 299.75,
+          "width": 1000,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-text",
           "rect": [
-            42,
-            215.59,
-            503,
-            335.59000000000003
+            23,
+            168,
+            523,
+            443.59
           ],
-          "top": 215.59,
-          "left": 42,
-          "height": 120,
-          "width": 461,
+          "top": 168,
+          "left": 23,
+          "height": 275.59,
+          "width": 500,
           "children": []
         },
         {
-          "name": "button",
+          "name": "bucketwrap",
           "rect": [
-            -8959,
-            27,
-            -8943,
-            33
+            23,
+            168,
+            1023,
+            487.75
           ],
-          "top": 27,
-          "left": -8959,
-          "height": 6,
-          "width": 16,
+          "top": 168,
+          "left": 23,
+          "height": 319.75,
+          "width": 1000,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "playlist-item",
           "rect": [
-            43,
-            188,
-            109.31,
-            207.59
+            821,
+            2799.86,
+            1009,
+            2948.98
           ],
-          "top": 188,
-          "left": 43,
-          "height": 19.59,
-          "width": 66.31,
+          "top": 2799.86,
+          "left": 821,
+          "height": 149.12,
+          "width": 188,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "playlist-item-link",
           "rect": [
-            42,
-            215.59,
-            503,
-            335.59000000000003
+            826,
+            2804.86,
+            1004,
+            2940.98
           ],
-          "top": 215.59,
-          "left": 42,
-          "height": 120,
-          "width": 461,
+          "top": 2804.86,
+          "left": 826,
+          "height": 136.12,
+          "width": 178,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-thumbnail-wrapper",
           "rect": [
-            -10000,
-            0,
-            -9999,
-            1
+            826,
+            2804.86,
+            1004,
+            2904.98
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 2804.86,
+          "left": 826,
+          "height": 100.12,
+          "width": 178,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            292.75,
+            789.06,
+            499.5,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 292.75,
+          "height": 30,
+          "width": 206.75,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            292.75,
+            789.06,
+            477.11,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 292.75,
+          "height": 30,
+          "width": 184.36,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            292.75,
+            789.06,
+            364.05,
+            819.06
+          ],
+          "top": 789.06,
+          "left": 292.75,
+          "height": 30,
+          "width": 71.3,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
+            23,
+            14340.94,
+            273,
+            14737.53
+          ],
+          "top": 14340.94,
+          "left": 23,
+          "height": 396.59,
+          "width": 250,
           "children": []
         }
       ],
@@ -439,11 +551,11 @@
             0,
             0,
             1024,
-            14961.52
+            14426.77
           ],
           "top": 0,
           "left": 0,
-          "height": 14961.52,
+          "height": 14426.77,
           "width": 1024,
           "children": []
         },
@@ -467,11 +579,11 @@
             0,
             71,
             1024,
-            14961.52
+            14426.77
           ],
           "top": 71,
           "left": 0,
-          "height": 14890.52,
+          "height": 14355.77,
           "width": 1024,
           "children": []
         },
@@ -479,11 +591,11 @@
           "name": "footer",
           "rect": [
             0,
-            14476.92,
+            13942.17,
             1024,
-            14961.51
+            14426.76
           ],
-          "top": 14476.92,
+          "top": 13942.17,
           "left": 0,
           "height": 484.59,
           "width": 1024,
@@ -535,84 +647,154 @@
           "name": "aside",
           "rect": [
             15,
-            757.98,
+            785.53,
             1009,
-            920.98
+            948.53
           ],
-          "top": 757.98,
+          "top": 785.53,
           "left": 15,
           "height": 163,
           "width": 994,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-wrap",
           "rect": [
-            34,
-            118.59,
-            492,
-            173.59
+            15,
+            71,
+            1009,
+            369.06
           ],
-          "top": 118.59,
-          "left": 34,
-          "height": 55,
-          "width": 458,
+          "top": 71,
+          "left": 15,
+          "height": 298.06,
+          "width": 994,
           "children": []
         },
         {
-          "name": "button",
+          "name": "story-text",
           "rect": [
-            -9291,
-            12,
-            -9275,
-            18
+            15,
+            71,
+            512,
+            333.09
           ],
-          "top": 12,
-          "left": -9291,
-          "height": 6,
-          "width": 16,
+          "top": 71,
+          "left": 15,
+          "height": 262.09,
+          "width": 497,
           "children": []
         },
         {
-          "name": "h2",
+          "name": "bucketwrap",
           "rect": [
-            35,
-            91,
-            101.31,
-            110.59
+            15,
+            71,
+            1009,
+            389.06
           ],
-          "top": 91,
-          "left": 35,
-          "height": 19.59,
-          "width": 66.31,
+          "top": 71,
+          "left": 15,
+          "height": 318.06,
+          "width": 994,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "playlist-item",
           "rect": [
-            34,
-            118.59,
-            492,
-            173.59
+            808.19,
+            2694.42,
+            995.0,
+            2842.87
           ],
-          "top": 118.59,
-          "left": 34,
-          "height": 55,
-          "width": 458,
+          "top": 2694.42,
+          "left": 808.19,
+          "height": 148.45,
+          "width": 186.81,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-item-link",
           "rect": [
-            -10000,
+            813.19,
+            2699.42,
+            990.0,
+            2834.87
+          ],
+          "top": 2699.42,
+          "left": 813.19,
+          "height": 135.45,
+          "width": 176.81,
+          "children": []
+        },
+        {
+          "name": "playlist-thumbnail-wrapper",
+          "rect": [
+            813.19,
+            2699.42,
+            990.0,
+            2798.87
+          ],
+          "top": 2699.42,
+          "left": 813.19,
+          "height": 99.45,
+          "width": 176.81,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            283.25,
+            689.53,
+            488.5,
+            719.53
+          ],
+          "top": 689.53,
+          "left": 283.25,
+          "height": 30,
+          "width": 205.25,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            283.25,
+            689.53,
+            467.61,
+            719.53
+          ],
+          "top": 689.53,
+          "left": 283.25,
+          "height": 30,
+          "width": 184.36,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            283.25,
+            689.53,
+            354.55,
+            719.53
+          ],
+          "top": 689.53,
+          "left": 283.25,
+          "height": 30,
+          "width": 71.3,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
             0,
-            -9999,
-            1
+            13942.17,
+            256,
+            14338.76
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 13942.17,
+          "left": 0,
+          "height": 396.59,
+          "width": 256,
           "children": []
         }
       ],
@@ -642,11 +824,11 @@
             0,
             0,
             375,
-            16098.61
+            16324.52
           ],
           "top": 0,
           "left": 0,
-          "height": 16098.61,
+          "height": 16324.52,
           "width": 375,
           "children": []
         },
@@ -670,11 +852,11 @@
             0,
             65,
             375,
-            16048.61
+            16274.52
           ],
           "top": 65,
           "left": 0,
-          "height": 15983.61,
+          "height": 16209.52,
           "width": 375,
           "children": []
         },
@@ -682,11 +864,11 @@
           "name": "footer",
           "rect": [
             0,
-            15116.42,
+            15342.33,
             375,
-            16048.61
+            16274.52
           ],
-          "top": 15116.42,
+          "top": 15342.33,
           "left": 0,
           "height": 932.19,
           "width": 375,
@@ -738,84 +920,168 @@
           "name": "aside",
           "rect": [
             15,
-            1479.41,
+            1594.91,
             360,
-            1642.41
+            1757.91
           ],
-          "top": 1479.41,
+          "top": 1594.91,
           "left": 15,
           "height": 163,
           "width": 345,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-wrap",
           "rect": [
-            14,
-            334.53,
-            360,
-            402.03
+            0,
+            65,
+            375,
+            562.03
           ],
-          "top": 334.53,
-          "left": 14,
-          "height": 67.5,
-          "width": 346,
+          "top": 65,
+          "left": 0,
+          "height": 497.03,
+          "width": 375,
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            -10000,
-            774,
-            -9984,
-            780
-          ],
-          "top": 774,
-          "left": -10000,
-          "height": 6,
-          "width": 16,
-          "children": []
-        },
-        {
-          "name": "h2",
+          "name": "story-text",
           "rect": [
             15,
             306.94,
             360,
-            326.53
+            547.03
           ],
           "top": 306.94,
           "left": 15,
-          "height": 19.59,
+          "height": 240.09,
           "width": 345,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "bucketwrap",
           "rect": [
-            14,
-            334.53,
-            360,
-            402.03
+            0,
+            65,
+            375,
+            577.03
           ],
-          "top": 334.53,
-          "left": 14,
-          "height": 67.5,
-          "width": 346,
+          "top": 65,
+          "left": 0,
+          "height": 512.03,
+          "width": 375,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-item",
           "rect": [
-            -10000,
-            0,
-            -9999,
-            1
+            4,
+            4310.47,
+            143.5,
+            4456.47
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 4310.47,
+          "left": 4,
+          "height": 146,
+          "width": 139.5,
+          "children": []
+        },
+        {
+          "name": "playlist-item-link",
+          "rect": [
+            9,
+            4315.47,
+            138.5,
+            4424.31
+          ],
+          "top": 4315.47,
+          "left": 9,
+          "height": 108.84,
+          "width": 129.5,
+          "children": []
+        },
+        {
+          "name": "playlist-thumbnail-wrapper",
+          "rect": [
+            9,
+            4315.47,
+            138.5,
+            4388.31
+          ],
+          "top": 4315.47,
+          "left": 9,
+          "height": 72.84,
+          "width": 129.5,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            206,
+            1016.72,
+            345,
+            1046.72
+          ],
+          "top": 1016.72,
+          "left": 206,
+          "height": 30,
+          "width": 139,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            206,
+            1016.72,
+            342.44,
+            1046.72
+          ],
+          "top": 1016.72,
+          "left": 206,
+          "height": 30,
+          "width": 136.44,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            206,
+            1016.72,
+            342.44,
+            1046.72
+          ],
+          "top": 1016.72,
+          "left": 206,
+          "height": 30,
+          "width": 136.44,
+          "children": []
+        },
+        {
+          "name": "story-link",
+          "rect": [
+            31,
+            2193.39,
+            175,
+            2337.39
+          ],
+          "top": 2193.39,
+          "left": 31,
+          "height": 144,
+          "width": 144,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
+            0,
+            15342.33,
+            187.5,
+            15718.92
+          ],
+          "top": 15342.33,
+          "left": 0,
+          "height": 376.59,
+          "width": 187.5,
           "children": []
         }
       ],
@@ -845,11 +1111,11 @@
             0,
             0,
             414,
-            15605.2
+            896
           ],
           "top": 0,
           "left": 0,
-          "height": 15605.2,
+          "height": 896,
           "width": 414,
           "children": []
         },
@@ -873,11 +1139,11 @@
             0,
             65,
             414,
-            15555.2
+            15761.23
           ],
           "top": 65,
           "left": 0,
-          "height": 15490.2,
+          "height": 15696.23,
           "width": 414,
           "children": []
         },
@@ -885,11 +1151,11 @@
           "name": "footer",
           "rect": [
             0,
-            14623.02,
+            14829.05,
             414,
-            15555.210000000001
+            15761.24
           ],
-          "top": 14623.02,
+          "top": 14829.05,
           "left": 0,
           "height": 932.19,
           "width": 414,
@@ -941,84 +1207,168 @@
           "name": "aside",
           "rect": [
             15,
-            1396.16,
+            1446.75,
             399,
-            1559.16
+            1609.75
           ],
-          "top": 1396.16,
+          "top": 1446.75,
           "left": 15,
           "height": 163,
           "width": 384,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-wrap",
           "rect": [
-            14,
-            356.47,
-            399,
-            401.47
+            0,
+            65,
+            414,
+            537.47
           ],
-          "top": 356.47,
-          "left": 14,
-          "height": 45,
-          "width": 385,
+          "top": 65,
+          "left": 0,
+          "height": 472.47,
+          "width": 414,
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            -10000,
-            858,
-            -9984,
-            864
-          ],
-          "top": 858,
-          "left": -10000,
-          "height": 6,
-          "width": 16,
-          "children": []
-        },
-        {
-          "name": "h2",
+          "name": "story-text",
           "rect": [
             15,
             328.88,
             399,
-            348.46999999999997
+            522.47
           ],
           "top": 328.88,
           "left": 15,
-          "height": 19.59,
+          "height": 193.59,
           "width": 384,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "bucketwrap",
           "rect": [
-            14,
-            356.47,
-            399,
-            401.47
+            0,
+            65,
+            414,
+            552.47
           ],
-          "top": 356.47,
-          "left": 14,
-          "height": 45,
-          "width": 385,
+          "top": 65,
+          "left": 0,
+          "height": 487.47,
+          "width": 414,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-item",
           "rect": [
-            -10000,
-            0,
-            -9999,
-            1
+            4,
+            4064.16,
+            163,
+            4210.97
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 4064.16,
+          "left": 4,
+          "height": 146.81,
+          "width": 159,
+          "children": []
+        },
+        {
+          "name": "playlist-item-link",
+          "rect": [
+            9,
+            4069.16,
+            158,
+            4188.97
+          ],
+          "top": 4069.16,
+          "left": 9,
+          "height": 119.81,
+          "width": 149,
+          "children": []
+        },
+        {
+          "name": "playlist-thumbnail-wrapper",
+          "rect": [
+            9,
+            4069.16,
+            158,
+            4152.97
+          ],
+          "top": 4069.16,
+          "left": 9,
+          "height": 83.81,
+          "width": 149,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            206,
+            947.16,
+            384,
+            977.16
+          ],
+          "top": 947.16,
+          "left": 206,
+          "height": 30,
+          "width": 178,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            206,
+            947.16,
+            342.44,
+            977.16
+          ],
+          "top": 947.16,
+          "left": 206,
+          "height": 30,
+          "width": 136.44,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            206,
+            947.16,
+            342.44,
+            977.16
+          ],
+          "top": 947.16,
+          "left": 206,
+          "height": 30,
+          "width": 136.44,
+          "children": []
+        },
+        {
+          "name": "story-link",
+          "rect": [
+            31,
+            2037.64,
+            175,
+            2181.6400000000003
+          ],
+          "top": 2037.64,
+          "left": 31,
+          "height": 144,
+          "width": 144,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
+            0,
+            14829.05,
+            207,
+            15205.64
+          ],
+          "top": 14829.05,
+          "left": 0,
+          "height": 376.59,
+          "width": 207,
           "children": []
         }
       ],
@@ -1076,11 +1426,11 @@
             0,
             65,
             360,
-            16381.55
+            16703.12
           ],
           "top": 65,
           "left": 0,
-          "height": 16316.55,
+          "height": 16638.12,
           "width": 360,
           "children": []
         },
@@ -1088,11 +1438,11 @@
           "name": "footer",
           "rect": [
             0,
-            15449.36,
+            15770.94,
             360,
-            16381.550000000001
+            16703.13
           ],
-          "top": 15449.36,
+          "top": 15770.94,
           "left": 0,
           "height": 932.19,
           "width": 360,
@@ -1144,84 +1494,168 @@
           "name": "aside",
           "rect": [
             15,
-            1583.47,
+            1639.97,
             345,
-            1746.47
+            1802.97
           ],
-          "top": 1583.47,
+          "top": 1639.97,
           "left": 15,
           "height": 163,
           "width": 330,
           "children": []
         },
         {
-          "name": "title",
+          "name": "story-wrap",
           "rect": [
-            14,
-            326.09,
-            345,
-            393.59
+            0,
+            65,
+            360,
+            553.5899999999999
           ],
-          "top": 326.09,
-          "left": 14,
-          "height": 67.5,
-          "width": 331,
+          "top": 65,
+          "left": 0,
+          "height": 488.59,
+          "width": 360,
           "children": []
         },
         {
-          "name": "button",
-          "rect": [
-            -10000,
-            762,
-            -9984,
-            768
-          ],
-          "top": 762,
-          "left": -10000,
-          "height": 6,
-          "width": 16,
-          "children": []
-        },
-        {
-          "name": "h2",
+          "name": "story-text",
           "rect": [
             15,
             298.5,
             345,
-            318.09
+            538.59
           ],
           "top": 298.5,
           "left": 15,
-          "height": 19.59,
+          "height": 240.09,
           "width": 330,
           "children": []
         },
         {
-          "name": "h3",
+          "name": "bucketwrap",
           "rect": [
-            14,
-            326.09,
-            345,
-            393.59
+            0,
+            65,
+            360,
+            568.5899999999999
           ],
-          "top": 326.09,
-          "left": 14,
-          "height": 67.5,
-          "width": 331,
+          "top": 65,
+          "left": 0,
+          "height": 503.59,
+          "width": 360,
           "children": []
         },
         {
-          "name": "a",
+          "name": "playlist-item",
           "rect": [
-            -10000,
-            0,
-            -9999,
-            1
+            4,
+            4424.59,
+            136,
+            4570.59
           ],
-          "top": 0,
-          "left": -10000,
-          "height": 1,
-          "width": 1,
+          "top": 4424.59,
+          "left": 4,
+          "height": 146,
+          "width": 132,
+          "children": []
+        },
+        {
+          "name": "playlist-item-link",
+          "rect": [
+            9,
+            4429.59,
+            131,
+            4548.21
+          ],
+          "top": 4429.59,
+          "left": 9,
+          "height": 118.62,
+          "width": 122,
+          "children": []
+        },
+        {
+          "name": "playlist-thumbnail-wrapper",
+          "rect": [
+            9,
+            4429.59,
+            131,
+            4498.21
+          ],
+          "top": 4429.59,
+          "left": 9,
+          "height": 68.62,
+          "width": 122,
+          "children": []
+        },
+        {
+          "name": "audio-module",
+          "rect": [
+            206,
+            1030.78,
+            330,
+            1065.78
+          ],
+          "top": 1030.78,
+          "left": 206,
+          "height": 35,
+          "width": 124,
+          "children": []
+        },
+        {
+          "name": "audio-module-controls",
+          "rect": [
+            206,
+            1030.78,
+            330,
+            1065.78
+          ],
+          "top": 1030.78,
+          "left": 206,
+          "height": 35,
+          "width": 124,
+          "children": []
+        },
+        {
+          "name": "audio-module-listen",
+          "rect": [
+            206,
+            1030.78,
+            330,
+            1065.78
+          ],
+          "top": 1030.78,
+          "left": 206,
+          "height": 35,
+          "width": 124,
+          "children": []
+        },
+        {
+          "name": "story-link",
+          "rect": [
+            31,
+            2260.95,
+            175,
+            2404.95
+          ],
+          "top": 2260.95,
+          "left": 31,
+          "height": 144,
+          "width": 144,
+          "children": []
+        },
+        {
+          "name": "npr-footer__module",
+          "rect": [
+            0,
+            15770.94,
+            180,
+            16147.53
+          ],
+          "top": 15770.94,
+          "left": 0,
+          "height": 376.59,
+          "width": 180,
           "children": []
         }
       ],

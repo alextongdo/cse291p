@@ -2,53 +2,18 @@
   "site": {
     "url": "https://www.wikipedia.org",
     "name": "wikipedia",
-    "captured_at": "2025-12-07T23:23:57.408643"
+    "captured_at": "2025-12-08T13:41:15.642009"
   },
   "selectors": [
     "body",
-    "header",
-    "main",
-    "footer",
-    "nav",
-    "section",
-    "article",
-    "aside",
-    ".nav",
-    ".navbar",
-    ".menu",
-    ".header",
+    ".central-textlogo",
+    ".search-container",
+    "#searchInput",
+    ".lang-list-container",
+    ".other-projects",
     ".footer",
-    ".hero",
-    ".banner",
-    ".content",
-    ".container",
-    ".row",
-    ".col",
-    ".grid",
-    ".card",
-    ".card-body",
-    ".card-title",
-    ".card-text",
-    ".title",
-    ".headline",
-    ".lede",
-    ".sidebar",
-    ".main",
-    ".search",
     "form",
-    "input",
-    "button",
-    "h1",
-    "h2",
-    "h3",
-    "img",
-    "ul",
-    "li",
-    "a",
-    ".tab",
-    ".tab-content",
-    ".carousel",
-    ".feature"
+    "button"
   ],
   "viewports": [
     {
@@ -71,109 +36,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
+        ".central-textlogo": {
           "first": {
-            "x": 0,
+            "x": 825,
             "y": 40,
-            "width": 1920,
-            "height": 575.17,
-            "right": 1920,
-            "bottom": 615.17
+            "width": 270,
+            "height": 90.08,
+            "right": 1095,
+            "bottom": 130.08
           },
           "all": null,
           "count": 1
         },
-        "footer": {
+        ".search-container": {
           "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1920,
-            "height": 556.39,
-            "right": 1920,
-            "bottom": 1174.16
+            "x": 690,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 1230,
+            "bottom": 525.67
           },
           "all": null,
           "count": 1
         },
-        "nav": {
+        "#searchInput": {
           "first": {
-            "x": 687,
-            "y": 135.08,
-            "width": 546,
-            "height": 325,
-            "right": 1233,
-            "bottom": 460.08
+            "x": 734.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 1129.09,
+            "bottom": 513.67
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 687,
-              "y": 135.08,
-              "width": 546,
-              "height": 325,
-              "right": 1233,
-              "bottom": 460.08
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 545.17,
-              "width": 1894.41,
-              "height": 21,
-              "right": 1907.2,
-              "bottom": 566.17
-            },
-            {
-              "index": 2,
-              "x": 675.83,
-              "y": 659.36,
-              "width": 1231.36,
-              "height": 450,
-              "right": 1907.19,
-              "bottom": 1109.36
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 675.83,
+            "y": 659.36,
+            "width": 1231.36,
+            "height": 450,
+            "right": 1907.19,
+            "bottom": 1109.36
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -187,91 +101,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 690,
@@ -283,111 +112,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 734.91,
-              "y": 469.67,
-              "width": 394.19,
-              "height": 44,
-              "right": 1129.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 3,
-              "x": 1505.81,
-              "y": 1016.81,
-              "width": 1,
-              "height": 1,
-              "right": 1506.81,
-              "bottom": 1017.81
-            },
-            {
-              "index": 4,
-              "x": 1654.95,
-              "y": 1016.81,
-              "width": 1,
-              "height": 1,
-              "right": 1655.95,
-              "bottom": 1017.81
-            },
-            {
-              "index": 5,
-              "x": 1804.09,
-              "y": 1016.81,
-              "width": 1,
-              "height": 1,
-              "right": 1805.09,
-              "bottom": 1017.81
-            },
-            {
-              "index": 6,
-              "x": 1505.81,
-              "y": 1075.81,
-              "width": 1,
-              "height": 1,
-              "right": 1506.81,
-              "bottom": 1076.81
-            },
-            {
-              "index": 7,
-              "x": 1654.95,
-              "y": 1075.81,
-              "width": 1,
-              "height": 1,
-              "right": 1655.95,
-              "bottom": 1076.81
-            },
-            {
-              "index": 8,
-              "x": 1804.09,
-              "y": 1075.81,
-              "width": 1,
-              "height": 1,
-              "right": 1805.09,
-              "bottom": 1076.81
-            },
-            {
-              "index": 9,
-              "x": 1505.81,
-              "y": 1134.81,
-              "width": 1,
-              "height": 1,
-              "right": 1506.81,
-              "bottom": 1135.81
-            },
-            {
-              "index": 10,
-              "x": 1729.53,
-              "y": 1134.81,
-              "width": 1,
-              "height": 1,
-              "right": 1730.53,
-              "bottom": 1135.81
-            },
-            {
-              "index": 11,
-              "x": 1544.23,
-              "y": 1282.81,
-              "width": 1,
-              "height": 1,
-              "right": 1545.23,
-              "bottom": 1283.81
-            },
-            {
-              "index": 12,
-              "x": 1770.22,
-              "y": 1282.81,
-              "width": 1,
-              "height": 1,
-              "right": 1771.22,
-              "bottom": 1283.81
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -437,180 +161,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 872,
-            "y": 52,
-            "width": 176,
-            "height": 66.08,
-            "right": 1048,
-            "bottom": 118.08
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 240,
-            "y": 1092.25,
-            "width": 1200,
-            "height": 36,
-            "right": 1440,
-            "bottom": 1128.25
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 860,
-            "y": 198,
-            "width": 200,
-            "height": 183,
-            "right": 1060,
-            "bottom": 381
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 749.41,
-            "y": 135.08,
-            "width": 156,
-            "height": 45.8,
-            "right": 905.41,
-            "bottom": 180.88
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 749.41,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 905.41,
-              "bottom": 180.88
-            },
-            {
-              "index": 1,
-              "x": 1014.59,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 1170.59,
-              "bottom": 180.88
-            },
-            {
-              "index": 2,
-              "x": 694.81,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 850.81,
-              "bottom": 245.88
-            },
-            {
-              "index": 3,
-              "x": 1069.19,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 1225.19,
-              "bottom": 245.88
-            },
-            {
-              "index": 4,
-              "x": 683.89,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 839.89,
-              "bottom": 310.88
-            },
-            {
-              "index": 5,
-              "x": 1080.11,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 1236.11,
-              "bottom": 310.88
-            },
-            {
-              "index": 6,
-              "x": 694.81,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 850.81,
-              "bottom": 375.88
-            },
-            {
-              "index": 7,
-              "x": 1069.19,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 1225.19,
-              "bottom": 375.88
-            },
-            {
-              "index": 8,
-              "x": 749.41,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 905.41,
-              "bottom": 440.88
-            },
-            {
-              "index": 9,
-              "x": 1014.59,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 1170.59,
-              "bottom": 440.88
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     },
@@ -634,109 +184,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
+        ".central-textlogo": {
           "first": {
-            "x": 0,
+            "x": 548,
             "y": 40,
-            "width": 1366,
-            "height": 575.17,
-            "right": 1366,
-            "bottom": 615.17
+            "width": 270,
+            "height": 90.08,
+            "right": 818,
+            "bottom": 130.08
           },
           "all": null,
           "count": 1
         },
-        "footer": {
+        ".search-container": {
           "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1366,
-            "height": 556.39,
-            "right": 1366,
-            "bottom": 1174.16
+            "x": 413,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 953,
+            "bottom": 525.67
           },
           "all": null,
           "count": 1
         },
-        "nav": {
+        "#searchInput": {
           "first": {
-            "x": 410,
-            "y": 135.08,
-            "width": 546,
-            "height": 325,
-            "right": 956,
-            "bottom": 460.08
+            "x": 457.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 852.09,
+            "bottom": 513.67
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 410,
-              "y": 135.08,
-              "width": 546,
-              "height": 325,
-              "right": 956,
-              "bottom": 460.08
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 545.17,
-              "width": 1340.41,
-              "height": 21,
-              "right": 1353.2,
-              "bottom": 566.17
-            },
-            {
-              "index": 2,
-              "x": 481.94,
-              "y": 659.36,
-              "width": 871.25,
-              "height": 450,
-              "right": 1353.19,
-              "bottom": 1109.36
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 481.94,
+            "y": 659.36,
+            "width": 871.25,
+            "height": 450,
+            "right": 1353.19,
+            "bottom": 1109.36
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -750,91 +249,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 413,
@@ -846,111 +260,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 457.91,
-              "y": 469.67,
-              "width": 394.19,
-              "height": 44,
-              "right": 852.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 3,
-              "x": 951.81,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 952.81,
-              "bottom": 955.42
-            },
-            {
-              "index": 4,
-              "x": 1100.95,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 1101.95,
-              "bottom": 955.42
-            },
-            {
-              "index": 5,
-              "x": 1250.09,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 1251.09,
-              "bottom": 955.42
-            },
-            {
-              "index": 6,
-              "x": 951.81,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 952.81,
-              "bottom": 1014.42
-            },
-            {
-              "index": 7,
-              "x": 1100.95,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 1101.95,
-              "bottom": 1014.42
-            },
-            {
-              "index": 8,
-              "x": 1250.09,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 1251.09,
-              "bottom": 1014.42
-            },
-            {
-              "index": 9,
-              "x": 951.81,
-              "y": 1072.42,
-              "width": 1,
-              "height": 1,
-              "right": 952.81,
-              "bottom": 1073.42
-            },
-            {
-              "index": 10,
-              "x": 1175.53,
-              "y": 1072.42,
-              "width": 1,
-              "height": 1,
-              "right": 1176.53,
-              "bottom": 1073.42
-            },
-            {
-              "index": 11,
-              "x": 990.23,
-              "y": 1220.42,
-              "width": 1,
-              "height": 1,
-              "right": 991.23,
-              "bottom": 1221.42
-            },
-            {
-              "index": 12,
-              "x": 1216.22,
-              "y": 1220.42,
-              "width": 1,
-              "height": 1,
-              "right": 1217.22,
-              "bottom": 1221.42
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -1000,180 +309,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 595,
-            "y": 52,
-            "width": 176,
-            "height": 66.08,
-            "right": 771,
-            "bottom": 118.08
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 20,
-            "y": 780.25,
-            "width": 1086,
-            "height": 36,
-            "right": 1106,
-            "bottom": 816.25
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 583,
-            "y": 198,
-            "width": 200,
-            "height": 183,
-            "right": 783,
-            "bottom": 381
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 472.41,
-            "y": 135.08,
-            "width": 156,
-            "height": 45.8,
-            "right": 628.41,
-            "bottom": 180.88
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 472.41,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 628.41,
-              "bottom": 180.88
-            },
-            {
-              "index": 1,
-              "x": 737.59,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 893.59,
-              "bottom": 180.88
-            },
-            {
-              "index": 2,
-              "x": 417.81,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 573.81,
-              "bottom": 245.88
-            },
-            {
-              "index": 3,
-              "x": 792.19,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 948.19,
-              "bottom": 245.88
-            },
-            {
-              "index": 4,
-              "x": 406.89,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 562.89,
-              "bottom": 310.88
-            },
-            {
-              "index": 5,
-              "x": 803.11,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 959.11,
-              "bottom": 310.88
-            },
-            {
-              "index": 6,
-              "x": 417.81,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 573.81,
-              "bottom": 375.88
-            },
-            {
-              "index": 7,
-              "x": 792.19,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 948.19,
-              "bottom": 375.88
-            },
-            {
-              "index": 8,
-              "x": 472.41,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 628.41,
-              "bottom": 440.88
-            },
-            {
-              "index": 9,
-              "x": 737.59,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 893.59,
-              "bottom": 440.88
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     },
@@ -1197,109 +332,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
+        ".central-textlogo": {
           "first": {
-            "x": 0,
+            "x": 377,
             "y": 40,
-            "width": 1024,
-            "height": 575.17,
-            "right": 1024,
-            "bottom": 615.17
+            "width": 270,
+            "height": 90.08,
+            "right": 647,
+            "bottom": 130.08
           },
           "all": null,
           "count": 1
         },
-        "footer": {
+        ".search-container": {
           "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1024,
-            "height": 556.39,
-            "right": 1024,
-            "bottom": 1174.16
+            "x": 242,
+            "y": 464.08,
+            "width": 540,
+            "height": 61.59,
+            "right": 782,
+            "bottom": 525.67
           },
           "all": null,
           "count": 1
         },
-        "nav": {
+        "#searchInput": {
           "first": {
-            "x": 239,
-            "y": 135.08,
-            "width": 546,
-            "height": 325,
-            "right": 785,
-            "bottom": 460.08
+            "x": 286.91,
+            "y": 469.67,
+            "width": 394.19,
+            "height": 44,
+            "right": 681.09,
+            "bottom": 513.67
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 239,
-              "y": 135.08,
-              "width": 546,
-              "height": 325,
-              "right": 785,
-              "bottom": 460.08
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 545.17,
-              "width": 998.41,
-              "height": 21,
-              "right": 1011.2,
-              "bottom": 566.17
-            },
-            {
-              "index": 2,
-              "x": 362.23,
-              "y": 659.36,
-              "width": 648.95,
-              "height": 450,
-              "right": 1011.19,
-              "bottom": 1109.36
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 362.23,
+            "y": 659.36,
+            "width": 648.95,
+            "height": 450,
+            "right": 1011.19,
+            "bottom": 1109.36
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -1313,91 +397,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 242,
@@ -1409,111 +408,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 286.91,
-              "y": 469.67,
-              "width": 394.19,
-              "height": 44,
-              "right": 681.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 3,
-              "x": 609.81,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 610.81,
-              "bottom": 955.42
-            },
-            {
-              "index": 4,
-              "x": 758.95,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 759.95,
-              "bottom": 955.42
-            },
-            {
-              "index": 5,
-              "x": 908.09,
-              "y": 954.42,
-              "width": 1,
-              "height": 1,
-              "right": 909.09,
-              "bottom": 955.42
-            },
-            {
-              "index": 6,
-              "x": 609.81,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 610.81,
-              "bottom": 1014.42
-            },
-            {
-              "index": 7,
-              "x": 758.95,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 759.95,
-              "bottom": 1014.42
-            },
-            {
-              "index": 8,
-              "x": 908.09,
-              "y": 1013.42,
-              "width": 1,
-              "height": 1,
-              "right": 909.09,
-              "bottom": 1014.42
-            },
-            {
-              "index": 9,
-              "x": 609.81,
-              "y": 1072.42,
-              "width": 1,
-              "height": 1,
-              "right": 610.81,
-              "bottom": 1073.42
-            },
-            {
-              "index": 10,
-              "x": 833.53,
-              "y": 1072.42,
-              "width": 1,
-              "height": 1,
-              "right": 834.53,
-              "bottom": 1073.42
-            },
-            {
-              "index": 11,
-              "x": 648.23,
-              "y": 1220.42,
-              "width": 1,
-              "height": 1,
-              "right": 649.23,
-              "bottom": 1221.42
-            },
-            {
-              "index": 12,
-              "x": 874.22,
-              "y": 1220.42,
-              "width": 1,
-              "height": 1,
-              "right": 875.22,
-              "bottom": 1221.42
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -1563,180 +457,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 424,
-            "y": 52,
-            "width": 176,
-            "height": 66.08,
-            "right": 600,
-            "bottom": 118.08
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 20,
-            "y": 780,
-            "width": 744,
-            "height": 36,
-            "right": 764,
-            "bottom": 816
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 412,
-            "y": 198,
-            "width": 200,
-            "height": 183,
-            "right": 612,
-            "bottom": 381
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 301.41,
-            "y": 135.08,
-            "width": 156,
-            "height": 45.8,
-            "right": 457.41,
-            "bottom": 180.88
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 301.41,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 457.41,
-              "bottom": 180.88
-            },
-            {
-              "index": 1,
-              "x": 566.59,
-              "y": 135.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 722.59,
-              "bottom": 180.88
-            },
-            {
-              "index": 2,
-              "x": 246.81,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 402.81,
-              "bottom": 245.88
-            },
-            {
-              "index": 3,
-              "x": 621.19,
-              "y": 200.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 777.19,
-              "bottom": 245.88
-            },
-            {
-              "index": 4,
-              "x": 235.89,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 391.89,
-              "bottom": 310.88
-            },
-            {
-              "index": 5,
-              "x": 632.11,
-              "y": 265.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 788.11,
-              "bottom": 310.88
-            },
-            {
-              "index": 6,
-              "x": 246.81,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 402.81,
-              "bottom": 375.88
-            },
-            {
-              "index": 7,
-              "x": 621.19,
-              "y": 330.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 777.19,
-              "bottom": 375.88
-            },
-            {
-              "index": 8,
-              "x": 301.41,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 457.41,
-              "bottom": 440.88
-            },
-            {
-              "index": 9,
-              "x": 566.59,
-              "y": 395.08,
-              "width": 156,
-              "height": 45.8,
-              "right": 722.59,
-              "bottom": 440.88
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     },
@@ -1760,109 +480,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 375,
-            "height": 540,
-            "right": 375,
-            "bottom": 560
-          },
-          "all": null,
-          "count": 1
-        },
-        "footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 375,
-            "height": 1111.08,
-            "right": 375,
-            "bottom": 1673.67
-          },
-          "all": null,
-          "count": 1
-        },
-        "nav": {
+        ".central-textlogo": {
           "first": {
             "x": 12.8,
-            "y": 170,
+            "y": 20,
             "width": 349.41,
-            "height": 320,
+            "height": 70,
             "right": 362.2,
-            "bottom": 490
+            "bottom": 90
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 12.8,
-              "y": 170,
-              "width": 349.41,
-              "height": 320,
-              "right": 362.2,
-              "bottom": 490
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 490,
-              "width": 349.41,
-              "height": 21,
-              "right": 362.2,
-              "bottom": 511
-            },
-            {
-              "index": 2,
-              "x": 6.39,
-              "y": 717.48,
-              "width": 362.22,
-              "height": 630,
-              "right": 368.61,
-              "bottom": 1347.48
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 375,
+            "height": 78,
+            "right": 375,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 299,
+            "height": 44,
+            "right": 309,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 717.48,
+            "width": 362.22,
+            "height": 630,
+            "right": 368.61,
+            "bottom": 1347.48
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -1876,91 +545,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 0,
@@ -1972,111 +556,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 10,
-              "y": 101.59,
-              "width": 299,
-              "height": 44,
-              "right": 309,
-              "bottom": 145.59
-            },
-            {
-              "index": 3,
-              "x": 82.61,
-              "y": 1155.09,
-              "width": 1,
-              "height": 1,
-              "right": 83.61,
-              "bottom": 1156.09
-            },
-            {
-              "index": 4,
-              "x": 183.91,
-              "y": 1155.09,
-              "width": 1,
-              "height": 1,
-              "right": 184.91,
-              "bottom": 1156.09
-            },
-            {
-              "index": 5,
-              "x": 285.2,
-              "y": 1155.09,
-              "width": 1,
-              "height": 1,
-              "right": 286.2,
-              "bottom": 1156.09
-            },
-            {
-              "index": 6,
-              "x": 82.61,
-              "y": 1214.09,
-              "width": 1,
-              "height": 1,
-              "right": 83.61,
-              "bottom": 1215.09
-            },
-            {
-              "index": 7,
-              "x": 183.91,
-              "y": 1214.09,
-              "width": 1,
-              "height": 1,
-              "right": 184.91,
-              "bottom": 1215.09
-            },
-            {
-              "index": 8,
-              "x": 285.2,
-              "y": 1214.09,
-              "width": 1,
-              "height": 1,
-              "right": 286.2,
-              "bottom": 1215.09
-            },
-            {
-              "index": 9,
-              "x": 82.61,
-              "y": 1273.09,
-              "width": 1,
-              "height": 1,
-              "right": 83.61,
-              "bottom": 1274.09
-            },
-            {
-              "index": 10,
-              "x": 234.56,
-              "y": 1273.09,
-              "width": 1,
-              "height": 1,
-              "right": 235.56,
-              "bottom": 1274.09
-            },
-            {
-              "index": 11,
-              "x": 108.7,
-              "y": 1421.09,
-              "width": 1,
-              "height": 1,
-              "right": 109.7,
-              "bottom": 1422.09
-            },
-            {
-              "index": 12,
-              "x": 262.19,
-              "y": 1421.09,
-              "width": 1,
-              "height": 1,
-              "right": 263.19,
-              "bottom": 1422.09
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -2126,180 +605,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 136.75,
-            "y": 44,
-            "width": 152,
-            "height": 50.58,
-            "right": 288.75,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 20,
-            "y": 824,
-            "width": 335,
-            "height": 30,
-            "right": 355,
-            "bottom": 854
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 76.25,
-            "y": 42.44,
-            "width": 57,
-            "height": 52.14,
-            "right": 133.25,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 28.8,
-            "y": 170,
-            "width": 83.3,
-            "height": 62.69,
-            "right": 112.09,
-            "bottom": 232.69
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 28.8,
-              "y": 170,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 112.09,
-              "bottom": 232.69
-            },
-            {
-              "index": 1,
-              "x": 144.09,
-              "y": 170,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 227.39,
-              "bottom": 232.69
-            },
-            {
-              "index": 2,
-              "x": 259.39,
-              "y": 170,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 342.69,
-              "bottom": 232.69
-            },
-            {
-              "index": 3,
-              "x": 28.8,
-              "y": 250,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 112.09,
-              "bottom": 312.69
-            },
-            {
-              "index": 4,
-              "x": 144.09,
-              "y": 250,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 227.39,
-              "bottom": 312.69
-            },
-            {
-              "index": 5,
-              "x": 259.39,
-              "y": 250,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 342.69,
-              "bottom": 312.69
-            },
-            {
-              "index": 6,
-              "x": 28.8,
-              "y": 330,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 112.09,
-              "bottom": 392.69
-            },
-            {
-              "index": 7,
-              "x": 144.09,
-              "y": 330,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 227.39,
-              "bottom": 392.69
-            },
-            {
-              "index": 8,
-              "x": 259.39,
-              "y": 330,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 342.69,
-              "bottom": 392.69
-            },
-            {
-              "index": 9,
-              "x": 28.8,
-              "y": 410,
-              "width": 83.3,
-              "height": 62.69,
-              "right": 112.09,
-              "bottom": 472.69
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     },
@@ -2323,109 +628,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 414,
-            "height": 540,
-            "right": 414,
-            "bottom": 560
-          },
-          "all": null,
-          "count": 1
-        },
-        "footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 414,
-            "height": 1091.58,
-            "right": 414,
-            "bottom": 1654.17
-          },
-          "all": null,
-          "count": 1
-        },
-        "nav": {
+        ".central-textlogo": {
           "first": {
             "x": 12.8,
-            "y": 170,
+            "y": 20,
             "width": 388.41,
-            "height": 320,
+            "height": 70,
             "right": 401.2,
-            "bottom": 490
+            "bottom": 90
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 12.8,
-              "y": 170,
-              "width": 388.41,
-              "height": 320,
-              "right": 401.2,
-              "bottom": 490
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 490,
-              "width": 388.41,
-              "height": 21,
-              "right": 401.2,
-              "bottom": 511
-            },
-            {
-              "index": 2,
-              "x": 6.39,
-              "y": 717.48,
-              "width": 401.22,
-              "height": 630,
-              "right": 407.61,
-              "bottom": 1347.48
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 414,
+            "height": 78,
+            "right": 414,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 338,
+            "height": 44,
+            "right": 348,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 717.48,
+            "width": 401.22,
+            "height": 630,
+            "right": 407.61,
+            "bottom": 1347.48
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -2439,91 +693,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 0,
@@ -2535,111 +704,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 10,
-              "y": 101.59,
-              "width": 338,
-              "height": 44,
-              "right": 348,
-              "bottom": 145.59
-            },
-            {
-              "index": 3,
-              "x": 88.86,
-              "y": 1075.3,
-              "width": 1,
-              "height": 1,
-              "right": 89.86,
-              "bottom": 1076.3
-            },
-            {
-              "index": 4,
-              "x": 203.03,
-              "y": 1075.3,
-              "width": 1,
-              "height": 1,
-              "right": 204.03,
-              "bottom": 1076.3
-            },
-            {
-              "index": 5,
-              "x": 317.2,
-              "y": 1075.3,
-              "width": 1,
-              "height": 1,
-              "right": 318.2,
-              "bottom": 1076.3
-            },
-            {
-              "index": 6,
-              "x": 88.86,
-              "y": 1134.3,
-              "width": 1,
-              "height": 1,
-              "right": 89.86,
-              "bottom": 1135.3
-            },
-            {
-              "index": 7,
-              "x": 203.03,
-              "y": 1134.3,
-              "width": 1,
-              "height": 1,
-              "right": 204.03,
-              "bottom": 1135.3
-            },
-            {
-              "index": 8,
-              "x": 317.2,
-              "y": 1134.3,
-              "width": 1,
-              "height": 1,
-              "right": 318.2,
-              "bottom": 1135.3
-            },
-            {
-              "index": 9,
-              "x": 88.86,
-              "y": 1193.3,
-              "width": 1,
-              "height": 1,
-              "right": 89.86,
-              "bottom": 1194.3
-            },
-            {
-              "index": 10,
-              "x": 260.11,
-              "y": 1193.3,
-              "width": 1,
-              "height": 1,
-              "right": 261.11,
-              "bottom": 1194.3
-            },
-            {
-              "index": 11,
-              "x": 118.27,
-              "y": 1341.3,
-              "width": 1,
-              "height": 1,
-              "right": 119.27,
-              "bottom": 1342.3
-            },
-            {
-              "index": 12,
-              "x": 291.25,
-              "y": 1341.3,
-              "width": 1,
-              "height": 1,
-              "right": 292.25,
-              "bottom": 1342.3
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -2689,180 +753,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 156.25,
-            "y": 44,
-            "width": 152,
-            "height": 50.58,
-            "right": 308.25,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 20,
-            "y": 908.25,
-            "width": 374,
-            "height": 30,
-            "right": 394,
-            "bottom": 938.25
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 95.75,
-            "y": 42.44,
-            "width": 57,
-            "height": 52.14,
-            "right": 152.75,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 28.8,
-            "y": 170,
-            "width": 96.17,
-            "height": 62.19,
-            "right": 124.97,
-            "bottom": 232.19
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 28.8,
-              "y": 170,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 124.97,
-              "bottom": 232.19
-            },
-            {
-              "index": 1,
-              "x": 156.97,
-              "y": 170,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 253.14,
-              "bottom": 232.19
-            },
-            {
-              "index": 2,
-              "x": 285.14,
-              "y": 170,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 381.31,
-              "bottom": 232.19
-            },
-            {
-              "index": 3,
-              "x": 28.8,
-              "y": 250,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 124.97,
-              "bottom": 312.19
-            },
-            {
-              "index": 4,
-              "x": 156.97,
-              "y": 250,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 253.14,
-              "bottom": 312.19
-            },
-            {
-              "index": 5,
-              "x": 285.14,
-              "y": 250,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 381.31,
-              "bottom": 312.19
-            },
-            {
-              "index": 6,
-              "x": 28.8,
-              "y": 330,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 124.97,
-              "bottom": 392.19
-            },
-            {
-              "index": 7,
-              "x": 156.97,
-              "y": 330,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 253.14,
-              "bottom": 392.19
-            },
-            {
-              "index": 8,
-              "x": 285.14,
-              "y": 330,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 381.31,
-              "bottom": 392.19
-            },
-            {
-              "index": 9,
-              "x": 28.8,
-              "y": 410,
-              "width": 96.17,
-              "height": 62.19,
-              "right": 124.97,
-              "bottom": 472.19
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     },
@@ -2886,109 +776,58 @@
           "all": null,
           "count": 1
         },
-        "header": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "main": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 360,
-            "height": 540,
-            "right": 360,
-            "bottom": 560
-          },
-          "all": null,
-          "count": 1
-        },
-        "footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 360,
-            "height": 1130.58,
-            "right": 360,
-            "bottom": 1693.17
-          },
-          "all": null,
-          "count": 1
-        },
-        "nav": {
+        ".central-textlogo": {
           "first": {
             "x": 12.8,
-            "y": 170,
+            "y": 20,
             "width": 334.41,
-            "height": 320,
+            "height": 70,
             "right": 347.2,
-            "bottom": 490
+            "bottom": 90
           },
-          "all": [
-            {
-              "index": 0,
-              "x": 12.8,
-              "y": 170,
-              "width": 334.41,
-              "height": 320,
-              "right": 347.2,
-              "bottom": 490
-            },
-            {
-              "index": 1,
-              "x": 12.8,
-              "y": 490,
-              "width": 334.41,
-              "height": 21,
-              "right": 347.2,
-              "bottom": 511
-            },
-            {
-              "index": 2,
-              "x": 6.39,
-              "y": 736.98,
-              "width": 347.22,
-              "height": 630,
-              "right": 353.61,
-              "bottom": 1366.98
-            }
-          ],
-          "count": 3
+          "all": null,
+          "count": 1
         },
-        "section": {
+        ".search-container": {
+          "first": {
+            "x": 0,
+            "y": 96,
+            "width": 360,
+            "height": 78,
+            "right": 360,
+            "bottom": 174
+          },
+          "all": null,
+          "count": 1
+        },
+        "#searchInput": {
+          "first": {
+            "x": 10,
+            "y": 101.59,
+            "width": 284,
+            "height": 44,
+            "right": 294,
+            "bottom": 145.59
+          },
+          "all": null,
+          "count": 1
+        },
+        ".lang-list-container": {
           "first": null,
           "all": null,
           "count": 0
         },
-        "article": {
-          "first": null,
+        ".other-projects": {
+          "first": {
+            "x": 6.39,
+            "y": 736.98,
+            "width": 347.22,
+            "height": 630,
+            "right": 353.61,
+            "bottom": 1366.98
+          },
           "all": null,
-          "count": 0
-        },
-        "aside": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".nav": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".navbar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".menu": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".header": {
-          "first": null,
-          "all": null,
-          "count": 0
+          "count": 1
         },
         ".footer": {
           "first": {
@@ -3002,91 +841,6 @@
           "all": null,
           "count": 1
         },
-        ".hero": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".banner": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
         "form": {
           "first": {
             "x": 0,
@@ -3098,111 +852,6 @@
           },
           "all": null,
           "count": 1
-        },
-        "input": {
-          "first": null,
-          "all": [
-            {
-              "index": 1,
-              "x": 10,
-              "y": 101.59,
-              "width": 284,
-              "height": 44,
-              "right": 294,
-              "bottom": 145.59
-            },
-            {
-              "index": 3,
-              "x": 80.22,
-              "y": 1200.69,
-              "width": 1,
-              "height": 1,
-              "right": 81.22,
-              "bottom": 1201.69
-            },
-            {
-              "index": 4,
-              "x": 176.56,
-              "y": 1200.69,
-              "width": 1,
-              "height": 1,
-              "right": 177.56,
-              "bottom": 1201.69
-            },
-            {
-              "index": 5,
-              "x": 272.91,
-              "y": 1200.69,
-              "width": 1,
-              "height": 1,
-              "right": 273.91,
-              "bottom": 1201.69
-            },
-            {
-              "index": 6,
-              "x": 80.22,
-              "y": 1259.69,
-              "width": 1,
-              "height": 1,
-              "right": 81.22,
-              "bottom": 1260.69
-            },
-            {
-              "index": 7,
-              "x": 176.56,
-              "y": 1259.69,
-              "width": 1,
-              "height": 1,
-              "right": 177.56,
-              "bottom": 1260.69
-            },
-            {
-              "index": 8,
-              "x": 272.91,
-              "y": 1259.69,
-              "width": 1,
-              "height": 1,
-              "right": 273.91,
-              "bottom": 1260.69
-            },
-            {
-              "index": 9,
-              "x": 80.22,
-              "y": 1318.69,
-              "width": 1,
-              "height": 1,
-              "right": 81.22,
-              "bottom": 1319.69
-            },
-            {
-              "index": 10,
-              "x": 224.73,
-              "y": 1318.69,
-              "width": 1,
-              "height": 1,
-              "right": 225.73,
-              "bottom": 1319.69
-            },
-            {
-              "index": 11,
-              "x": 105.03,
-              "y": 1466.69,
-              "width": 1,
-              "height": 1,
-              "right": 106.03,
-              "bottom": 1467.69
-            },
-            {
-              "index": 12,
-              "x": 251.02,
-              "y": 1466.69,
-              "width": 1,
-              "height": 1,
-              "right": 252.02,
-              "bottom": 1467.69
-            }
-          ],
-          "count": 11
         },
         "button": {
           "first": {
@@ -3252,180 +901,6 @@
             }
           ],
           "count": 4
-        },
-        "h1": {
-          "first": {
-            "x": 129.25,
-            "y": 44,
-            "width": 152,
-            "height": 50.58,
-            "right": 281.25,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": {
-            "x": 20,
-            "y": 812,
-            "width": 320,
-            "height": 60,
-            "right": 340,
-            "bottom": 872
-          },
-          "all": null,
-          "count": 1
-        },
-        "img": {
-          "first": {
-            "x": 68.75,
-            "y": 42.44,
-            "width": 57,
-            "height": 52.14,
-            "right": 125.75,
-            "bottom": 94.58
-          },
-          "all": null,
-          "count": 1
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 1
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": {
-            "x": 28.8,
-            "y": 170,
-            "width": 78.34,
-            "height": 62.69,
-            "right": 107.14,
-            "bottom": 232.69
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 28.8,
-              "y": 170,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 107.14,
-              "bottom": 232.69
-            },
-            {
-              "index": 1,
-              "x": 139.14,
-              "y": 170,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 217.48,
-              "bottom": 232.69
-            },
-            {
-              "index": 2,
-              "x": 249.48,
-              "y": 170,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 327.83,
-              "bottom": 232.69
-            },
-            {
-              "index": 3,
-              "x": 28.8,
-              "y": 250,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 107.14,
-              "bottom": 312.69
-            },
-            {
-              "index": 4,
-              "x": 139.14,
-              "y": 250,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 217.48,
-              "bottom": 312.69
-            },
-            {
-              "index": 5,
-              "x": 249.48,
-              "y": 250,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 327.83,
-              "bottom": 312.69
-            },
-            {
-              "index": 6,
-              "x": 28.8,
-              "y": 330,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 107.14,
-              "bottom": 392.69
-            },
-            {
-              "index": 7,
-              "x": 139.14,
-              "y": 330,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 217.48,
-              "bottom": 392.69
-            },
-            {
-              "index": 8,
-              "x": 249.48,
-              "y": 330,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 327.83,
-              "bottom": 392.69
-            },
-            {
-              "index": 9,
-              "x": 28.8,
-              "y": 410,
-              "width": 78.34,
-              "height": 62.69,
-              "right": 107.14,
-              "bottom": 472.69
-            }
-          ],
-          "count": 10
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
-          "first": null,
-          "all": null,
-          "count": 0
         }
       }
     }

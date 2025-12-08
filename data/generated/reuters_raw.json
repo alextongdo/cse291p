@@ -1,8 +1,8 @@
 {
   "site": {
-    "url": "https://www.reuters.com",
+    "url": "https://www.reuters.com/world/",
     "name": "reuters",
-    "captured_at": "2025-12-07T23:23:14.641830"
+    "captured_at": "2025-12-08T13:41:25.095238"
   },
   "selectors": [
     "body",
@@ -12,43 +12,15 @@
     "nav",
     "section",
     "article",
-    "aside",
-    ".nav",
-    ".navbar",
-    ".menu",
-    ".header",
-    ".footer",
-    ".hero",
-    ".banner",
-    ".content",
-    ".container",
-    ".row",
-    ".col",
-    ".grid",
-    ".card",
-    ".card-body",
-    ".card-title",
-    ".card-text",
-    ".title",
-    ".headline",
-    ".lede",
-    ".sidebar",
-    ".main",
-    ".search",
-    "form",
-    "input",
-    "button",
-    "h1",
-    "h2",
-    "h3",
-    "img",
-    "ul",
-    "li",
-    "a",
-    ".tab",
-    ".tab-content",
-    ".carousel",
-    ".feature"
+    "[data-testid='BodyWrapper']",
+    "[data-testid='Heading']",
+    "[data-testid='MediaStoryCard']",
+    "[class*='media-story-card']",
+    "[class*='story-collection']",
+    "[class*='story-card']",
+    "[class*='story-content']",
+    ".layout__grid",
+    ".layout__content"
   ],
   "viewports": [
     {
@@ -101,187 +73,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
@@ -338,187 +170,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
@@ -575,187 +267,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
@@ -812,187 +364,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
@@ -1049,187 +461,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
@@ -1286,187 +558,47 @@
           "all": null,
           "count": 0
         },
-        "aside": {
+        "[data-testid='BodyWrapper']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".nav": {
+        "[data-testid='Heading']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".navbar": {
+        "[data-testid='MediaStoryCard']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".menu": {
+        "[class*='media-story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".header": {
+        "[class*='story-collection']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".footer": {
+        "[class*='story-card']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".hero": {
+        "[class*='story-content']": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".banner": {
+        ".layout__grid": {
           "first": null,
           "all": null,
           "count": 0
         },
-        ".content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".container": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".row": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".col": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".grid": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-body": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".card-text": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".title": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".headline": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".lede": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".sidebar": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".main": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".search": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "form": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "input": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "button": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h1": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h2": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "h3": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "img": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "ul": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "li": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        "a": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".tab-content": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".carousel": {
-          "first": null,
-          "all": null,
-          "count": 0
-        },
-        ".feature": {
+        ".layout__content": {
           "first": null,
           "all": null,
           "count": 0
