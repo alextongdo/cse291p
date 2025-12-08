@@ -17,500 +17,620 @@
   "train": [
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 458.4,
+      "rect": [
+        60,
+        582.5,
+        518.4,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 396.4,
+          "rect": [
+            91,
+            713.5,
+            487.4,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 394.4,
+          "rect": [
+            91,
+            773.5,
+            485.4,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 466.317,
+      "rect": [
+        60,
+        582.5,
+        526.317,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 404.317,
+          "rect": [
+            91,
+            713.5,
+            495.317,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 402.317,
+          "rect": [
+            91,
+            773.5,
+            493.317,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 446.85,
+      "rect": [
+        60,
+        582.5,
+        506.85,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 384.85,
+          "rect": [
+            91,
+            713.5,
+            475.85,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 382.85,
+          "rect": [
+            91,
+            773.5,
+            473.85,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 400.317,
+      "rect": [
+        60,
+        582.5,
+        460.317,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 338.317,
+          "rect": [
+            91,
+            713.5,
+            429.317,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 336.317,
+          "rect": [
+            91,
+            773.5,
+            427.317,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 380.85,
+      "rect": [
+        60,
+        582.5,
+        440.85,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 318.85,
+          "rect": [
+            91,
+            713.5,
+            409.85,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 316.85,
+          "rect": [
+            91,
+            773.5,
+            407.85,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 475.883,
+      "rect": [
+        60,
+        582.5,
+        535.883,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 413.883,
+          "rect": [
+            91,
+            713.5,
+            504.883,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 411.883,
+          "rect": [
+            91,
+            773.5,
+            502.883,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 462.35,
+      "rect": [
+        60,
+        582.5,
+        522.35,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 400.35,
+          "rect": [
+            91,
+            713.5,
+            491.35,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 398.35,
+          "rect": [
+            91,
+            773.5,
+            489.35,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 397.017,
+      "rect": [
+        60,
+        582.5,
+        457.017,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 335.017,
+          "rect": [
+            91,
+            713.5,
+            426.017,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 333.017,
+          "rect": [
+            91,
+            773.5,
+            424.017,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 480.167,
+      "rect": [
+        60,
+        582.5,
+        540.1669999999999,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 418.167,
+          "rect": [
+            91,
+            713.5,
+            509.167,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 416.167,
+          "rect": [
+            91,
+            773.5,
+            507.167,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 430.35,
+      "rect": [
+        60,
+        582.5,
+        490.35,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 368.35,
+          "rect": [
+            91,
+            713.5,
+            459.35,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 366.35,
+          "rect": [
+            91,
+            773.5,
+            457.35,
+            797.5
+          ],
           "children": []
         }
       ]
@@ -519,500 +639,620 @@
   "test": [
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 482.483,
+      "rect": [
+        60,
+        582.5,
+        542.483,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 420.483,
+          "rect": [
+            91,
+            713.5,
+            511.483,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 418.483,
+          "rect": [
+            91,
+            773.5,
+            509.483,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 400.65,
+      "rect": [
+        60,
+        582.5,
+        460.65,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 338.65,
+          "rect": [
+            91,
+            713.5,
+            429.65,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 336.65,
+          "rect": [
+            91,
+            773.5,
+            427.65,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 397.667,
+      "rect": [
+        60,
+        582.5,
+        457.667,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 335.667,
+          "rect": [
+            91,
+            713.5,
+            426.667,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 333.667,
+          "rect": [
+            91,
+            773.5,
+            424.667,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 383.817,
+      "rect": [
+        60,
+        582.5,
+        443.817,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 321.817,
+          "rect": [
+            91,
+            713.5,
+            412.817,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 319.817,
+          "rect": [
+            91,
+            773.5,
+            410.817,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 483.15,
+      "rect": [
+        60,
+        582.5,
+        543.15,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 421.15,
+          "rect": [
+            91,
+            713.5,
+            512.15,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 419.15,
+          "rect": [
+            91,
+            773.5,
+            510.15,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 465.317,
+      "rect": [
+        60,
+        582.5,
+        525.317,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 403.317,
+          "rect": [
+            91,
+            713.5,
+            494.317,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 401.317,
+          "rect": [
+            91,
+            773.5,
+            492.317,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 474.233,
+      "rect": [
+        60,
+        582.5,
+        534.233,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 412.233,
+          "rect": [
+            91,
+            713.5,
+            503.233,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 410.233,
+          "rect": [
+            91,
+            773.5,
+            501.233,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 406.25,
+      "rect": [
+        60,
+        582.5,
+        466.25,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 344.25,
+          "rect": [
+            91,
+            713.5,
+            435.25,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 342.25,
+          "rect": [
+            91,
+            773.5,
+            433.25,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 360.717,
+      "rect": [
+        60,
+        582.5,
+        420.717,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 298.717,
+          "rect": [
+            91,
+            713.5,
+            389.717,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 296.717,
+          "rect": [
+            91,
+            773.5,
+            387.717,
+            797.5
+          ],
           "children": []
         }
       ]
     },
     {
       "name": "turing",
-      "top": 582.5,
-      "left": 60,
-      "height": 258,
-      "width": 483.15,
+      "rect": [
+        60,
+        582.5,
+        543.15,
+        840.5
+      ],
       "children": [
         {
           "name": "turing-info",
-          "top": 613.5,
-          "left": 91,
-          "height": 80,
-          "width": 250,
+          "rect": [
+            91,
+            613.5,
+            341,
+            693.5
+          ],
           "children": [
             {
               "name": "turing-pic",
-              "top": 613.5,
-              "left": 91,
-              "height": 80,
-              "width": 80,
+              "rect": [
+                91,
+                613.5,
+                171,
+                693.5
+              ],
               "children": []
             },
             {
               "name": "turing-name",
-              "top": 613.5,
-              "left": 191,
-              "height": 80,
-              "width": 118.117,
+              "rect": [
+                191,
+                613.5,
+                309.117,
+                693.5
+              ],
               "children": []
             }
           ]
         },
         {
           "name": "turing-blurb",
-          "top": 713.5,
-          "left": 91,
-          "height": 50,
-          "width": 421.15,
+          "rect": [
+            91,
+            713.5,
+            512.15,
+            763.5
+          ],
           "children": []
         },
         {
           "name": "turing-follow",
-          "top": 773.5,
-          "left": 91,
-          "height": 24,
-          "width": 419.15,
+          "rect": [
+            91,
+            773.5,
+            510.15,
+            797.5
+          ],
           "children": []
         }
       ]
