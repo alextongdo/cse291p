@@ -8,7 +8,7 @@ from src.logging import get_logger, setup_logging
 from src.pruning import ConditionalHierarchicalPruner, HierarchicalPruner
 from src.types import LinearConstraint, View
 
-setup_logging(debug=True)
+setup_logging(debug=False)
 
 
 logger = get_logger(__name__)
@@ -111,8 +111,14 @@ def _solve_layout(
 
     # Add layout axioms
     _add_layout_axioms(solver, root._flattened_views_in_subtree, var_map)
+    
+    # Add root size constraints
+    solver.addConstraint((var_map[f"{root.name}.width"] == width) | "required")
+    solver.addConstraint((var_map[f"{root.name}.height"] == height) | "required")
+    solver.addConstraint((var_map[f"{root.name}.left"] == 0) | "required")
+    solver.addConstraint((var_map[f"{root.name}.top"] == 0) | "required")
 
-    # Add synthesized constraints, skipping any that make the system infeasible
+    # Add synthesized constraints, skipping any that conflict with root dimensions
     for constraint in constraints:
         try:
             solver.addConstraint(_constraint_to_kiwi(constraint, var_map))
@@ -121,14 +127,8 @@ def _solve_layout(
             kiwisolver.DuplicateConstraint,
         ):
             logger.warning(
-                f"UNSAT constraint during layout solving: {repr(constraint)}"
+                f"Skipping conflicting constraint: {repr(constraint)}"
             )
-
-    # Fix root dimensions to desired size
-    solver.addConstraint((var_map[f"{root.name}.width"] == width) | "required")
-    solver.addConstraint((var_map[f"{root.name}.height"] == height) | "required")
-    solver.addConstraint((var_map[f"{root.name}.left"] == 0) | "required")
-    solver.addConstraint((var_map[f"{root.name}.top"] == 0) | "required")
 
     # Solve
     solver.updateVariables()
@@ -154,8 +154,11 @@ class Mockdown:
 
     def fit(self, examples: list[View]) -> None:
         templates = TemplateInstantiator(examples).instantiate()
+        print(len(templates))
         candidates = BayesianLearning(examples=examples, seed=42).learn(templates)
+        print(len(candidates))
         selected = HierarchicalPruner(examples).prune(candidates)
+        print(len(selected))
         self.constraints = selected
         # We need a copy of the root structure for prediction
         self.root = examples[0]
@@ -189,12 +192,23 @@ class ConditionalMockdown:
         example_idxs_to_templates_map = ConditionalTemplateInstantiator(
             examples=examples
         ).instantiate()
+
+        print({ind: len(lst) for ind, lst in example_idxs_to_templates_map.items()})
+        print(sum(len(lst) for _, lst in example_idxs_to_templates_map.items()))
+
         example_idxs_to_constrs_map = ConditionalBayesianLearning(
             examples=examples, seed=42
         ).learn(example_idxs_to_templates_map)
+
+        print({ind: len(lst) for ind, lst in example_idxs_to_constrs_map.items()})
+        print(sum(len(lst) for _, lst in example_idxs_to_constrs_map.items()))
+        
         ex_to_selected_map = ConditionalHierarchicalPruner(examples=examples).prune(
             example_idxs_to_constrs_map
         )
+
+        print({ind: len(lst) for ind, lst in ex_to_selected_map.items()})
+
         self.examples = examples
         self.ex_to_constrs_map = ex_to_selected_map
 
@@ -225,15 +239,19 @@ class ConditionalMockdown:
             f"(width={self.examples[selected_idx].width})"
         )
 
-        # Collect all constraints that apply to the selected example
+        # Collect ALL constraints from applicable groups
+        # Sort by specificity (most specific first) so that if there are true
+        # conflicts, the more specific constraint gets added first and the
+        # less specific one is caught by kiwisolver's try/except
         constraints: list[LinearConstraint] = []
-        for example_idxs, constrs in self.ex_to_constrs_map.items():
-            if selected_idx in example_idxs:
-                constraints.extend(constrs)
 
-        for c in constraints:
-            if c.y.view.name == "root" or c.x is not None and c.x.view.name == "root":
-                logger.debug(f"{repr(c)}")
+        applicable_groups = sorted(
+            [k for k in self.ex_to_constrs_map.keys() if selected_idx in k],
+            key=lambda k: len(k),  # Ascending by size (most specific first)
+        )
+
+        for group_key in applicable_groups:
+            constraints.extend(self.ex_to_constrs_map[group_key])
 
         # Solve layout
         root = self.examples[selected_idx]

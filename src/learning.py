@@ -223,7 +223,7 @@ class TemplateBayesianLinearModel:
         # Suppress warnings from perfect separation in GLM
         with warnings.catch_warnings():
             warnings.simplefilter("ignore")
-            return self.model.loglike((float(b), float(a)))
+            return self.model.loglike((float(b), float(a)), scale=1)
 
     def prior_score(self, a: Fraction | int) -> float:
         """
@@ -299,13 +299,13 @@ class TemplateBayesianLinearModel:
         """Add tiny noise to avoid perfect separation in GLM."""
         # Generate 1D noise for x and broadcast across columns
         x_noise = np.random.randn(len(x)) * 1e-5
-        x_noise -= x_noise.mean()  # ALEX ADDDED
+        x_noise -= x_noise.mean()  # BUG WITH ORIGINAL
         # Broadcasting: add noise to each row
         x_smudged = x + x_noise[:, np.newaxis]
 
         # Generate noise for y
         y_noise = np.random.randn(len(y)) * 1e-5
-        y_noise -= y_noise.mean()  # ALEX ADDDED
+        y_noise -= y_noise.mean()  # BUG WITH ORIGINAL
         y_smudged = y + y_noise
 
         return x_smudged, y_smudged
@@ -426,6 +426,15 @@ class BayesianLearning:
         if seed is not None:
             np.random.seed(seed)
 
+        # Verify all examples have the same view names (required for proper indexing)
+        view_names_per_example = [
+            {v.name for v in ex._flattened_views_in_subtree} for ex in examples
+        ]
+        if not all(
+            names == view_names_per_example[0] for names in view_names_per_example
+        ):
+            raise ValueError("All examples must have the same view names. ")
+
         # Pre-compute anchor data map for all examples
         anchor_to_data_map: dict[str, list[float]] = defaultdict(list)
         for example in self.examples:
@@ -453,7 +462,6 @@ class BayesianLearning:
 
         results = []
         for template in templates:
-            logger.debug(f"Doing Bayesian learning for {repr(template)}")
             # Extract anchor values data for the template from all examples.
             y_data = np.array(
                 self.anchor_to_data_map[f"{template.y.view.name}.{template.y.type}"],
@@ -477,9 +485,8 @@ class BayesianLearning:
             if len(candidates) == 0:
                 logger.debug("Learned 0 candidates")
             for cand in candidates:
-                logger.debug(f"Learned {repr(cand)}")
+                logger.debug(f"  Learned {repr(cand)}")
             results.extend(candidates)
-
         return results
 
 
@@ -509,6 +516,15 @@ class ConditionalBayesianLearning:
         if seed is not None:
             np.random.seed(seed)
 
+        # Verify all examples have the same view names (required for proper indexing)
+        view_names_per_example = [
+            {v.name for v in ex._flattened_views_in_subtree} for ex in examples
+        ]
+        if not all(
+            names == view_names_per_example[0] for names in view_names_per_example
+        ):
+            raise ValueError("All examples must have the same view names.")
+
         # Pre-compute anchor data map for all examples
         anchor_to_data_map: dict[str, list[float]] = defaultdict(list)
         for example in self.examples:
@@ -525,12 +541,7 @@ class ConditionalBayesianLearning:
 
     def _get_anchor_value(self, example_idx: int, anchor_key: str) -> float:
         """Get anchor value for a specific example."""
-        if anchor_key not in self.anchor_to_data_map:
-            raise ValueError(f"Anchor {anchor_key} not found in any example")
-        anchor_list = self.anchor_to_data_map[anchor_key]
-        if example_idx >= len(anchor_list):
-            raise ValueError(f"Anchor {anchor_key} not found in example {example_idx} (only {len(anchor_list)} examples have this anchor)")
-        return anchor_list[example_idx]
+        return self.anchor_to_data_map[anchor_key][example_idx]
 
     def _cluster_template_examples(
         self,
@@ -548,24 +559,7 @@ class ConditionalBayesianLearning:
             List of clusters, where each cluster contains original example indices
         """
         y_key = f"{template.y.view.name}.{template.y.type}"
-        # Filter to only examples where the anchor exists
-        valid_idxs = []
-        y_values = []
-        for i in example_idxs:
-            try:
-                val = self._get_anchor_value(i, y_key)
-                valid_idxs.append(i)
-                y_values.append(val)
-            except (ValueError, IndexError):
-                # Skip examples where this anchor doesn't exist
-                continue
-        
-        if not valid_idxs:
-            # No valid examples, return empty clusters
-            return []
-        
-        # Use valid_idxs instead of example_idxs for the rest
-        example_idxs = tuple(valid_idxs)
+        y_values = [self._get_anchor_value(i, y_key) for i in example_idxs]
 
         is_constant_form = template.x is None
         is_mul_only_form = template.x is not None and template.b == 0.0
@@ -581,25 +575,7 @@ class ConditionalBayesianLearning:
         elif is_mul_only_form:
             # Multiplicative form: y = a*x → observed a = y/x
             x_key = f"{template.x.view.name}.{template.x.type}"
-            # Filter to examples where both y and x anchors exist
-            final_valid_idxs = []
-            final_y_values = []
-            x_values = []
-            for idx, y_val in zip(example_idxs, y_values):
-                try:
-                    x_val = self._get_anchor_value(idx, x_key)
-                    final_valid_idxs.append(idx)
-                    final_y_values.append(y_val)
-                    x_values.append(x_val)
-                except (ValueError, IndexError):
-                    continue
-            
-            if not final_valid_idxs:
-                return []
-            
-            example_idxs = tuple(final_valid_idxs)
-            y_values = final_y_values
-            
+            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
             observed = [
                 y / x if x != 0 else 0.0
                 for y, x in zip(y_values, x_values, strict=True)
@@ -611,25 +587,7 @@ class ConditionalBayesianLearning:
         elif is_add_only_form:
             # Additive form: y = x + b → observed b = y - x
             x_key = f"{template.x.view.name}.{template.x.type}"
-            # Filter to examples where both y and x anchors exist
-            final_valid_idxs = []
-            final_y_values = []
-            x_values = []
-            for idx, y_val in zip(example_idxs, y_values):
-                try:
-                    x_val = self._get_anchor_value(idx, x_key)
-                    final_valid_idxs.append(idx)
-                    final_y_values.append(y_val)
-                    x_values.append(x_val)
-                except (ValueError, IndexError):
-                    continue
-            
-            if not final_valid_idxs:
-                return []
-            
-            example_idxs = tuple(final_valid_idxs)
-            y_values = final_y_values
-            
+            x_values = [self._get_anchor_value(i, x_key) for i in example_idxs]
             observed = [y - x for y, x in zip(y_values, x_values, strict=True)]
             observations = list(zip(observed, example_idxs, strict=True))
             clusters = cluster_by_observed_param(
@@ -645,7 +603,6 @@ class ConditionalBayesianLearning:
                 f"  Template {repr(template)} split into "
                 f"{len(clusters)} clusters: {clusters}"
             )
-            logger.debug(f"    Observations: {observations}")
 
         return clusters
 
@@ -654,61 +611,44 @@ class ConditionalBayesianLearning:
         example_idxs_to_templates_map: dict[tuple, list[LinearConstraint]],
     ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         """
-        Perform Bayesian learning per structural set with clustering, then merge
-        constraints across sets.
+        Perform Bayesian learning with clustering for parameter modes.
 
-        For each template, examples are clustered by their observed parameter
-        values before learning. This handles cases where the same structural set
-        has multiple parameter modes (e.g., margin=10 for some, margin=50 for others).
+        For each template, examples are clustered by observed parameter values.
+        This handles cases where examples have different parameter modes
+        (e.g., margin=10 for some, margin=50 for others).
 
         Args:
             example_idxs_to_templates_map:
                 Maps example index tuples to their templates
-                e.g., {(0, 1): [templates], (2, 3): [templates]}
+                e.g., {(0, 1, 2): [global templates], (0, 1): [conditional templates]}
 
         Returns:
-            Dictionary mapping example index tuples to learned constraints:
-            - (0, 1): constraints specific to examples 0, 1
-            - (2, 3): constraints specific to examples 2, 3
-            - (0, 1, 2, 3): constraints that apply to all (merged)
+            Dictionary mapping example index tuples to learned constraints
         """
-        # Map cosntraints to examples they apply to
-        constr_to_sets_map: dict[LinearConstraint, set[int]] = defaultdict(set)
-        # Map constraints to their max score equivalents
-        constr_to_max_score_map: dict[LinearConstraint, LinearConstraint] = {}
+        output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
 
         for example_idxs, templates in example_idxs_to_templates_map.items():
-            logger.debug(f"\n\nLearning for structural set {example_idxs}")
+            logger.debug(f"Learning for example set {example_idxs}")
 
             for template in templates:
                 # Cluster examples by observed parameter values
                 clusters = self._cluster_template_examples(template, example_idxs)
 
-                # Learn separately for each cluster
+                # Skip clusters with < 2 examples (unless it's the only cluster)
+                # Single-example clusters are likely noise, not true conditional patterns
+                min_cluster_size = 1 if len(clusters) == 1 else 2
+
                 for cluster_example_idxs in clusters:
+                    if len(cluster_example_idxs) < min_cluster_size:
+                        continue
+
                     cluster_examples = [self.examples[i] for i in cluster_example_idxs]
                     learned = BayesianLearning(
                         examples=cluster_examples, config=self.config
                     ).learn([template])
 
-                    for constr in learned:
-                        constr_to_sets_map[constr].update(cluster_example_idxs)
-                        if (
-                            constr not in constr_to_max_score_map
-                            or constr.score > constr_to_max_score_map[constr].score
-                        ):
-                            constr_to_max_score_map[constr] = constr
-
-        # Map examples to which constraints apply to them
-        output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
-        for constr, example_idxs_set in constr_to_sets_map.items():
-            output[tuple(sorted(example_idxs_set))].append(
-                constr_to_max_score_map[constr]
-            )
-
-        # Sanity check: no duplicate constraints in any list
-        for constr_list in output.values():
-            assert len(set(constr_list)) == len(constr_list)
+                    key = tuple(sorted(cluster_example_idxs))
+                    output[key].extend(learned)
 
         return dict(output)
 

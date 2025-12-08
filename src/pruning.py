@@ -1,5 +1,4 @@
 import logging
-from collections import defaultdict
 from fractions import Fraction
 
 import z3
@@ -82,14 +81,17 @@ def add_layout_axioms(
     for view in views:
         if is_horizontal:
             # Horizontal axioms
-            z3_weight = anchor_to_z3_var(view.anchor("width"), test_rect_idx)
+            z3_width = anchor_to_z3_var(view.anchor("width"), test_rect_idx)
             z3_left = anchor_to_z3_var(view.anchor("left"), test_rect_idx)
             z3_right = anchor_to_z3_var(view.anchor("right"), test_rect_idx)
             z3_center_x = anchor_to_z3_var(view.anchor("center_x"), test_rect_idx)
 
-            solver.add(z3_weight == z3_right - z3_left)
+            solver.add(z3_width == z3_right - z3_left)
             solver.add(z3_center_x == (z3_left + z3_right) / 2)
-            solver.add(z3_weight >= 0, z3_left >= 0, z3_right >= 0)
+            solver.add(z3_width >= 0)
+            solver.add(z3_left >= 0)
+            solver.add(z3_right >= 0)
+            solver.add(z3_center_x >= 0)
         else:
             # Vertical axioms
             z3_height = anchor_to_z3_var(view.anchor("height"), test_rect_idx)
@@ -99,7 +101,10 @@ def add_layout_axioms(
 
             solver.add(z3_height == z3_bottom - z3_top)
             solver.add(z3_center_y == (z3_top + z3_bottom) / 2)
-            solver.add(z3_height >= 0, z3_top >= 0, z3_bottom >= 0)
+            solver.add(z3_height >= 0)
+            solver.add(z3_top >= 0)
+            solver.add(z3_bottom >= 0)
+            solver.add(z3_center_y >= 0)
 
 
 def add_root_dims_constraints(
@@ -107,24 +112,21 @@ def add_root_dims_constraints(
     test_rect: TestRect,
     test_rect_idx: int,
     root: View,
-    is_horizontal: bool,
 ):
     """
     Add z3 constraints that the root view must be the same size as the test rect.
 
-    Note: We pass Fraction objects directly to Z3 (not floats) to preserve
-    exact rational arithmetic.
+    Note: We pass Fraction objects directly to Z3 (not floats) to preserve exact rational arithmetic.
     """
-    if is_horizontal:
-        z3_width = anchor_to_z3_var(root.anchor("width"), test_rect_idx)
-        z3_left = anchor_to_z3_var(root.anchor("left"), test_rect_idx)
-        solver.add(z3_width == test_rect.width)
-        solver.add(z3_left == test_rect.left)
-    else:
-        z3_height = anchor_to_z3_var(root.anchor("height"), test_rect_idx)
-        z3_top = anchor_to_z3_var(root.anchor("top"), test_rect_idx)
-        solver.add(z3_height == test_rect.height)
-        solver.add(z3_top == test_rect.top)
+    z3_width = anchor_to_z3_var(root.anchor("width"), test_rect_idx)
+    z3_height = anchor_to_z3_var(root.anchor("height"), test_rect_idx)
+    z3_left = anchor_to_z3_var(root.anchor("left"), test_rect_idx)
+    z3_top = anchor_to_z3_var(root.anchor("top"), test_rect_idx)
+
+    solver.add(z3_width == test_rect.width)
+    solver.add(z3_height == test_rect.height)
+    solver.add(z3_left == test_rect.left)
+    solver.add(z3_top == test_rect.top)
 
 
 def z3_to_fraction(z3_val) -> Fraction:
@@ -198,9 +200,15 @@ class MaxSMTPruner:
         constraints = [c for c in candidates if not is_aspect_ratio(c)]
 
         if len(constraints) == 0:
-            raise ValueError("No constraints were given to the MaxSMT pruner.")
+            defaults: dict[str, Fraction] = {}
+            for view in self.root_and_children:
+                for anchor in view.anchors():
+                    defaults[f"{view.name}.{anchor.type}"] = Fraction(
+                        getattr(view, anchor.type)
+                    )
+            return ([], defaults, defaults)
 
-        constraint_to_weight_map = get_constraint_weights(constraints)
+        constraint_to_weight_map = get_constraint_weights(candidates)
 
         # Create test rect range
         test_rects = test_rect_range(self.min_rect, self.max_rect, num=5)
@@ -223,20 +231,15 @@ class MaxSMTPruner:
                 solver = v_solver
                 z3_vars_to_constr_map = z3_vars_to_v_constr_map
 
-            # Scale to integer for Z3
-            weight = int(constraint_to_weight_map[constraint] * 1000)
+            weight = constraint_to_weight_map[constraint]
             solver.add_soft(z3_var, weight)
             z3_vars_to_constr_map[z3_name] = constraint
 
         # Add hard constraints for each conformance
         for test_rect_idx, test_rect in enumerate(test_rects):
 
-            add_root_dims_constraints(
-                h_solver, test_rect, test_rect_idx, self.root, is_horizontal=True
-            )
-            add_root_dims_constraints(
-                v_solver, test_rect, test_rect_idx, self.root, is_horizontal=False
-            )
+            add_root_dims_constraints(h_solver, test_rect, test_rect_idx, self.root)
+            add_root_dims_constraints(v_solver, test_rect, test_rect_idx, self.root)
 
             add_layout_axioms(
                 h_solver, self.root_and_children, test_rect_idx, is_horizontal=True
@@ -294,7 +297,7 @@ class MaxSMTPruner:
         selected = [
             z3_vars_to_constr_map[v.name()]
             for v in model.decls()
-            if v.name() in z3_vars_to_constr_map and z3.is_true(model[v])
+            if v.name() in z3_vars_to_constr_map and model.get_interp(v)
         ]
 
         # Extract anchor position at smallest and largest test rects
@@ -311,12 +314,12 @@ class MaxSMTPruner:
             for anchor_type in anchor_types:
                 # Get anchor position under smallest test rect (index 0)
                 min_var = anchor_to_z3_var(view.anchor(anchor_type), 0)
-                min_val = model.eval(min_var, model_completion=True)
+                min_val = model.get_interp(min_var)
 
                 # Get anchor position under largest test rect (last index)
                 max_idx = len(test_rects) - 1
                 max_var = anchor_to_z3_var(view.anchor(anchor_type), max_idx)
-                max_val = model.eval(max_var, model_completion=True)
+                max_val = model.get_interp(max_var)
 
                 key = f"{view.name}.{anchor_type}"
                 mins[key] = z3_to_fraction(min_val)
@@ -381,9 +384,6 @@ class HierarchicalPruner:
                 c for c in candidates if HierarchicalPruner._is_relevant(focus, c)
             ]
 
-            if not relevant:
-                continue
-
             max_smt_solver = MaxSMTPruner(focus, min_rect, max_rect)
             constraints, anchor_to_min_size_map, anchor_to_max_size_map = (
                 max_smt_solver.prune(relevant)
@@ -446,144 +446,54 @@ class ConditionalHierarchicalPruner:
 
     def __init__(self, examples: list[View]):
         self.examples = examples
-        self._compute_test_rect_ranges()
-
-    def _compute_test_rect_ranges(self):
-        """
-        Compute the test rect range for each example using midpoint breakpoints.
-
-        Examples are sorted by width, then midpoint rects are computed by
-        interpolating both width AND height between consecutive examples.
-
-        For examples [(400, 300), (800, 600), (1200, 900)] sorted by width:
-        - Midpoint rects: [(600, 450), (1000, 750)]
-        - Example 0: test range from (100, 100) to midpoint (600, 450)
-        - Example 1: test range from (600, 450) to (1000, 750)
-        - Example 2: test range from (1000, 750) to (2400, 1800)
-        """
-
-        # Sort examples by width
-        sorted_example_idxs = sorted(
-            range(len(self.examples)), key=lambda i: self.examples[i].width
-        )
-        sorted_examples = [self.examples[i] for i in sorted_example_idxs]
-
-        # Compute breakpoints in the middle of example rects
-        breakpoint_rects: list[TestRect] = [
-            TestRect(
-                left=Fraction(0),
-                top=Fraction(0),
-                width=Fraction(1000),
-                height=Fraction(600),
-            )
-        ]
-        for smaller, larger in zip(
-            sorted_examples[:-1], sorted_examples[1:], strict=True
-        ):
-            breakpoint_rects.append(
-                TestRect(
-                    left=Fraction(0),
-                    top=Fraction(0),
-                    width=(Fraction(smaller.width) + Fraction(larger.width)) / 2,
-                    height=(Fraction(smaller.height) + Fraction(larger.height)) / 2,
-                )
-            )
-        breakpoint_rects.append(
-            TestRect(
-                left=Fraction(0),
-                top=Fraction(0),
-                width=Fraction(sorted_examples[-1].width) + 100,
-                height=Fraction(sorted_examples[-1].height) + 0,
-            )
-        )
-
-        # Map each example index to its (min_rect, max_rect) range
-        self.example_to_rect_range: dict[int, tuple[TestRect, TestRect]] = {}
-        for ex_idx, min_rect, max_rect in zip(
-            sorted_example_idxs,
-            breakpoint_rects[:-1],
-            breakpoint_rects[1:],
-            strict=True,
-        ):
-            self.example_to_rect_range[ex_idx] = (min_rect, max_rect)
 
     def prune(
         self,
         conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
     ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         """
-        Per-example pruning for conditional constraints.
+        Per-group pruning for conditional constraints.
 
         Algorithm:
-        1. For each example, collect ALL constraints that apply to it
-           (from any group containing that example)
-        2. Run HierarchicalPruner using that example's width range (from midpoint
-           breakpoints) to ensure constraints generalize
-        3. A constraint survives if it survives for ALL examples in its group
+        1. For each group, prune its constraints using that group's examples
+        2. Global group (all examples) is pruned exactly like Original
+        3. Conditional groups are pruned with their subset of examples
+        4. Conflicts between groups are resolved at PREDICTION time using priority:
+           - More specific groups (fewer examples) override more general ones
 
-        This handles overlapping groups correctly:
-        - Constraint in (0,1) is tested on example 0 AND example 1
-        - Constraint in (0,) is tested only on example 0
-        - When testing example 0, both constraints are tested together,
-          ensuring they're compatible
+        This ensures:
+        - Global constraints behave exactly like Original
+        - Conditional constraints are pruned appropriately for their examples
+        - Conflicts are resolved at prediction time (specific overrides general)
 
         Args:
             conditional_constraints: Dict mapping example index tuples to constraints
                 e.g., {(0,): [...], (0, 1): [...], (0, 1, 2): [...]}
 
         Returns:
-            Dict with same structure, constraints pruned for compatibility
+            Dict with same structure, constraints pruned per group
         """
+        output: dict[tuple[int, ...], list[LinearConstraint]] = {}
 
-        # Step 1: Map each example to all constraints that apply to it
-        example_to_constraints: dict[int, list[LinearConstraint]] = defaultdict(list)
-        constraint_to_group: dict[LinearConstraint, tuple[int, ...]] = {}
+        # Sort groups by size (largest first) for logging clarity
+        sorted_groups = sorted(
+            conditional_constraints.keys(),
+            key=lambda k: -len(k),  # Descending by size
+        )
 
-        for group_key, constraints in conditional_constraints.items():
-            for constraint in constraints:
-                constraint_to_group[constraint] = group_key
-                for example_idx in group_key:
-                    example_to_constraints[example_idx].append(constraint)
-
-        constr_p_ex = {k: len(v) for k, v in sorted(example_to_constraints.items())}
-        logger.info(f"  Constraints per example: {constr_p_ex}")
-
-        # Step 2: Prune per-example using rect range from midpoint breakpoints
-        survived_per_example: dict[int, set[LinearConstraint]] = {}
-
-        for example_idx, constraints in example_to_constraints.items():
-            example = self.examples[example_idx]
-            min_rect, max_rect = self.example_to_rect_range[example_idx]
+        for group_key in sorted_groups:
+            constraints = conditional_constraints[group_key]
+            group_examples = [self.examples[i] for i in group_key]
 
             logger.info(
-                f"  Pruning for example {example_idx}: {len(constraints)} constraints "
-                "(size range: "
-                f"[{float(min_rect.width):.0f}x{float(min_rect.height):.0f}] to "
-                f"[{float(max_rect.width):.0f}x{float(max_rect.height):.0f}])"
+                f"  Pruning group {group_key}: {len(constraints)} constraints "
+                f"with {len(group_examples)} examples"
             )
 
-            pruned = HierarchicalPruner(
-                [example], min_rect=min_rect, max_rect=max_rect
-            ).prune(constraints)
-            survived_per_example[example_idx] = set(pruned)
+            # Prune with the group's examples
+            pruned = HierarchicalPruner(group_examples).prune(constraints)
 
             logger.info(f"    → {len(pruned)} constraints survived")
+            output[group_key] = pruned
 
-        # Step 3: Constraint survives if it survives for ALL examples in its group
-        pruned_output: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
-
-        for group_key, constraints in conditional_constraints.items():
-            for constraint in constraints:
-                # Check if constraint survived for all examples in its group
-                if all(
-                    constraint in survived_per_example.get(ex_idx, set())
-                    for ex_idx in group_key
-                ):
-                    pruned_output[group_key].append(constraint)
-
-            logger.info(
-                f"  Group {group_key}: {len(constraints)} → "
-                f"{len(pruned_output[group_key])} constraints"
-            )
-
-        return dict(pruned_output)
+        return output

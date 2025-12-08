@@ -2,6 +2,14 @@ from src.main import ConditionalMockdown
 from src.types import View
 from src.visualize import visualize
 
+# def load_json(filename: str):
+#     path = Path(__file__).parent / filename
+#     with open(path) as f:
+#         return json.load(f)
+
+# data = load_json("data/ieee-simple.json")
+# examples = data["examples"]
+
 examples = [
     {
         "name": "root",
@@ -33,40 +41,40 @@ examples = [
             },
         ],
     },
-    {
-        "name": "root",
-        "rect": [0, 0, 500, 1530],
-        "children": [
-            {
-                "name": "authors",
-                "rect": [0, 510, 500, 1530],
-                "children": [
-                    {"name": "author1", "rect": [60, 540, 440, 840]},
-                    {"name": "author2", "rect": [60, 870, 440, 1170]},
-                    {"name": "author3", "rect": [60, 1200, 440, 1500]},
-                ],
-            },
-        ],
-    },
-    {
-        "name": "root",
-        "rect": [0, 0, 400, 1470],
-        "children": [
-            {
-                "name": "authors",
-                "rect": [0, 510, 400, 1470],
-                "children": [
-                    {"name": "author1", "rect": [10, 525, 390, 825]},
-                    {"name": "author2", "rect": [10, 840, 390, 1140]},
-                    {"name": "author3", "rect": [10, 1155, 390, 1455]},
-                ],
-            },
-        ],
-    },
+    # {
+    #     "name": "root",
+    #     "rect": [0, 0, 500, 1530],
+    #     "children": [
+    #         {
+    #             "name": "authors",
+    #             "rect": [0, 510, 500, 1530],
+    #             "children": [
+    #                 {"name": "author1", "rect": [10, 540, 440, 840]},
+    #                 {"name": "author2", "rect": [10, 870, 440, 1170]},
+    #                 {"name": "author3", "rect": [10, 1200, 440, 1500]},
+    #             ],
+    #         },
+    #     ],
+    # },
+    # {
+    #     "name": "root",
+    #     "rect": [0, 0, 400, 1470],
+    #     "children": [
+    #         {
+    #             "name": "authors",
+    #             "rect": [0, 510, 400, 1470],
+    #             "children": [
+    #                 {"name": "author1", "rect": [10, 525, 390, 825]},
+    #                 {"name": "author2", "rect": [10, 840, 390, 1140]},
+    #                 {"name": "author3", "rect": [10, 1155, 390, 1455]},
+    #             ],
+    #         },
+    #     ],
+    # },
 ]
 
 views = [View(**example) for example in examples]
 mockdown = ConditionalMockdown()
 mockdown.fit(views)
-rects = mockdown.predict(width=800, height=1400)
+rects = mockdown.predict(width=views[-1].width + 10, height=views[-1].height)
 visualize(rects, root_name="root")

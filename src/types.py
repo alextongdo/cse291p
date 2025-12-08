@@ -146,6 +146,11 @@ class LinearConstraint(BaseModel):
     def __hash__(self):
         return hash(repr(self))
 
+    def __eq__(self, other) -> bool:
+        if not isinstance(other, LinearConstraint):
+            return False
+        return repr(self) == repr(other)
+
     def __repr__(self) -> str:
         if self.x is None:
             assert self.a == 0

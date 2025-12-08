@@ -105,7 +105,7 @@ class TemplateInstantiator:
         )
         offset_matrix = offset_parent_child_matrix | offset_sibling_matrix
 
-        # Compute view-level visibility matrices, which marks an anchor pair 
+        # Compute view-level visibility matrices, which marks an anchor pair
         # as visible if *any anchor pair* of their views were deemed visible
         # by the sweep-line algorithm
         views = self.examples[0]._flattened_views_in_subtree
@@ -334,16 +334,22 @@ class ConditionalTemplateInstantiator:
         assert len(self.examples) > 0, "At least one example is required."
 
     def instantiate(self) -> dict[tuple[int, ...], list[LinearConstraint]]:
-
-        # Group examples by their instantiated templates
-        set_to_examples_map = defaultdict(list)
+        """
+        Instantiate templates and group by which examples they apply to.
+        """
+        # For each template, find which examples have it
+        template_to_examples: dict[LinearConstraint, set[int]] = defaultdict(set)
         for example_idx, example in enumerate(self.examples):
             templates = TemplateInstantiator(examples=[example]).instantiate()
-            set_to_examples_map[frozenset(templates)].append(example_idx)
+            for template in templates:
+                template_to_examples[template].add(example_idx)
 
-        # Convert to output format: tuple of example indices → list of templates
-        output = {}
-        for templates_set, example_idxs in set_to_examples_map.items():
-            output[tuple(example_idxs)] = list(templates_set)
+        # Group templates by their applicability set
+        examples_to_templates: dict[tuple[int, ...], list[LinearConstraint]] = (
+            defaultdict(list)
+        )
+        for template, example_set in template_to_examples.items():
+            key = tuple(sorted(example_set))
+            examples_to_templates[key].append(template)
 
-        return output
+        return dict(examples_to_templates)
