@@ -1,0 +1,72 @@
+{
+  "sites": [
+    {
+      "url": "https://ieeexplore.ieee.org/Xplore/",
+      "name": "ieee_explore",
+      "selectors": [
+        "body",
+        "header",
+        "main",
+        "footer",
+        "#LayoutWrapper",
+        ".GlobalNav",
+        ".global-nav",
+        ".global-nav .gn-header",
+        ".global-nav .gn-search",
+        ".global-nav .gn-links",
+        ".header-main",
+        ".header-main .logo-container",
+        ".header-main .search-container",
+        ".header-main .right-section",
+        ".main-section",
+        ".main-section .row",
+        ".main-section .col",
+        ".main-section .feature",
+        ".main-section .feature h2",
+        ".main-section .feature p",
+        ".main-section .feature a",
+        ".main-section .tab-content",
+        ".main-section .tab-content .tab-pane",
+        ".tab-content",
+        ".tab-pane",
+        ".search-container",
+        ".search-container form",
+        ".search-container input",
+        ".search-container button",
+        ".content",
+        ".content .row",
+        ".content .col",
+        ".highlight",
+        ".card",
+        ".card-body",
+        ".card h2",
+        ".card h3",
+        ".card p",
+        ".card a",
+        ".page-footer",
+        ".page-footer .row",
+        ".page-footer .col",
+        "nav",
+        "section",
+        "article"
+      ]
+    }
+  ],
+  "viewports": {
+    "wide": [
+      { "width": 1920, "height": 1080, "label": "desktop_large" },
+      { "width": 1366, "height": 768, "label": "desktop_medium" },
+      { "width": 1024, "height": 768, "label": "tablet_landscape" }
+    ],
+    "thin": [
+      { "width": 375, "height": 812, "label": "iphone_x" },
+      { "width": 414, "height": 896, "label": "iphone_xr" },
+      { "width": 360, "height": 800, "label": "android_small" }
+    ]
+  },
+  "settings": {
+    "wait_after_resize_ms": 1000,
+    "timeout_ms": 30000
+  }
+}
+
