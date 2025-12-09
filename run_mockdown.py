@@ -11,11 +11,11 @@ def load_json(filename: str):
     with open(path) as f:
         return json.load(f)
 
-data = load_json("data/ieee-simple.json")
-examples = data["examples"]
+data = load_json("data/hn.json")
+examples = data["train"]
 
 views = [View(**example) for example in examples]
 mockdown = Mockdown()
 mockdown.fit(views)
 rects = mockdown.predict(width=views[0].width, height=views[0].height)
-visualize(rects, root_name="root")
+visualize(rects, root_name=views[0].name)
