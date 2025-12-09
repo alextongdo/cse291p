@@ -1,12 +1,12 @@
 # Legacy Comparison Results (new pipeline; original mockdown fails)
 
-The original mockdown fails on these legacy datasets (non-isomorphic examples not supported), so only the new pipeline metrics are shown. `hn` timed out; `conference` timed out in this run.
+The original mockdown fails on these legacy datasets (non-isomorphic examples not supported), so only the new pipeline metrics are shown. `conference` rerun succeeded; `hn` still timed out.
 
 Dataset | RMSD (px) | ACC | Constraints | Total (s) | Inst (s) | Learn (s) | Prune (s)
 --- | --- | --- | --- | --- | --- | --- | ---
 ace | 0.3017 | 1.0000 | 1223 | 26.8536 | 4.4571 | 20.2692 | 2.1273
 author | 24.4573 | 0.0000 | 669 | 181.3447 | 1.0135 | 8.0805 | 172.2507
-conference | timeout | — | — | — | — | — | —
+conference | 0.7894 | 0.6836 | 3544 | 702.8437 | 18.7528 | 49.0635 | 635.0275
 ddg | 0.2168 | 1.0000 | 627 | 14.4277 | 1.0847 | 7.8392 | 5.5038
 fwt-main | 0.2951 | 1.0000 | 1827 | 49.3395 | 10.0502 | 27.9030 | 11.3863
 fwt-running | 0.2006 | 1.0000 | 543 | 12.6874 | 0.8116 | 7.4801 | 4.3957

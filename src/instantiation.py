@@ -225,9 +225,6 @@ class TemplateInstantiator:
 
         for view in views:
             left, top, right, bottom = view.rect
-            if right <= left or bottom <= top:
-                # Skip zero-size or invalid intervals (e.g., padded dummy views)
-                continue
             # Top edge
             horizontal_edge_tree.addi(begin=left, end=right, data=view.anchor("top"))
             # Bottom edge
