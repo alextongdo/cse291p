@@ -1,0 +1,106 @@
+{
+  "sites": [
+    {
+      "url": "https://www.wikipedia.org",
+      "name": "wikipedia",
+      "selectors": [
+        "body",
+        ".central-textlogo",
+        ".search-container",
+        "#searchInput",
+        ".lang-list-container",
+        ".other-projects",
+        ".footer",
+        "form",
+        "button"
+      ]
+    }
+  ],
+  "viewports": {
+    "wide": [
+      {
+        "width": 1920,
+        "height": 1080,
+        "label": "desktop_large"
+      },
+      {
+        "width": 1366,
+        "height": 768,
+        "label": "desktop_medium"
+      },
+      {
+        "width": 1024,
+        "height": 768,
+        "label": "tablet_landscape"
+      }
+    ],
+    "thin": [
+      {
+        "width": 375,
+        "height": 812,
+        "label": "iphone_x"
+      },
+      {
+        "width": 414,
+        "height": 896,
+        "label": "iphone_xr"
+      },
+      {
+        "width": 360,
+        "height": 800,
+        "label": "android_small"
+      }
+    ]
+  },
+  "settings": {
+    "wait_after_resize_ms": 1500,
+    "timeout_ms": 60000,
+    "wait_until": "domcontentloaded"
+  },
+  "default_selectors": [
+    "body",
+    "header",
+    "main",
+    "footer",
+    "nav",
+    "section",
+    "article",
+    "aside",
+    ".nav",
+    ".navbar",
+    ".menu",
+    ".header",
+    ".footer",
+    ".hero",
+    ".banner",
+    ".content",
+    ".container",
+    ".row",
+    ".col",
+    ".grid",
+    ".card",
+    ".card-body",
+    ".card-title",
+    ".card-text",
+    ".title",
+    ".headline",
+    ".lede",
+    ".sidebar",
+    ".main",
+    ".search",
+    "form",
+    "input",
+    "button",
+    "h1",
+    "h2",
+    "h3",
+    "img",
+    "ul",
+    "li",
+    "a",
+    ".tab",
+    ".tab-content",
+    ".carousel",
+    ".feature"
+  ]
+}

@@ -16,21 +16,26 @@
       "selectors": [
         "body", "header", "main", "footer", "nav",
         ".pillars", ".content__main", ".content__secondary", ".l-side-margins",
-        ".fc-container", ".fc-item", ".fc-item__content", ".fc-item__title",
-        ".fc-item__media-wrapper", "section[data-link-name='block']",
-        "section[id^='most-']", "section[id^='news']", ".front-page"
+        ".fc-container", ".fc-item", ".fc-item__container", ".fc-item__content", ".fc-item__title",
+        ".fc-item__standfirst", ".fc-item__media-wrapper", ".fc-slice-wrapper",
+        ".content__article-body", ".content__headline", "figure", ".media-primary",
+        "section[data-link-name='block']", "section[id^='most-']", "section[id^='news']", ".front-page"
       ]
     },
     {
       "url": "https://www.cnn.com",
       "name": "cnn",
       "selectors": [
-        "body", "header", "footer", "nav",
+        "body", "header", "footer", "nav", "main",
+        ".page", ".l-container", ".container", ".zone", ".zn",
         ".subnav__section", ".subnav__section-link", ".subnav__subsection", ".subnav__subsection-link",
-        ".container", ".container__item", ".container__headline", ".container__headline-text", ".container__text",
+        ".cd__wrapper", ".cd__content", ".cd__headline", ".cd__headline-text", ".cd__description",
+        ".cd__img", ".media", ".media__image", ".media__caption",
+        ".card",
+        ".container__item", ".container__headline", ".container__headline-text", ".container__text",
         ".container__item-media-wrapper", ".container__item-media", ".container__link--type-article",
         ".container_lead-plus-headlines-with-images__item", ".container_lead-plus-headlines__link",
-        ".container_vertical-shelf-carousel__link", ".card", ".zone"
+        ".container_vertical-shelf-carousel__link", ".layout__wrapper", ".layout__headline", "article"
       ]
     },
     {
@@ -38,9 +43,13 @@
       "name": "nytimes",
       "selectors": [
         "body", "header", "main", "footer", "nav", "#site-content",
-        "section[name]", "section[data-block-tracking-id]", "article",
-        "div.story-wrapper", ".story-wrapper",
-        ".css-1ez5fsm", ".css-13mho3u", ".css-1l4spti", ".css-kz1pwz", ".container-margin"
+        "section[name]", "section[data-block-tracking-id]", "section[aria-label]",
+        "article", ".story-wrapper", ".css-1ez5fsm", ".css-13mho3u",
+        ".css-1l4spti", ".css-kz1pwz", ".container-margin",
+        "figure", ".g-headlines", ".story", ".css-1vkm6nb",
+        "div[data-component]", "section[data-testid]", ".css-1vkm6nb", ".css-1wjnrbv",
+        "div[class*='story']", "div[class*='block']", "div[class*='promo']",
+        ".css-1fanzo5", ".css-1r6wvpq", ".css-1qiat4j", ".css-1y65k6g"
       ]
     },
     {
@@ -51,7 +60,9 @@
         "[class*='duet--layout--river']", "[class*='duet--content-cards']",
         ".duet--content-cards--content-card", ".duet--content-cards--quick-post",
         ".duet--article--timestamp", "article", ".c-entry-box--compact",
-        ".l-col__main", ".l-col__sidebar", ".c-feature-grid"
+        ".l-col__main", ".l-col__sidebar", ".c-feature-grid",
+        ".c-page", ".c-compact-river", ".c-compact-river__entry", ".c-entry-box--compact__body",
+        ".c-entry-box--compact__title", ".c-entry-box--compact__dek", ".c-multi-rail"
       ]
     },
     {
@@ -59,10 +70,13 @@
       "name": "npr",
       "selectors": [
         "body", "header", "main", "footer", "nav", "section", "article", "aside",
-        ".story-wrap", ".story-text", ".bucketwrap",
+        ".story-wrap", ".story-text", ".bucketwrap", ".story-package",
         ".playlist-item", ".playlist-item-link", ".playlist-thumbnail-wrapper",
         ".audio-module", ".audio-module-controls", ".audio-module-listen",
-        ".respArchListImg", ".imagewrap", ".story-link", ".npr-footer__module"
+        ".respArchListImg", ".imagewrap", ".story-link", ".npr-footer__module",
+        ".featured", ".featured-content", ".featured-content__teaser", ".story-content",
+        "div[data-story-id]", "div[class*='story']", "div[class*='lede']", "div[class*='promo']",
+        ".grid", ".row", ".col", ".column", ".featured-grid", ".featured-grid__item", ".story-package__item"
       ]
     },
     {

@@ -2,7 +2,7 @@
   "site": {
     "url": "https://www.reuters.com/world/",
     "name": "reuters",
-    "captured_at": "2025-12-08T13:41:25.095238"
+    "captured_at": "2025-12-08T19:23:08.196224"
   },
   "selectors": [
     "body",

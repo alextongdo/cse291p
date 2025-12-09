@@ -32,6 +32,7 @@ if str(project_root) not in sys.path:
 from src.evaluation import calculate_rmsd
 from src.instantiation import ConditionalTemplateInstantiator
 from src.learning import ConditionalBayesianLearning
+import os
 from src.pruning import ConditionalHierarchicalPruner
 from src.types import View, LinearConstraint
 from src.main import _solve_layout
@@ -112,21 +113,27 @@ def _filter_dict_to_common_names(d: dict, common: set[str], keep_root: bool = Fa
     return None
 
 
-def filter_views_to_common_names(views: list[View]) -> list[View]:
-    """Retain only views whose names appear in all examples (root always kept)."""
+def align_views_to_union(views: list[View]) -> list[View]:
+    """
+    Pad missing view names across all examples to satisfy name consistency checks.
+    Pads with rect=0 and tracks padded names for later RMSD masking.
+    """
     if not views:
         return views
-    name_sets = [set(v.name for v in ex._flattened_views_in_subtree) for ex in views]
-    common = set.intersection(*name_sets) if name_sets else set()
-    if not common:
-        return views
-    filtered = []
-    for v in views:
-        d = _view_to_dict(v)
-        fd = _filter_dict_to_common_names(d, common, keep_root=True)
-        if fd:
-            filtered.append(View(**fd))
-    return filtered
+    union_names: set[str] = set()
+    for ex in views:
+        union_names.update(v.name for v in ex._flattened_views_in_subtree)
+    aligned: list[View] = []
+    for ex in views:
+        present = {v.name for v in ex._flattened_views_in_subtree}
+        missing = union_names - present
+        if missing:
+            for name in missing:
+                ex.children.append(View(name=name, rect=(0, 0, 0, 0), children=[]))
+            ex.model_post_init(None)
+        setattr(ex, "_padded_names", missing)
+        aligned.append(ex)
+    return aligned
 
 
 def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]]) -> float:
@@ -158,20 +165,66 @@ def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[L
             continue
 
         solved = _solve_layout(ex, constrs, ex.width, ex.height)
+        padded = getattr(ex, "_padded_names", set())
         predicted = {}
         for v in ex._flattened_views_in_subtree:
+            if v.name in padded:
+                continue
             predicted[v.name] = (
                 solved[f"{v.name}.left"],
                 solved[f"{v.name}.top"],
                 solved[f"{v.name}.right"],
                 solved[f"{v.name}.bottom"],
             )
-        # use existing rmsd metric
+        # use existing rmsd metric (will naturally use only present views)
         all_errors.append(calculate_rmsd(predicted, ex))
 
     if not all_errors:
         return 0.0
     return sum(all_errors) / len(all_errors)
+
+
+def accuracy_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]], tol: float = 1.0) -> float:
+    """Compute accuracy: fraction of views whose rect matches within tol on all sides."""
+    n = len(examples)
+    global_key = tuple(range(n))
+    global_constr = outputs.get(global_key, [])
+    accuracies = []
+    for idx, ex in enumerate(examples):
+        group_constr = []
+        candidate = [(len(k), k, v) for k, v in outputs.items() if k != global_key and idx in k]
+        if candidate:
+            candidate.sort(key=lambda x: x[0])
+            _, _, group_constr = candidate[0]
+        constrs = global_constr + group_constr
+        if not constrs:
+            continue
+        solved = _solve_layout(ex, constrs, ex.width, ex.height)
+        padded = getattr(ex, "_padded_names", set())
+        total = 0
+        correct = 0
+        for v in ex._flattened_views_in_subtree:
+            if v.name in padded:
+                continue
+            total += 1
+            pl, pt, pr, pb = (
+                solved[f"{v.name}.left"],
+                solved[f"{v.name}.top"],
+                solved[f"{v.name}.right"],
+                solved[f"{v.name}.bottom"],
+            )
+            if (
+                abs(pl - v.left) <= tol
+                and abs(pt - v.top) <= tol
+                and abs(pr - v.right) <= tol
+                and abs(pb - v.bottom) <= tol
+            ):
+                correct += 1
+        if total:
+            accuracies.append(correct / total)
+    if not accuracies:
+        return 0.0
+    return sum(accuracies) / len(accuracies)
 
 
 def run_new_pipeline(examples_file: Path) -> dict:
@@ -185,7 +238,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     print("=" * 80)
     
     views = load_examples_legacy(examples_file)
-    views = filter_views_to_common_names(views)
+    views = align_views_to_union(views)
     print(f"Loaded {len(views)} examples")
     
     overall_start = time.perf_counter()
@@ -204,17 +257,27 @@ def run_new_pipeline(examples_file: Path) -> dict:
     ).learn(example_idxs_to_templates_map)
     learn_time = time.perf_counter() - learn_start
     
-    # Stage 3: Hierarchical pruning
+    prune_strategy = os.getenv("PRUNE_STRATEGY", "hierarchical").lower()
+
+    # Stage 3: Pruning (configurable)
     prune_start = time.perf_counter()
-    outputs = ConditionalHierarchicalPruner(examples=views).prune(
-        example_idxs_to_constrs_map
-    )
+    if prune_strategy == "none":
+        outputs = example_idxs_to_constrs_map
+    else:
+        try:
+            outputs = ConditionalHierarchicalPruner(examples=views).prune(
+                example_idxs_to_constrs_map
+            )
+        except Exception as e:
+            print(f"[WARN] Hierarchical pruning failed ({e}); returning unpruned constraints")
+            outputs = example_idxs_to_constrs_map
     prune_time = time.perf_counter() - prune_start
     
     overall_time = time.perf_counter() - overall_start
     
     # Calculate RMSD
     rmsd = rmsd_conditional(views, outputs)
+    acc = accuracy_conditional(views, outputs)
     num_constraints = sum(len(cs) for cs in outputs.values())
     
     print(f"✓ Completed in {overall_time:.4f}s")
@@ -223,10 +286,12 @@ def run_new_pipeline(examples_file: Path) -> dict:
     print(f"  - Learning:      {learn_time:.4f}s")
     print(f"  - Pruning:       {prune_time:.4f}s")
     print(f"✓ RMSD: {rmsd:.4f} pixels")
+    print(f"✓ ACC:  {acc:.4f}")
     
     return {
         'success': True,
         'rmsd': rmsd,
+        'accuracy': acc,
         'num_constraints': num_constraints,
         'total_time': overall_time,
         'stage_timings': {

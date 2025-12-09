@@ -16,127 +16,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1920,
-            1080
+            8,
+            8,
+            1912,
+            45564.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 1080,
-          "width": 1920,
+          "top": 8,
+          "left": 8,
+          "height": 45556.06,
+          "width": 1904,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            302.41,
-            281,
-            1617.6000000000001,
-            446
+            8,
+            60,
+            1912,
+            38505.5
           ],
-          "top": 281,
-          "left": 302.41,
-          "height": 165,
-          "width": 1315.19,
+          "top": 60,
+          "left": 8,
+          "height": 38445.5,
+          "width": 1904,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            446,
-            1920,
-            15348.58
+            8,
+            38526.94,
+            1912,
+            45110.350000000006
           ],
-          "top": 446,
-          "left": 0,
-          "height": 14902.58,
-          "width": 1920,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6583.41,
+          "width": 1904,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            302.41,
-            15789.08,
-            1617.6000000000001,
-            15909.08
+            8,
+            45178.16,
+            1912,
+            45564.07000000001
           ],
-          "top": 15789.08,
-          "left": 302.41,
-          "height": 120,
-          "width": 1315.19,
+          "top": 45178.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 1904,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            446,
-            1920,
-            15348.58
+            8,
+            38526.94,
+            1912,
+            45110.350000000006
           ],
-          "top": 446,
-          "left": 0,
-          "height": 14902.58,
-          "width": 1920,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6583.41,
+          "width": 1904,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            360,
-            7503.83,
-            590.39,
-            7888.33
+            48,
+            40557.19,
+            1872,
+            40813.19
           ],
-          "top": 7503.83,
-          "left": 360,
-          "height": 384.5,
-          "width": 230.39,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            360,
-            466,
-            573.59,
-            705.69
-          ],
-          "top": 466,
-          "left": 360,
-          "height": 239.69,
-          "width": 213.59,
+          "top": 40557.19,
+          "left": 48,
+          "height": 256,
+          "width": 1824,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            360,
-            466,
-            573.59,
-            705.69
+            8,
+            38807.19,
+            1912,
+            38927.19
           ],
-          "top": 466,
-          "left": 360,
-          "height": 239.69,
-          "width": 213.59,
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1904,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            606.59,
-            466,
-            943.48,
-            867.89
+            48,
+            39113.19,
+            1872,
+            39131.19
           ],
-          "top": 466,
-          "left": 606.59,
-          "height": 401.89,
-          "width": 336.89,
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 1824,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            39113.19,
+            1872,
+            39131.19
+          ],
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 1824,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            40075.19,
+            1872,
+            40093.19
+          ],
+          "top": 40075.19,
+          "left": 48,
+          "height": 18,
+          "width": 1824,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            38807.19,
+            1912,
+            38927.19
+          ],
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1904,
           "children": []
         }
       ],
@@ -163,127 +191,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1366,
-            768
+            8,
+            8,
+            1358,
+            45600.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 768,
-          "width": 1366,
+          "top": 8,
+          "left": 8,
+          "height": 45592.06,
+          "width": 1350,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            42.03,
-            281,
-            1323.97,
-            446
+            8,
+            60,
+            1358,
+            38505.5
           ],
-          "top": 281,
-          "left": 42.03,
-          "height": 165,
-          "width": 1281.94,
+          "top": 60,
+          "left": 8,
+          "height": 38445.5,
+          "width": 1350,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            446,
-            1366,
-            15348.58
+            8,
+            38526.94,
+            1358,
+            45146.350000000006
           ],
-          "top": 446,
-          "left": 0,
-          "height": 14902.58,
-          "width": 1366,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6619.41,
+          "width": 1350,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            42.03,
-            15789.08,
-            1323.97,
-            15909.08
+            8,
+            45214.16,
+            1358,
+            45600.07000000001
           ],
-          "top": 15789.08,
-          "left": 42.03,
-          "height": 120,
-          "width": 1281.94,
+          "top": 45214.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 1350,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            446,
-            1366,
-            15348.58
+            8,
+            38526.94,
+            1358,
+            45146.350000000006
           ],
-          "top": 446,
-          "left": 0,
-          "height": 14902.58,
-          "width": 1366,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6619.41,
+          "width": 1350,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            83,
-            7503.83,
-            313.39,
-            7888.33
+            48,
+            40593.19,
+            1318,
+            40849.19
           ],
-          "top": 7503.83,
-          "left": 83,
-          "height": 384.5,
-          "width": 230.39,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            83,
-            466,
-            296.59000000000003,
-            705.69
-          ],
-          "top": 466,
-          "left": 83,
-          "height": 239.69,
-          "width": 213.59,
+          "top": 40593.19,
+          "left": 48,
+          "height": 256,
+          "width": 1270,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            83,
-            466,
-            296.59000000000003,
-            705.69
+            8,
+            38807.19,
+            1358,
+            38927.19
           ],
-          "top": 466,
-          "left": 83,
-          "height": 239.69,
-          "width": 213.59,
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1350,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            329.59,
-            466,
-            666.48,
-            867.89
+            48,
+            39113.19,
+            1318,
+            39131.19
           ],
-          "top": 466,
-          "left": 329.59,
-          "height": 401.89,
-          "width": 336.89,
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 1270,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            39113.19,
+            1318,
+            39131.19
+          ],
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 1270,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            40093.19,
+            1318,
+            40111.19
+          ],
+          "top": 40093.19,
+          "left": 48,
+          "height": 18,
+          "width": 1270,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            38807.19,
+            1358,
+            38927.19
+          ],
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1350,
           "children": []
         }
       ],
@@ -310,127 +366,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1024,
-            768
+            8,
+            8,
+            1016,
+            45672.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 768,
-          "width": 1024,
+          "top": 8,
+          "left": 8,
+          "height": 45664.06,
+          "width": 1008,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            281,
-            1024,
-            457
+            8,
+            60,
+            1016,
+            38505.5
           ],
-          "top": 281,
-          "left": 0,
-          "height": 176,
-          "width": 1024,
+          "top": 60,
+          "left": 8,
+          "height": 38445.5,
+          "width": 1008,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            457,
-            1024,
-            21468.59
+            8,
+            38526.94,
+            1016,
+            45218.350000000006
           ],
-          "top": 457,
-          "left": 0,
-          "height": 21011.59,
-          "width": 1024,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6691.41,
+          "width": 1008,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            21737.59,
-            1024,
-            21893.59
+            8,
+            45286.16,
+            1016,
+            45672.07000000001
           ],
-          "top": 21737.59,
-          "left": 0,
-          "height": 156,
-          "width": 1024,
+          "top": 45286.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 1008,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            457,
-            1024,
-            21468.59
+            8,
+            38526.94,
+            1016,
+            45218.350000000006
           ],
-          "top": 457,
-          "left": 0,
-          "height": 21011.59,
-          "width": 1024,
+          "top": 38526.94,
+          "left": 8,
+          "height": 6691.41,
+          "width": 1008,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            30.72,
-            12494.52,
-            346.24,
-            12990.210000000001
+            48,
+            40629.19,
+            976,
+            40885.19
           ],
-          "top": 12494.52,
-          "left": 30.72,
-          "height": 495.69,
-          "width": 315.52,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            30.72,
-            477,
-            282.15999999999997,
-            706.31
-          ],
-          "top": 477,
-          "left": 30.72,
-          "height": 229.31,
-          "width": 251.44,
+          "top": 40629.19,
+          "left": 48,
+          "height": 256,
+          "width": 928,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            30.72,
-            477,
-            282.15999999999997,
-            706.31
+            8,
+            38807.19,
+            1016,
+            38927.19
           ],
-          "top": 477,
-          "left": 30.72,
-          "height": 229.31,
-          "width": 251.44,
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1008,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            315.16,
-            477,
-            708.83,
-            935.6700000000001
+            48,
+            39113.19,
+            976,
+            39131.19
           ],
-          "top": 477,
-          "left": 315.16,
-          "height": 458.67,
-          "width": 393.67,
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 928,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            39113.19,
+            976,
+            39131.19
+          ],
+          "top": 39113.19,
+          "left": 48,
+          "height": 18,
+          "width": 928,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            40111.19,
+            976,
+            40129.19
+          ],
+          "top": 40111.19,
+          "left": 48,
+          "height": 18,
+          "width": 928,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            38807.19,
+            1016,
+            38927.19
+          ],
+          "top": 38807.19,
+          "left": 8,
+          "height": 120,
+          "width": 1008,
           "children": []
         }
       ],
@@ -457,141 +541,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            375,
-            812
+            8,
+            8,
+            367,
+            49129.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 812,
-          "width": 375,
+          "top": 8,
+          "left": 8,
+          "height": 49121.06,
+          "width": 359,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            0,
-            375,
-            106
+            8,
+            60,
+            367,
+            39909.5
           ],
-          "top": 0,
-          "left": 0,
-          "height": 106,
-          "width": 375,
+          "top": 60,
+          "left": 8,
+          "height": 39849.5,
+          "width": 359,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            106,
-            375,
-            24554.14
+            8,
+            39930.94,
+            367,
+            48675.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 24448.14,
-          "width": 375,
+          "top": 39930.94,
+          "left": 8,
+          "height": 8744.41,
+          "width": 359,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            24823.14,
-            375,
-            25035.14
+            8,
+            48743.16,
+            367,
+            49129.07000000001
           ],
-          "top": 24823.14,
-          "left": 0,
-          "height": 212,
-          "width": 375,
-          "children": []
-        },
-        {
-          "name": "nav",
-          "rect": [
-            0,
-            774.53,
-            375,
-            794.53
-          ],
-          "top": 774.53,
-          "left": 0,
-          "height": 20,
-          "width": 375,
+          "top": 48743.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 359,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            106,
-            375,
-            24554.14
+            8,
+            39930.94,
+            367,
+            48675.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 24448.14,
-          "width": 375,
+          "top": 39930.94,
+          "left": 8,
+          "height": 8744.41,
+          "width": 359,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            19,
-            13966.03,
-            269,
-            14122.03
+            48,
+            42844.19,
+            327,
+            43172.19
           ],
-          "top": 13966.03,
-          "left": 19,
-          "height": 156,
-          "width": 250,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            0,
-            126,
-            375,
-            794.53
-          ],
-          "top": 126,
-          "left": 0,
-          "height": 668.53,
-          "width": 375,
+          "top": 42844.19,
+          "left": 48,
+          "height": 328,
+          "width": 279,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            0,
-            126,
-            375,
-            794.53
+            8,
+            40248.19,
+            367,
+            40422.19
           ],
-          "top": 126,
-          "left": 0,
-          "height": 668.53,
-          "width": 375,
+          "top": 40248.19,
+          "left": 8,
+          "height": 174,
+          "width": 359,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            20,
-            1969.05,
-            355,
-            2323.46
+            48,
+            40680.19,
+            327,
+            40698.19
           ],
-          "top": 1969.05,
-          "left": 20,
-          "height": 354.41,
-          "width": 335,
+          "top": 40680.19,
+          "left": 48,
+          "height": 18,
+          "width": 279,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            40680.19,
+            327,
+            40698.19
+          ],
+          "top": 40680.19,
+          "left": 48,
+          "height": 18,
+          "width": 279,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            42038.19,
+            327,
+            42092.19
+          ],
+          "top": 42038.19,
+          "left": 48,
+          "height": 54,
+          "width": 279,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            40248.19,
+            367,
+            40422.19
+          ],
+          "top": 40248.19,
+          "left": 8,
+          "height": 174,
+          "width": 359,
           "children": []
         }
       ],
@@ -618,141 +716,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            414,
-            896
+            8,
+            8,
+            406,
+            48517.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 896,
-          "width": 414,
+          "top": 8,
+          "left": 8,
+          "height": 48509.06,
+          "width": 398,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            0,
-            414,
-            106
+            8,
+            60,
+            406,
+            39729.5
           ],
-          "top": 0,
-          "left": 0,
-          "height": 106,
-          "width": 414,
+          "top": 60,
+          "left": 8,
+          "height": 39669.5,
+          "width": 398,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            106,
-            414,
-            25331.92
+            8,
+            39750.94,
+            406,
+            48063.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 25225.92,
-          "width": 414,
+          "top": 39750.94,
+          "left": 8,
+          "height": 8312.41,
+          "width": 398,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            25600.92,
-            414,
-            25792.92
+            8,
+            48131.16,
+            406,
+            48517.07000000001
           ],
-          "top": 25600.92,
-          "left": 0,
-          "height": 192,
-          "width": 414,
-          "children": []
-        },
-        {
-          "name": "nav",
-          "rect": [
-            0,
-            813.53,
-            414,
-            833.53
-          ],
-          "top": 813.53,
-          "left": 0,
-          "height": 20,
-          "width": 414,
+          "top": 48131.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 398,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            106,
-            414,
-            25331.92
+            8,
+            39750.94,
+            406,
+            48063.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 25225.92,
-          "width": 414,
+          "top": 39750.94,
+          "left": 8,
+          "height": 8312.41,
+          "width": 398,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            19,
-            14255.12,
-            269,
-            14411.12
+            48,
+            42556.19,
+            366,
+            42812.19
           ],
-          "top": 14255.12,
-          "left": 19,
-          "height": 156,
-          "width": 250,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            0,
-            126,
-            414,
-            833.53
-          ],
-          "top": 126,
-          "left": 0,
-          "height": 707.53,
-          "width": 414,
+          "top": 42556.19,
+          "left": 48,
+          "height": 256,
+          "width": 318,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            0,
-            126,
-            414,
-            833.53
+            8,
+            40068.19,
+            406,
+            40224.19
           ],
-          "top": 126,
-          "left": 0,
-          "height": 707.53,
-          "width": 414,
+          "top": 40068.19,
+          "left": 8,
+          "height": 156,
+          "width": 398,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            20,
-            1933.14,
-            394,
-            2326.55
+            48,
+            40482.19,
+            366,
+            40500.19
           ],
-          "top": 1933.14,
-          "left": 20,
-          "height": 393.41,
-          "width": 374,
+          "top": 40482.19,
+          "left": 48,
+          "height": 18,
+          "width": 318,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            40482.19,
+            366,
+            40500.19
+          ],
+          "top": 40482.19,
+          "left": 48,
+          "height": 18,
+          "width": 318,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            41786.19,
+            366,
+            41822.19
+          ],
+          "top": 41786.19,
+          "left": 48,
+          "height": 36,
+          "width": 318,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            40068.19,
+            406,
+            40224.19
+          ],
+          "top": 40068.19,
+          "left": 8,
+          "height": 156,
+          "width": 398,
           "children": []
         }
       ],
@@ -779,141 +891,155 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            360,
-            800
+            8,
+            8,
+            352,
+            49309.06
           ],
-          "top": 0,
-          "left": 0,
-          "height": 800,
-          "width": 360,
+          "top": 8,
+          "left": 8,
+          "height": 49301.06,
+          "width": 344,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            0,
-            360,
-            106
+            8,
+            60,
+            352,
+            39981.5
           ],
-          "top": 0,
-          "left": 0,
-          "height": 106,
-          "width": 360,
+          "top": 60,
+          "left": 8,
+          "height": 39921.5,
+          "width": 344,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            106,
-            360,
-            24200.41
+            8,
+            40002.94,
+            352,
+            48855.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 24094.41,
-          "width": 360,
+          "top": 40002.94,
+          "left": 8,
+          "height": 8852.41,
+          "width": 344,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            24469.41,
-            360,
-            24681.41
+            8,
+            48923.16,
+            352,
+            49309.07000000001
           ],
-          "top": 24469.41,
-          "left": 0,
-          "height": 212,
-          "width": 360,
-          "children": []
-        },
-        {
-          "name": "nav",
-          "rect": [
-            0,
-            793.12,
-            360,
-            813.12
-          ],
-          "top": 793.12,
-          "left": 0,
-          "height": 20,
-          "width": 360,
+          "top": 48923.16,
+          "left": 8,
+          "height": 385.91,
+          "width": 344,
           "children": []
         },
         {
           "name": "site-content",
           "rect": [
-            0,
-            106,
-            360,
-            24200.41
+            8,
+            40002.94,
+            352,
+            48855.350000000006
           ],
-          "top": 106,
-          "left": 0,
-          "height": 24094.41,
-          "width": 360,
+          "top": 40002.94,
+          "left": 8,
+          "height": 8852.41,
+          "width": 344,
           "children": []
         },
         {
-          "name": "article",
+          "name": "section_aria-label",
           "rect": [
-            19,
-            13815.44,
-            269,
-            13971.44
+            48,
+            42970.19,
+            312,
+            43298.19
           ],
-          "top": 13815.44,
-          "left": 19,
-          "height": 156,
-          "width": 250,
-          "children": []
-        },
-        {
-          "name": "divstory-wrapper",
-          "rect": [
-            0,
-            126,
-            360,
-            813.12
-          ],
-          "top": 126,
-          "left": 0,
-          "height": 687.12,
-          "width": 360,
+          "top": 42970.19,
+          "left": 48,
+          "height": 328,
+          "width": 264,
           "children": []
         },
         {
           "name": "story-wrapper",
           "rect": [
-            0,
-            126,
-            360,
-            813.12
+            8,
+            40320.19,
+            352,
+            40494.19
           ],
-          "top": 126,
-          "left": 0,
-          "height": 687.12,
-          "width": 360,
+          "top": 40320.19,
+          "left": 8,
+          "height": 174,
+          "width": 344,
           "children": []
         },
         {
           "name": "container-margin",
           "rect": [
-            20,
-            2010.64,
-            340,
-            2350.05
+            48,
+            40752.19,
+            312,
+            40770.19
           ],
-          "top": 2010.64,
-          "left": 20,
-          "height": 339.41,
-          "width": 320,
+          "top": 40752.19,
+          "left": 48,
+          "height": 18,
+          "width": 264,
+          "children": []
+        },
+        {
+          "name": "figure",
+          "rect": [
+            48,
+            40752.19,
+            312,
+            40770.19
+          ],
+          "top": 40752.19,
+          "left": 48,
+          "height": 18,
+          "width": 264,
+          "children": []
+        },
+        {
+          "name": "section_data-testid",
+          "rect": [
+            48,
+            42128.19,
+            312,
+            42182.19
+          ],
+          "top": 42128.19,
+          "left": 48,
+          "height": 54,
+          "width": 264,
+          "children": []
+        },
+        {
+          "name": "div_class*='story'",
+          "rect": [
+            8,
+            40320.19,
+            352,
+            40494.19
+          ],
+          "top": 40320.19,
+          "left": 8,
+          "height": 174,
+          "width": 344,
           "children": []
         }
       ],

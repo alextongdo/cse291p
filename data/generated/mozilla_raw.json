@@ -2,7 +2,7 @@
   "site": {
     "url": "https://www.mozilla.org",
     "name": "mozilla",
-    "captured_at": "2025-12-08T13:40:54.643717"
+    "captured_at": "2025-12-08T19:22:37.519403"
   },
   "selectors": [
     "body",
@@ -35,9 +35,9 @@
             "x": 0,
             "y": 0,
             "width": 1920,
-            "height": 2045.61,
+            "height": 2031.41,
             "right": 1920,
-            "bottom": 2045.61
+            "bottom": 2031.41
           },
           "all": null,
           "count": 1
@@ -71,9 +71,9 @@
             "x": 0,
             "y": 1191.3,
             "width": 1920,
-            "height": 854.31,
+            "height": 840.11,
             "right": 1920,
-            "bottom": 2045.61
+            "bottom": 2031.41
           },
           "all": null,
           "count": 1
@@ -95,9 +95,9 @@
             "x": 0,
             "y": 56.5,
             "width": 1920,
-            "height": 1989.11,
+            "height": 1974.91,
             "right": 1920,
-            "bottom": 2045.61
+            "bottom": 2031.41
           },
           "all": null,
           "count": 1
@@ -169,9 +169,9 @@
             "x": 0,
             "y": 0,
             "width": 1366,
-            "height": 2050.14,
+            "height": 2035.94,
             "right": 1366,
-            "bottom": 2050.14
+            "bottom": 2035.94
           },
           "all": null,
           "count": 1
@@ -205,9 +205,9 @@
             "x": 0,
             "y": 1211.3,
             "width": 1366,
-            "height": 838.84,
+            "height": 824.64,
             "right": 1366,
-            "bottom": 2050.14
+            "bottom": 2035.94
           },
           "all": null,
           "count": 1
@@ -229,9 +229,9 @@
             "x": 0,
             "y": 56.5,
             "width": 1366,
-            "height": 1993.64,
+            "height": 1979.44,
             "right": 1366,
-            "bottom": 2050.14
+            "bottom": 2035.94
           },
           "all": null,
           "count": 1
@@ -303,9 +303,9 @@
             "x": 0,
             "y": 0,
             "width": 1024,
-            "height": 2143.62,
+            "height": 2124.62,
             "right": 1024,
-            "bottom": 2143.62
+            "bottom": 2124.62
           },
           "all": null,
           "count": 1
@@ -339,9 +339,9 @@
             "x": 0,
             "y": 1360.09,
             "width": 1024,
-            "height": 783.53,
+            "height": 764.53,
             "right": 1024,
-            "bottom": 2143.62
+            "bottom": 2124.62
           },
           "all": null,
           "count": 1
@@ -363,9 +363,9 @@
             "x": 0,
             "y": 56.5,
             "width": 1024,
-            "height": 2087.12,
+            "height": 2068.12,
             "right": 1024,
-            "bottom": 2143.62
+            "bottom": 2124.62
           },
           "all": null,
           "count": 1
@@ -437,9 +437,9 @@
             "x": 0,
             "y": 0,
             "width": 375,
-            "height": 5209.64,
+            "height": 5015.62,
             "right": 375,
-            "bottom": 5209.64
+            "bottom": 5015.62
           },
           "all": null,
           "count": 1
@@ -473,9 +473,9 @@
             "x": 0,
             "y": 3930.19,
             "width": 375,
-            "height": 1279.45,
+            "height": 1085.44,
             "right": 375,
-            "bottom": 5209.64
+            "bottom": 5015.62
           },
           "all": null,
           "count": 1
@@ -497,9 +497,9 @@
             "x": 0,
             "y": 54,
             "width": 375,
-            "height": 5155.64,
+            "height": 4961.62,
             "right": 375,
-            "bottom": 5209.64
+            "bottom": 5015.62
           },
           "all": null,
           "count": 1
@@ -571,9 +571,9 @@
             "x": 0,
             "y": 0,
             "width": 414,
-            "height": 5136,
+            "height": 4941.98,
             "right": 414,
-            "bottom": 5136
+            "bottom": 4941.98
           },
           "all": null,
           "count": 1
@@ -607,9 +607,9 @@
             "x": 0,
             "y": 3888.39,
             "width": 414,
-            "height": 1247.61,
+            "height": 1053.59,
             "right": 414,
-            "bottom": 5136.0
+            "bottom": 4941.98
           },
           "all": null,
           "count": 1
@@ -631,9 +631,9 @@
             "x": 0,
             "y": 54,
             "width": 414,
-            "height": 5082,
+            "height": 4887.98,
             "right": 414,
-            "bottom": 5136
+            "bottom": 4941.98
           },
           "all": null,
           "count": 1
@@ -705,9 +705,9 @@
             "x": 0,
             "y": 0,
             "width": 360,
-            "height": 5226.52,
+            "height": 5032.5,
             "right": 360,
-            "bottom": 5226.52
+            "bottom": 5032.5
           },
           "all": null,
           "count": 1
@@ -741,9 +741,9 @@
             "x": 0,
             "y": 3950.19,
             "width": 360,
-            "height": 1276.33,
+            "height": 1082.31,
             "right": 360,
-            "bottom": 5226.52
+            "bottom": 5032.5
           },
           "all": null,
           "count": 1
@@ -765,9 +765,9 @@
             "x": 0,
             "y": 54,
             "width": 360,
-            "height": 5172.52,
+            "height": 4978.5,
             "right": 360,
-            "bottom": 5226.52
+            "bottom": 5032.5
           },
           "all": null,
           "count": 1

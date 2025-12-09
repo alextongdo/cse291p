@@ -16,71 +16,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1920,
-            9872.47
+            8,
+            8,
+            1912,
+            30454.89
           ],
-          "top": 0,
-          "left": 0,
-          "height": 9872.47,
-          "width": 1920,
+          "top": 8,
+          "left": 8,
+          "height": 30446.89,
+          "width": 1904,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            277,
-            1920,
-            358
+            8,
+            129,
+            1912,
+            236
           ],
-          "top": 277,
-          "left": 0,
-          "height": 81,
-          "width": 1920,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 1904,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            424,
-            1920,
-            9455.47
+            8,
+            856,
+            1912,
+            28763.64
           ],
-          "top": 424,
-          "left": 0,
-          "height": 9031.47,
-          "width": 1920,
+          "top": 856,
+          "left": 8,
+          "height": 27907.64,
+          "width": 1904,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            320,
-            9592.47,
-            1600,
-            9872.47
+            8,
+            28797.64,
+            1912,
+            30454.89
           ],
-          "top": 9592.47,
-          "left": 320,
-          "height": 280,
-          "width": 1280,
+          "top": 28797.64,
+          "left": 8,
+          "height": 1657.25,
+          "width": 1904,
           "children": []
         },
         {
           "name": "nav",
           "rect": [
-            0,
-            358,
-            1920,
-            400
+            8,
+            252,
+            1912,
+            486
           ],
-          "top": 358,
-          "left": 0,
-          "height": 42,
-          "width": 1920,
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 1904,
           "children": []
         }
       ],
@@ -107,71 +107,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1366,
-            10202.47
+            8,
+            8,
+            1358,
+            27992.25
           ],
-          "top": 0,
-          "left": 0,
-          "height": 10202.47,
-          "width": 1366,
+          "top": 8,
+          "left": 8,
+          "height": 27984.25,
+          "width": 1350,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            299,
-            1366,
-            380
+            8,
+            129,
+            1358,
+            236
           ],
-          "top": 299,
-          "left": 0,
-          "height": 81,
-          "width": 1366,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 1350,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            446,
-            1366,
-            9785.47
+            8,
+            856,
+            1358,
+            26301
           ],
-          "top": 446,
-          "left": 0,
-          "height": 9339.47,
-          "width": 1366,
+          "top": 856,
+          "left": 8,
+          "height": 25445,
+          "width": 1350,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            43,
-            9922.47,
-            1323,
-            10202.47
+            8,
+            26335,
+            1358,
+            27992.25
           ],
-          "top": 9922.47,
-          "left": 43,
-          "height": 280,
-          "width": 1280,
+          "top": 26335,
+          "left": 8,
+          "height": 1657.25,
+          "width": 1350,
           "children": []
         },
         {
           "name": "nav",
           "rect": [
-            0,
-            380,
-            1366,
-            422
+            8,
+            252,
+            1358,
+            486
           ],
-          "top": 380,
-          "left": 0,
-          "height": 42,
-          "width": 1366,
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 1350,
           "children": []
         }
       ],
@@ -198,71 +198,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            0,
-            1024,
-            10000.47
+            8,
+            8,
+            1016,
+            26181.64
           ],
-          "top": 0,
-          "left": 0,
-          "height": 10000.47,
-          "width": 1024,
+          "top": 8,
+          "left": 8,
+          "height": 26173.64,
+          "width": 1008,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            299,
-            1024,
-            380
+            8,
+            129,
+            1016,
+            236
           ],
-          "top": 299,
-          "left": 0,
-          "height": 81,
-          "width": 1024,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 1008,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            446,
-            1024,
-            9518.47
+            8,
+            856,
+            1016,
+            24490.39
           ],
-          "top": 446,
-          "left": 0,
-          "height": 9072.47,
-          "width": 1024,
+          "top": 856,
+          "left": 8,
+          "height": 23634.39,
+          "width": 1008,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            9655.47,
-            1024,
-            10000.47
+            8,
+            24524.39,
+            1016,
+            26181.64
           ],
-          "top": 9655.47,
-          "left": 0,
-          "height": 345,
-          "width": 1024,
+          "top": 24524.39,
+          "left": 8,
+          "height": 1657.25,
+          "width": 1008,
           "children": []
         },
         {
           "name": "nav",
           "rect": [
-            0,
-            380,
-            1024,
-            422
+            8,
+            252,
+            1016,
+            486
           ],
-          "top": 380,
-          "left": 0,
-          "height": 42,
-          "width": 1024,
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 1008,
           "children": []
         }
       ],
@@ -289,57 +289,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            -12,
-            375,
-            14422.25
+            8,
+            8,
+            367,
+            31179.56
           ],
-          "top": -12,
-          "left": 0,
-          "height": 14434.25,
-          "width": 375,
+          "top": 8,
+          "left": 8,
+          "height": 31171.56,
+          "width": 359,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            284,
-            375,
-            333
+            8,
+            129,
+            367,
+            236
           ],
-          "top": 284,
-          "left": 0,
-          "height": 49,
-          "width": 375,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 359,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            333,
-            375,
-            13165.25
+            8,
+            856,
+            367,
+            29470.31
           ],
-          "top": 333,
-          "left": 0,
-          "height": 12832.25,
-          "width": 375,
+          "top": 856,
+          "left": 8,
+          "height": 28614.31,
+          "width": 359,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            13302.25,
-            375,
-            14422.25
+            8,
+            29504.31,
+            367,
+            31179.56
           ],
-          "top": 13302.25,
-          "left": 0,
-          "height": 1120,
-          "width": 375,
+          "top": 29504.31,
+          "left": 8,
+          "height": 1675.25,
+          "width": 359,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            8,
+            252,
+            367,
+            486
+          ],
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 359,
           "children": []
         }
       ],
@@ -366,57 +380,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            -12,
-            414,
-            14193.5
+            8,
+            8,
+            406,
+            31041.12
           ],
-          "top": -12,
-          "left": 0,
-          "height": 14205.5,
-          "width": 414,
+          "top": 8,
+          "left": 8,
+          "height": 31033.12,
+          "width": 398,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            284,
-            414,
-            333
+            8,
+            129,
+            406,
+            236
           ],
-          "top": 284,
-          "left": 0,
-          "height": 49,
-          "width": 414,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 398,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            333,
-            414,
-            12965.5
+            8,
+            856,
+            406,
+            29331.88
           ],
-          "top": 333,
-          "left": 0,
-          "height": 12632.5,
-          "width": 414,
+          "top": 856,
+          "left": 8,
+          "height": 28475.88,
+          "width": 398,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            13102.5,
-            414,
-            14193.5
+            8,
+            29365.88,
+            406,
+            31041.13
           ],
-          "top": 13102.5,
-          "left": 0,
-          "height": 1091,
-          "width": 414,
+          "top": 29365.88,
+          "left": 8,
+          "height": 1675.25,
+          "width": 398,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            8,
+            252,
+            406,
+            486
+          ],
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 398,
           "children": []
         }
       ],
@@ -443,57 +471,71 @@
         {
           "name": "body",
           "rect": [
-            0,
-            -12,
-            360,
-            14502.5
+            8,
+            8,
+            352,
+            31370.45
           ],
-          "top": -12,
-          "left": 0,
-          "height": 14514.5,
-          "width": 360,
+          "top": 8,
+          "left": 8,
+          "height": 31362.45,
+          "width": 344,
           "children": []
         },
         {
           "name": "header",
           "rect": [
-            0,
-            284,
-            360,
-            333
+            8,
+            129,
+            352,
+            236
           ],
-          "top": 284,
-          "left": 0,
-          "height": 49,
-          "width": 360,
+          "top": 129,
+          "left": 8,
+          "height": 107,
+          "width": 344,
           "children": []
         },
         {
           "name": "main",
           "rect": [
-            0,
-            333,
-            360,
-            13245.5
+            8,
+            856,
+            352,
+            29661.2
           ],
-          "top": 333,
-          "left": 0,
-          "height": 12912.5,
-          "width": 360,
+          "top": 856,
+          "left": 8,
+          "height": 28805.2,
+          "width": 344,
           "children": []
         },
         {
           "name": "footer",
           "rect": [
-            0,
-            13382.5,
-            360,
-            14502.5
+            8,
+            29695.2,
+            352,
+            31370.45
           ],
-          "top": 13382.5,
-          "left": 0,
-          "height": 1120,
-          "width": 360,
+          "top": 29695.2,
+          "left": 8,
+          "height": 1675.25,
+          "width": 344,
+          "children": []
+        },
+        {
+          "name": "nav",
+          "rect": [
+            8,
+            252,
+            352,
+            486
+          ],
+          "top": 252,
+          "left": 8,
+          "height": 234,
+          "width": 344,
           "children": []
         }
       ],

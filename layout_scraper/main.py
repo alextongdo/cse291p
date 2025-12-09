@@ -212,6 +212,24 @@ async def capture_site(
     
     # Navigate to the URL
     await page.goto(url, wait_until=wait_until, timeout=timeout_ms)
+
+    # Simplify page: remove obvious noise (scripts, styles, iframes, ads, svg icons)
+    # Inspired by DCGen's simplify step; conservative to avoid breaking layout.
+    await page.evaluate(
+        """
+(() => {
+  const removeSelectors = [
+    'script', 'style', 'noscript', 'iframe', 'link[rel=preload]',
+    'video', 'audio', 'canvas', 'svg', 'object', 'embed'
+  ];
+  removeSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach(el => el.remove());
+  });
+  // Remove obvious ads/trackers by attribute hints
+  document.querySelectorAll('[id*="ad"], [class*="ad-"], [class*="advert"], [class*="banner"], [class*="cookie"]').forEach(el => el.remove());
+})();
+"""
+    )
     
     # Capture all viewports
     viewport_data = []

@@ -1,0 +1,84 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [0, 0, 1440, 1100],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 1440, 140],
+          "children": [
+            { "name": "logo", "rect": [30, 20, 200, 120] },
+            { "name": "nav", "rect": [220, 30, 1240, 110] }
+          ]
+        },
+        {
+          "name": "river",
+          "rect": [40, 150, 1360, 900],
+          "children": [
+            { "name": "hero_card", "rect": [40, 150, 880, 520] },
+            { "name": "side_card", "rect": [920, 150, 1360, 520] },
+            { "name": "row_card_1", "rect": [40, 540, 620, 720] },
+            { "name": "row_card_2", "rect": [660, 540, 1240, 720] },
+            { "name": "row_card_3", "rect": [40, 740, 620, 920] },
+            { "name": "row_card_4", "rect": [660, 740, 1240, 920] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 950, 1440, 1100] }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 1024, 1100],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 1024, 130],
+          "children": [
+            { "name": "logo", "rect": [20, 20, 180, 110] },
+            { "name": "nav", "rect": [200, 30, 980, 110] }
+          ]
+        },
+        {
+          "name": "river",
+          "rect": [20, 140, 1004, 940],
+          "children": [
+            { "name": "hero_card", "rect": [20, 140, 1004, 450] },
+            { "name": "row_card_1", "rect": [20, 460, 500, 650] },
+            { "name": "row_card_2", "rect": [520, 460, 1004, 650] },
+            { "name": "row_card_3", "rect": [20, 670, 500, 860] },
+            { "name": "row_card_4", "rect": [520, 670, 1004, 860] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 940, 1024, 1100] }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 414, 1100],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 414, 110],
+          "children": [
+            { "name": "burger", "rect": [20, 20, 70, 90] },
+            { "name": "logo", "rect": [90, 20, 200, 90] },
+            { "name": "search", "rect": [230, 20, 394, 90] }
+          ]
+        },
+        {
+          "name": "river",
+          "rect": [10, 120, 404, 920],
+          "children": [
+            { "name": "hero_card", "rect": [10, 120, 404, 360] },
+            { "name": "row_card_1", "rect": [10, 370, 404, 520] },
+            { "name": "row_card_2", "rect": [10, 540, 404, 690] },
+            { "name": "row_card_3", "rect": [10, 710, 404, 860] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 920, 414, 1100] }
+      ]
+    }
+  ]
+}
+

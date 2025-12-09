@@ -1,0 +1,100 @@
+{
+  "examples": [
+    {
+      "name": "root",
+      "rect": [0, 0, 1440, 1200],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 1440, 140],
+          "children": [
+            { "name": "logo", "rect": [40, 20, 220, 120] },
+            { "name": "nav_main", "rect": [240, 30, 1200, 110] }
+          ]
+        },
+        {
+          "name": "top_grid",
+          "rect": [40, 160, 1400, 700],
+          "children": [
+            { "name": "lead_left", "rect": [40, 160, 780, 520] },
+            { "name": "lead_right", "rect": [820, 160, 1400, 520] },
+            { "name": "kicker_1", "rect": [40, 540, 460, 700] },
+            { "name": "kicker_2", "rect": [500, 540, 920, 700] },
+            { "name": "kicker_3", "rect": [960, 540, 1400, 700] }
+          ]
+        },
+        {
+          "name": "mid_columns",
+          "rect": [40, 720, 1400, 1080],
+          "children": [
+            { "name": "col_left", "rect": [40, 720, 640, 1080] },
+            { "name": "col_center", "rect": [660, 720, 1100, 1080] },
+            { "name": "col_right", "rect": [1120, 720, 1400, 1080] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 1080, 1440, 1200] }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 1024, 1100],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 1024, 130],
+          "children": [
+            { "name": "logo", "rect": [30, 20, 200, 110] },
+            { "name": "nav_main", "rect": [210, 30, 950, 110] }
+          ]
+        },
+        {
+          "name": "top_grid",
+          "rect": [20, 140, 1004, 620],
+          "children": [
+            { "name": "lead", "rect": [20, 140, 1004, 420] },
+            { "name": "kicker_1", "rect": [20, 430, 330, 620] },
+            { "name": "kicker_2", "rect": [350, 430, 660, 620] },
+            { "name": "kicker_3", "rect": [680, 430, 1004, 620] }
+          ]
+        },
+        {
+          "name": "mid_columns",
+          "rect": [20, 640, 1004, 980],
+          "children": [
+            { "name": "col_left", "rect": [20, 640, 500, 980] },
+            { "name": "col_right", "rect": [520, 640, 1004, 980] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 980, 1024, 1100] }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [0, 0, 414, 1200],
+      "children": [
+        {
+          "name": "header",
+          "rect": [0, 0, 414, 110],
+          "children": [
+            { "name": "burger", "rect": [20, 20, 70, 90] },
+            { "name": "logo", "rect": [90, 20, 220, 90] },
+            { "name": "search", "rect": [250, 20, 394, 90] }
+          ]
+        },
+        { "name": "lead", "rect": [10, 120, 404, 420] },
+        {
+          "name": "stack",
+          "rect": [10, 430, 404, 980],
+          "children": [
+            { "name": "story_1", "rect": [10, 430, 404, 580] },
+            { "name": "story_2", "rect": [10, 590, 404, 740] },
+            { "name": "story_3", "rect": [10, 750, 404, 900] },
+            { "name": "story_4", "rect": [10, 910, 404, 1060] }
+          ]
+        },
+        { "name": "footer", "rect": [0, 1060, 414, 1200] }
+      ]
+    }
+  ]
+}
+

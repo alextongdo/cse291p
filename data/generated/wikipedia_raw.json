@@ -2,7 +2,7 @@
   "site": {
     "url": "https://www.wikipedia.org",
     "name": "wikipedia",
-    "captured_at": "2025-12-08T13:41:15.642009"
+    "captured_at": "2025-12-08T19:22:58.673102"
   },
   "selectors": [
     "body",
@@ -25,52 +25,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 40,
-            "width": 1920,
-            "height": 1134.16,
-            "right": 1920,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 825,
-            "y": 40,
-            "width": 270,
-            "height": 90.08,
-            "right": 1095,
-            "bottom": 130.08
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 690,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 1230,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 734.91,
-            "y": 469.67,
-            "width": 394.19,
-            "height": 44,
-            "right": 1129.09,
-            "bottom": 513.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -78,89 +50,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 675.83,
-            "y": 659.36,
-            "width": 1231.36,
-            "height": 450,
-            "right": 1907.19,
-            "bottom": 1109.36
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1920,
-            "height": 556.39,
-            "right": 1920,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 690,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 1230,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 1129.09,
-            "y": 469.67,
-            "width": 56,
-            "height": 44,
-            "right": 1185.09,
-            "bottom": 513.67
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 1129.09,
-              "y": 469.67,
-              "width": 56,
-              "height": 44,
-              "right": 1185.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 1,
-              "x": 807.33,
-              "y": 545.17,
-              "width": 305.33,
-              "height": 36,
-              "right": 1112.66,
-              "bottom": 581.17
-            },
-            {
-              "index": 2,
-              "x": 1851,
-              "y": 149,
-              "width": 48,
-              "height": 48,
-              "right": 1899,
-              "bottom": 197
-            },
-            {
-              "index": 3,
-              "x": 1616.64,
-              "y": 1558.5,
-              "width": 86.7,
-              "height": 54,
-              "right": 1703.34,
-              "bottom": 1612.5
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     },
@@ -173,52 +80,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 40,
-            "width": 1366,
-            "height": 1134.16,
-            "right": 1366,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 548,
-            "y": 40,
-            "width": 270,
-            "height": 90.08,
-            "right": 818,
-            "bottom": 130.08
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 413,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 953,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 457.91,
-            "y": 469.67,
-            "width": 394.19,
-            "height": 44,
-            "right": 852.09,
-            "bottom": 513.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -226,89 +105,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 481.94,
-            "y": 659.36,
-            "width": 871.25,
-            "height": 450,
-            "right": 1353.19,
-            "bottom": 1109.36
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1366,
-            "height": 556.39,
-            "right": 1366,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 413,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 953,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 852.09,
-            "y": 469.67,
-            "width": 56,
-            "height": 44,
-            "right": 908.09,
-            "bottom": 513.67
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 852.09,
-              "y": 469.67,
-              "width": 56,
-              "height": 44,
-              "right": 908.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 1,
-              "x": 530.33,
-              "y": 545.17,
-              "width": 305.33,
-              "height": 36,
-              "right": 835.66,
-              "bottom": 581.17
-            },
-            {
-              "index": 2,
-              "x": 1297,
-              "y": 86.61,
-              "width": 48,
-              "height": 48,
-              "right": 1345,
-              "bottom": 134.61
-            },
-            {
-              "index": 3,
-              "x": 1062.64,
-              "y": 1496.11,
-              "width": 86.7,
-              "height": 54,
-              "right": 1149.34,
-              "bottom": 1550.11
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     },
@@ -321,52 +135,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 40,
-            "width": 1024,
-            "height": 1134.16,
-            "right": 1024,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 377,
-            "y": 40,
-            "width": 270,
-            "height": 90.08,
-            "right": 647,
-            "bottom": 130.08
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 242,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 782,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 286.91,
-            "y": 469.67,
-            "width": 394.19,
-            "height": 44,
-            "right": 681.09,
-            "bottom": 513.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -374,89 +160,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 362.23,
-            "y": 659.36,
-            "width": 648.95,
-            "height": 450,
-            "right": 1011.19,
-            "bottom": 1109.36
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 617.77,
-            "width": 1024,
-            "height": 556.39,
-            "right": 1024,
-            "bottom": 1174.16
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 242,
-            "y": 464.08,
-            "width": 540,
-            "height": 61.59,
-            "right": 782,
-            "bottom": 525.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 681.09,
-            "y": 469.67,
-            "width": 56,
-            "height": 44,
-            "right": 737.09,
-            "bottom": 513.67
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 681.09,
-              "y": 469.67,
-              "width": 56,
-              "height": 44,
-              "right": 737.09,
-              "bottom": 513.67
-            },
-            {
-              "index": 1,
-              "x": 359.33,
-              "y": 545.17,
-              "width": 305.33,
-              "height": 36,
-              "right": 664.66,
-              "bottom": 581.17
-            },
-            {
-              "index": 2,
-              "x": 955,
-              "y": 86.61,
-              "width": 48,
-              "height": 48,
-              "right": 1003,
-              "bottom": 134.61
-            },
-            {
-              "index": 3,
-              "x": 720.64,
-              "y": 1496.11,
-              "width": 86.7,
-              "height": 54,
-              "right": 807.34,
-              "bottom": 1550.11
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     },
@@ -469,52 +190,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 375,
-            "height": 1653.67,
-            "right": 375,
-            "bottom": 1673.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 12.8,
-            "y": 20,
-            "width": 349.41,
-            "height": 70,
-            "right": 362.2,
-            "bottom": 90
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 375,
-            "height": 78,
-            "right": 375,
-            "bottom": 174
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 10,
-            "y": 101.59,
-            "width": 299,
-            "height": 44,
-            "right": 309,
-            "bottom": 145.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -522,89 +215,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 6.39,
-            "y": 717.48,
-            "width": 362.22,
-            "height": 630,
-            "right": 368.61,
-            "bottom": 1347.48
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 375,
-            "height": 1111.08,
-            "right": 375,
-            "bottom": 1673.67
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 375,
-            "height": 61.59,
-            "right": 375,
-            "bottom": 157.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 309,
-            "y": 101.59,
-            "width": 56,
-            "height": 44,
-            "right": 365,
-            "bottom": 145.59
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 309,
-              "y": 101.59,
-              "width": 56,
-              "height": 44,
-              "right": 365,
-              "bottom": 145.59
-            },
-            {
-              "index": 1,
-              "x": 34.83,
-              "y": 490,
-              "width": 305.33,
-              "height": 36,
-              "right": 340.16,
-              "bottom": 526
-            },
-            {
-              "index": 2,
-              "x": 306,
-              "y": 95.41,
-              "width": 48,
-              "height": 48,
-              "right": 354,
-              "bottom": 143.41
-            },
-            {
-              "index": 3,
-              "x": 144.14,
-              "y": 1696.78,
-              "width": 86.7,
-              "height": 54,
-              "right": 230.84,
-              "bottom": 1750.78
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     },
@@ -617,52 +245,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 414,
-            "height": 1634.17,
-            "right": 414,
-            "bottom": 1654.17
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 12.8,
-            "y": 20,
-            "width": 388.41,
-            "height": 70,
-            "right": 401.2,
-            "bottom": 90
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 414,
-            "height": 78,
-            "right": 414,
-            "bottom": 174
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 10,
-            "y": 101.59,
-            "width": 338,
-            "height": 44,
-            "right": 348,
-            "bottom": 145.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -670,89 +270,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 6.39,
-            "y": 717.48,
-            "width": 401.22,
-            "height": 630,
-            "right": 407.61,
-            "bottom": 1347.48
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 414,
-            "height": 1091.58,
-            "right": 414,
-            "bottom": 1654.17
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 414,
-            "height": 61.59,
-            "right": 414,
-            "bottom": 157.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 348,
-            "y": 101.59,
-            "width": 56,
-            "height": 44,
-            "right": 404,
-            "bottom": 145.59
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 348,
-              "y": 101.59,
-              "width": 56,
-              "height": 44,
-              "right": 404,
-              "bottom": 145.59
-            },
-            {
-              "index": 1,
-              "x": 54.33,
-              "y": 490,
-              "width": 305.33,
-              "height": 36,
-              "right": 359.66,
-              "bottom": 526
-            },
-            {
-              "index": 2,
-              "x": 345,
-              "y": 112.2,
-              "width": 48,
-              "height": 48,
-              "right": 393,
-              "bottom": 160.2
-            },
-            {
-              "index": 3,
-              "x": 163.64,
-              "y": 1616.98,
-              "width": 86.7,
-              "height": 54,
-              "right": 250.34,
-              "bottom": 1670.98
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     },
@@ -765,52 +300,24 @@
       },
       "elements": {
         "body": {
-          "first": {
-            "x": 0,
-            "y": 20,
-            "width": 360,
-            "height": 1673.17,
-            "right": 360,
-            "bottom": 1693.17
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".central-textlogo": {
-          "first": {
-            "x": 12.8,
-            "y": 20,
-            "width": 334.41,
-            "height": 70,
-            "right": 347.2,
-            "bottom": 90
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".search-container": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 360,
-            "height": 78,
-            "right": 360,
-            "bottom": 174
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "#searchInput": {
-          "first": {
-            "x": 10,
-            "y": 101.59,
-            "width": 284,
-            "height": 44,
-            "right": 294,
-            "bottom": 145.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".lang-list-container": {
           "first": null,
@@ -818,89 +325,24 @@
           "count": 0
         },
         ".other-projects": {
-          "first": {
-            "x": 6.39,
-            "y": 736.98,
-            "width": 347.22,
-            "height": 630,
-            "right": 353.61,
-            "bottom": 1366.98
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         ".footer": {
-          "first": {
-            "x": 0,
-            "y": 562.59,
-            "width": 360,
-            "height": 1130.58,
-            "right": 360,
-            "bottom": 1693.17
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "form": {
-          "first": {
-            "x": 0,
-            "y": 96,
-            "width": 360,
-            "height": 61.59,
-            "right": 360,
-            "bottom": 157.59
-          },
+          "first": null,
           "all": null,
-          "count": 1
+          "count": 0
         },
         "button": {
-          "first": {
-            "x": 294,
-            "y": 101.59,
-            "width": 56,
-            "height": 44,
-            "right": 350,
-            "bottom": 145.59
-          },
-          "all": [
-            {
-              "index": 0,
-              "x": 294,
-              "y": 101.59,
-              "width": 56,
-              "height": 44,
-              "right": 350,
-              "bottom": 145.59
-            },
-            {
-              "index": 1,
-              "x": 27.33,
-              "y": 490,
-              "width": 305.33,
-              "height": 36,
-              "right": 332.66,
-              "bottom": 526
-            },
-            {
-              "index": 2,
-              "x": 291,
-              "y": 93,
-              "width": 48,
-              "height": 48,
-              "right": 339,
-              "bottom": 141
-            },
-            {
-              "index": 3,
-              "x": 136.64,
-              "y": 1742.38,
-              "width": 86.7,
-              "height": 54,
-              "right": 223.34,
-              "bottom": 1796.38
-            }
-          ],
-          "count": 4
+          "first": null,
+          "all": null,
+          "count": 0
         }
       }
     }

@@ -1,0 +1,37 @@
+{
+  "sites": [
+    {
+      "url": "https://www.cnn.com",
+      "name": "cnn",
+      "selectors": [
+        "body", "header", "main", "footer", "nav", "section", "article",
+        ".page", ".l-container", ".container", ".zone", ".zn",
+        ".subnav__section", ".subnav__section-link", ".subnav__subsection", ".subnav__subsection-link",
+        ".cd__wrapper", ".cd__content", ".cd__headline", ".cd__headline-text", ".cd__description",
+        ".cd__img", ".media", ".media__image", ".media__caption",
+        ".card", ".container__item", ".container__headline", ".container__headline-text", ".container__text",
+        ".container__item-media-wrapper", ".container__item-media", ".container__link--type-article",
+        ".container_lead-plus-headlines-with-images__item", ".container_lead-plus-headlines__link",
+        ".container_vertical-shelf-carousel__link"
+      ]
+    }
+  ],
+  "viewports": {
+    "wide": [
+      { "width": 1920, "height": 1080, "label": "desktop_large" },
+      { "width": 1366, "height": 768, "label": "desktop_medium" },
+      { "width": 1024, "height": 768, "label": "tablet_landscape" }
+    ],
+    "thin": [
+      { "width": 375, "height": 812, "label": "iphone_x" },
+      { "width": 414, "height": 896, "label": "iphone_xr" },
+      { "width": 360, "height": 800, "label": "android_small" }
+    ]
+  },
+  "settings": {
+    "wait_after_resize_ms": 1500,
+    "timeout_ms": 60000,
+    "wait_until": "domcontentloaded"
+  }
+}
+
