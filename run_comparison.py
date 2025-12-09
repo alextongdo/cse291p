@@ -1,7 +1,7 @@
 import argparse
 import json
 
-from src.evaluation import calculate_rmsd
+from src.evaluation import calculate_accuracy, calculate_rmsd
 from src.main import ConditionalMockdown, Mockdown
 from src.types import LinearConstraint, View
 
@@ -145,24 +145,26 @@ def main():
     print()
 
     # Predict with original Mockdown
+    original_predicted = None
+    original_rmsd = None
     try:
         original_predicted = mockdown.predict(test_width, test_height)
         original_rmsd = calculate_rmsd(original_predicted, ground_truth)
         print(f"Original Mockdown RMSD: {original_rmsd:.4f}")
     except Exception as e:
         print(f"Original Mockdown prediction failed: {e}")
-        original_rmsd = None
 
     # Predict with ConditionalMockdown
+    conditional_predicted = None
+    conditional_rmsd = None
     try:
         conditional_predicted = cond_mockdown.predict(test_width, test_height)
         conditional_rmsd = calculate_rmsd(conditional_predicted, ground_truth)
         print(f"Conditional Mockdown RMSD: {conditional_rmsd:.4f}")
     except Exception as e:
         print(f"Conditional Mockdown prediction failed: {e}")
-        conditional_rmsd = None
 
-    # Compare
+    # Compare RMSD
     if original_rmsd is not None and conditional_rmsd is not None:
         diff = conditional_rmsd - original_rmsd
         print()
@@ -172,6 +174,37 @@ def main():
             print(f"Original is better by {diff:.4f}")
         else:
             print(f"Conditional is better by {-diff:.4f}")
+
+    # Accuracy Comparison
+    print()
+    print("=" * 60)
+    print("ACCURACY COMPARISON")
+    print("=" * 60)
+
+    # Accuracy with original Mockdown
+    if original_predicted is not None:
+        original_acc = calculate_accuracy(original_predicted, ground_truth)
+        print(f"Original Mockdown Accuracy: {original_acc:.2%}")
+    else:
+        original_acc = None
+
+    # Accuracy with ConditionalMockdown
+    if conditional_predicted is not None:
+        conditional_acc = calculate_accuracy(conditional_predicted, ground_truth)
+        print(f"Conditional Mockdown Accuracy: {conditional_acc:.2%}")
+    else:
+        conditional_acc = None
+
+    # Compare Accuracy
+    if original_acc is not None and conditional_acc is not None:
+        diff = conditional_acc - original_acc
+        print()
+        if abs(diff) < 0.0001:
+            print("Accuracies are effectively equal")
+        elif diff > 0:
+            print(f"Conditional is better by {diff:.2%}")
+        else:
+            print(f"Original is better by {-diff:.2%}")
 
 
 if __name__ == "__main__":
