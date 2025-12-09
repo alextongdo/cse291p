@@ -240,18 +240,11 @@ class ConditionalMockdown:
         )
 
         # Collect ALL constraints from applicable groups
-        # Sort by specificity (most specific first) so that if there are true
-        # conflicts, the more specific constraint gets added first and the
-        # less specific one is caught by kiwisolver's try/except
+        # No sorting needed - pruning guarantees compatibility between groups
         constraints: list[LinearConstraint] = []
-
-        applicable_groups = sorted(
-            [k for k in self.ex_to_constrs_map.keys() if selected_idx in k],
-            key=lambda k: len(k),  # Ascending by size (most specific first)
-        )
-
-        for group_key in applicable_groups:
-            constraints.extend(self.ex_to_constrs_map[group_key])
+        for group_key, group_constraints in self.ex_to_constrs_map.items():
+            if selected_idx in group_key:
+                constraints.extend(group_constraints)
 
         # Solve layout
         root = self.examples[selected_idx]

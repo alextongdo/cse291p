@@ -166,23 +166,37 @@ class MaxSMTPruner:
         self.max_rect = max_rect
 
     def prune(
-        self, candidates: list[LinearConstraint]
+        self,
+        candidates: list[LinearConstraint],
+        fixed_constraints: list[LinearConstraint] | None = None,
     ) -> tuple[list[LinearConstraint], dict[str, Fraction], dict[str, Fraction]]:
         """
-        Solve MaxSMT for the given candidates.
+        Solve MaxSMT for the given candidates using lexicographic optimization.
 
         Args:
-            candidates: List of constraints with scores
+            candidates: List of constraints with scores (soft, lower priority "p1")
+            fixed_constraints: Optional list of constraints from supersets (soft, 
+                higher priority "p0"). These are strongly preferred but can be 
+                dropped if unsatisfiable for this group's test rect range.
 
         Returns:
-            selected_constraints: Chosen constraints
+            selected_constraints: Chosen constraints (from candidates only)
             mins: Dict mapping "view.anchor" -> min value
             maxes: Dict mapping "view.anchor" -> max value
+        
+        Note:
+            Uses Z3's lexicographic optimization: first maximize "p0" (fixed/global),
+            then subject to that, maximize "p1" (candidates/conditional).
         """
+        if fixed_constraints is None:
+            fixed_constraints = []
 
         for c in candidates:
             assert c.a is not None and c.b is not None
             assert c.score is not None
+
+        for c in fixed_constraints:
+            assert c.a is not None and c.b is not None
 
         # Filter constraints (following Mockdown's filter_constraints)
         # 1. Remove aspect ratio constraints (width = a * height)
@@ -198,8 +212,9 @@ class MaxSMTPruner:
             }
 
         constraints = [c for c in candidates if not is_aspect_ratio(c)]
+        filtered_fixed = [c for c in fixed_constraints if not is_aspect_ratio(c)]
 
-        if len(constraints) == 0:
+        if len(constraints) == 0 and len(filtered_fixed) == 0:
             defaults: dict[str, Fraction] = {}
             for view in self.root_and_children:
                 for anchor in view.anchors():
@@ -208,7 +223,7 @@ class MaxSMTPruner:
                     )
             return ([], defaults, defaults)
 
-        constraint_to_weight_map = get_constraint_weights(candidates)
+        constraint_to_weight_map = get_constraint_weights(candidates) if candidates else {}
 
         # Create test rect range
         test_rects = test_rect_range(self.min_rect, self.max_rect, num=5)
@@ -219,9 +234,25 @@ class MaxSMTPruner:
         h_solver = z3.Optimize()
         v_solver = z3.Optimize()
 
-        # Add constraint variables as soft constraints
+        # Add fixed constraints as HIGH PRIORITY soft constraints (group "p0")
+        # These are from supersets (e.g., global) - strongly preferred but droppable
+        for fixed_idx, fixed_constraint in enumerate(filtered_fixed):
+            z3_name = f"fixed_{fixed_idx}"
+            z3_var = z3.Bool(z3_name)
+
+            if fixed_constraint.y.is_horizontal():
+                solver = h_solver
+            else:
+                solver = v_solver
+
+            # Use score if available, otherwise default weight of 1.0
+            weight = fixed_constraint.score if fixed_constraint.score is not None else 1.0
+            # Priority group "p0" - highest priority (optimized first)
+            solver.add_soft(z3_var, weight, "p0")
+
+        # Add candidate constraints as LOWER PRIORITY soft constraints (group "p1")
         for constr_idx, constraint in enumerate(constraints):
-            z3_name = f"constraint_{constr_idx}"  # boolean switch
+            z3_name = f"constraint_{constr_idx}"
             z3_var = z3.Bool(z3_name)
 
             if constraint.y.is_horizontal():
@@ -232,11 +263,22 @@ class MaxSMTPruner:
                 z3_vars_to_constr_map = z3_vars_to_v_constr_map
 
             weight = constraint_to_weight_map[constraint]
-            solver.add_soft(z3_var, weight)
+            # Priority group "p1" - lower priority (optimized after p0)
+            solver.add_soft(z3_var, weight, "p1")
             z3_vars_to_constr_map[z3_name] = constraint
 
-        # Add hard constraints for each conformance
+        # Add implications for each conformance (test rect)
         for test_rect_idx, test_rect in enumerate(test_rects):
+
+            # Fixed constraints: if switch is true, constraint must hold
+            for fixed_idx, fixed_constraint in enumerate(filtered_fixed):
+                z3_name = f"fixed_{fixed_idx}"
+                z3_var = z3.Bool(z3_name)
+                expr = constraint_to_z3_expr(fixed_constraint, test_rect_idx)
+                if fixed_constraint.y.is_horizontal():
+                    h_solver.add(z3.Implies(z3_var, expr))
+                else:
+                    v_solver.add(z3.Implies(z3_var, expr))
 
             add_root_dims_constraints(h_solver, test_rect, test_rect_idx, self.root)
             add_root_dims_constraints(v_solver, test_rect, test_rect_idx, self.root)
@@ -371,7 +413,21 @@ class HierarchicalPruner:
                 left=max(lefts), top=max(tops), width=max(widths), height=max(heights)
             )
 
-    def prune(self, candidates: list[LinearConstraint]) -> list[LinearConstraint]:
+    def prune(
+        self,
+        candidates: list[LinearConstraint],
+        fixed_constraints: list[LinearConstraint] | None = None,
+    ) -> list[LinearConstraint]:
+        """
+        Prune candidates hierarchically.
+
+        Args:
+            candidates: Constraints to prune (soft, can be dropped)
+            fixed_constraints: Optional constraints that must be satisfied (hard)
+        """
+        if fixed_constraints is None:
+            fixed_constraints = []
+
         # Worklist: (focus_view, min_rect, max_rect)
         worklist = [(self.root, self.min_rect, self.max_rect)]
         output_constraints = set()
@@ -383,10 +439,13 @@ class HierarchicalPruner:
             relevant = [
                 c for c in candidates if HierarchicalPruner._is_relevant(focus, c)
             ]
+            relevant_fixed = [
+                c for c in fixed_constraints if HierarchicalPruner._is_relevant(focus, c)
+            ]
 
             max_smt_solver = MaxSMTPruner(focus, min_rect, max_rect)
             constraints, anchor_to_min_size_map, anchor_to_max_size_map = (
-                max_smt_solver.prune(relevant)
+                max_smt_solver.prune(relevant, fixed_constraints=relevant_fixed)
             )
             output_constraints.update(constraints)
 
@@ -452,19 +511,19 @@ class ConditionalHierarchicalPruner:
         conditional_constraints: dict[tuple[int, ...], list[LinearConstraint]],
     ) -> dict[tuple[int, ...], list[LinearConstraint]]:
         """
-        Per-group pruning for conditional constraints.
+        Per-group pruning for conditional constraints with global as fixed context.
 
         Algorithm:
-        1. For each group, prune its constraints using that group's examples
-        2. Global group (all examples) is pruned exactly like Original
-        3. Conditional groups are pruned with their subset of examples
-        4. Conflicts between groups are resolved at PREDICTION time using priority:
-           - More specific groups (fewer examples) override more general ones
+        1. First, prune global constraints (all examples) using Original's algorithm
+        2. For conditional groups, prune with global constraints as FIXED context
+           - Global constraints are hard constraints that must be satisfied
+           - Conditional constraints are soft (candidates that can be dropped)
+           - Only conditional constraints compatible with global survive
 
         This ensures:
         - Global constraints behave exactly like Original
-        - Conditional constraints are pruned appropriately for their examples
-        - Conflicts are resolved at prediction time (specific overrides general)
+        - Conditional constraints are compatible with global (no runtime conflicts)
+        - No runtime conflict resolution needed at prediction time
 
         Args:
             conditional_constraints: Dict mapping example index tuples to constraints
@@ -473,25 +532,60 @@ class ConditionalHierarchicalPruner:
         Returns:
             Dict with same structure, constraints pruned per group
         """
+        n = len(self.examples)
+        global_key = tuple(range(n))
         output: dict[tuple[int, ...], list[LinearConstraint]] = {}
 
-        # Sort groups by size (largest first) for logging clarity
-        sorted_groups = sorted(
-            conditional_constraints.keys(),
-            key=lambda k: -len(k),  # Descending by size
+        # Step 1: Prune global constraints using Original's algorithm
+        global_constraints = conditional_constraints.get(global_key, [])
+        if global_constraints:
+            logger.info(
+                f"  Pruning global group {global_key}: "
+                f"{len(global_constraints)} constraints with {n} examples"
+            )
+            pruned_global = HierarchicalPruner(self.examples).prune(global_constraints)
+            logger.info(f"    → {len(pruned_global)} constraints survived")
+        else:
+            pruned_global = []
+
+        output[global_key] = pruned_global
+
+        # Step 2: For conditional groups, prune WITH all supersets as fixed context
+        # Sort by size (largest first, excluding global which is already done)
+        # This ensures larger groups are pruned before smaller groups that are subsets
+        conditional_groups = sorted(
+            [k for k in conditional_constraints.keys() if k != global_key],
+            key=lambda k: -len(k),
         )
 
-        for group_key in sorted_groups:
+        for group_key in conditional_groups:
             constraints = conditional_constraints[group_key]
             group_examples = [self.examples[i] for i in group_key]
+            group_set = set(group_key)
+
+            # Collect fixed constraints from ALL supersets (including global)
+            # A superset's constraints will apply whenever this group's constraints apply
+            fixed_constraints: list[LinearConstraint] = list(pruned_global)
+            superset_keys = []
+
+            for other_key, other_constraints in output.items():
+                if other_key == global_key:
+                    continue  # Already included
+                # Check if this group is a strict subset of other_key
+                if group_set < set(other_key):
+                    fixed_constraints.extend(other_constraints)
+                    superset_keys.append(other_key)
 
             logger.info(
-                f"  Pruning group {group_key}: {len(constraints)} constraints "
-                f"with {len(group_examples)} examples"
+                f"  Pruning conditional group {group_key}: "
+                f"{len(constraints)} constraints with {len(group_examples)} examples "
+                f"(+ {len(fixed_constraints)} fixed from global + {superset_keys})"
             )
 
-            # Prune with the group's examples
-            pruned = HierarchicalPruner(group_examples).prune(constraints)
+            # Prune with all superset constraints as fixed (hard) context
+            pruned = HierarchicalPruner(group_examples).prune(
+                constraints, fixed_constraints=fixed_constraints
+            )
 
             logger.info(f"    → {len(pruned)} constraints survived")
             output[group_key] = pruned
