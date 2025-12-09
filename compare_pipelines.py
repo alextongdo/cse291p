@@ -140,7 +140,9 @@ def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[L
     """
     Compute RMSD for conditional outputs by selecting constraints per example:
     - global constraints: key = tuple(range(len(examples)))
-    - group-specific: pick the smallest group that contains the example
+    - group-specific: pick the smallest group that contains the example.
+      If a specific group is found, prefer it over global to avoid mixing
+      incompatible branches (e.g., stacked mobile vs desktop grid).
     """
     n = len(examples)
     global_key = tuple(range(n))
@@ -150,7 +152,7 @@ def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[L
 
     for idx, ex in enumerate(examples):
         # pick most specific group containing idx
-        group_constr = []
+        # Choose the most specific group containing this example; if none, fall back to global.
         candidate = [
             (len(k), k, v)
             for k, v in outputs.items()
@@ -158,9 +160,9 @@ def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[L
         ]
         if candidate:
             candidate.sort(key=lambda x: x[0])
-            _, _, group_constr = candidate[0]
-
-        constrs = global_constr + group_constr
+            _, _, constrs = candidate[0]
+        else:
+            constrs = global_constr
         if not constrs:
             continue
 

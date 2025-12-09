@@ -37,8 +37,11 @@ def load_examples(path: Path) -> list[dict[str, Any]]:
 
 
 def to_rect(v: dict[str, Any]) -> tuple[float, float, float, float]:
+    # Most of our data uses [x, y, width, height]; fall back to left/top/width/height or 1x1.
     if "rect" in v and isinstance(v["rect"], (list, tuple)) and len(v["rect"]) == 4:
-        l, t, r, b = [float(x) for x in v["rect"]]
+        l, t, w, h = [float(x) for x in v["rect"]]
+        r = l + w
+        b = t + h
     elif all(k in v for k in ("left", "top", "width", "height")):
         l = float(v["left"])
         t = float(v["top"])
