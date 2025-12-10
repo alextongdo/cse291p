@@ -1,0 +1,612 @@
+{
+  "site": "gmail",
+  "url": "https://gmail.com",
+  "examples": [
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                200,
+                217,
+                1080,
+                619
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    236,
+                    217,
+                    1044,
+                    221
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    236,
+                    325,
+                    1044,
+                    583
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                200,
+                619,
+                1080,
+                683
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    216,
+                    619,
+                    1064,
+                    683
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                200,
+                217,
+                1080,
+                619
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    236,
+                    217,
+                    1044,
+                    221
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    236,
+                    325,
+                    1044,
+                    583
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                200,
+                619,
+                1080,
+                683
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    216,
+                    619,
+                    1064,
+                    683
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                200,
+                217,
+                1080,
+                619
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    236,
+                    217,
+                    1044,
+                    221
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    236,
+                    325,
+                    1044,
+                    583
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                200,
+                619,
+                1080,
+                683
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    216,
+                    619,
+                    1064,
+                    683
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                510
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    24,
+                    0,
+                    336,
+                    4
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    24,
+                    96,
+                    336,
+                    486
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                0,
+                632,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    24,
+                    632,
+                    336,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                510
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    24,
+                    0,
+                    336,
+                    4
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    24,
+                    96,
+                    336,
+                    486
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                0,
+                632,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    24,
+                    632,
+                    336,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body.jR8x9d.nyoS7c.NhGkGb.EIlDfe@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.S7xv8.LZgQXe@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.TcuCfd.NQ5OL@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                510
+              ],
+              "children": [
+                {
+                  "name": "[div.Ih3FE@1]",
+                  "rect": [
+                    24,
+                    0,
+                    336,
+                    4
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#yDmH0d.fAlnEc@1]",
+                  "rect": [
+                    24,
+                    96,
+                    336,
+                    486
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.wmGw4@1]",
+              "rect": [
+                0,
+                632,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[c-wiz@2]",
+                  "rect": [
+                    24,
+                    632,
+                    336,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div@5]",
+          "rect": [
+            0,
+            0,
+            171.21875,
+            20
+          ],
+          "children": [
+            {
+              "name": "[div@4]",
+              "rect": [
+                0,
+                0,
+                171.21875,
+                20
+              ],
+              "children": []
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    }
+  ]
+}

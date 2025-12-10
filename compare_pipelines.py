@@ -19,6 +19,7 @@ import subprocess
 import sys
 import time
 from pathlib import Path
+from collections import defaultdict
 
 # Fix path ordering to avoid shadowing stdlib modules (e.g., logging, types)
 project_root = Path(__file__).parent
@@ -32,6 +33,7 @@ if str(project_root) not in sys.path:
 from src.evaluation import calculate_rmsd
 from src.instantiation import ConditionalTemplateInstantiator
 from src.learning import ConditionalBayesianLearning
+from src.config import ConditionalLearningConfig
 import os
 from src.pruning import ConditionalHierarchicalPruner
 from src.types import View, LinearConstraint
@@ -136,30 +138,52 @@ def align_views_to_union(views: list[View]) -> list[View]:
     return aligned
 
 
-def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]]) -> float:
+def rmsd_conditional_breakdown(
+    examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]]
+) -> tuple[float, list[float]]:
     """
-    Compute RMSD for conditional outputs by selecting constraints per example:
+    Compute per-example RMSD (and average) for conditional outputs by selecting constraints per example:
     - global constraints: key = tuple(range(len(examples)))
     - group-specific: pick the smallest group that contains the example.
       If a specific group is found, prefer it over global to avoid mixing
       incompatible branches (e.g., stacked mobile vs desktop grid).
     """
     n = len(examples)
-    global_key = tuple(range(n))
-    global_constr = outputs.get(global_key, [])
+    # per-category only selection
+    def _category(view: View) -> str:
+        w = view.width
+        if w >= 1100:
+            return "desktop"
+        if w >= 700:
+            return "tablet"
+        return "mobile"
 
-    all_errors = []
+    categories = {idx: _category(v) for idx, v in enumerate(examples)}
+    target_for = {idx: categories[idx] for idx in range(n)}
+
+    skip_global = True
+    global_key = tuple(range(n))
+    global_constr: list[LinearConstraint] = []
+
+    per_example_errors: list[float] = []
 
     for idx, ex in enumerate(examples):
-        # pick most specific group containing idx
-        # Choose the most specific group containing this example; if none, fall back to global.
-        candidate = [
-            (len(k), k, v)
-            for k, v in outputs.items()
-            if k != global_key and idx in k
-        ]
+        # pick most specific group containing idx; if none, fall back to global.
+        candidate: list[tuple[int, tuple[int, ...], list[LinearConstraint]]] = []
+        for k, v in outputs.items():
+            if idx not in k:
+                continue
+            if len(k) == n:  # global
+                continue
+            cats = {categories[i] for i in k}
+            if len(cats) != 1:
+                continue
+            if categories[idx] not in cats:
+                continue
+            candidate.append((len(k), k, v))
         if candidate:
-            candidate.sort(key=lambda x: x[0])
+            # prefer the largest applicable group to avoid underfit tiny subsets
+            candidate.sort(key=lambda x: -x[0])
             _, _, constrs = candidate[0]
         else:
             constrs = global_constr
@@ -178,25 +202,52 @@ def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[L
                 solved[f"{v.name}.right"],
                 solved[f"{v.name}.bottom"],
             )
-        # use existing rmsd metric (will naturally use only present views)
-        all_errors.append(calculate_rmsd(predicted, ex))
+        per_example_errors.append(calculate_rmsd(predicted, ex))
 
-    if not all_errors:
-        return 0.0
-    return sum(all_errors) / len(all_errors)
+    avg = sum(per_example_errors) / len(per_example_errors) if per_example_errors else 0.0
+    return avg, per_example_errors
+
+
+def rmsd_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]]) -> float:
+    avg, _ = rmsd_conditional_breakdown(examples, outputs)
+    return avg
 
 
 def accuracy_conditional(examples: list[View], outputs: dict[tuple[int, ...], list[LinearConstraint]], tol: float = 1.0) -> float:
     """Compute accuracy: fraction of views whose rect matches within tol on all sides."""
     n = len(examples)
+    # per-category only selection
+    def _category(view: View) -> str:
+        w = view.width
+        if w >= 1100:
+            return "desktop"
+        if w >= 700:
+            return "tablet"
+        return "mobile"
+
+    categories = {idx: _category(v) for idx, v in enumerate(examples)}
+
+    skip_global = True
     global_key = tuple(range(n))
-    global_constr = outputs.get(global_key, [])
+    global_constr: list[LinearConstraint] = []
     accuracies = []
     for idx, ex in enumerate(examples):
         group_constr = []
-        candidate = [(len(k), k, v) for k, v in outputs.items() if k != global_key and idx in k]
+        candidate: list[tuple[int, tuple[int, ...], list[LinearConstraint]]] = []
+        for k, v in outputs.items():
+            if idx not in k:
+                continue
+            if len(k) == n:  # global
+                continue
+            cats = {categories[i] for i in k}
+            if len(cats) != 1:
+                continue
+            if categories[idx] not in cats:
+                continue
+            candidate.append((len(k), k, v))
         if candidate:
-            candidate.sort(key=lambda x: x[0])
+            # prefer the largest applicable group to avoid underfit tiny subsets
+            candidate.sort(key=lambda x: -x[0])
             _, _, group_constr = candidate[0]
         constrs = global_constr + group_constr
         if not constrs:
@@ -242,6 +293,17 @@ def run_new_pipeline(examples_file: Path) -> dict:
     views = load_examples_legacy(examples_file)
     views = align_views_to_union(views)
     print(f"Loaded {len(views)} examples")
+
+    # Heuristic viewport categories for optional biasing
+    def _category(view: View) -> str:
+        w = view.width
+        if w >= 1100:
+            return "desktop"
+        if w >= 700:
+            return "tablet"
+        return "mobile"
+
+    categories = {idx: _category(v) for idx, v in enumerate(views)}
     
     overall_start = time.perf_counter()
     
@@ -250,13 +312,84 @@ def run_new_pipeline(examples_file: Path) -> dict:
     example_idxs_to_templates_map = ConditionalTemplateInstantiator(
         examples=views
     ).instantiate()
+
+    # Optional category bias: split template groups by inferred viewport category
+    category_bias = os.getenv("CATEGORY_BIAS", "1").lower() in {"1", "true", "yes"}
+    if category_bias:
+        # Split mixed groups into per-category subsets; keep same-category groups as-is.
+        filtered_map: dict[tuple[int, ...], list[LinearConstraint]] = defaultdict(list)
+        for key, templates in example_idxs_to_templates_map.items():
+            cat_to_idxs: dict[str, list[int]] = defaultdict(list)
+            for idx in key:
+                cat_to_idxs[categories[idx]].append(idx)
+            for cat, idxs in cat_to_idxs.items():
+                filtered_map[tuple(sorted(idxs))].extend(templates)
+
+        # Add per-category global groups by uniting templates from that category.
+        cat_to_idxs: dict[str, list[int]] = defaultdict(list)
+        for idx, cat in categories.items():
+            cat_to_idxs[cat].append(idx)
+        for cat, idxs in cat_to_idxs.items():
+            cat_key = tuple(sorted(idxs))
+            collected: list[LinearConstraint] = []
+            for key, templates in example_idxs_to_templates_map.items():
+                if all(categories[i] == cat for i in key):
+                    collected.extend(templates)
+            if collected:
+                filtered_map[cat_key].extend(collected)
+
+        example_idxs_to_templates_map = dict(filtered_map)
     inst_time = time.perf_counter() - inst_start
     
     # Stage 2: Bayesian learning with clustering
     learn_start = time.perf_counter()
+    max_dim = max(max(root.width, root.height) for root in views)
+    a_thresh = float(os.getenv("A_THRESH", "0.05"))
+    b_thresh = float(os.getenv("B_THRESH", "1.0"))
+    conditional_config = ConditionalLearningConfig(
+        max_offset=int(max_dim) + 10,
+        a_cluster_threshold=a_thresh,
+        b_cluster_threshold=b_thresh,
+    )
     example_idxs_to_constrs_map = ConditionalBayesianLearning(
-        examples=views, seed=42
+        examples=views,
+        config=conditional_config,
+        seed=42,
     ).learn(example_idxs_to_templates_map)
+
+    # Optional post-learning constraint filtering: drop cross-dimension or high-ratio
+    drop_cross = os.getenv("DROP_CROSS_DIM", "0").lower() in {"1", "true", "yes"}
+    ratio_limit = float(os.getenv("RATIO_LIMIT", "0"))
+
+    ignore_names_env = os.getenv("IGNORE_NAMES", "")
+    ignore_names = {n.strip() for n in ignore_names_env.split(",") if n.strip()}
+
+    def _filter_map(
+        m: dict[tuple[int, ...], list[LinearConstraint]]
+    ) -> dict[tuple[int, ...], list[LinearConstraint]]:
+        if not drop_cross and ratio_limit <= 0 and not ignore_names:
+            return m
+        out: dict[tuple[int, ...], list[LinearConstraint]] = {}
+        for k, cs in m.items():
+            kept: list[LinearConstraint] = []
+            for c in cs:
+                if ignore_names:
+                    if c.y.view.name in ignore_names or (
+                        c.x is not None and c.x.view.name in ignore_names
+                    ):
+                        continue
+                if c.x is not None:
+                    if drop_cross and (c.y.is_horizontal() != c.x.is_horizontal()):
+                        continue
+                    if ratio_limit > 0 and c.a is not None:
+                        a_val = float(c.a) if not isinstance(c.a, float) else c.a
+                        if abs(a_val) > ratio_limit:
+                            continue
+                kept.append(c)
+            out[k] = kept
+        return out
+
+    example_idxs_to_constrs_map = _filter_map(example_idxs_to_constrs_map)
     learn_time = time.perf_counter() - learn_start
     
     prune_strategy = os.getenv("PRUNE_STRATEGY", "hierarchical").lower()
@@ -278,7 +411,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     overall_time = time.perf_counter() - overall_start
     
     # Calculate RMSD
-    rmsd = rmsd_conditional(views, outputs)
+    rmsd, rmsd_breakdown = rmsd_conditional_breakdown(views, outputs)
     acc = accuracy_conditional(views, outputs)
     num_constraints = sum(len(cs) for cs in outputs.values())
     
@@ -289,6 +422,7 @@ def run_new_pipeline(examples_file: Path) -> dict:
     print(f"  - Pruning:       {prune_time:.4f}s")
     print(f"✓ RMSD: {rmsd:.4f} pixels")
     print(f"✓ ACC:  {acc:.4f}")
+    print("  RMSD by example:", ", ".join(f"{e:.2f}" for e in rmsd_breakdown))
     
     return {
         'success': True,
