@@ -1,0 +1,912 @@
+{
+  "site": "arcgis",
+  "url": "https://arcgis.com",
+  "examples": [
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            798.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                744.25
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    182,
+                    1280,
+                    744.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            846.40625,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                503.078125,
+                856.5,
+                776.90625,
+                874.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    503.078125,
+                    856.5,
+                    555.078125,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    558.328125,
+                    856.5,
+                    574.21875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    577.46875,
+                    856.5,
+                    629.46875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    632.71875,
+                    856.5,
+                    648.609375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    651.859375,
+                    856.5,
+                    703.859375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    707.109375,
+                    856.5,
+                    723,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    726.25,
+                    856.5,
+                    776.90625,
+                    874.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            798.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                744.25
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    182,
+                    1280,
+                    744.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            846.40625,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                503.078125,
+                856.5,
+                776.90625,
+                874.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    503.078125,
+                    856.5,
+                    555.078125,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    558.328125,
+                    856.5,
+                    574.21875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    577.46875,
+                    856.5,
+                    629.46875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    632.71875,
+                    856.5,
+                    648.609375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    651.859375,
+                    856.5,
+                    703.859375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    707.109375,
+                    856.5,
+                    723,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    726.25,
+                    856.5,
+                    776.90625,
+                    874.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            798.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                744.25
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    182,
+                    1280,
+                    744.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            846.40625,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                503.078125,
+                856.5,
+                776.90625,
+                874.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    503.078125,
+                    856.5,
+                    555.078125,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    558.328125,
+                    856.5,
+                    574.21875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    577.46875,
+                    856.5,
+                    629.46875,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    632.71875,
+                    856.5,
+                    648.609375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    651.859375,
+                    856.5,
+                    703.859375,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    707.109375,
+                    856.5,
+                    723,
+                    874.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    726.25,
+                    856.5,
+                    776.90625,
+                    874.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            658.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                644.4375
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    109.1875,
+                    360,
+                    644.4375
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            706.40625,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                43.078125,
+                716.5,
+                316.90625,
+                734.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    43.078125,
+                    716.5,
+                    95.078125,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    98.328125,
+                    716.5,
+                    114.21875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    117.46875,
+                    716.5,
+                    169.46875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    172.71875,
+                    716.5,
+                    188.609375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    191.859375,
+                    716.5,
+                    243.859375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    247.109375,
+                    716.5,
+                    263,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    266.25,
+                    716.5,
+                    316.90625,
+                    734.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            658.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                644.4375
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    109.1875,
+                    360,
+                    644.4375
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            706.40625,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                43.078125,
+                716.5,
+                316.90625,
+                734.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    43.078125,
+                    716.5,
+                    95.078125,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    98.328125,
+                    716.5,
+                    114.21875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    117.46875,
+                    716.5,
+                    169.46875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    172.71875,
+                    716.5,
+                    188.609375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    191.859375,
+                    716.5,
+                    243.859375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    247.109375,
+                    716.5,
+                    263,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    266.25,
+                    716.5,
+                    316.90625,
+                    734.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body.index.arcgis-online-signin-background@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.wrapper@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            658.40625
+          ],
+          "children": [
+            {
+              "name": "[div.page.padding-trailer-0@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                644.4375
+              ],
+              "children": [
+                {
+                  "name": "[div.esri-header-barrier@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    56
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div#33d9f5c4-1708-4f97-8606-ff370d19a169-section.page-section.arcgis-online-banner@1]",
+                  "rect": [
+                    0,
+                    109.1875,
+                    360,
+                    644.4375
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[footer.leader-2.padding-trailer-1.font-size--3.text-light-gray.arcgis-online-footer@1]",
+          "rect": [
+            0,
+            706.40625,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[span.esriItemLinks@1]",
+              "rect": [
+                43.078125,
+                716.5,
+                316.90625,
+                734.5
+              ],
+              "children": [
+                {
+                  "name": "[a@1]",
+                  "rect": [
+                    43.078125,
+                    716.5,
+                    95.078125,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@3]",
+                  "rect": [
+                    98.328125,
+                    716.5,
+                    114.21875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@2]",
+                  "rect": [
+                    117.46875,
+                    716.5,
+                    169.46875,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@4]",
+                  "rect": [
+                    172.71875,
+                    716.5,
+                    188.609375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@3]",
+                  "rect": [
+                    191.859375,
+                    716.5,
+                    243.859375,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[span@5]",
+                  "rect": [
+                    247.109375,
+                    716.5,
+                    263,
+                    734.5
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[a@4]",
+                  "rect": [
+                    266.25,
+                    716.5,
+                    316.90625,
+                    734.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    }
+  ]
+}

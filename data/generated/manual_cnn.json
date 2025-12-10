@@ -2,60 +2,82 @@
   "examples": [
     {
       "name": "root",
-      "rect": [0, 0, 1366, 900],
+      "rect": [
+        0,
+        0,
+        1440,
+        1000
+      ],
       "_viewport": {
-        "width": 1366,
-        "height": 900,
-        "label": "Desktop",
+        "width": 1440,
+        "height": 1000,
+        "label": "Desktop Large",
         "category": "desktop"
       },
       "children": [
         {
           "name": "header",
-          "rect": [0, 0, 1366, 120],
-          "children": [
-            { "name": "nav_top", "rect": [0, 0, 1366, 50] },
-            { "name": "nav_categories", "rect": [0, 50, 1366, 120] }
+          "rect": [
+            0,
+            0,
+            1440,
+            80
           ]
         },
         {
-          "name": "main_content",
-          "rect": [40, 140, 1326, 850],
+          "name": "content",
+          "rect": [
+            0,
+            80,
+            1440,
+            1000
+          ],
           "children": [
             {
-              "name": "col_left_news_feed",
-              "rect": [40, 140, 360, 850],
+              "name": "col_left",
+              "rect": [
+                0,
+                80,
+                360,
+                1000
+              ]
+            },
+            {
+              "name": "col_hero",
+              "rect": [
+                360,
+                80,
+                1080,
+                1000
+              ],
               "children": [
                 {
-                  "name": "story_trump_denial",
-                  "rect": [40, 140, 360, 450],
-                  "children": [
-                     { "name": "story_image", "rect": [40, 140, 360, 320] },
-                     { "name": "story_headline", "rect": [40, 330, 360, 400] },
-                     { "name": "story_meta", "rect": [40, 410, 360, 450] }
+                  "name": "hero_img",
+                  "rect": [
+                    360,
+                    80,
+                    1080,
+                    586
                   ]
                 },
                 {
-                  "name": "news_list_items",
-                  "rect": [40, 470, 360, 650]
+                  "name": "hero_text",
+                  "rect": [
+                    360,
+                    586,
+                    1080,
+                    954
+                  ]
                 }
               ]
             },
             {
-              "name": "col_center_hero",
-              "rect": [390, 140, 970, 850],
-              "children": [
-                { "name": "hero_headline_scotus", "rect": [390, 140, 970, 240] },
-                { "name": "hero_image_scotus", "rect": [390, 260, 970, 600] },
-                { "name": "hero_summary_scotus", "rect": [390, 620, 970, 750] }
-              ]
-            },
-            {
-              "name": "col_right_sidebar",
-              "rect": [1000, 140, 1326, 850],
-              "children": [
-                { "name": "sidebar_header_streaming", "rect": [1000, 140, 1326, 180] },
-                { "name": "ad_card_visual", "rect": [1000, 200, 1326, 700] }
+              "name": "col_right",
+              "rect": [
+                1080,
+                80,
+                1440,
+                1000
               ]
             }
           ]
@@ -64,60 +86,82 @@
     },
     {
       "name": "root",
-      "rect": [0, 0, 1024, 1100],
+      "rect": [
+        0,
+        0,
+        1024,
+        800
+      ],
       "_viewport": {
         "width": 1024,
-        "height": 1100,
+        "height": 800,
         "label": "Tablet Landscape",
         "category": "tablet"
       },
       "children": [
         {
           "name": "header",
-          "rect": [0, 0, 1024, 110],
-          "children": [
-            { "name": "nav_top", "rect": [0, 0, 1024, 50] },
-            { "name": "nav_categories", "rect": [0, 50, 1024, 110] }
+          "rect": [
+            0,
+            0,
+            1024,
+            64
           ]
         },
         {
-          "name": "main_content",
-          "rect": [30, 130, 994, 1050],
+          "name": "content",
+          "rect": [
+            0,
+            64,
+            1024,
+            800
+          ],
           "children": [
             {
-              "name": "col_center_hero",
-              "rect": [30, 130, 650, 800],
-              "children": [
-                { "name": "hero_headline_scotus", "rect": [30, 130, 650, 230] },
-                { "name": "hero_image_scotus", "rect": [30, 250, 650, 600] },
-                { "name": "hero_summary_scotus", "rect": [30, 620, 650, 750] }
+              "name": "col_left",
+              "rect": [
+                0,
+                64,
+                256,
+                800
               ]
             },
             {
-              "name": "col_left_news_feed",
-              "rect": [680, 130, 994, 800],
+              "name": "col_hero",
+              "rect": [
+                256,
+                64,
+                768,
+                800
+              ],
               "children": [
                 {
-                  "name": "story_trump_denial",
-                  "rect": [680, 130, 994, 400],
-                  "children": [
-                     { "name": "story_image", "rect": [680, 130, 994, 280] },
-                     { "name": "story_headline", "rect": [680, 290, 994, 360] },
-                     { "name": "story_meta", "rect": [680, 370, 994, 400] }
+                  "name": "hero_img",
+                  "rect": [
+                    256,
+                    64,
+                    768,
+                    469
                   ]
                 },
                 {
-                  "name": "news_list_items",
-                  "rect": [680, 420, 994, 600]
+                  "name": "hero_text",
+                  "rect": [
+                    256,
+                    469,
+                    768,
+                    744
+                  ]
                 }
               ]
             },
             {
-              "name": "col_right_sidebar",
-              "rect": [30, 830, 994, 1050],
-              "children": [
-                 { "name": "sidebar_header_streaming", "rect": [30, 830, 994, 870] },
-                 { "name": "ad_card_visual", "rect": [30, 890, 994, 1050] }
+              "name": "col_right",
+              "rect": [
+                768,
+                64,
+                1024,
+                800
               ]
             }
           ]
@@ -126,60 +170,670 @@
     },
     {
       "name": "root",
-      "rect": [0, 0, 414, 2000],
+      "rect": [
+        0,
+        0,
+        1440,
+        1000
+      ],
       "_viewport": {
-        "width": 414,
-        "height": 2000,
-        "label": "Mobile",
+        "width": 1440,
+        "height": 1000,
+        "label": "Desktop Large Copy",
+        "category": "desktop"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1440,
+            80
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            80,
+            1440,
+            1000
+          ],
+          "children": [
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                80,
+                360,
+                1000
+              ]
+            },
+            {
+              "name": "col_hero",
+              "rect": [
+                360,
+                80,
+                1080,
+                1000
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    360,
+                    80,
+                    1080,
+                    586
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    360,
+                    586,
+                    1080,
+                    954
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                1080,
+                80,
+                1440,
+                1000
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        1024,
+        800
+      ],
+      "_viewport": {
+        "width": 1024,
+        "height": 800,
+        "label": "Tablet Landscape Copy",
+        "category": "tablet"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            1024,
+            64
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            64,
+            1024,
+            800
+          ],
+          "children": [
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                64,
+                256,
+                800
+              ]
+            },
+            {
+              "name": "col_hero",
+              "rect": [
+                256,
+                64,
+                768,
+                800
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    256,
+                    64,
+                    768,
+                    469
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    256,
+                    469,
+                    768,
+                    744
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                768,
+                64,
+                1024,
+                800
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "Mobile Large",
         "category": "mobile"
       },
       "children": [
         {
           "name": "header",
-          "rect": [0, 0, 414, 80],
-          "children": [
-            { "name": "nav_top", "rect": [0, 0, 414, 40] },
-            { "name": "nav_categories", "rect": [0, 40, 414, 80] }
+          "rect": [
+            0,
+            0,
+            360,
+            60
           ]
         },
         {
-          "name": "main_content",
-          "rect": [16, 100, 398, 1950],
+          "name": "content",
+          "rect": [
+            0,
+            60,
+            360,
+            760
+          ],
           "children": [
             {
-              "name": "col_left_news_feed",
-              "rect": [16, 100, 398, 900],
+              "name": "col_hero",
+              "rect": [
+                0,
+                60,
+                360,
+                480
+              ],
               "children": [
                 {
-                  "name": "story_trump_denial",
-                  "rect": [16, 100, 398, 500],
-                  "children": [
-                     { "name": "story_image", "rect": [16, 100, 398, 320] },
-                     { "name": "story_headline", "rect": [16, 330, 398, 420] },
-                     { "name": "story_meta", "rect": [16, 430, 398, 480] }
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    60,
+                    360,
+                    300
                   ]
                 },
                 {
-                  "name": "news_list_items",
-                  "rect": [16, 520, 398, 880]
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    300,
+                    360,
+                    480
+                  ]
                 }
               ]
             },
             {
-              "name": "col_center_hero",
-              "rect": [16, 920, 398, 1600],
-              "children": [
-                { "name": "hero_headline_scotus", "rect": [16, 920, 398, 1050] },
-                { "name": "hero_image_scotus", "rect": [16, 1060, 398, 1300] },
-                { "name": "hero_summary_scotus", "rect": [16, 1310, 398, 1580] }
+              "name": "col_left",
+              "rect": [
+                0,
+                480,
+                360,
+                620
               ]
             },
             {
-              "name": "col_right_sidebar",
-              "rect": [16, 1620, 398, 1950],
+              "name": "col_right",
+              "rect": [
+                0,
+                620,
+                360,
+                760
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "Mobile Medium",
+        "category": "mobile"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            60
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            60,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "col_hero",
+              "rect": [
+                0,
+                60,
+                360,
+                480
+              ],
               "children": [
-                { "name": "sidebar_header_streaming", "rect": [16, 1620, 398, 1660] },
-                { "name": "ad_card_visual", "rect": [16, 1680, 398, 1950] }
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    60,
+                    360,
+                    300
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    300,
+                    360,
+                    480
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                480,
+                360,
+                620
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                0,
+                620,
+                360,
+                760
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "Mobile Small",
+        "category": "mobile"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            60
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            60,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "col_hero",
+              "rect": [
+                0,
+                60,
+                360,
+                480
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    60,
+                    360,
+                    300
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    300,
+                    360,
+                    480
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                480,
+                360,
+                620
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                0,
+                620,
+                360,
+                760
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        762
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 762,
+        "label": "Mobile Large Variant",
+        "category": "mobile"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            61
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            61,
+            360,
+            762
+          ],
+          "children": [
+            {
+              "name": "col_hero",
+              "rect": [
+                0,
+                61,
+                360,
+                484
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    61,
+                    360,
+                    302
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    302,
+                    360,
+                    484
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                484,
+                360,
+                625
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                0,
+                625,
+                360,
+                762
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        759
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 759,
+        "label": "Mobile Medium Variant",
+        "category": "mobile"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            59
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            59,
+            360,
+            759
+          ],
+          "children": [
+            {
+              "name": "col_hero",
+              "rect": [
+                0,
+                59,
+                360,
+                482
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    59,
+                    360,
+                    298
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    298,
+                    360,
+                    482
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                482,
+                360,
+                621
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                0,
+                621,
+                360,
+                759
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "root",
+      "rect": [
+        0,
+        0,
+        360,
+        761
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 761,
+        "label": "Mobile Small Variant",
+        "category": "mobile"
+      },
+      "children": [
+        {
+          "name": "header",
+          "rect": [
+            0,
+            0,
+            360,
+            62
+          ]
+        },
+        {
+          "name": "content",
+          "rect": [
+            0,
+            62,
+            360,
+            761
+          ],
+          "children": [
+            {
+              "name": "col_hero",
+              "rect": [
+                0,
+                62,
+                360,
+                486
+              ],
+              "children": [
+                {
+                  "name": "hero_img",
+                  "rect": [
+                    0,
+                    62,
+                    360,
+                    304
+                  ]
+                },
+                {
+                  "name": "hero_text",
+                  "rect": [
+                    0,
+                    304,
+                    360,
+                    486
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "col_left",
+              "rect": [
+                0,
+                486,
+                360,
+                626
+              ]
+            },
+            {
+              "name": "col_right",
+              "rect": [
+                0,
+                626,
+                360,
+                761
               ]
             }
           ]

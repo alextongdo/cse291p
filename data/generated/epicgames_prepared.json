@@ -1,0 +1,624 @@
+{
+  "url": "https://epicgames.com",
+  "examples": [
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            430,
+            240.609375,
+            850,
+            659.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                490,
+                300.609375,
+                790,
+                430.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    490,
+                    300.609375,
+                    790,
+                    356.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    490,
+                    356.390625,
+                    790,
+                    430.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                490,
+                455.390625,
+                790,
+                534.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    490,
+                    455.390625,
+                    790,
+                    520.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                490,
+                559.390625,
+                790,
+                599.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    490,
+                    559.390625,
+                    790,
+                    599.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            430,
+            240.609375,
+            850,
+            659.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                490,
+                300.609375,
+                790,
+                430.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    490,
+                    300.609375,
+                    790,
+                    356.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    490,
+                    356.390625,
+                    790,
+                    430.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                490,
+                455.390625,
+                790,
+                534.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    490,
+                    455.390625,
+                    790,
+                    520.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                490,
+                559.390625,
+                790,
+                599.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    490,
+                    559.390625,
+                    790,
+                    599.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            430,
+            240.609375,
+            850,
+            659.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                490,
+                300.609375,
+                790,
+                430.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    490,
+                    300.609375,
+                    790,
+                    356.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    490,
+                    356.390625,
+                    790,
+                    430.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                490,
+                455.390625,
+                790,
+                534.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    490,
+                    455.390625,
+                    790,
+                    520.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                490,
+                559.390625,
+                790,
+                599.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    490,
+                    559.390625,
+                    790,
+                    599.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            5,
+            205.609375,
+            355,
+            554.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                30,
+                230.609375,
+                330,
+                360.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    30,
+                    230.609375,
+                    330,
+                    286.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    30,
+                    286.390625,
+                    330,
+                    360.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                30,
+                385.390625,
+                330,
+                464.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    30,
+                    385.390625,
+                    330,
+                    450.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                30,
+                489.390625,
+                330,
+                529.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    30,
+                    489.390625,
+                    330,
+                    529.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            5,
+            205.609375,
+            355,
+            554.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                30,
+                230.609375,
+                330,
+                360.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    30,
+                    230.609375,
+                    330,
+                    286.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    30,
+                    286.390625,
+                    330,
+                    360.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                30,
+                385.390625,
+                330,
+                464.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    30,
+                    385.390625,
+                    330,
+                    450.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                30,
+                489.390625,
+                330,
+                529.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    30,
+                    489.390625,
+                    330,
+                    529.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div.cf_challenge_container@1]",
+          "rect": [
+            5,
+            205.609375,
+            355,
+            554.390625
+          ],
+          "children": [
+            {
+              "name": "[div.cf_challenge_section@1]",
+              "rect": [
+                30,
+                230.609375,
+                330,
+                360.390625
+              ],
+              "children": [
+                {
+                  "name": "[div.logo@1]",
+                  "rect": [
+                    30,
+                    230.609375,
+                    330,
+                    286.390625
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[section@1]",
+                  "rect": [
+                    30,
+                    286.390625,
+                    330,
+                    360.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge@1]",
+              "rect": [
+                30,
+                385.390625,
+                330,
+                464.390625
+              ],
+              "children": [
+                {
+                  "name": "[form#challenge-form.challenge-form@1]",
+                  "rect": [
+                    30,
+                    385.390625,
+                    330,
+                    450.390625
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.cf_challenge_section@2]",
+              "rect": [
+                30,
+                489.390625,
+                330,
+                529.390625
+              ],
+              "children": [
+                {
+                  "name": "[section@2]",
+                  "rect": [
+                    30,
+                    489.390625,
+                    330,
+                    529.390625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    }
+  ],
+  "val_rmsd": 0.3330077246377326,
+  "val_accuracy": 1.0,
+  "train_indices": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "val_indices": [
+    2,
+    5
+  ],
+  "site": "epicgames"
+}

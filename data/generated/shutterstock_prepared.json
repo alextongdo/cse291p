@@ -1,0 +1,876 @@
+{
+  "url": "https://shutterstock.com",
+  "examples": [
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900.015625
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900.015625
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                60
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    60
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                60,
+                1280,
+                900.015625
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    60,
+                    1280,
+                    116
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    124,
+                    1280,
+                    900.015625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                900
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                50.75,
+                128.501953125,
+                181.25
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    50.75,
+                    128.501953125,
+                    181.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900.015625
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900.015625
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                60
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    60
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                60,
+                1280,
+                900.015625
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    60,
+                    1280,
+                    116
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    124,
+                    1280,
+                    900.015625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                900
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                50.75,
+                128.501953125,
+                181.25
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    50.75,
+                    128.501953125,
+                    181.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        1280,
+        900.015625
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900.015625
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                60
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    1280,
+                    60
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                60,
+                1280,
+                900.015625
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    60,
+                    1280,
+                    116
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    124,
+                    1280,
+                    900.015625
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            1280,
+            900
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                1280,
+                900
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                50.75,
+                128.501953125,
+                181.25
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    50.75,
+                    128.501953125,
+                    181.25
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 1280,
+        "height": 900,
+        "label": "horizontal",
+        "category": "desktop"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                105
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    105
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                105,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    105,
+                    360,
+                    161
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    169,
+                    360,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                760
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                66.5,
+                128.501953125,
+                237.5
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    66.5,
+                    128.501953125,
+                    237.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                105
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    105
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                105,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    105,
+                    360,
+                    161
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    169,
+                    360,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                760
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                66.5,
+                128.501953125,
+                237.5
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    66.5,
+                    128.501953125,
+                    237.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    },
+    {
+      "name": "[body@1]",
+      "rect": [
+        0,
+        0,
+        360,
+        760
+      ],
+      "children": [
+        {
+          "name": "[div#__next@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.mui-1i8dzl2-root@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                3
+              ],
+              "children": [
+                {
+                  "name": "[div@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    3
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiBox-root.mui-1nyrg0n@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                105
+              ],
+              "children": [
+                {
+                  "name": "[div.MuiGrid-root.MuiGrid-container.mui-1bvjati-container-container@1]",
+                  "rect": [
+                    0,
+                    0,
+                    360,
+                    105
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "[div.MuiContainer-root.MuiContainer-disableGutters.mui-sgxi1e-root@1]",
+              "rect": [
+                0,
+                105,
+                360,
+                760
+              ],
+              "children": [
+                {
+                  "name": "[header.MuiPaper-root.MuiPaper-elevation.MuiPaper-elevation4.MuiAppBar-root.MuiAppBar-colorPrimary.MuiAppBar-positionRelative.mui-13x0ifu-root-root-siteHeader@1]",
+                  "rect": [
+                    0,
+                    105,
+                    360,
+                    161
+                  ],
+                  "children": []
+                },
+                {
+                  "name": "[div.MuiBox-root.mui-1fkqomy@1]",
+                  "rect": [
+                    0,
+                    169,
+                    360,
+                    760
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "[div#assetTypeDropDown.MuiPopover-root.MuiMenu-root.MuiModal-root.MuiModal-hidden.mui-xuzscv@1]",
+          "rect": [
+            0,
+            0,
+            360,
+            760
+          ],
+          "children": [
+            {
+              "name": "[div.MuiBackdrop-root.MuiBackdrop-invisible.MuiModal-backdrop.mui-esi9ax@1]",
+              "rect": [
+                0,
+                0,
+                360,
+                760
+              ],
+              "children": []
+            },
+            {
+              "name": "[div.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiPaper-elevation8.MuiPopover-paper.MuiMenu-paper.mui-pwxzbm@1]",
+              "rect": [
+                18.357421875,
+                66.5,
+                128.501953125,
+                237.5
+              ],
+              "children": [
+                {
+                  "name": "[ul.MuiList-root.MuiList-padding.MuiMenu-list.mui-r8u8y9@1]",
+                  "rect": [
+                    18.357421875,
+                    66.5,
+                    128.501953125,
+                    237.5
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "_viewport": {
+        "width": 360,
+        "height": 760,
+        "label": "vertical",
+        "category": "mobile"
+      }
+    }
+  ],
+  "val_rmsd": 0.39163593909010685,
+  "val_accuracy": 0.7307692307692308,
+  "train_indices": [
+    0,
+    1,
+    3,
+    4
+  ],
+  "val_indices": [
+    2,
+    5
+  ],
+  "site": "shutterstock"
+}
