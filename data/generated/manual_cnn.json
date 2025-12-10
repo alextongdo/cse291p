@@ -3,51 +3,59 @@
     {
       "name": "root",
       "rect": [0, 0, 1366, 900],
-      "_viewport": { "width": 1366, "height": 900, "label": "Desktop", "category": "desktop" },
+      "_viewport": {
+        "width": 1366,
+        "height": 900,
+        "label": "Desktop",
+        "category": "desktop"
+      },
       "children": [
         {
           "name": "header",
           "rect": [0, 0, 1366, 120],
           "children": [
             { "name": "nav_top", "rect": [0, 0, 1366, 50] },
-            { "name": "nav_categories", "rect": [0, 50, 1366, 70] }
+            { "name": "nav_categories", "rect": [0, 50, 1366, 120] }
           ]
         },
         {
           "name": "main_content",
-          "rect": [40, 140, 1286, 720],
+          "rect": [40, 140, 1326, 850],
           "children": [
             {
               "name": "col_left_news_feed",
-              "rect": [40, 140, 320, 720],
+              "rect": [40, 140, 360, 850],
               "children": [
                 {
                   "name": "story_trump_denial",
-                  "rect": [40, 140, 320, 320],
+                  "rect": [40, 140, 360, 450],
                   "children": [
-                    { "name": "story_image", "rect": [40, 140, 320, 180] },
-                    { "name": "story_headline", "rect": [40, 330, 320, 70] },
-                    { "name": "story_meta", "rect": [40, 410, 320, 40] }
+                     { "name": "story_image", "rect": [40, 140, 360, 320] },
+                     { "name": "story_headline", "rect": [40, 330, 360, 400] },
+                     { "name": "story_meta", "rect": [40, 410, 360, 450] }
                   ]
                 },
-                { "name": "news_list_items", "rect": [40, 470, 320, 220] }
+                {
+                  "name": "news_list_items",
+                  "rect": [40, 470, 360, 650]
+                }
               ]
             },
             {
               "name": "col_center_hero",
-              "rect": [390, 140, 580, 720],
+              "rect": [390, 140, 970, 850],
               "children": [
-            { "name": "hero_headline_scotus", "rect": [390, 140, 580, 120] },
-            { "name": "hero_image_scotus", "rect": [390, 270, 580, 330] },
-            { "name": "hero_summary_scotus", "rect": [390, 620, 580, 150] }
+                { "name": "hero_headline_scotus", "rect": [390, 140, 970, 240] },
+                { "name": "hero_image_scotus", "rect": [390, 260, 970, 600] },
+                { "name": "hero_summary_scotus", "rect": [390, 620, 970, 750] }
               ]
             },
             {
               "name": "col_right_sidebar",
-              "rect": [1000, 140, 326, 720],
+              "rect": [1000, 140, 1326, 850],
               "children": [
-            { "name": "sidebar_header_streaming", "rect": [1000, 140, 326, 60] },
-            { "name": "ad_card_visual", "rect": [1000, 210, 326, 510] }
+                { "name": "sidebar_header_streaming", "rect": [1000, 140, 1326, 180] },
+                { "name": "ad_card_visual", "rect": [1000, 200, 1326, 700] }
               ]
             }
           ]
@@ -57,51 +65,59 @@
     {
       "name": "root",
       "rect": [0, 0, 1024, 1100],
-      "_viewport": { "width": 1024, "height": 1100, "label": "Tablet Landscape", "category": "tablet" },
+      "_viewport": {
+        "width": 1024,
+        "height": 1100,
+        "label": "Tablet Landscape",
+        "category": "tablet"
+      },
       "children": [
         {
           "name": "header",
           "rect": [0, 0, 1024, 110],
           "children": [
             { "name": "nav_top", "rect": [0, 0, 1024, 50] },
-            { "name": "nav_categories", "rect": [0, 50, 1024, 60] }
+            { "name": "nav_categories", "rect": [0, 50, 1024, 110] }
           ]
         },
         {
           "name": "main_content",
-          "rect": [30, 130, 964, 720],
+          "rect": [30, 130, 994, 1050],
           "children": [
             {
-              "name": "col_left_news_feed",
-              "rect": [30, 130, 300, 720],
+              "name": "col_center_hero",
+              "rect": [30, 130, 650, 800],
               "children": [
-                {
-                  "name": "story_trump_denial",
-                  "rect": [30, 130, 300, 300],
-                  "children": [
-                    { "name": "story_image", "rect": [30, 130, 300, 150] },
-                    { "name": "story_headline", "rect": [30, 290, 300, 70] },
-                    { "name": "story_meta", "rect": [30, 370, 300, 30] }
-                  ]
-                },
-                { "name": "news_list_items", "rect": [30, 440, 300, 200] }
+                { "name": "hero_headline_scotus", "rect": [30, 130, 650, 230] },
+                { "name": "hero_image_scotus", "rect": [30, 250, 650, 600] },
+                { "name": "hero_summary_scotus", "rect": [30, 620, 650, 750] }
               ]
             },
             {
-              "name": "col_center_hero",
-              "rect": [360, 130, 380, 720],
+              "name": "col_left_news_feed",
+              "rect": [680, 130, 994, 800],
               "children": [
-                { "name": "hero_headline_scotus", "rect": [360, 130, 380, 120] },
-                { "name": "hero_image_scotus", "rect": [360, 270, 380, 340] },
-                { "name": "hero_summary_scotus", "rect": [360, 620, 380, 170] }
+                {
+                  "name": "story_trump_denial",
+                  "rect": [680, 130, 994, 400],
+                  "children": [
+                     { "name": "story_image", "rect": [680, 130, 994, 280] },
+                     { "name": "story_headline", "rect": [680, 290, 994, 360] },
+                     { "name": "story_meta", "rect": [680, 370, 994, 400] }
+                  ]
+                },
+                {
+                  "name": "news_list_items",
+                  "rect": [680, 420, 994, 600]
+                }
               ]
             },
             {
               "name": "col_right_sidebar",
-              "rect": [760, 130, 234, 720],
+              "rect": [30, 830, 994, 1050],
               "children": [
-                { "name": "sidebar_header_streaming", "rect": [760, 130, 234, 60] },
-                { "name": "ad_card_visual", "rect": [760, 210, 234, 520] }
+                 { "name": "sidebar_header_streaming", "rect": [30, 830, 994, 870] },
+                 { "name": "ad_card_visual", "rect": [30, 890, 994, 1050] }
               ]
             }
           ]
@@ -110,160 +126,60 @@
     },
     {
       "name": "root",
-      "rect": [0, 0, 414, 1100],
-      "_viewport": { "width": 414, "height": 1100, "label": "Mobile", "category": "mobile" },
+      "rect": [0, 0, 414, 2000],
+      "_viewport": {
+        "width": 414,
+        "height": 2000,
+        "label": "Mobile",
+        "category": "mobile"
+      },
       "children": [
         {
           "name": "header",
           "rect": [0, 0, 414, 80],
           "children": [
             { "name": "nav_top", "rect": [0, 0, 414, 40] },
-            { "name": "nav_categories", "rect": [0, 40, 414, 40] }
+            { "name": "nav_categories", "rect": [0, 40, 414, 80] }
           ]
         },
         {
           "name": "main_content",
-          "rect": [16, 100, 382, 900],
+          "rect": [16, 100, 398, 1950],
           "children": [
             {
               "name": "col_left_news_feed",
-              "rect": [16, 100, 382, 280],
+              "rect": [16, 100, 398, 900],
               "children": [
                 {
                   "name": "story_trump_denial",
-                  "rect": [16, 100, 382, 200],
+                  "rect": [16, 100, 398, 500],
                   "children": [
-                    { "name": "story_image", "rect": [16, 100, 382, 180] },
-                    { "name": "story_headline", "rect": [16, 280, 382, 40] },
-                    { "name": "story_meta", "rect": [16, 330, 382, 20] }
+                     { "name": "story_image", "rect": [16, 100, 398, 320] },
+                     { "name": "story_headline", "rect": [16, 330, 398, 420] },
+                     { "name": "story_meta", "rect": [16, 430, 398, 480] }
                   ]
                 },
-                { "name": "news_list_items", "rect": [16, 320, 382, 60] }
+                {
+                  "name": "news_list_items",
+                  "rect": [16, 520, 398, 880]
+                }
               ]
             },
             {
               "name": "col_center_hero",
-              "rect": [16, 420, 382, 300],
+              "rect": [16, 920, 398, 1600],
               "children": [
-                { "name": "hero_headline_scotus", "rect": [16, 420, 382, 90] },
-                { "name": "hero_image_scotus", "rect": [16, 520, 382, 130] },
-                { "name": "hero_summary_scotus", "rect": [16, 670, 382, 80] }
+                { "name": "hero_headline_scotus", "rect": [16, 920, 398, 1050] },
+                { "name": "hero_image_scotus", "rect": [16, 1060, 398, 1300] },
+                { "name": "hero_summary_scotus", "rect": [16, 1310, 398, 1580] }
               ]
             },
             {
               "name": "col_right_sidebar",
-              "rect": [16, 740, 382, 260],
+              "rect": [16, 1620, 398, 1950],
               "children": [
-                { "name": "sidebar_header_streaming", "rect": [16, 740, 382, 60] },
-                { "name": "ad_card_visual", "rect": [16, 820, 382, 200] }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "root",
-      "rect": [0, 0, 375, 1100],
-      "_viewport": { "width": 375, "height": 1100, "label": "Mobile Small", "category": "mobile" },
-      "children": [
-        {
-          "name": "header",
-          "rect": [0, 0, 375, 80],
-          "children": [
-            { "name": "nav_top", "rect": [0, 0, 375, 40] },
-            { "name": "nav_categories", "rect": [0, 40, 375, 40] }
-          ]
-        },
-        {
-          "name": "main_content",
-          "rect": [12, 100, 351, 900],
-          "children": [
-            {
-              "name": "col_left_news_feed",
-              "rect": [12, 100, 351, 260],
-              "children": [
-                {
-                  "name": "story_trump_denial",
-                  "rect": [12, 100, 351, 190],
-                  "children": [
-                    { "name": "story_image", "rect": [12, 100, 351, 120] },
-                    { "name": "story_headline", "rect": [12, 230, 351, 40] },
-                    { "name": "story_meta", "rect": [12, 280, 351, 20] }
-                  ]
-                },
-                { "name": "news_list_items", "rect": [12, 300, 351, 60] }
-              ]
-            },
-            {
-              "name": "col_center_hero",
-              "rect": [12, 380, 351, 280],
-              "children": [
-                { "name": "hero_headline_scotus", "rect": [12, 380, 351, 80] },
-                { "name": "hero_image_scotus", "rect": [12, 480, 351, 140] },
-                { "name": "hero_summary_scotus", "rect": [12, 640, 351, 80] }
-              ]
-            },
-            {
-              "name": "col_right_sidebar",
-              "rect": [12, 680, 351, 320],
-              "children": [
-                { "name": "sidebar_header_streaming", "rect": [12, 680, 351, 60] },
-                { "name": "ad_card_visual", "rect": [12, 760, 351, 200] }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "root",
-      "rect": [0, 0, 430, 1400],
-      "_viewport": { "width": 430, "height": 1400, "label": "Mobile Tall", "category": "mobile" },
-      "children": [
-        {
-          "name": "header",
-          "rect": [0, 0, 430, 90],
-          "children": [
-            { "name": "nav_top", "rect": [0, 0, 430, 45] },
-            { "name": "nav_categories", "rect": [0, 45, 430, 45] }
-          ]
-        },
-        {
-          "name": "main_content",
-          "rect": [16, 110, 398, 1180],
-          "children": [
-            {
-              "name": "col_left_news_feed",
-              "rect": [16, 110, 398, 360],
-              "children": [
-                {
-                  "name": "story_trump_denial",
-                  "rect": [16, 110, 398, 250],
-                  "children": [
-                    { "name": "story_image", "rect": [16, 110, 398, 160] },
-                    { "name": "story_headline", "rect": [16, 280, 398, 50] },
-                    { "name": "story_meta", "rect": [16, 340, 398, 30] }
-                  ]
-                },
-                { "name": "news_list_items", "rect": [16, 370, 398, 80] }
-              ]
-            },
-            {
-              "name": "col_center_hero",
-              "rect": [16, 500, 398, 360],
-              "children": [
-                { "name": "hero_headline_scotus", "rect": [16, 500, 398, 110] },
-                { "name": "hero_image_scotus", "rect": [16, 630, 398, 180] },
-                { "name": "hero_summary_scotus", "rect": [16, 820, 398, 100] }
-              ]
-            },
-            {
-              "name": "col_right_sidebar",
-              "rect": [16, 880, 398, 410],
-              "children": [
-                { "name": "sidebar_header_streaming", "rect": [16, 880, 398, 70] },
-                { "name": "ad_card_visual", "rect": [16, 970, 398, 300] }
+                { "name": "sidebar_header_streaming", "rect": [16, 1620, 398, 1660] },
+                { "name": "ad_card_visual", "rect": [16, 1680, 398, 1950] }
               ]
             }
           ]
@@ -272,4 +188,3 @@
     }
   ]
 }
-
